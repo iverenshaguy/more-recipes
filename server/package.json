@@ -1,29 +1,59 @@
 {
   "name": "more-recipes-personal",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/app.js",
+  "description": "More Recipes App",
+  "main": "dist/app.js",
   "directories": {
     "test": "tests"
   },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 95,
+    "statements": 95,
+    "functions": 95,
+    "branches": 95,
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "cache": true,
+    "report-dir": "./coverage"
+  },
   "scripts": {
     "start:dev": "nodemon ./dist/bin/www",
-    "maintest": "mocha --compilers js:babel-register tests/test.js",
-    "test": "npm run build && npm run maintest",
-    "build": "",
+    "test": "cross-env NODE_ENV=test nyc mocha tests/test.js",
+    "clean": "rm -rf dist",
+    "prebuild:init": "mkdir dist",
+    "prebuild:bininit": "cd dist && mkdir bin && cd ..",
+    "prebuild": "npm-run-all clean prebuild:init prebuild:bininit",
+    "build": "npm-run-all build:all copyconfig",
+    "build:single": "babel src/customValidator.js -o dist/customValidator.js --source-maps",
+    "build:main": "babel src -d dist --source-maps",
+    "build:www": "babel src/bin/www -o dist/bin/www --source-maps",
+    "build:all": "npm-run-all build:www build:main",
+    "copyconfig": "cd dist && mkdir config && cd ../src/config && cp config.json ../../dist/config/config.json",
     "lint": "eslint *.js",
-    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "codeclimate": "cat ./coverage/lcov.info | codeclimate-test-reporter"
+    "coverage": "npm-run-all --parallel coveralls codeclimate",
+    "coveralls": "nyc report --reporter=lcov | coveralls",
+    "codeclimate": "nyc report --reporter=lcov | codeclimate-test-reporter"
   },
   "author": "Iveren Shaguy",
   "license": "ISC",
   "dependencies": {
+    "aglio": "^2.3.0",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "cookie-parser": "^1.4.3",
+    "env2": "^2.2.0",
     "express": "^4.15.4",
     "express-validator": "^4.2.1",
+    "global": "^4.3.2",
     "mocha": "^3.5.3",
     "morgan": "^1.8.2",
     "pg": "^7.3.0",
@@ -34,17 +64,24 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0",
     "codeclimate-test-reporter": "^0.5.0",
     "coveralls": "^2.13.1",
-    "eslint": "^4.7.2",
+    "cross-env": "^5.0.5",
+    "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "eslint-watch": "^3.1.2",
     "istanbul": "^0.4.5",
     "mocha-lcov-reporter": "^1.3.0",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.2.1",
+    "supertest": "^3.0.0"
   }
 }

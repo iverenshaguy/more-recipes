@@ -1,4 +1,11 @@
 {
   "presets": ["es2015"],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  },
   "plugins": ["add-module-exports"]
 }
