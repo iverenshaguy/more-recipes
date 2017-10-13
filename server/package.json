@@ -2,7 +2,7 @@
   "name": "more-recipes-personal",
   "version": "1.0.0",
   "description": "More Recipes App",
-  "main": "dist/app.js",
+  "main": "dist/bin/www.js",
   "directories": {
     "test": "tests"
   },
@@ -26,18 +26,14 @@
     "report-dir": "./coverage"
   },
   "scripts": {
-    "start:dev": "nodemon ./dist/bin/www",
-    "test": "cross-env NODE_ENV=test nyc mocha tests/test.js",
+    "start:dev": "nodemon ./dist/bin/www.js",
+    "test": "cross-env NODE_ENV=test nyc mocha tests/test.js --recursive --timeout 10000",
     "clean": "rm -rf dist",
     "prebuild:init": "mkdir dist",
-    "prebuild:bininit": "cd dist && mkdir bin && cd ..",
-    "prebuild": "npm-run-all clean prebuild:init prebuild:bininit",
-    "build": "npm-run-all build:all copyconfig",
-    "build:single": "babel src/customValidator.js -o dist/customValidator.js --source-maps",
-    "build:main": "babel src -d dist --source-maps",
-    "build:www": "babel src/bin/www -o dist/bin/www --source-maps",
-    "build:all": "npm-run-all build:www build:main",
-    "copyconfig": "cd dist && mkdir config && cd ../src/config && cp config.json ../../dist/config/config.json",
+    "prebuild": "npm-run-all clean prebuild:init",
+    "build": "babel src -d dist",
+    "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
+    "build:single2": "babel src/password_hash/password_hash.js -o dist/password_hash/password_hash.js",
     "lint": "eslint *.js",
     "coverage": "npm-run-all --parallel coveralls codeclimate",
     "coveralls": "nyc report --reporter=lcov | coveralls",
@@ -47,8 +43,10 @@
   "license": "ISC",
   "dependencies": {
     "aglio": "^2.3.0",
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "cookie-parser": "^1.4.3",
     "env2": "^2.2.0",
     "express": "^4.15.4",
@@ -56,9 +54,11 @@
     "global": "^4.3.2",
     "mocha": "^3.5.3",
     "morgan": "^1.8.2",
+    "multer": "^1.3.0",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.10.3"
+    "sequelize": "^4.10.3",
+    "supertest": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -81,7 +81,6 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.1",
-    "nyc": "^11.2.1",
-    "supertest": "^3.0.0"
+    "nyc": "^11.2.1"
   }
 }

@@ -1,7 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
-import expressValidator from 'express-validator';
 import routes from './routes';
 
 // Set up the express app
@@ -14,14 +13,14 @@ app.use(logger('dev'));
 
 // Parse incoming requests data
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //  Connect all our routes to our application
 app.use('/', routes);
 
 // Default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to More Recipes',
+app.get('*', (req, res) => res.status(409).send({
+  message: 'Where Are You Going? Page Not Found',
 }));
 
 export default app;
