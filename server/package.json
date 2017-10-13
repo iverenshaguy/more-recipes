@@ -28,6 +28,7 @@
   "scripts": {
     "start:dev": "nodemon ./dist/bin/www.js",
     "test": "cross-env NODE_ENV=test nyc mocha tests/test.js --recursive --timeout 10000",
+    "pretest": "npm run lint",
     "clean": "rm -rf dist",
     "prebuild:init": "mkdir dist",
     "prebuild": "npm-run-all clean prebuild:init",

@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import config from './config';
+import config from '../../config/hash_config.json';
 
 export default {
 
@@ -43,6 +43,7 @@ export default {
       if (typeof (password) !== 'string') {
         reject(TypeError('Password Must Be a String'));
       }
+      
 
       if (!combinedHashString) {
         reject(Error('Database Password must be Provided for Comparism'));

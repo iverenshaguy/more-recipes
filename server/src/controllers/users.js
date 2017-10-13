@@ -15,16 +15,16 @@ export default {
         profilePic: req.profilePic,
         coverPhoto: req.coverPhoto,
       })
-        .then(user => res.status(201).send(user));
-      // .catch(error => res.status(400).send(error));
-    });
-    // .catch(error => res.status(400).send(error));
+        .then(user => res.status(201).send(user))
+        .catch(error => res.status(400).send(error));
+    })
+      .catch(error => res.status(400).send(error));
   },
   list(req, res) {
     return User
       .all()
-      .then(users => res.status(200).send(users));
-    // .catch(error => res.status(400).send(error));
+      .then(users => res.status(200).send(users))
+      .catch(error => res.status(400).send(error));
   },
   retrieve(req, res) {
     verifyPassword(req.password, req.passwordHash).then((verify) => {
@@ -33,8 +33,8 @@ export default {
       }
 
       User.findOne({ where: { email: req.email } })
-        .then(user => res.status(200).send(user));
-      // .catch(error => res.status(400).send(error));
+        .then(user => res.status(200).send(user))
+        .catch(error => res.status(400).send(error));
     }).catch(error => res.status(400).send(error));
   }
 };
