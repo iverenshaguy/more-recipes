@@ -43,7 +43,7 @@ export default {
       if (typeof (password) !== 'string') {
         reject(TypeError('Password Must Be a String'));
       }
-      
+
 
       if (!combinedHashString) {
         reject(Error('Database Password must be Provided for Comparism'));

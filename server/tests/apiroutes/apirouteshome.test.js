@@ -24,7 +24,7 @@ describe('API Test', () => {
   describe('API Route FallBack', () => {
     it('should return a Fallback Message', (done) => {
       request(app)
-        .get('/api/v1/fallback')
+        .get('/api/fallback')
         .end((err, res) => {
           expect(res.statusCode).to.equal(409);
           expect(res.body.message).to.equal('Where Are You Going? Page Not Found');

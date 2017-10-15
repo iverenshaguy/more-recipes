@@ -1,6 +1,6 @@
 coverage
 .coveralls.yml
-.travis.yml
 dist
 node_modules
 .env
+stray_scripts

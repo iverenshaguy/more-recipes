@@ -1,23 +1,23 @@
 import { User } from '../models';
-import { hashPassword, verifyPassword } from '../password_hash/password_hash';
+import { verifyPassword } from '../validations/password_hash';
 
 export default {
-  create(req, res) {
-    hashPassword(req.password).then((hash) => {
-      User.create({
-        firstname: req.firstname,
-        lastname: req.lastname,
-        username: req.username,
-        email: req.email.toLowerCase(),
-        passwordHash: hash,
-        aboutMe: req.aboutMe,
-        occupation: req.occupation,
-        profilePic: req.profilePic,
-        coverPhoto: req.coverPhoto,
-      })
-        .then(user => res.status(201).send(user))
-        .catch(error => res.status(400).send(error));
+  create(req, userData, res) {
+    User.create({
+      firstname: userData.firstname,
+      lastname: userData.lastname,
+      username: userData.username,
+      email: userData.email.toLowerCase(),
+      password: userData.password,
+      aboutMe: userData.aboutMe,
+      occupation: userData.occupation,
+      profilePic: userData.profilePic,
+      coverPhoto: userData.coverPhoto,
     })
+      .then((user) => {
+        req.session.user = user.dataValues;
+        res.status(201).send(user);
+      })
       .catch(error => res.status(400).send(error));
   },
   list(req, res) {
@@ -26,15 +26,18 @@ export default {
       .then(users => res.status(200).send(users))
       .catch(error => res.status(400).send(error));
   },
-  retrieve(req, res) {
-    verifyPassword(req.password, req.passwordHash).then((verify) => {
-      if (verify === false) {
-        throw new Error('Username and password don\'t match!');
-      }
-
-      User.findOne({ where: { email: req.email } })
-        .then(user => res.status(200).send(user))
-        .catch(error => res.status(400).send(error));
-    }).catch(error => res.status(400).send(error));
+  retrieve(req, userData, res) {
+    User.findOne({ where: { email: userData.email } })
+      .then((user) => {
+        verifyPassword(userData.password, user.passwordHash).then((verify) => {
+          if (!verify) {
+            throw new Error();
+          }
+          req.session.user = user.dataValues;
+          return res.status(200).send(user);
+        })
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
   }
 };

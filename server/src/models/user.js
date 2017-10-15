@@ -1,3 +1,5 @@
+import { hashPassword } from '../validations/password_hash';
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstname: {
@@ -44,6 +46,12 @@ export default (sequelize, DataTypes) => {
     coverPhoto: {
       type: DataTypes.STRING
     },
+  }, {
+    hooks: {
+      beforeCreate: user => hashPassword(user.password).then((hash) => {
+        user.passwordHash = hash;
+      })
+    }
   });
   User.associate = (models) => {
     User.hasMany(models.Recipe, {

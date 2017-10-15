@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { hashPassword, verifyPassword } from '../../src/password_hash/password_hash';
+import { hashPassword, verifyPassword } from '../../src/validations/password_hash';
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;
