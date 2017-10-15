@@ -23,7 +23,7 @@ apiUsersRoutes.post('/signup', validation.registration, (req, res) => {
   return usersController.create(req, userData, res);
 });
 
-apiUsersRoutes.get('/login', validation.authentication, (req, res) => {
+apiUsersRoutes.get('/signin', validation.authentication, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });

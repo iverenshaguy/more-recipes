@@ -178,7 +178,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -196,7 +196,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -213,7 +213,7 @@ describe('Routes: User API Tests', () => {
         user.email = 'favourshaguy@gmail.com';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -231,7 +231,7 @@ describe('Routes: User API Tests', () => {
         user.password = '';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -249,7 +249,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -269,7 +269,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -287,7 +287,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -303,7 +303,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah56';
 
         agent
-          .get('/api/users/login')
+          .get('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
