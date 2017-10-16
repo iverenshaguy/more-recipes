@@ -8,11 +8,11 @@ import validation from '../../validations/validation';
 import * as usersController from '../../controllers/users';
 import { User } from '../../models';
 
-const apiUsersRoutes = express.Router();
+const userRoutes = express.Router();
 
-apiUsersRoutes.get('/', usersController.list);
+userRoutes.get('/', usersController.list);
 
-apiUsersRoutes.post('/signup', validation.registration, (req, res) => {
+userRoutes.post('/signup', validation.register, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
@@ -23,7 +23,7 @@ apiUsersRoutes.post('/signup', validation.registration, (req, res) => {
   return usersController.create(req, userData, res);
 });
 
-apiUsersRoutes.get('/signin', validation.authentication, (req, res) => {
+userRoutes.post('/signin', validation.login, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
@@ -37,4 +37,4 @@ apiUsersRoutes.get('/signin', validation.authentication, (req, res) => {
   });
 });
 
-export default apiUsersRoutes;
+export default userRoutes;
