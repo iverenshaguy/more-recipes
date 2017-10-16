@@ -1,7 +1,7 @@
 import request from 'supertest';
 import chai from 'chai';
 import app from '../../src/bin/www';
-import { User } from '../../src/models';
+import { sequelize, User } from '../../src/models';
 import './apirouteshome.test';
 
 const expect = chai.expect;
@@ -9,7 +9,7 @@ const agent = request.agent(app);
 
 
 describe('Routes: User API Tests', () => {
-  beforeEach(() => User.sync({ force: true }).then(() => User.create({
+  before(() => User.sync({ force: true }).then(() => User.create({
     firstname: 'Iveren',
     lastname: 'Shaguy',
     username: 'iverenshaguy',
@@ -18,6 +18,9 @@ describe('Routes: User API Tests', () => {
     aboutMe: 'I am great',
     occupation: 'Coder'
   })).then());
+
+  after(() => sequelize.drop());
+
   describe('## Get All Users', () => {
     it('should return an array of users', (done) => {
       agent
@@ -178,7 +181,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -196,7 +199,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -213,7 +216,7 @@ describe('Routes: User API Tests', () => {
         user.email = 'favourshaguy@gmail.com';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -231,7 +234,7 @@ describe('Routes: User API Tests', () => {
         user.password = '';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -249,7 +252,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -269,7 +272,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -287,7 +290,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -303,7 +306,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah56';
 
         agent
-          .get('/api/users/signin')
+          .post('/api/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
