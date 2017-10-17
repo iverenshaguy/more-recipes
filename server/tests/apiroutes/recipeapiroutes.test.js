@@ -37,7 +37,7 @@ describe('Routes: Recipe API Tests', () => {
     ]
   }, {
     include: [User]
-  }).then()));
+  }).then(recipe => recipe)));
 
   after(() => sequelize.drop({ force: true }));
 
@@ -71,7 +71,7 @@ describe('Routes: Recipe API Tests', () => {
       recipe.totalTime = '50 minutes';
       recipe.difficulty = 'Easy';
       recipe.extraInfo = 'Suitable for Vegans';
-      recipe.vegetarian = true;
+      recipe.vegetarian = 'true';
       recipe.ingredients = ['2 cups of beans', '3 Plantains'];
       recipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
       recipe.directions = [
@@ -100,54 +100,32 @@ describe('Routes: Recipe API Tests', () => {
     });
 
     describe('## Check for authorised wrong input', () => {
-      recipe.recipeName = 'Bean Pottage';
-      recipe.prepTime = '5 minutes';
-      recipe.cookTime = '45 minutes';
-      recipe.totalTime = '50 minutes';
-      recipe.difficulty = 'Easy';
-      recipe.extraInfo = 'Suitable for Vegans';
-      recipe.vegetarian = true;
-      recipe.ingredients = ['2 cups of beans', '3 Plantains'];
-      recipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
-      recipe.directions = [
-        'Put the beans on fire with sliced onions (a big bulb)',
-        'When it is very soft and can be easily mashed, add plantains, palmoil and ingredients'
-      ];
+      const badRecipe = {};
+      badRecipe.recipeName = '';
+      badRecipe.prepTime = '-5 minutes';
+      badRecipe.cookTime = '45 minutes';
+      badRecipe.totalTime = '50 minutes';
+      badRecipe.difficulty = 'Not Hard';
+      badRecipe.extraInfo = '[Suitable for Vegans]';
+      badRecipe.vegetarian = 'true';
+      badRecipe.ingredients = {};
+      badRecipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
 
-      xit('should not create a new recipe', (done) => {
+      it('should not create a new recipe', (done) => {
         agent
           .post('/api/recipes/')
-          .send(recipe)
+          .send(badRecipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
-            expect(res.statusCode).to.equal(201);
-            expect(res.body.recipeName).to.equal('Bean Pottage');
-            expect(res.body.directions).to.be.an('array');
-            expect(res.body.ingredients[0]).to.equal('2 cups of beans');
-            expect(res.body.preparations).to.have.lengthOf(1);
-
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
-      });
-
-      xit('should not create a new recipe', (done) => {
-        agent
-          .post('/api/recipes/')
-          .send(recipe)
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(201);
-            expect(res.body.recipeName).to.equal('Bean Pottage');
-            expect(res.body.directions).to.be.an('array');
-            expect(res.body.ingredients[0]).to.equal('2 cups of beans');
-            expect(res.body.preparations).to.have.lengthOf(1);
-
-            if (err) {
-              return done(err);
-            }
+            console.log(res.body);
+            expect(res.statusCode).to.equal(422);
+            expect(res.body).to.have.property('errors');
+            expect(res.body.errors.recipeName.msg).to.equal('Recipe name cannot be empty');
+            expect(res.body.errors.difficulty.msg).to.equal('Please select a valid field');
+            expect(res.body.errors.prepTime.msg).to.equal('Prep time can only contain alphanumeric characters');
+            expect(res.body.errors.ingredients.msg).to.equal('Ingredient can only contain letters and the characters (,.\'-)');
+            expect(res.body.errors.directions.msg).to.equal('Direction must be specified');
+            if (err) return done(err);
             done();
           });
       });
@@ -175,7 +153,7 @@ describe('Routes: Recipe API Tests', () => {
       recipe.totalTime = '50 minutes';
       recipe.difficulty = 'Easy';
       recipe.extraInfo = 'Suitable for Vegans';
-      recipe.vegetarian = true;
+      recipe.vegetarian = 'true';
       recipe.ingredients = ['2 cups of beans', '3 Plantains'];
       recipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
       recipe.directions = [
@@ -190,7 +168,7 @@ describe('Routes: Recipe API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
-            expect(res.body.error).to.equal('You are not authorized to access that page, please Signin.');
+            expect(res.body.error).to.equal('You are not authorized to access this page, please Signin.');
 
             if (err) {
               return done(err);

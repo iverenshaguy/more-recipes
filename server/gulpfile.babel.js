@@ -7,9 +7,7 @@ import sourcemaps from 'gulp-sourcemaps';
 
 gulp.task('default', ['build']);
 
-gulp.watch('src/**/*.js', ['build:watch'], (event) => {
-  console.log(`File ${event.path} was ${event.type}, running tasks...`);
-});
+gulp.watch('src/**/*.js', ['build:watch'], event => `File ${event.path} was ${event.type}, running tasks...`);
 
 // gulp.task('prebuild', () => gulp.src('src/**/*.js')
 //   .pipe(babel())

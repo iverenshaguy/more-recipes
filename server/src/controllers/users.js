@@ -17,14 +17,12 @@ export default {
       .then((user) => {
         req.session.user = user.dataValues;
         res.status(201).send(user);
-      })
-      .catch(error => res.status(400).send(error));
+      });
   },
   list(req, res) {
     return User
       .all()
-      .then(users => res.status(200).send(users))
-      .catch(error => res.status(400).send(error));
+      .then(users => res.status(200).send(users));
   },
   retrieve(req, userData, res) {
     User.findOne({ where: { email: userData.email } })
@@ -35,9 +33,7 @@ export default {
           }
           req.session.user = user.dataValues;
           return res.status(200).send(user);
-        })
-          .catch(error => res.status(400).send(error));
-      })
-      .catch(error => res.status(400).send(error));
+        });
+      });
   }
 };

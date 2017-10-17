@@ -81,7 +81,7 @@ export default (sequelize, DataTypes) => {
           args: [
             ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult']
           ],
-          msg: 'Please select a field'
+          msg: 'Please select a valid field'
         }
       }
     },

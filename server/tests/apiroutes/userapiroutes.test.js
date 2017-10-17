@@ -17,7 +17,7 @@ describe('Routes: User API Tests', () => {
     password: 'LionJudah56',
     aboutMe: 'I am great',
     occupation: 'Coder'
-  })).then());
+  })).then(user => user));
 
   after(() => sequelize.drop());
 
