@@ -33,16 +33,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// // middleware function to check for logged-in users
-// const sessionChecker = (req, res, next) => {
-//   if (req.session.user && req.cookies.id) {
-//     res.redirect('/dashboard');
-//   }
-
-//   next();
-// };
-
 //  Connect all our routes to our application
 app.use('/', routes);
 

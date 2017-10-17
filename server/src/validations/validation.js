@@ -3,7 +3,7 @@ import { check } from 'express-validator/check';
 import { User } from '../models';
 
 export default {
-  registration: [
+  register: [
     check('firstname')
       .exists()
       .withMessage('First name must be specified')
@@ -74,7 +74,7 @@ export default {
       .trim()
       .escape()
   ],
-  authentication: [
+  login: [
     check('email')
       .exists().withMessage('Email must be specified')
       .isEmail()
@@ -92,5 +92,82 @@ export default {
       .exists().withMessage('Password must be specified')
       .isLength({ min: 3 })
       .withMessage('Please enter a valid password.'),
+  ],
+  addRecipe: [
+    check('recipeName')
+      .exists()
+      .withMessage('Recipe name must be specified')
+      .isLength({ min: 1 })
+      .withMessage('Recipe name cannot be empty')
+      .isLength({ max: 255 })
+      .withMessage('Recipe name must not be more than 255 characters')
+      .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
+      .withMessage('Recipe name can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('prepTime')
+      .isLength({ min: 2, max: 15 })
+      .withMessage('Prep time must be between 2 and 15 characters')
+      .matches(/^[a-zA-Z0-9\s]*$/)
+      .withMessage('Prep time can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('cookTime')
+      .isLength({ min: 2, max: 15 })
+      .withMessage('Cook time must be between 2 and 15 characters')
+      .matches(/^[a-zA-Z0-9\s]*$/)
+      .withMessage('Cook time can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('totalTime')
+      .isLength({ min: 2, max: 15 })
+      .withMessage('Total time must be between 2 and 15 characters')
+      .matches(/^[a-zA-Z0-9\s]*$/)
+      .withMessage('Total time can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('difficulty')
+      .isIn(['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
+      .withMessage('Please Select a Field')
+      .trim()
+      .escape(),
+    check('extraInfo')
+      .matches(/^[a-z 0-9 ,.'-\s]+$/i)
+      .withMessage('Extra info can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('vegetarian')
+      .isIn([false, true])
+      .withMessage('This field can only accept true or false')
+      .trim()
+      .escape(),
+    check('recipeImage')
+      .trim()
+      .escape(),
+    check('ingredients')
+      .exists()
+      .withMessage('Ingredient must be specified')
+      .isLength({ min: 1 })
+      .withMessage('Ingredient cannot be empty')
+      .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
+      .withMessage('Ingredient can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('preparations')
+      .isLength({ min: 1 })
+      .withMessage('Preparation cannot be empty')
+      .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
+      .withMessage('Preparation can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+    check('directions')
+      .exists()
+      .withMessage('Direction must be specified')
+      .isLength({ min: 1 })
+      .withMessage('Direction cannot be empty')
+      .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
+      .withMessage('Direction can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
   ]
 };

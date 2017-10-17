@@ -5,6 +5,7 @@ import express from 'express';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
 import validation from '../../validations/validation';
+import { logout } from '../../validations/authentication';
 import * as usersController from '../../controllers/users';
 import { User } from '../../models';
 
@@ -36,5 +37,7 @@ userRoutes.post('/signin', validation.login, (req, res) => {
     return usersController.retrieve(req, userData, res);
   });
 });
+
+userRoutes.get('/logout', logout);
 
 export default userRoutes;

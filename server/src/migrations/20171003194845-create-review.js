@@ -7,7 +7,8 @@ export default {
       type: Sequelize.INTEGER
     },
     rating: {
-      type: Sequelize.ENUM('1', '2', '3', '4', '5'),
+      type: Sequelize.ENUM,
+      values: ['1', '2', '3', '4', '5'],
       allowNull: false
     },
     comment: {

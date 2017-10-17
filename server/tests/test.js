@@ -3,3 +3,4 @@ import './apiroutes/apiroutes.test';
 import './functions/functions.test';
 import './middlewares/middlewares.test';
 import './models/models.test';
+import './apiroutes/recipeapiroutes.test';

@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
       },
       validate: {
         is: {
-          args: /^[a-zA-Z0-9\s]*$/,
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
           msg: 'Input is not valid'
         },
         notEmpty: {
@@ -24,10 +24,10 @@ export default (sequelize, DataTypes) => {
           args: /^[a-zA-Z0-9\s]*$/,
           msg: 'Input is not valid'
         },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
-        }
+        // notEmpty: {
+        //   args: true,
+        //   msg: 'Input cannot be empty'
+        // }
       }
     },
     prepTime: {
@@ -74,10 +74,13 @@ export default (sequelize, DataTypes) => {
       }
     },
     difficulty: {
-      type: DataTypes.ENUM('Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'),
+      type: DataTypes.ENUM,
+      values: ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'],
       validate: {
         isIn: {
-          args: [['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult']],
+          args: [
+            ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult']
+          ],
           msg: 'Please select a field'
         }
       }
@@ -86,7 +89,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       validate: {
         is: {
-          args: /^[a-zA-Z0-9\s]*$/,
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
           msg: 'Input is not valid'
         },
         notEmpty: {
@@ -100,35 +103,61 @@ export default (sequelize, DataTypes) => {
       defaultValue: false,
       validate: {
         isIn: {
-          args: [[false, true]],
+          args: [
+            [false, true]
+          ],
           msg: 'Please select a field'
         }
       }
     },
-    upvotes: {
-      type: DataTypes.INTEGER,
+    ingredients: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: {
+        args: false,
+        msg: 'This is a required field'
+      },
       validate: {
-        isInt: {
+        is: {
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
+          msg: 'Input is not valid'
+        },
+        notEmpty: {
           args: true,
-          msg: 'Input can only be a number'
+          msg: 'Input cannot be empty'
         }
       }
     },
-    downvotes: {
-      type: DataTypes.INTEGER,
+    preparations: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: {
+        args: false,
+        msg: 'This is a required field'
+      },
       validate: {
-        isInt: {
+        is: {
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
+          msg: 'Input is not valid'
+        },
+        notEmpty: {
           args: true,
-          msg: 'Input can only be a number'
+          msg: 'Input cannot be empty'
         }
       }
     },
-    totalFavorites: {
-      type: DataTypes.INTEGER,
+    directions: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: {
+        args: false,
+        msg: 'This is a required field'
+      },
       validate: {
-        isInt: {
+        is: {
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
+          msg: 'Input is not valid'
+        },
+        notEmpty: {
           args: true,
-          msg: 'Input can only be a number'
+          msg: 'Input cannot be empty'
         }
       }
     }
@@ -136,18 +165,6 @@ export default (sequelize, DataTypes) => {
   Recipe.associate = (models) => {
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId',
-    });
-    Recipe.hasMany(models.Ingredient, {
-      foreignKey: 'recipeId',
-      as: 'ingredient',
-    });
-    Recipe.hasMany(models.Preparation, {
-      foreignKey: 'recipeId',
-      as: 'preparation',
-    });
-    Recipe.hasMany(models.Direction, {
-      foreignKey: 'recipeId',
-      as: 'directions',
     });
     Recipe.hasMany(models.Like, {
       foreignKey: 'recipeId',

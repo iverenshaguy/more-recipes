@@ -12,7 +12,7 @@ export default {
     },
     recipeImage: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     prepTime: {
       type: Sequelize.STRING
@@ -25,7 +25,8 @@ export default {
       allowNull: false
     },
     difficulty: {
-      type: Sequelize.ENUM('Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'),
+      type: Sequelize.ENUM,
+      values: ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'],
     },
     extraInfo: {
       type: Sequelize.STRING
@@ -34,14 +35,17 @@ export default {
       type: Sequelize.BOOLEAN,
       defaultValue: false
     },
-    upvotes: {
-      type: Sequelize.INTEGER
+    ingredients: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: false
     },
-    downvotes: {
-      type: Sequelize.INTEGER
+    preparations: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: false
     },
-    totalFavorites: {
-      type: Sequelize.INTEGER
+    directions: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: false
     },
     createdAt: {
       allowNull: false,
