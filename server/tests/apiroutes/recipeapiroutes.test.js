@@ -117,7 +117,6 @@ describe('Routes: Recipe API Tests', () => {
           .send(badRecipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
-            console.log(res.body);
             expect(res.statusCode).to.equal(422);
             expect(res.body).to.have.property('errors');
             expect(res.body.errors.recipeName.msg).to.equal('Recipe name cannot be empty');
@@ -134,10 +133,11 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Logout of Application', () => {
       it('should log user out', (done) => {
         agent
-          .get('/api/users/logout')
+          .post('/api/users/logout')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('You\'ve been signed out successfully');
             if (err) {
               return done(err);
             }
@@ -167,8 +167,8 @@ describe('Routes: Recipe API Tests', () => {
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
-            expect(res.statusCode).to.equal(400);
-            expect(res.body.error).to.equal('You are not authorized to access this page, please Signin.');
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
 
             if (err) {
               return done(err);

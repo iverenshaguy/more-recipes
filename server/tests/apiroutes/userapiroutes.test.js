@@ -284,7 +284,7 @@ describe('Routes: User API Tests', () => {
           });
       });
 
-      it('should be empty', (done) => {
+      it('should not authenticate user and return error \'Username/Password do not match\'', (done) => {
         const user = {};
         user.email = 'iverenshaguy@gmail.com';
         user.password = 'LionJudah234';
@@ -294,13 +294,14 @@ describe('Routes: User API Tests', () => {
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
-            expect(res.statusCode).to.equal(400);
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('Username/Password do not match');
             if (err) return done(err);
             done();
           });
       });
 
-      it('should return a validated user', (done) => {
+      it('should validate user and return \'You\'ve been signed in successfully\'', (done) => {
         const user = {};
         user.email = 'iverenshaguy@gmail.com';
         user.password = 'LionJudah56';
@@ -311,9 +312,48 @@ describe('Routes: User API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('You\'ve been signed in successfully');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should authenticate user and return user data', (done) => {
+        agent
+          .get('/api/users/profile')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
             expect(res.body.firstname).to.equal('Iveren');
             expect(res.body.email).to.equal('iverenshaguy@gmail.com');
             if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should log user out', (done) => {
+        agent
+          .post('/api/users/logout')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('You\'ve been signed out successfully');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not authenticate user and return \'You are not authorized to access this page, please signin\'', (done) => {
+        agent
+          .get('/api/users/profile')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
             done();
           });
       });

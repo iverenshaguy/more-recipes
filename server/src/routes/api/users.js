@@ -5,9 +5,8 @@ import express from 'express';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
 import validation from '../../validations/validation';
-import { logout } from '../../validations/authentication';
+import { signout, authenticate } from '../../validations/authentication';
 import * as usersController from '../../controllers/users';
-import { User } from '../../models';
 
 const userRoutes = express.Router();
 
@@ -18,6 +17,7 @@ userRoutes.post('/signup', validation.register, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
+
   // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
 
@@ -29,15 +29,17 @@ userRoutes.post('/signin', validation.login, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
+
   // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
-  User.findOne({ where: { email: userData.email } }).then((result) => {
-    userData.passwordHash = (result.get('passwordHash')).toString();
-
-    return usersController.retrieve(req, userData, res);
-  });
+  return usersController.signin(req, userData, res);
+  // User.findOne({ where: { email: userData.email } }).then((result) => {
+  //   userData.passwordHash = (result.get('passwordHash')).toString();   
+  // });
 });
 
-userRoutes.get('/logout', logout);
+userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
+
+userRoutes.post('/logout', signout);
 
 export default userRoutes;

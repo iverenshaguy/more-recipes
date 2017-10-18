@@ -24,16 +24,21 @@ export default {
       .all()
       .then(users => res.status(200).send(users));
   },
-  retrieve(req, userData, res) {
+  signin(req, userData, res) {
     User.findOne({ where: { email: userData.email } })
       .then((user) => {
         verifyPassword(userData.password, user.passwordHash).then((verify) => {
           if (!verify) {
-            throw new Error();
+            return res.status(401).send({ error: 'Username/Password do not match' });
           }
           req.session.user = user.dataValues;
-          return res.status(200).send(user);
+
+          res.status(200).send({ message: 'You\'ve been signed in successfully' });
         });
       });
+  },
+  retrieve(req, res) {
+    User.findOne({ where: { email: req.session.user.email } })
+      .then(user => res.status(200).send(user));
   }
 };
