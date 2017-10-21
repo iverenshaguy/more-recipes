@@ -15,10 +15,12 @@ export default {
       allowNull: true
     },
     prepTime: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     cookTime: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     totalTime: {
       type: Sequelize.STRING,
@@ -26,26 +28,32 @@ export default {
     },
     difficulty: {
       type: Sequelize.ENUM,
+      allowNull: true,
       values: ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'],
     },
     extraInfo: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT,
+      allowNull: true,
     },
     vegetarian: {
       type: Sequelize.BOOLEAN,
+      allowNull: true,
       defaultValue: false
     },
     ingredients: {
       type: Sequelize.ARRAY(Sequelize.TEXT),
-      allowNull: false
+      allowNull: false,
+      defaultValue: []
     },
     preparations: {
       type: Sequelize.ARRAY(Sequelize.TEXT),
-      allowNull: false
+      allowNull: true,
+      defaultValue: []
     },
     directions: {
       type: Sequelize.ARRAY(Sequelize.TEXT),
-      allowNull: false
+      allowNull: false,
+      defaultValue: []
     },
     createdAt: {
       allowNull: false,
@@ -54,7 +62,12 @@ export default {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE
-    }
+    },
+    userId: {
+      allowNull: false,
+      foreignKey: true,
+      type: Sequelize.INTEGER
+    },
   }),
   down: queryInterface => queryInterface.dropTable('Recipes')
 };

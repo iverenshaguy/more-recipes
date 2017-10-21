@@ -11,7 +11,8 @@ export default {
       allowNull: false
     },
     lastname: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     username: {
       type: Sequelize.STRING,
@@ -24,20 +25,23 @@ export default {
       unique: true
     },
     passwordHash: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: Sequelize.STRING
     },
     aboutMe: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
+      allowNull: true,
     },
     occupation: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     profilePic: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     coverPhoto: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     createdAt: {
       allowNull: false,

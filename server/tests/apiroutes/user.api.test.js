@@ -2,7 +2,7 @@ import request from 'supertest';
 import chai from 'chai';
 import app from '../../src/bin/www';
 import { sequelize, User } from '../../src/models';
-import './apirouteshome.test';
+import './home.api.test';
 
 const expect = chai.expect;
 const agent = request.agent(app);

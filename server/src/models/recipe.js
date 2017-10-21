@@ -1,3 +1,5 @@
+import { checkArrayData } from '../validations/arrayCheck';
+
 export default (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {
     recipeName: {
@@ -32,27 +34,21 @@ export default (sequelize, DataTypes) => {
     },
     prepTime: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         is: {
           args: /^[a-zA-Z0-9\s]*$/,
           msg: 'Input is not valid'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
         }
       }
     },
     cookTime: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         is: {
           args: /^[a-zA-Z0-9\s]*$/,
           msg: 'Input is not valid'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
         }
       }
     },
@@ -75,6 +71,7 @@ export default (sequelize, DataTypes) => {
     },
     difficulty: {
       type: DataTypes.ENUM,
+      allowNull: true,
       values: ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'],
       validate: {
         isIn: {
@@ -86,20 +83,18 @@ export default (sequelize, DataTypes) => {
       }
     },
     extraInfo: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
+      allowNull: true,
       validate: {
         is: {
           args: /^[a-z 0-9 ,.'-()\s]+$/i,
           msg: 'Input is not valid'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
         }
       }
     },
     vegetarian: {
       type: DataTypes.BOOLEAN,
+      allowNull: true,
       defaultValue: false,
       validate: {
         isIn: {
@@ -116,6 +111,7 @@ export default (sequelize, DataTypes) => {
         args: false,
         msg: 'This is a required field'
       },
+      defaultValue: [],
       validate: {
         is: {
           args: /^[a-z 0-9 ,.'-()\s]+$/i,
@@ -129,10 +125,22 @@ export default (sequelize, DataTypes) => {
     },
     preparations: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: true,
+      defaultValue: ['No preparation necessary'],
+      validate: {
+        is: {
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
+          msg: 'Input is not valid'
+        }
+      }
+    },
+    directions: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: {
         args: false,
         msg: 'This is a required field'
       },
+      defaultValue: [],
       validate: {
         is: {
           args: /^[a-z 0-9 ,.'-()\s]+$/i,
@@ -144,21 +152,18 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
-    directions: {
-      type: DataTypes.ARRAY(DataTypes.TEXT),
-      allowNull: {
-        args: false,
-        msg: 'This is a required field'
-      },
-      validate: {
-        is: {
-          args: /^[a-z 0-9 ,.'-()\s]+$/i,
-          msg: 'Input is not valid'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
-        }
+    userId: {
+      allowNull: false,
+      foreignKey: true,
+      type: DataTypes.INTEGER
+    },
+  },
+  {
+    hooks: {
+      beforeCreate: (recipe) => {
+        recipe.ingredients = checkArrayData(recipe.ingredients);
+        recipe.preparations = checkArrayData(recipe.preparations);
+        recipe.directions = checkArrayData(recipe.directions);
       }
     }
   });

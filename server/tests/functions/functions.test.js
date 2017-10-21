@@ -1,1 +1,2 @@
-import './passwordhashfunctions.test';
+import './passwordhash.functions.test';
+import './arrayCheck.functions.test';

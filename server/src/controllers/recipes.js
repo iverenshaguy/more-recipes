@@ -20,9 +20,7 @@ export default {
         User
       ]
     })
-      .then((recipe) => {
-        res.status(201).send(recipe);
-      });
+      .then(recipe => res.status(201).send(recipe));
   },
 
 };

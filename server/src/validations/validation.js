@@ -16,6 +16,7 @@ export default {
       .trim()
       .escape(),
     check('lastname')
+      .optional({ checkFalsy: true })
       .isLength({ max: 144 })
       .withMessage('Last name must not be more than 144 characters')
       .matches(/^[a-z ,.'-]+$/i)
@@ -58,10 +59,12 @@ export default {
       .exists()
       .custom((value, { req }) => value === req.body.password),
     check('aboutMe')
+      .optional({ checkFalsy: true })
       .isLength({ max: 255 }).withMessage('Text must not be more than 255 characters')
       .trim()
       .escape(),
     check('occupation')
+      .optional({ checkFalsy: true })
       .matches(/^[a-zA-Z0-9\s]*$/).withMessage('Occupation must be alphanumeric')
       .isLength({ max: 144 })
       .withMessage('Text must not be more than 144 characters')
@@ -106,6 +109,7 @@ export default {
       .trim()
       .escape(),
     check('prepTime')
+      .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Prep time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
@@ -113,6 +117,7 @@ export default {
       .trim()
       .escape(),
     check('cookTime')
+      .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Cook time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
@@ -127,16 +132,19 @@ export default {
       .trim()
       .escape(),
     check('difficulty')
+      .optional({ checkFalsy: true })
       .isIn(['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
       .withMessage('Please select a valid field')
       .trim()
       .escape(),
     check('extraInfo')
+      .optional({ checkFalsy: true })
       .matches(/^[a-z 0-9 ,.'-\s]+$/i)
       .withMessage('Extra info can only contain letters and the characters (,.\'-)')
       .trim()
       .escape(),
     check('vegetarian')
+      .optional({ checkFalsy: true })
       .isIn([false, true])
       .withMessage('This field can only accept true or false')
       .trim()
@@ -154,6 +162,7 @@ export default {
       .trim()
       .escape(),
     check('preparations')
+      .optional({ checkFalsy: true })
       .isLength({ min: 1 })
       .withMessage('Preparation cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)

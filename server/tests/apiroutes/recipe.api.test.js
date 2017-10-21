@@ -2,14 +2,22 @@ import request from 'supertest';
 import chai from 'chai';
 import app from '../../src/bin/www';
 import { sequelize, User, Recipe } from '../../src/models';
-import './userapiroutes.test';
+import './user.api.test';
 
 const expect = chai.expect;
 const agent = request.agent(app);
 
 describe('Routes: Recipe API Tests', () => {
   // before(() => sequelize.sync({ force: true, match: /_test$/ }).then(() => Recipe.create({
-  before(() => sequelize.sync().then(() => Recipe.create({
+  before(() => sequelize.sync().then(() => User.create({
+    firstname: 'Iveren',
+    lastname: 'Shaguy',
+    username: 'iverenshaguy',
+    email: 'iverenshaguy@gmail.com',
+    password: 'LionJudah56',
+    aboutMe: 'I am great',
+    occupation: 'Coder'
+  }).then(user => Recipe.create({
     recipeName: 'Jollof Rice',
     prepTime: '30 Minutes',
     cookTime: '20 Minutes',
@@ -17,15 +25,7 @@ describe('Routes: Recipe API Tests', () => {
     difficulty: 'Normal',
     extraInfo: 'Sweet Food, lol',
     vegetarian: 'false',
-    User: {
-      firstname: 'Iveren',
-      lastname: 'Shaguy',
-      username: 'iverenshaguy',
-      email: 'iverenshaguy@gmail.com',
-      password: 'LionJudah56',
-      aboutMe: 'I am great',
-      occupation: 'Coder'
-    },
+    userId: user.id,
     ingredients: ['2 Cups of Rice', '1 Kilo of Chicken'],
     preparations: [
       'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
@@ -37,7 +37,7 @@ describe('Routes: Recipe API Tests', () => {
     ]
   }, {
     include: [User]
-  }).then(recipe => recipe)));
+  }).then(recipe => recipe))));
 
   after(() => sequelize.drop({ force: true }));
 
@@ -73,7 +73,7 @@ describe('Routes: Recipe API Tests', () => {
       recipe.extraInfo = 'Suitable for Vegans';
       recipe.vegetarian = 'true';
       recipe.ingredients = ['2 cups of beans', '3 Plantains'];
-      recipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
+      recipe.preparations = 'Soak the beans for 3 hours to reduce bloating';
       recipe.directions = [
         'Put the beans on fire with sliced onions (a big bulb)',
         'When it is very soft and can be easily mashed, add plantains, palmoil and ingredients'
