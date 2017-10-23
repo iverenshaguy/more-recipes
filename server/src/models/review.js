@@ -23,24 +23,10 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
-    userId: {
-      allowNull: false,
-      foreignKey: true,
-      type: DataTypes.INTEGER
-    },
-    recipeId: {
-      allowNull: false,
-      foreignKey: true,
-      type: DataTypes.INTEGER
-    },
   });
   Review.associate = (models) => {
-    Review.belongsTo(models.Recipe, {
-      foreignKey: 'recipeId',
-    });
-    Review.belongsTo(models.User, {
-      foreignKey: 'userId',
-    });
+    Review.belongsTo(models.Recipe);
+    Review.belongsTo(models.User);
   };
 
   return Review;

@@ -64,9 +64,13 @@ export default {
       type: Sequelize.DATE
     },
     userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id'
+      },
       allowNull: false,
-      foreignKey: true,
-      type: Sequelize.INTEGER
+      foreignKey: true
     },
   }),
   down: queryInterface => queryInterface.dropTable('Recipes')

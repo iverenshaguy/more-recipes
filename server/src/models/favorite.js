@@ -9,24 +9,10 @@ export default (sequelize, DataTypes) => {
         }
       }
     },
-    userId: {
-      allowNull: false,
-      foreignKey: true,
-      type: DataTypes.INTEGER
-    },
-    recipeId: {
-      allowNull: false,
-      foreignKey: true,
-      type: DataTypes.INTEGER
-    },
   });
   Favorite.associate = (models) => {
-    Favorite.belongsTo(models.Recipe, {
-      foreignKey: 'recipeId',
-    });
-    Favorite.belongsTo(models.User, {
-      foreignKey: 'userId',
-    });
+    Favorite.belongsTo(models.Recipe);
+    Favorite.belongsTo(models.User);
   };
 
   return Favorite;

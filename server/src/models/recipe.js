@@ -151,12 +151,7 @@ export default (sequelize, DataTypes) => {
           msg: 'Input cannot be empty'
         }
       }
-    },
-    userId: {
-      allowNull: false,
-      foreignKey: true,
-      type: DataTypes.INTEGER
-    },
+    }
   },
   {
     hooks: {
@@ -168,9 +163,7 @@ export default (sequelize, DataTypes) => {
     }
   });
   Recipe.associate = (models) => {
-    Recipe.belongsTo(models.User, {
-      foreignKey: 'userId',
-    });
+    Recipe.belongsTo(models.User);
     Recipe.hasMany(models.Like, {
       foreignKey: 'recipeId',
       as: 'likes',

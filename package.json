@@ -2,7 +2,7 @@
   "name": "more-recipes-personal",
   "version": "1.0.0",
   "description": "More Recipes App",
-  "main": "dist/bin/www.js",
+  "main": "server/dist/bin/www.js",
   "directories": {
     "test": "tests"
   },
@@ -12,7 +12,7 @@
     "lines": 95,
     "statements": 95,
     "functions": 95,
-    "branches": 95,
+    "branches": 70,
     "require": [
       "babel-register"
     ],
@@ -26,7 +26,7 @@
     "report-dir": "./coverage"
   },
   "scripts": {
-    "start:dev": "nodemon ./dist/bin/www.js",
+    "start:dev": "nodemon ./server/dist/bin/www.js",
     "test": "cross-env NODE_ENV=test nyc mocha tests/test.js --recursive --timeout 10000",
     "pretest": "npm-run-all lint",
     "clean": "rm -rf dist",
@@ -34,7 +34,7 @@
     "prebuild": "npm-run-all clean prebuild:init",
     "build": "babel src -d dist",
     "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
-    "build:single2": "babel src/password_hash/password_hash.js -o dist/password_hash/password_hash.js",
+    "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
     "lint": "eslint *.js",
     "migrate:test": "npm-run-all migrate:undo:test migrate:all:test",
     "migrate:undo:test": "sequelize db:migrate:undo:all --env test",

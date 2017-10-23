@@ -18,14 +18,22 @@ export default {
       type: Sequelize.DATE
     },
     userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
       allowNull: false,
-      foreignKey: true,
-      type: Sequelize.INTEGER
+      foreignKey: true
     },
     recipeId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Recipes',
+        key: 'id'
+      },
       allowNull: false,
-      foreignKey: true,
-      type: Sequelize.INTEGER
+      foreignKey: true
     },
   }),
   down: queryInterface => queryInterface.dropTable('Favorites')

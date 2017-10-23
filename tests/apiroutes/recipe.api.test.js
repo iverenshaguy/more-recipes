@@ -1,7 +1,7 @@
 import request from 'supertest';
 import chai from 'chai';
-import app from '../../src/bin/www';
-import { sequelize, User, Recipe } from '../../src/models';
+import app from '../../server/src/bin/www';
+import { sequelize, User, Recipe } from '../../server/src/models';
 import './user.api.test';
 
 const expect = chai.expect;

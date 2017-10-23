@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { checkArrayData } from '../../src/validations/arrayCheck';
+import { checkArrayData } from '../../server/src/validations/arrayCheck';
 
 const expect = chai.expect;
 
