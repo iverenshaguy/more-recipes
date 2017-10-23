@@ -3,7 +3,7 @@ import { check } from 'express-validator/check';
 import { User } from '../models';
 
 export default {
-  registration: [
+  register: [
     check('firstname')
       .exists()
       .withMessage('First name must be specified')
@@ -74,7 +74,7 @@ export default {
       .trim()
       .escape()
   ],
-  authentication: [
+  login: [
     check('email')
       .exists().withMessage('Email must be specified')
       .isEmail()
