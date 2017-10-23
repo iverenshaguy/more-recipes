@@ -15,6 +15,20 @@ describe('Test for Array Check', () => {
   });
 
   it('should return an array', () => {
+    const checkString = checkArrayData(2);
+
+    expect(checkString).to.be.an('array');
+    expect(checkString[0]).to.equal(2);
+  });
+
+  it('should return an array', () => {
+    const checkString = checkArrayData({});
+
+    expect(checkString).to.be.an('array');
+    expect(checkString[0]).to.be.an('object');
+  });
+
+  it('should return an array', () => {
     const checkArray = checkArrayData(arrayofStrings);
 
     expect(checkArray).to.be.an('array');
