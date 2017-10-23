@@ -40,6 +40,4 @@ userRoutes.post('/signin', validation.login, (req, res) => {
 
 userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
 
-userRoutes.post('/logout', signout);
-
 export default userRoutes;

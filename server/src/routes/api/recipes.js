@@ -19,7 +19,7 @@ recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
   return recipesController.create(req, recipeData, res);
 });
 
-recipeRoutes.put('/', authenticate, validation.updateRecipe, (req, res) => {
+recipeRoutes.put('/:id', authenticate, validation.updateRecipe, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });

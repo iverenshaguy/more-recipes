@@ -182,6 +182,11 @@ export default {
       .escape(),
   ],
   updateRecipe: [
+    check('id')
+      .exists()
+      .withMessage('Recipe to edit must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
     check('recipeName')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
