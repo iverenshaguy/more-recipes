@@ -9,10 +9,10 @@
   "nyc": {
     "check-coverage": true,
     "per-file": true,
-    "lines": 95,
-    "statements": 95,
-    "functions": 95,
-    "branches": 95,
+    "lines": 70,
+    "statements": 70,
+    "functions": 70,
+    "branches": 70,
     "require": [
       "babel-register"
     ],
