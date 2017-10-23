@@ -1,6 +1,0 @@
-coverage
-.coveralls.yml
-dist
-node_modules
-.env
-stray_scripts
