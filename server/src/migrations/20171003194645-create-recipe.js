@@ -66,11 +66,11 @@ export default {
     userId: {
       type: Sequelize.INTEGER,
       references: {
-        model: 'User',
+        model: 'Users',
         key: 'id'
       },
       allowNull: false,
-      foreignKey: true
+      foreignKey: true,
     },
   }),
   down: queryInterface => queryInterface.dropTable('Recipes')

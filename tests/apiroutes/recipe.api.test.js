@@ -9,15 +9,7 @@ const agent = request.agent(app);
 
 describe('Routes: Recipe API Tests', () => {
   // before(() => sequelize.sync({ force: true, match: /_test$/ }).then(() => Recipe.create({
-  before(() => sequelize.sync().then(() => User.create({
-    firstname: 'Iveren',
-    lastname: 'Shaguy',
-    username: 'iverenshaguy',
-    email: 'iverenshaguy@gmail.com',
-    password: 'LionJudah56',
-    aboutMe: 'I am great',
-    occupation: 'Coder'
-  }).then(user => Recipe.create({
+  before(() => sequelize.sync().then(() => Recipe.create({
     recipeName: 'Jollof Rice',
     prepTime: '30 Minutes',
     cookTime: '20 Minutes',
@@ -25,7 +17,6 @@ describe('Routes: Recipe API Tests', () => {
     difficulty: 'Normal',
     extraInfo: 'Sweet Food, lol',
     vegetarian: 'false',
-    userId: user.id,
     ingredients: ['2 Cups of Rice', '1 Kilo of Chicken'],
     preparations: [
       'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
@@ -34,10 +25,19 @@ describe('Routes: Recipe API Tests', () => {
     directions: [
       'Parboil Rice till half done',
       'Put already fried tomato stew on fire, add water and seasoning to taste'
-    ]
+    ],
+    User: {
+      firstname: 'Iveren',
+      lastname: 'Shaguy',
+      username: 'iverenshaguy',
+      email: 'iverenshaguy@gmail.com',
+      password: 'LionJudah56',
+      aboutMe: 'I am great',
+      occupation: 'Coder'
+    }
   }, {
     include: [User]
-  }).then(recipe => recipe))));
+  }).then(recipe => recipe)));
 
   after(() => sequelize.drop({ force: true }));
 
