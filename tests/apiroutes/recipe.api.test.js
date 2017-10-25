@@ -1,10 +1,9 @@
 import request from 'supertest';
-import chai from 'chai';
+import { expect } from 'chai';
 import app from '../../server/src/bin/www';
 import { sequelize, User, Recipe } from '../../server/src/models';
 import './user.api.test';
 
-const expect = chai.expect;
 const agent = request.agent(app);
 
 describe('Routes: Recipe API Tests', () => {
