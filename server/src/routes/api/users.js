@@ -5,7 +5,7 @@ import express from 'express';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
 import validation from '../../validations/validation';
-import { signout, authenticate } from '../../validations/authentication';
+import { authenticate } from '../../validations/authentication';
 import * as usersController from '../../controllers/users';
 
 const userRoutes = express.Router();
