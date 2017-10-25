@@ -32,10 +32,8 @@ userRoutes.post('/signin', validation.login, (req, res) => {
 
   // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
+
   return usersController.signin(req, userData, res);
-  // User.findOne({ where: { email: userData.email } }).then((result) => {
-  //   userData.passwordHash = (result.get('passwordHash')).toString();   
-  // });
 });
 
 userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
