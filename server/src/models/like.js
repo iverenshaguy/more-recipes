@@ -8,11 +8,11 @@ export default (sequelize, DataTypes) => {
           msg: 'Please select a field'
         }
       }
-    }
+    },
   });
   Like.associate = (models) => {
     Like.belongsTo(models.Recipe, {
-      foreignKey: 'recipeId',
+      foreignKey: 'userId',
     });
     Like.belongsTo(models.User, {
       foreignKey: 'userId',
