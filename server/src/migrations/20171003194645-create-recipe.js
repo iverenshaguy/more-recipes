@@ -12,36 +12,48 @@ export default {
     },
     recipeImage: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: true
     },
     prepTime: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     cookTime: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     totalTime: {
       type: Sequelize.STRING,
       allowNull: false
     },
     difficulty: {
-      type: Sequelize.ENUM('Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'),
+      type: Sequelize.ENUM,
+      allowNull: true,
+      values: ['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'],
     },
     extraInfo: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT,
+      allowNull: true,
     },
     vegetarian: {
       type: Sequelize.BOOLEAN,
+      allowNull: true,
       defaultValue: false
     },
-    upvotes: {
-      type: Sequelize.INTEGER
+    ingredients: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: false,
+      defaultValue: []
     },
-    downvotes: {
-      type: Sequelize.INTEGER
+    preparations: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: true,
+      defaultValue: []
     },
-    totalFavorites: {
-      type: Sequelize.INTEGER
+    directions: {
+      type: Sequelize.ARRAY(Sequelize.TEXT),
+      allowNull: false,
+      defaultValue: []
     },
     createdAt: {
       allowNull: false,
@@ -50,7 +62,16 @@ export default {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE
-    }
+    },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      allowNull: false,
+      foreignKey: true,
+    },
   }),
   down: queryInterface => queryInterface.dropTable('Recipes')
 };

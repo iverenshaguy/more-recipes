@@ -7,7 +7,8 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
     lastname: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -21,30 +22,44 @@ export default (sequelize, DataTypes) => {
     },
     passwordHash: {
       type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: 'Password cannot be empty'
-        }
-      }
     },
     password: {
-      type: DataTypes.VIRTUAL
-    },
-    passwordConfirm: {
-      type: DataTypes.VIRTUAL
+      type: DataTypes.VIRTUAL,
+      allowNull: false,
     },
     aboutMe: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
     occupation: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     profilePic: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        is: {
+          args: /^[a-zA-Z0-9\s]*$/,
+          msg: 'Input is not valid'
+        },
+        // notEmpty: {
+        //   args: true,
+        //   msg: 'Input cannot be empty'
+        // }
+      }
     },
     coverPhoto: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        is: {
+          args: /^[a-zA-Z0-9\s]*$/,
+          msg: 'Input is not valid'
+        },
+        // notEmpty: {
+        //   args: true,
+        //   msg: 'Input cannot be empty'
+        // }
+      }
     },
   }, {
     hooks: {
@@ -57,22 +72,27 @@ export default (sequelize, DataTypes) => {
     User.hasMany(models.Recipe, {
       foreignKey: 'userId',
       as: 'recipes',
+      onDelete: 'cascade',
     });
     User.hasMany(models.Like, {
       foreignKey: 'userId',
       as: 'likes',
+      onDelete: 'cascade',
     });
     User.hasMany(models.Favorite, {
       foreignKey: 'userId',
       as: 'favorites',
+      onDelete: 'cascade',
     });
     User.hasMany(models.Review, {
       foreignKey: 'userId',
       as: 'reviews',
+      onDelete: 'cascade',
     });
     User.hasMany(models.Notification, {
       foreignKey: 'userId',
       as: 'notifications',
+      onDelete: 'cascade',
     });
   };
 
