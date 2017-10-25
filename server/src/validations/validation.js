@@ -182,6 +182,11 @@ export default {
       .escape(),
   ],
   updateRecipe: [
+    check('id')
+      .exists()
+      .withMessage('Recipe to edit must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
     check('recipeName')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
@@ -261,5 +266,12 @@ export default {
       .withMessage('Direction can only contain letters and the characters (,.\'-)')
       .trim()
       .escape(),
+  ],
+  deleteRecipe: [
+    check('id')
+      .exists()
+      .withMessage('Recipe to delete must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
   ]
 };

@@ -1,10 +1,9 @@
 import request from 'supertest';
-import chai from 'chai';
+import { expect } from 'chai';
 import app from '../../server/src/bin/www';
 import { sequelize, User } from '../../server/src/models';
 import './home.api.test';
 
-const expect = chai.expect;
 const agent = request.agent(app);
 
 
@@ -331,20 +330,8 @@ describe('Routes: User API Tests', () => {
           });
       });
 
-      it('should log user out', (done) => {
-        agent
-          .post('/api/users/logout')
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            expect(res.body.message).to.equal('You\'ve been signed out successfully');
-            if (err) return done(err);
-            done();
-          });
-      });
-
       it('should not authenticate user and return \'You are not authorized to access this page, please signin\'', (done) => {
-        agent
+        request(app)
           .get('/api/users/profile')
           .set('Accept', 'application/json')
           .end((err, res) => {

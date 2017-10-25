@@ -5,7 +5,7 @@ import express from 'express';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
 import validation from '../../validations/validation';
-import { signout, authenticate } from '../../validations/authentication';
+import { authenticate } from '../../validations/authentication';
 import * as usersController from '../../controllers/users';
 
 const userRoutes = express.Router();
@@ -32,14 +32,10 @@ userRoutes.post('/signin', validation.login, (req, res) => {
 
   // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
+
   return usersController.signin(req, userData, res);
-  // User.findOne({ where: { email: userData.email } }).then((result) => {
-  //   userData.passwordHash = (result.get('passwordHash')).toString();   
-  // });
 });
 
 userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
-
-userRoutes.post('/logout', signout);
 
 export default userRoutes;

@@ -1,10 +1,9 @@
 import request from 'supertest';
-import chai from 'chai';
+import { expect } from 'chai';
 import app from '../../server/src/bin/www';
 import { sequelize, User, Recipe } from '../../server/src/models';
 import './user.api.test';
 
-const expect = chai.expect;
 const agent = request.agent(app);
 
 describe('Routes: Recipe API Tests', () => {
@@ -39,46 +38,55 @@ describe('Routes: Recipe API Tests', () => {
     include: [User]
   }).then(recipe => recipe)));
 
+  before((done) => {
+    const user = {};
+    user.email = 'iverenshaguy@gmail.com';
+    user.password = 'LionJudah56';
+
+    agent
+      .post('/api/users/signin')
+      .send(user)
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect('Location', '/server');
+        if (err) {
+          return done(err);
+        }
+        done();
+      });
+  });
+
   after(() => sequelize.drop({ force: true }));
 
+  const recipe = {};
+  recipe.recipeName = 'Bean Pottage';
+  recipe.prepTime = '5 minutes';
+  recipe.cookTime = '45 minutes';
+  recipe.totalTime = '50 minutes';
+  recipe.difficulty = 'Easy';
+  recipe.extraInfo = 'Suitable for Vegans';
+  recipe.vegetarian = 'true';
+  recipe.ingredients = ['2 cups of beans', '3 Plantains'];
+  recipe.preparations = 'Soak the beans for 3 hours to reduce bloating';
+  recipe.directions = [
+    'Put the beans on fire with sliced onions (a big bulb)',
+    'When it is very soft and can be easily mashed, add plantains, palmoil and ingredients'
+  ];
+
+  const badRecipe = {};
+  badRecipe.recipeName = '';
+  badRecipe.prepTime = '-5 minutes';
+  badRecipe.cookTime = '45 minutes';
+  badRecipe.totalTime = '50 minutes';
+  badRecipe.difficulty = 'Not Hard';
+  badRecipe.extraInfo = '[Suitable for Vegans]';
+  badRecipe.vegetarian = 'true';
+  badRecipe.ingredients = {};
+  badRecipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
+
   describe('## Add a Recipe for User Iveren', () => {
-    const user = {};
-    const recipe = {};
-
-    describe('## Login to Application', () => {
-      it('should autheticate user', (done) => {
-        user.email = 'iverenshaguy@gmail.com';
-        user.password = 'LionJudah56';
-
-        agent
-          .post('/api/users/signin')
-          .send(user)
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
-      });
-    });
-
     describe('## Check for authorised right input', () => {
-      recipe.recipeName = 'Bean Pottage';
-      recipe.prepTime = '5 minutes';
-      recipe.cookTime = '45 minutes';
-      recipe.totalTime = '50 minutes';
-      recipe.difficulty = 'Easy';
-      recipe.extraInfo = 'Suitable for Vegans';
-      recipe.vegetarian = 'true';
-      recipe.ingredients = ['2 cups of beans', '3 Plantains'];
-      recipe.preparations = 'Soak the beans for 3 hours to reduce bloating';
-      recipe.directions = [
-        'Put the beans on fire with sliced onions (a big bulb)',
-        'When it is very soft and can be easily mashed, add plantains, palmoil and ingredients'
-      ];
-
       it('should create a new recipe', (done) => {
         agent
           .post('/api/recipes/')
@@ -100,17 +108,6 @@ describe('Routes: Recipe API Tests', () => {
     });
 
     describe('## Check for authorised wrong input', () => {
-      const badRecipe = {};
-      badRecipe.recipeName = '';
-      badRecipe.prepTime = '-5 minutes';
-      badRecipe.cookTime = '45 minutes';
-      badRecipe.totalTime = '50 minutes';
-      badRecipe.difficulty = 'Not Hard';
-      badRecipe.extraInfo = '[Suitable for Vegans]';
-      badRecipe.vegetarian = 'true';
-      badRecipe.ingredients = {};
-      badRecipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
-
       it('should not create a new recipe', (done) => {
         agent
           .post('/api/recipes/')
@@ -130,39 +127,10 @@ describe('Routes: Recipe API Tests', () => {
       });
     });
 
-    describe('## Logout of Application', () => {
-      it('should log user out', (done) => {
-        agent
-          .post('/api/users/logout')
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            expect(res.body.message).to.equal('You\'ve been signed out successfully');
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
-      });
-    });
 
     describe('## Check for unauthorised input', () => {
-      recipe.recipeName = 'Bean Pottage';
-      recipe.prepTime = '5 minutes';
-      recipe.cookTime = '45 minutes';
-      recipe.totalTime = '50 minutes';
-      recipe.difficulty = 'Easy';
-      recipe.extraInfo = 'Suitable for Vegans';
-      recipe.vegetarian = 'true';
-      recipe.ingredients = ['2 cups of beans', '3 Plantains'];
-      recipe.preparations = ['Soak the beans for 3 hours to reduce bloating'];
-      recipe.directions = [
-        'Put the beans on fire with sliced onions (a big bulb)',
-        'When it is very soft and can be easily mashed, add plantains, palmoil and ingredients'
-      ];
-
       it('should not create a new recipe', (done) => {
-        agent
+        request(app)
           .post('/api/recipes/')
           .send(recipe)
           .set('Accept', 'application/json')
@@ -176,6 +144,233 @@ describe('Routes: Recipe API Tests', () => {
             done();
           });
       });
+    });
+  });
+
+  describe('## Update an Existing Recipe for User Iveren', () => {
+    describe('## Check for authorised right input', () => {
+      it('should update recipe', (done) => {
+        recipe.recipeName = 'Beans and Plantain Pottage';
+        recipe.preparations = ['Soak the beans for 1 hour to reduce bloating', 'Boil for 10 minutes and drain water'];
+        recipe.ingredients = '2 cups of beans';
+        agent
+          .put('/api/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.recipeName).to.equal('Beans and Plantain Pottage');
+            expect(res.body.preparations).to.have.lengthOf(2);
+            expect(res.body.preparations[0]).to.equal('Soak the beans for 1 hour to reduce bloating');
+            expect(res.body.preparations[1]).to.equal('Boil for 10 minutes and drain water');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not update recipe for Non-Existent ID 123', (done) => {
+        recipe.ingredients = ['2 cups of beans', '3 Plantains', '2 bulbs of Onions'];
+
+        agent
+          .put('/api/recipes/123')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.message).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not update recipe for Non-Existent ID abc', (done) => {
+        agent
+          .put('/api/recipes/abc')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not update recipe because of wrong input data', (done) => {
+        badRecipe.prepTime = '5 minutes';
+
+        agent
+          .put('/api/recipes/1')
+          .send(badRecipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body).to.have.property('errors');
+            expect(res.body.errors.difficulty.msg).to.equal('Please select a valid field');
+            expect(res.body.errors.extraInfo.msg).to.equal('Extra info can only contain letters and the characters (,.\'-)');
+            expect(res.body.errors.ingredients.msg).to.equal('Ingredient can only contain letters and the characters (,.\'-)');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not update recipe', (done) => {
+        request(app)
+          .put('/api/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Delete an Existing Recipe for User Iveren', () => {
+    describe('## Check for authorised right input', () => {
+      it('should delete recipe', (done) => {
+        agent
+          .delete('/api/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(204);
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not delete recipe for Non-Existent ID 123', (done) => {
+        agent
+          .delete('/api/recipes/123')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.message).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not delete recipe for Non-Existent ID abc', (done) => {
+        agent
+          .delete('/api/recipes/abc')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not delete recipe', (done) => {
+        request(app)
+          .delete('/api/recipes/1')
+          .send(recipe)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Check for Wrong User', () => {
+    before(() => User.create({
+      firstname: 'Favour',
+      lastname: 'Shaguy',
+      username: 'favourshaguy',
+      email: 'favourshaguy@gmail.com',
+      password: 'LionJudah',
+      aboutMe: 'I am great',
+      occupation: 'Chef'
+    })
+      .then(user => user));
+
+    before((done) => {
+      const user = {};
+      user.email = 'favourshaguy@gmail.com';
+      user.password = 'LionJudah';
+
+      agent
+        .post('/api/users/signin')
+        .send(user)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect('Location', '/server');
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should not update recipe', (done) => {
+      recipe.recipeName = 'Beans and Plantain Pottage';
+      recipe.preparations = ['Soak the beans for 1 hour to reduce bloating', 'Boil for 10 minutes and drain water'];
+      recipe.ingredients = '2 cups of beans';
+
+      agent
+        .put('/api/recipes/1')
+        .send(recipe)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('Recipe Not Found');
+
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should not delete recipe', (done) => {
+      agent
+        .delete('/api/recipes/1')
+        .send(recipe)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body.message).to.equal('Recipe Not Found');
+
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
     });
   });
 });

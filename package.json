@@ -28,14 +28,14 @@
   "scripts": {
     "start:dev": "nodemon ./server/dist/bin/www.js",
     "test": "cross-env NODE_ENV=test nyc mocha tests/test.js --recursive --timeout 10000",
-    "pretest": "npm-run-all lint",
+    "pretest": "npm run lint",
     "clean": "cd server && rm -rf dist",
     "prebuild:init": "cd server && mkdir dist",
     "prebuild": "npm-run-all clean prebuild:init",
     "build": "babel server/src -d server/dist",
     "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
     "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
-    "lint": "eslint server/*.js",
+    "lint": "eslint **/*.js --fix",
     "coverage": "npm-run-all --parallel coveralls codeclimate",
     "coveralls": "nyc report --reporter=lcov | coveralls",
     "codeclimate": "nyc report --reporter=lcov | codeclimate-test-reporter"

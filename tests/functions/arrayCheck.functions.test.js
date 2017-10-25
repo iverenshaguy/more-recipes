@@ -1,7 +1,5 @@
-import chai from 'chai';
+import { expect } from 'chai';
 import { checkArrayData } from '../../server/src/validations/arrayCheck';
-
-const expect = chai.expect;
 
 describe('Test for Array Check', () => {
   const normalString = 'This is a string';

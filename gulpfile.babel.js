@@ -23,15 +23,12 @@ gulp.task('sourcemaps', () => gulp.src('server/src/**/*.js')
   .pipe(babel())
   .pipe(concat('all.js'))
   .pipe(sourcemaps.write('.'))
-  .pipe(gulp.dest('server/dist'))
-);
+  .pipe(gulp.dest('server/dist')));
 
 gulp.task('build', ['clean', 'sourcemaps'], () => gulp.src('server/src/**/*.js')
   .pipe(babel())
-  .pipe(gulp.dest('server/dist'))
-);
+  .pipe(gulp.dest('server/dist')));
 
 gulp.task('build:watch', () => gulp.src('server/src/**/*.js')
   .pipe(babel())
-  .pipe(gulp.dest('server/dist'))
-);
+  .pipe(gulp.dest('server/dist')));
