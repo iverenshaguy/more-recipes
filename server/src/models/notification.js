@@ -16,7 +16,7 @@ export default (sequelize, DataTypes) => {
           msg: 'Input cannot be empty'
         }
       }
-    }
+    },
   });
   Notification.associate = (models) => {
     Notification.belongsTo(models.User, {
