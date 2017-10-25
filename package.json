@@ -35,7 +35,7 @@
     "build": "babel server/src -d server/dist",
     "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
     "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
-    "lint": "eslint server/*.js",
+    "lint": "eslint **/*.js --fix",
     "coverage": "npm-run-all --parallel coveralls codeclimate",
     "coveralls": "nyc report --reporter=lcov | coveralls",
     "codeclimate": "nyc report --reporter=lcov | codeclimate-test-reporter"

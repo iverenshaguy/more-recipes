@@ -1,10 +1,9 @@
 import request from 'supertest';
-import chai from 'chai';
+import { expect } from 'chai';
 import app from '../../server/src/bin/www';
 import { sequelize, User } from '../../server/src/models';
 import './home.api.test';
 
-const expect = chai.expect;
 const agent = request.agent(app);
 
 
