@@ -24,10 +24,19 @@ recipeRoutes.put('/:id', authenticate, validation.updateRecipe, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  // matchedData returns only the subset of data validated by the middleware
+
   const recipeData = matchedData(req);
 
   return recipesController.update(req, recipeData, res);
+});
+
+recipeRoutes.delete('/:id', authenticate, validation.deleteRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  return recipesController.delete(req, res);
 });
 
 export default recipeRoutes;

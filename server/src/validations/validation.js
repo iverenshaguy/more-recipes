@@ -266,5 +266,12 @@ export default {
       .withMessage('Direction can only contain letters and the characters (,.\'-)')
       .trim()
       .escape(),
+  ],
+  deleteRecipe: [
+    check('id')
+      .exists()
+      .withMessage('Recipe to delete must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
   ]
 };
