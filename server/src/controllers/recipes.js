@@ -36,4 +36,18 @@ export default {
           .then(() => res.status(200).send(recipe));
       });
   },
+
+  delete(req, res) {
+    return Recipe
+      .findOne({ where: { id: req.params.id, userId: req.session.user.id } })
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(404).send({ message: 'Recipe Not Found' });
+        }
+
+        return recipe
+          .destroy()
+          .then(() => res.status(204).send());
+      });
+  },
 };
