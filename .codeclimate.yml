@@ -7,5 +7,5 @@ engines:
     
 ratings:
    paths:
-   - "server/**.js"
+   - "server/src/**.js"
    
