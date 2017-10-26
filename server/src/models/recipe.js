@@ -159,6 +159,12 @@ export default (sequelize, DataTypes) => {
         recipe.ingredients = checkArrayData(recipe.ingredients);
         recipe.preparations = checkArrayData(recipe.preparations);
         recipe.directions = checkArrayData(recipe.directions);
+      },
+
+      beforeUpdate: (recipe) => {
+        recipe.ingredients = checkArrayData(recipe.ingredients);
+        recipe.preparations = checkArrayData(recipe.preparations);
+        recipe.directions = checkArrayData(recipe.directions);
       }
     }
   });
@@ -169,14 +175,17 @@ export default (sequelize, DataTypes) => {
     Recipe.hasMany(models.Like, {
       foreignKey: 'recipeId',
       as: 'likes',
+      onDelete: 'cascade',
     });
     Recipe.hasMany(models.Favorite, {
       foreignKey: 'recipeId',
       as: 'favorites',
+      onDelete: 'cascade',
     });
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',
       as: 'reviews',
+      onDelete: 'cascade',
     });
   };
 

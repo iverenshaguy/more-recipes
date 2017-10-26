@@ -8,8 +8,4 @@ export default {
 
     next();
   },
-
-  signout: (req, res) => {
-    req.session.destroy(() => res.status(200).send({ message: 'You\'ve been signed out successfully' }));
-  }
 };
