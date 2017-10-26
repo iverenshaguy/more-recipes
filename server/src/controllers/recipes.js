@@ -25,16 +25,10 @@ export default {
 
   update(req, recipeData, res) {
     return Recipe
-      .findOne({ where: {
-        id: req.params.id,
-        userId: req.session.user.id,
-      }
-      })
+      .findOne({ where: { id: req.params.id, userId: req.session.user.id } })
       .then((recipe) => {
         if (!recipe) {
-          return res.status(404).send({
-            message: 'Recipe Not Found',
-          });
+          return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
         return recipe
@@ -45,16 +39,10 @@ export default {
 
   delete(req, res) {
     return Recipe
-      .findOne({ where: {
-        id: req.params.id,
-        userId: req.session.user.id,
-      }
-      })
+      .findOne({ where: { id: req.params.id, userId: req.session.user.id } })
       .then((recipe) => {
         if (!recipe) {
-          return res.status(404).send({
-            message: 'Recipe Not Found',
-          });
+          return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
         return recipe
