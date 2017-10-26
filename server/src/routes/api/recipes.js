@@ -39,4 +39,6 @@ recipeRoutes.delete('/:id', authenticate, validation.deleteRecipe, (req, res) =>
   return recipesController.delete(req, res);
 });
 
+recipeRoutes.get('/', authenticate, recipesController.list);
+
 export default recipeRoutes;

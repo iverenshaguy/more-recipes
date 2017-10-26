@@ -50,4 +50,10 @@ export default {
           .then(() => res.status(204).send());
       });
   },
+
+  list(req, res) {
+    return Recipe
+      .all()
+      .then(recipes => res.status(200).send(recipes));
+  }
 };

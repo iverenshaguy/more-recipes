@@ -306,7 +306,98 @@ describe('Routes: Recipe API Tests', () => {
     });
   });
 
-  describe('## Check for Wrong User', () => {
+  describe('## Get all Recipes in App for User Iveren', () => {
+    describe('## Check for authorised right input', () => {
+      before((done) => {
+        const recipe2 = {};
+        recipe2.recipeName = 'Jollof Rice';
+        recipe2.prepTime = '30 Minutes';
+        recipe2.cookTime = '20 Minutes';
+        recipe2.totalTime = '1 Hour';
+        recipe2.difficulty = 'Normal';
+        recipe2.extraInfo = 'Sweet Food, lol';
+        recipe2.vegetarian = 'false';
+        recipe2.ingredients = ['2 Cups of Rice', '1 Kilo of Chicken'];
+        recipe2.preparations = [
+          'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
+          'Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.'
+        ];
+        recipe2.directions = [
+          'Parboil Rice till half done',
+          'Put already fried tomato stew on fire, add water and seasoning to taste'
+        ];
+
+        agent
+          .post('/api/recipes/')
+          .send(recipe2)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.recipeName).to.equal('Jollof Rice');
+            expect(res.body.directions).to.be.an('array');
+            expect(res.body.ingredients[0]).to.equal('2 Cups of Rice');
+            expect(res.body.preparations).to.have.lengthOf(2);
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+
+
+      it('should get all recipes', (done) => {
+        agent
+          .get('/api/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.lengthOf(2);
+            expect(res.body[0].recipeName).to.equal('Bean Pottage');
+            expect(res.body[1].recipeName).to.equal('Jollof Rice');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not get all recipes for url with parameter', (done) => {
+        agent
+          .get('/api/recipes/1')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(409);
+            expect(res.body.message).to.equal('Where Are You Going? Page Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not get any recipes', (done) => {
+        request(app)
+          .get('/api/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Check for Another User', () => {
     before(() => User.create({
       firstname: 'Favour',
       lastname: 'Shaguy',
@@ -365,6 +456,23 @@ describe('Routes: Recipe API Tests', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body.message).to.equal('Recipe Not Found');
+
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should get all recipes', (done) => {
+      agent
+        .get('/api/recipes')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.have.lengthOf(2);
+          expect(res.body[0].recipeName).to.equal('Bean Pottage');
+          expect(res.body[1].recipeName).to.equal('Jollof Rice');
 
           if (err) {
             return done(err);
