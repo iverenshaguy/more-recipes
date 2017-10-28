@@ -38,4 +38,6 @@ userRoutes.post('/signin', validation.login, (req, res) => {
 
 userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
 
+userRoutes.get('/:userId/recipes', authenticate, validation.favoriteRecipes, (req, res) => usersController.getFavorites(req, res));
+
 export default userRoutes;

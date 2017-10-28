@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../server/src/bin/www';
-import { sequelize, User, Recipe } from '../../server/src/models';
+import { sequelize, User, Recipe, Favorite } from '../../server/src/models';
 import './user.api.test';
 
 const agent = request.agent(app);
@@ -195,7 +195,7 @@ describe('Routes: Recipe API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
-            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
             if (err) return done(err);
             done();
           });
@@ -279,7 +279,7 @@ describe('Routes: Recipe API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
-            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
             if (err) return done(err);
             done();
           });
@@ -397,6 +397,295 @@ describe('Routes: Recipe API Tests', () => {
     });
   });
 
+  describe('## Review an Existing Recipe for User Iveren', () => {
+    const review = { rating: '4', comment: 'Very Good Recipe' };
+    const badReview1 = { rating: '7', comment: '[Very Good Recipe]' };
+    const badReview2 = { rating: 'Five', comment: '' };
+    const badReview3 = {};
+
+    describe('## Check for authorised right input', () => {
+      it('should review recipe', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.rating).to.equal('4');
+            expect(res.body.comment).to.equal('Very Good Recipe');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+
+      it('should not review recipe', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal('Review Already Submitted');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not review recipe for Non-Existent ID 123', (done) => {
+        agent
+          .post('/api/recipes/123/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.message).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe for Non-Existent ID abc', (done) => {
+        agent
+          .post('/api/recipes/abc/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview1)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
+            expect(res.body.errors.comment.msg).to.equal('Review can only contain letters and the characters (,.\'-)');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview2)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
+            expect(res.body.errors.comment.msg).to.equal('Review cannot be empty');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview3)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated');
+            expect(res.body.errors.comment.msg).to.equal('Review must be specified');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not review recipe', (done) => {
+        request(app)
+          .post('/api/recipes/2/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Get Favorites Recipes for User Iveren', () => {
+    describe('## Check for authorised right input', () => {
+      before(() => Recipe.bulkCreate([
+        {
+          recipeName: 'Coconut Rice',
+          prepTime: '30 Minutes',
+          cookTime: '20 Minutes',
+          totalTime: '1 Hour',
+          difficulty: 'Normal',
+          extraInfo: 'Sweet Food, lol',
+          vegetarian: 'false',
+          ingredients: ['2 Cups of Rice', '1 Kilo of Chicken'],
+          preparations: [
+            'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
+            'Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.'
+          ],
+          directions: [
+            'Parboil Rice till half done'
+          ],
+          userId: 1
+        },
+
+        {
+          recipeName: 'Fried Rice',
+          prepTime: '30 Minutes',
+          cookTime: '20 Minutes',
+          totalTime: '1 Hour',
+          difficulty: 'Normal',
+          extraInfo: 'Sweet Food, lol',
+          vegetarian: 'false',
+          ingredients: ['2 Cups of Rice', '1 Kilo of Chicken'],
+          preparations: [
+            'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
+            'Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.'
+          ],
+          directions: [
+            'Parboil Rice till half done'
+          ],
+          userId: 1
+        },
+
+        {
+          recipeName: 'Sweet Potatoe Pottage',
+          prepTime: '30 Minutes',
+          cookTime: '20 Minutes',
+          totalTime: '1 Hour',
+          difficulty: 'Normal',
+          extraInfo: 'Sweet Food, lol',
+          vegetarian: 'true',
+          ingredients: ['3 Potatoes', '2 bulbs of Onions '],
+          preparations: [
+            'Cut the potatoes into small pieces'
+          ],
+          directions: [
+            'Boil Potatoes for 25 minutes till a bit soft'
+          ],
+          userId: 1
+        },
+
+        {
+          recipeName: 'Egusi Soup',
+          prepTime: '30 Minutes',
+          cookTime: '20 Minutes',
+          totalTime: '1 Hour',
+          difficulty: 'Normal',
+          extraInfo: 'Sweet Food, lol',
+          vegetarian: 'false',
+          ingredients: ['2 Cups of Ground Egusi', '1 Kilo of Chicken'],
+          preparations: [
+            'Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time',
+            'Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.'
+          ],
+          directions: [
+            'Add chopped onions to oil and fry till it\'s transluscent',
+            'Add already mixed Egusi and fry till oil separates'
+          ],
+          userId: 1
+        },
+      ]).then(() => Favorite.bulkCreate([
+        {
+          favorite: true,
+          recipeId: 3,
+          userId: 1
+        },
+
+        {
+          favorite: true,
+          recipeId: 4,
+          userId: 1
+        },
+
+        {
+          favorite: false,
+          recipeId: 5,
+          userId: 1
+        },
+
+        {
+          favorite: true,
+          recipeId: 6,
+          userId: 1
+        }
+      ]))
+        .then(() => Favorite.findAll()).then(favorites => favorites)
+      );
+
+
+      it('should get favorite recipes', (done) => {
+        agent
+          .get('/api/users/1/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.lengthOf(3);
+            expect(res.body[0].Recipe.recipeName).to.equal('Jollof Rice');
+            expect(res.body[2].Recipe.recipeName).to.equal('Sweet Potatoe Pottage');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not get favorite recipes for url with wrong user id', (done) => {
+        agent
+          .get('/api/users/2/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.message).to.equal('You are not authorized to access this page');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not get any recipes', (done) => {
+        request(app)
+          .get('/api/users/1/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
   describe('## Check for Another User', () => {
     before(() => User.create({
       firstname: 'Favour',
@@ -470,9 +759,24 @@ describe('Routes: Recipe API Tests', () => {
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body).to.have.lengthOf(2);
+          expect(res.body).to.have.lengthOf(6);
           expect(res.body[0].recipeName).to.equal('Bean Pottage');
           expect(res.body[1].recipeName).to.equal('Jollof Rice');
+
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should return no favorite recipes', (done) => {
+      agent
+        .get('/api/users/2/recipes')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('You have no favorite recipes');
 
           if (err) {
             return done(err);

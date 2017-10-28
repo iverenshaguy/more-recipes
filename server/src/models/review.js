@@ -16,9 +16,13 @@ export default (sequelize, DataTypes) => {
     },
     comment: {
       type: DataTypes.TEXT,
+      allowNull: {
+        args: false,
+        msg: 'This is a required field'
+      },
       validate: {
         is: {
-          args: /^[a-zA-Z0-9\s]*$/,
+          args: /^[a-z 0-9 ,.'-()\s]+$/i,
           msg: 'Input is not valid'
         }
       }
@@ -26,7 +30,7 @@ export default (sequelize, DataTypes) => {
   });
   Review.associate = (models) => {
     Review.belongsTo(models.Recipe, {
-      foreignKey: 'userId',
+      foreignKey: 'recipeId',
     });
     Review.belongsTo(models.User, {
       foreignKey: 'userId',
