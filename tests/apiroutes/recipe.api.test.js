@@ -631,9 +631,7 @@ describe('Routes: Recipe API Tests', () => {
           userId: 1
         }
       ]))
-        .then(() => Favorite.findAll()).then(favorites => favorites)
-      );
-
+        .then(() => Favorite.findAll()).then(favorites => favorites));
 
       it('should get favorite recipes', (done) => {
         agent

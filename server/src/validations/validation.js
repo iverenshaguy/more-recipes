@@ -306,5 +306,4 @@ export default {
       .isInt()
       .withMessage('User Not Found'),
   ],
-
 };
