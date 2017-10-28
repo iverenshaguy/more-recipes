@@ -195,7 +195,7 @@ describe('Routes: Recipe API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
-            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
             if (err) return done(err);
             done();
           });
@@ -279,7 +279,7 @@ describe('Routes: Recipe API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
-            expect(res.body.errors.id.msg).to.equal('Recipe Not Found');
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
             if (err) return done(err);
             done();
           });
@@ -383,6 +383,137 @@ describe('Routes: Recipe API Tests', () => {
       it('should not get any recipes', (done) => {
         request(app)
           .get('/api/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Review an Existing Recipe for User Iveren', () => {
+    const review = { rating: '4', comment: 'Very Good Recipe' };
+    const badReview1 = { rating: '7', comment: '[Very Good Recipe]' };
+    const badReview2 = { rating: 'Five', comment: '' };
+    const badReview3 = {};
+
+    describe('## Check for authorised right input', () => {
+      it('should review recipe', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.rating).to.equal('4');
+            expect(res.body.comment).to.equal('Very Good Recipe');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+
+      it('should not review recipe', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body.message).to.equal('Review Already Submitted');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should not review recipe for Non-Existent ID 123', (done) => {
+        agent
+          .post('/api/recipes/123/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body.message).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe for Non-Existent ID abc', (done) => {
+        agent
+          .post('/api/recipes/abc/reviews')
+          .send(review)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview1)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
+            expect(res.body.errors.comment.msg).to.equal('Review can only contain letters and the characters (,.\'-)');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview2)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
+            expect(res.body.errors.comment.msg).to.equal('Review cannot be empty');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not review recipe because of wrong input data', (done) => {
+        agent
+          .post('/api/recipes/2/reviews')
+          .send(badReview3)
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(422);
+            expect(res.body.errors.rating.msg).to.equal('Recipe must be rated');
+            expect(res.body.errors.comment.msg).to.equal('Review must be specified');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not review recipe', (done) => {
+        request(app)
+          .post('/api/recipes/2/reviews')
+          .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);

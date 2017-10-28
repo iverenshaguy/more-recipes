@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
   });
   Like.associate = (models) => {
     Like.belongsTo(models.Recipe, {
-      foreignKey: 'userId',
+      foreignKey: 'recipeId',
     });
     Like.belongsTo(models.User, {
       foreignKey: 'userId',

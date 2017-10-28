@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
   });
   Favorite.associate = (models) => {
     Favorite.belongsTo(models.Recipe, {
-      foreignKey: 'userId',
+      foreignKey: 'recipeId',
     });
     Favorite.belongsTo(models.User, {
       foreignKey: 'userId',

@@ -182,7 +182,7 @@ export default {
       .escape(),
   ],
   updateRecipe: [
-    check('id')
+    check('recipeId')
       .exists()
       .withMessage('Recipe to edit must be specified')
       .isInt()
@@ -268,10 +268,35 @@ export default {
       .escape(),
   ],
   deleteRecipe: [
-    check('id')
+    check('recipeId')
       .exists()
       .withMessage('Recipe to delete must be specified')
       .isInt()
       .withMessage('Recipe Not Found'),
-  ]
+  ],
+  reviewRecipe: [
+    check('recipeId')
+      .exists()
+      .withMessage('Recipe to review must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
+    check('rating')
+      .exists()
+      .withMessage('Recipe must be rated')
+      .isIn(['1', '2', '3', '4', '5'])
+      .withMessage('Recipe must be rated from 1 - 5')
+      .trim()
+      .escape(),
+    check('comment')
+      .exists()
+      .withMessage('Review must be specified')
+      .isLength({ min: 1 })
+      .withMessage('Review cannot be empty')
+      .isLength({ max: 400 })
+      .withMessage('Review must not be more than 400 characters')
+      .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
+      .withMessage('Review can only contain letters and the characters (,.\'-)')
+      .trim()
+      .escape(),
+  ],
 };
