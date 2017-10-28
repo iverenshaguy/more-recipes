@@ -299,4 +299,11 @@ export default {
       .trim()
       .escape(),
   ],
+  favoriteRecipes: [
+    check('userId')
+      .exists()
+      .withMessage('User must be specified')
+      .isInt()
+      .withMessage('User Not Found'),
+  ],
 };

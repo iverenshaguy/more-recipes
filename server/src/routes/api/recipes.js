@@ -52,5 +52,4 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   return recipesController.reviewRecipe(req, reviewData, res);
 });
 
-
 export default recipeRoutes;

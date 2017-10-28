@@ -1,9 +1,11 @@
-import { User } from '../models';
+import { Sequelize, User, Recipe, Favorite } from '../models';
 import { verifyPassword } from '../validations/password_hash';
+
+const { Op } = Sequelize;
 
 export default {
   create(req, userData, res) {
-    User.create({
+    return User.create({
       firstname: userData.firstname,
       lastname: userData.lastname,
       username: userData.username,
@@ -19,13 +21,15 @@ export default {
         res.status(201).send(user);
       });
   },
+
   list(req, res) {
     return User
       .all()
       .then(users => res.status(200).send(users));
   },
+
   signin(req, userData, res) {
-    User.findOne({ where: { email: userData.email } })
+    return User.findOne({ where: { email: userData.email } })
       .then((user) => {
         verifyPassword(userData.password, user.passwordHash).then((verify) => {
           if (!verify) {
@@ -37,8 +41,34 @@ export default {
         });
       });
   },
+
   retrieve(req, res) {
-    User.findOne({ where: { email: req.session.user.email } })
+    return User.findOne({ where: { email: req.session.user.email } })
       .then(user => res.status(200).send(user));
+  },
+
+  getFavorites(req, res) {
+    if (+req.session.user.id !== +req.params.userId) {
+      return res.status(401).send({ message: 'You are not authorized to access this page' });
+    }
+
+    return Favorite.findAll({
+      include: [{
+        model: Recipe
+      }],
+      where: {
+        userId: req.params.userId,
+        favorite: {
+          [Op.not]: false,
+        }
+      }
+    })
+      .then((recipes) => {
+        if (recipes.length === 0) {
+          return res.status(200).send({ message: 'You have no favorite recipes' });
+        }
+
+        return res.status(200).send(recipes);
+      });
   }
 };
