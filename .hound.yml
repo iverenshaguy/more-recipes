@@ -1,0 +1,15 @@
+jshint:
+  enabled: false
+  
+coffeescript:
+  enabled: false
+  
+scss:
+  config_file: .scss-lint.yml
+
+eslint:
+  enabled: true
+  config_file: .hound.eslintrc
+  ignore_file: .eslintignore
+
+fail_on_violations: true

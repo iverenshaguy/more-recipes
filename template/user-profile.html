@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>More Recipes - View Recipe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel='stylesheet' href="src/assets/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' href="src/assets/kitchen-font/flaticon.css">
+    <link rel="stylesheet" href="src/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="user-profile ">
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="navbar navbar-toggleable-xl navbar-light bg-faded" data-toggle="affix" id="more-recipes-navbar">
+            <a class="navbar-brand hidden-md-down" href="index.html">MORE RECIPES</a>
+            <a class="navbar-brand hidden-lg-up" id="navbar-brand-right" href="index.html">MORE RECIPES</a>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <form class="hidden-sm-down form-inline mx-2 my-auto d-inline" id="search-form">
+                    <div class="input-group input-group">
+                        <label class="sr-only" for="search">Search for Recipes</label>
+                        <input type="text" class="form-control" id="search" placeholder="Search for Recipes">
+                        <span class="input-group-btn">
+                  <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+                </span>
+                    </div>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link menu-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-reorder fa-lg"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="search-recipes.html">All Recipes</a>
+                            <a class="dropdown-item" href="favorite-recipes.html">Favorite Recipes</a>
+                            <a class="dropdown-item" href="top-recipes.html">Top Recipes</a>
+                        </div>
+                    </li>
+                    <li class="hidden-xs-down hidden-md-up nav-item search-icon">
+                        <a href="javascript:void(0)" class="nav-link"><i class="fa fa-search"></i> Search...</a>
+                    </li>
+                    <li class="hidden-xs-down nav-item justify-content-start">
+                        <a class="nav-link" href="#add-edit-modal" data-toggle="modal" class="add-recipe" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item justify-content-start notifications-link">
+                        <a class="nav-link" href="#" title="Notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="container-fluid">
+                                <p>You have a new review</p>
+                                <div class="dropdown-divider"></div>
+                                <p>3 people viewed your recipe</p>
+                                <div class="dropdown-divider"></div>
+                                <p>Review your security details</p>
+                                <div class="dropdown-divider"></div>
+                                <p>Chef Steve just posted a new recipe</p>
+                                <div class="dropdown-divider"></div>
+                                <p>1 person added your recipe to their favorites</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hidden-xs-down nav-item mr-1">
+                        <a class="nav-link" href="favorite-recipes.html" title="Favorite Recipes"><i class="fa fa-heart fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-profile-picture-div rounded-cirle dropdown">
+                            <a class="nav-link" href="#" title="Profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="src/images/user1.jpg" class="rounded-cirle" alt="..."></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="user-profile.html">Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Edit Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#user-profile?#recipes">My Recipes</a>
+                                <a class="dropdown-item" href="favorite-recipes.html">Favourite Recipes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)">Log out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row" id="result-search-form-div">
+                <div class="col-12 w-100 py-3">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <label class="sr-only" for="search">Search for Recipe</label>
+                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid user-profile-hero">
+    </div>
+    <div class="container-fluid user-profile-div">
+        <div class="row user-profile-details">
+            <div class="col-xs-12 col-lg-4 pt-1 text-center profile-picture">
+                <img src="src/images/user1.jpg" class="rounded-circle img-fluid img-thumbnail" alt="Profile Picture">
+            </div>
+            <div class="col-xs-12 col-lg-8 pt-1 text-left details">
+                <p class="d-inline-block text-center px-5"><span class="d-block">4 </span><span class="d-block">Recipes</span></p>
+                <p class="d-inline-block text-center px-5"><span class="d-block">13 </span><span class="d-block">Favorites</span></p>
+                <p class="d-inline-block text-center px-5"><span class="d-block">20 </span><span class="d-block">Likes</span></p>
+            </div>
+        </div>
+        <div class="row px-5 justify-content-center user-profile-cards">
+            <div class="hidden-sm-down card-deck">
+                <div class="card card-oulitne-secondary col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 category-card">
+                    <div class="card-block text-center profile-details">
+                        <p class="name pt-3">Jane Smith</p>
+                        <small class="text-muted username pt-1">@jane</small>
+                        <p class="about-me pt-3">Mother. Wife. Chef. Engineer.</p>
+                    </div>
+                </div>
+                <div class="card col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 category-card">
+                    <a href="#add-edit-modal" data-toggle="modal">
+                        <div class="card-top text-center"><i class="fa fa-plus fa-4x"></i></div>
+                        <div class="card-block">
+                            <p class="card-text text-center">ADD A RECIPE</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="card col-lg-3 col-md-6 col-sm-12 col-xs-12 px-0 mt-4 category-card">
+                    <a href="#recipes">
+                        <img class="card-img-top" src="src/images/pork-image.jpg" class="img-fluid" alt="Category Image">
+                         <div class="card-block">
+                             <p class="card-text text-center">MY RECIPES</p>
+                         </div>
+                     </a>
+                </div>
+                <div class="card col-lg-3 col-md-6 col-sm-12 col-xs-12 px-0 mt-4 category-card">
+                    <a href="favorite-recipes.html">
+                        <img class="card-img-top w-100" src="src/images/gizdodo.jpg" class="img-fluid" alt="Category Image">
+                        <div class="card-block">
+                            <p class="card-text text-center">FAVORITE RECIPES</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid user-profile-recipe-cards-wrapper mb-5" id="recipes">
+        <div class="row justify-content-center user-profile-recipe-cards px-5 mt-0">
+            <div class="col-12 px-5 text-center">
+                <h5>MY RECIPES</h5>
+                <hr>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
+                <a href="user-recipe.html">
+                    <div class="card">
+                        <img class="card-img-top" src="src/images/fish-img.jpg" class="img-fluid" alt="recipe-image">
+                        <div class="card-block text-center pb-0">
+                            <h5 class="card-title mb-1">Rice Plantain and Fish</h5>
+                            <!-- <p class="card-text mb-2"><span class="text-muted">Posted by </span><a href="#">@janesmith</a></p> -->
+                        </div>
+                        <div class="card-block text-center recipe-details">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-clock-o"></i> 30 minutes</p>
+                            <p class="card-text text-muted mr-0 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Easy</p>
+                        </div>
+                        <div class="card-block my-0 text-center recipe-tags">
+                            <p class="card-text inline-p">Rice</p>
+                            <p class="card-text inline-p">Fish</p>
+                            <!-- <p class="card-text inline-p">Healthy</p> -->
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center text-muted px-2 recipe-rating">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
+                            <!-- <p class="card-text text-muted mr-2 inline-p"> | </p>
+                  <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-thumbs-up"></i> 200</p> -->
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
+                <a href="user-recipe.html">
+                    <div class="card">
+                        <img class="card-img-top" src="src/images/egusi.jpg" class="img-fluid" alt="recipe-image">
+                        <div class="card-block text-center pb-0">
+                            <h5 class="card-title mb-1">Pounded Yam and Egusi</h5>
+                            <!-- <p class="card-text mb-2"><span class="text-muted">Posted by </span><a href="#">@janesmith</a></p> -->
+                        </div>
+                        <div class="card-block text-center recipe-details">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-clock-o"></i> 45 minutes</p>
+                            <p class="card-text text-muted mr-0 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Difficult</p>
+                        </div>
+                        <div class="card-block my-0 text-center recipe-tags">
+                            <p class="card-text inline-p">Yam</p>
+                            <p class="card-text inline-p">Chicken</p>
+                            <p class="card-text inline-p">Healthy</p>
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center text-muted px-2 recipe-rating">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
+                            <!-- <p class="card-text text-muted mr-2 inline-p"> | </p>
+                  <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-thumbs-up"></i> 200</p> -->
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
+                <a href="user-recipe.html">
+                    <div class="card">
+                        <img class="card-img-top" src="src/images/gizdodo.jpg" class="img-fluid" alt="recipe-image">
+                        <div class="card-block text-center pb-0">
+                            <h5 class="card-title mb-1">Gizdodo</h5>
+                            <!-- <p class="card-text mb-2"><span class="text-muted">Posted by </span><a href="#">@janesmith</a></p> -->
+                        </div>
+                        <div class="card-block text-center recipe-details">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-clock-o"></i> 20 minutes</p>
+                            <p class="card-text text-muted mr-0 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Normal</p>
+                        </div>
+                        <div class="card-block my-0 text-center recipe-tags">
+                            <p class="card-text inline-p">Gizzard</p>
+                            <p class="card-text inline-p">Plantain</p>
+                            <p class="card-text inline-p">Healthy</p>
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center text-muted px-2 recipe-rating">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
+                            <!-- <p class="card-text text-muted mr-2 inline-p"> | </p>
+                  <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-thumbs-up"></i> 200</p> -->
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
+                <a href="user-recipe.html">
+                    <div class="card">
+                        <img class="card-img-top" src="src/images/shrimp-rice.jpg" class="img-fluid" alt="recipe-image">
+                        <div class="card-block text-center pb-0">
+                            <h5 class="card-title mb-1">Rice and Shrimps</h5>
+                            <!-- <p class="card-text mb-2"><span class="text-muted">Posted by </span><a href="#">@janesmith</a></p> -->
+                        </div>
+                        <div class="card-block text-center recipe-details">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-clock-o"></i> 45 minutes</p>
+                            <p class="card-text text-muted mr-0 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Difficult</p>
+                        </div>
+                        <div class="card-block my-0 text-center recipe-tags">
+                            <p class="card-text inline-p">Rice</p>
+                            <p class="card-text inline-p">Shrimps</p>
+                            <p class="card-text inline-p">Healthy</p>
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center text-muted px-2 recipe-rating">
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
+                            <!-- <p class="card-text text-muted mr-2 inline-p"> | </p>
+                  <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-thumbs-up"></i> 200</p> -->
+                            <p class="card-text text-muted mr-2 inline-p"> | </p>
+                            <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="add-edit-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="dynamic-modal-title">Edit Recipe</h3>
+                    <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row" id="add-edit-recipe ">
+                            <div class="offset-md-1 col-md-10 col-xs-12 col-sm-12 ">
+                                <form id="add-recipe " class="add-edit-form row">
+                                    <input type="file " class="hidden-xs-up " id="add-edit-image ">
+                                    <div class="form-group mt-5 col-12 ">
+                                        <label for="recipe-name " class="col-form-label col-form-label-lg ">Recipe Name</label>
+                                        <input type="text " class="form-control " id="recipe-name " placeholder="Jollof Rice and Curried Chicken ">
+                                    </div>
+                                    <div class="recipe-img-div col-12">
+                                        <img src="" id="recipe-photo-preview" class="img-fluid">
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="recipe-image" id="dynamic-image-label" class="col-form-label col-form-label-lg "> Change the Recipe Image</label><br>
+                                        <label class="custom-file"> 
+                                              <input type="file" id="recipe-image" class="recipe-image">
+                                              <span class="custom-file-control"></span>
+                                            </label>
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="username" class="col-form-label col-form-label-lg ">Ingredients</label>
+                                        <input type="text " class="form-control " id="ingredients[] " placeholder="1 tbsp of pureed scotch bonnet pepper ">
+                                        <p class="text-muted mt-2 mb-0 " id="add-ingredient "><i class="fa fa-plus "></i> Add Another Ingredient</p>
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="username " class="col-form-label col-form-label-lg ">Preparation</label>
+                                        <input type="text " class="form-control " id="ingredients[] " placeholder="Cut up the chicken ">
+                                        <p class="text-muted mt-2 mb-0 " id="add-direction "><i class="fa fa-plus "></i> Add</p>
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="username " class="col-form-label col-form-label-lg ">Directions</label>
+                                        <input type="text " class="form-control " id="ingredients[] " placeholder="Put the spiced chicken in a hot oven for 15 minutes ">
+                                        <p class="text-muted mt-2 mb-0 " id="add-preparation "><i class="fa fa-plus "></i> Add</p>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="username " class="col-form-label col-form-label-lg ">Preparation Time</label>
+                                        <input type="text " class="form-control " id="prep-time " placeholder="20 Minutes ">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="username " class="col-form-label col-form-label-lg ">Cooking Time</label>
+                                        <input type="text " class="form-control " id="cook-time " placeholder="1 Hour 30 Minutes ">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="username " class="col-form-label col-form-label-lg ">Total Time to Cook</label>
+                                        <input type="text " class="form-control " id="total-time " placeholder="1 Hour 50 Minutes ">
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="country " class="col-form-label-lg ">Difficulty</label>
+                                        <select class="custom-select form-control " id="country ">
+                                                <option value="Easy " selected>Easy</option>
+                                                <option value="Normal ">Normal</option>
+                                                <option value="A Bit Difficult ">A Bit Difficult</option>
+                                                <option value="Difficult ">Difficult</option>
+                                                <option value="Very Difficult ">Very Difficult</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                              <input class="form-check-input" type="checkbox" value="">
+                                            Suitable For Vegetarians
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="extra-info " class="col-form-label col-form-label-lg ">Extra Information (Allergy Warnings etc)</label>
+                                        <textarea class="form-control " id="extra-info " rows="5 " placeholder="Contains Mushrooms "></textarea>
+                                    </div>
+                                    <div class="form-group col-12 mt-3 ">
+                                        <button class="btn btn-success btn-block ">ADD RECIPE</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2017 More Recipes</p>
+        </div>
+    </footer>
+
+    <script src="src/assets/jquery.js"></script>
+    <script src="src/assets/tether/dist/js/tether.min.js"></script>
+    <script src="src/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>
