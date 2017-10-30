@@ -23,7 +23,7 @@ describe('Routes: User API Tests', () => {
   describe('## Get All Users', () => {
     it('should return an array of users', (done) => {
       agent
-        .get('/api/users/')
+        .get('/api/v1/users/')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('array');
@@ -50,7 +50,7 @@ describe('Routes: User API Tests', () => {
         user.occupation = 'Student';
 
         agent
-          .post('/api/users/signup')
+          .post('/api/v1/users/signup')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -79,7 +79,7 @@ describe('Routes: User API Tests', () => {
         user.occupation = '**$$##';
 
         agent
-          .post('/api/users/signup')
+          .post('/api/v1/users/signup')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -109,7 +109,7 @@ describe('Routes: User API Tests', () => {
 
 
         agent
-          .post('/api/users/signup')
+          .post('/api/v1/users/signup')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -126,7 +126,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'Liosnsid3456';
 
         agent
-          .post('/api/users/signup')
+          .post('/api/v1/users/signup')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -153,7 +153,7 @@ describe('Routes: User API Tests', () => {
 
       it('should create a new user', (done) => {
         agent
-          .post('/api/users/signup')
+          .post('/api/v1/users/signup')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -180,7 +180,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -198,7 +198,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -215,7 +215,7 @@ describe('Routes: User API Tests', () => {
         user.email = 'favourshaguy@gmail.com';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -233,7 +233,7 @@ describe('Routes: User API Tests', () => {
         user.password = '';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -251,7 +251,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -271,7 +271,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -289,7 +289,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah234';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -306,7 +306,7 @@ describe('Routes: User API Tests', () => {
         user.password = 'LionJudah56';
 
         agent
-          .post('/api/users/signin')
+          .post('/api/v1/users/signin')
           .send(user)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -319,7 +319,7 @@ describe('Routes: User API Tests', () => {
 
       it('should authenticate user and return user data', (done) => {
         agent
-          .get('/api/users/profile')
+          .get('/api/v1/users/profile')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -332,7 +332,7 @@ describe('Routes: User API Tests', () => {
 
       it('should not authenticate user and return \'You are not authorized to access this page, please signin\'', (done) => {
         request(app)
-          .get('/api/users/profile')
+          .get('/api/v1/users/profile')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);

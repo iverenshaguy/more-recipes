@@ -1,7 +1,5 @@
-import { Sequelize, User, Recipe, Favorite } from '../models';
+import { User, Recipe, Favorite } from '../models';
 import { verifyPassword } from '../validations/password_hash';
-
-const { Op } = Sequelize;
 
 export default {
   create(req, userData, res) {
@@ -58,9 +56,7 @@ export default {
       }],
       where: {
         userId: req.params.userId,
-        favorite: {
-          [Op.not]: false,
-        }
+        favorite: true
       }
     })
       .then((recipes) => {

@@ -1,5 +1,3 @@
 import './server.test';
-import './apiroutes/api.test';
+import './apiroutes/recipe.api.test';
 import './functions/functions.test';
-import './middlewares/middlewares.test';
-import './models/models.test';

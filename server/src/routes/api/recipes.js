@@ -39,8 +39,6 @@ recipeRoutes.delete('/:recipeId', authenticate, validation.deleteRecipe, (req, r
   return recipesController.delete(req, res);
 });
 
-recipeRoutes.get('/', authenticate, recipesController.list);
-
 recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -50,6 +48,14 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   const reviewData = matchedData(req);
 
   return recipesController.reviewRecipe(req, reviewData, res);
+});
+
+recipeRoutes.get('/', authenticate, (req, res) => {
+  if (req.query.sort === 'upvotes') {
+    return recipesController.getUpvoted(req, res);
+  }
+
+  return recipesController.list(req, res);
 });
 
 export default recipeRoutes;

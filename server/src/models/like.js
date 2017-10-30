@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const Like = sequelize.define('Like', {
-    like: {
+    upvote: {
       type: DataTypes.BOOLEAN,
       validate: {
         isIn: {
