@@ -25,7 +25,7 @@ export default {
       const combined = Buffer.alloc(hash.length + salt.length + 8);
 
       // include the size of the salt so that we can, during verification,
-      // figure out how much of the hash is salt and also incluse the 
+      // figure out how much of the hash is salt and also include the
       // iteration count
       combined.writeUInt32BE(salt.length, 0, true);
       combined.writeUInt32BE(iterations, 4, true);
