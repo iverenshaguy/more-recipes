@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../server/src/bin/www';
-import { sequelize, User, Recipe, Favorite } from '../../server/src/models';
+import { sequelize, User, Recipe, Favorite, Like } from '../../server/src/models';
 import './user.api.test';
 
 const agent = request.agent(app);
@@ -36,7 +36,8 @@ describe('Routes: Recipe API Tests', () => {
     }
   }, {
     include: [User]
-  }).then(recipe => recipe)));
+  })
+    .then(recipe => recipe)));
 
   before((done) => {
     const user = {};
@@ -44,7 +45,7 @@ describe('Routes: Recipe API Tests', () => {
     user.password = 'LionJudah56';
 
     agent
-      .post('/api/users/signin')
+      .post('/api/v1/users/signin')
       .send(user)
       .set('Accept', 'application/json')
       .end((err, res) => {
@@ -89,7 +90,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised right input', () => {
       it('should create a new recipe', (done) => {
         agent
-          .post('/api/recipes/')
+          .post('/api/v1/recipes/')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -110,7 +111,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised wrong input', () => {
       it('should not create a new recipe', (done) => {
         agent
-          .post('/api/recipes/')
+          .post('/api/v1/recipes/')
           .send(badRecipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -131,7 +132,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not create a new recipe', (done) => {
         request(app)
-          .post('/api/recipes/')
+          .post('/api/v1/recipes/')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -154,7 +155,7 @@ describe('Routes: Recipe API Tests', () => {
         recipe.preparations = ['Soak the beans for 1 hour to reduce bloating', 'Boil for 10 minutes and drain water'];
         recipe.ingredients = '2 cups of beans';
         agent
-          .put('/api/recipes/1')
+          .put('/api/v1/recipes/1')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -177,7 +178,7 @@ describe('Routes: Recipe API Tests', () => {
         recipe.ingredients = ['2 cups of beans', '3 Plantains', '2 bulbs of Onions'];
 
         agent
-          .put('/api/recipes/123')
+          .put('/api/v1/recipes/123')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -190,7 +191,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not update recipe for Non-Existent ID abc', (done) => {
         agent
-          .put('/api/recipes/abc')
+          .put('/api/v1/recipes/abc')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -205,7 +206,7 @@ describe('Routes: Recipe API Tests', () => {
         badRecipe.prepTime = '5 minutes';
 
         agent
-          .put('/api/recipes/1')
+          .put('/api/v1/recipes/1')
           .send(badRecipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -224,7 +225,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not update recipe', (done) => {
         request(app)
-          .put('/api/recipes/1')
+          .put('/api/v1/recipes/1')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -244,7 +245,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised right input', () => {
       it('should delete recipe', (done) => {
         agent
-          .delete('/api/recipes/1')
+          .delete('/api/v1/recipes/1')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -261,7 +262,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised wrong input', () => {
       it('should not delete recipe for Non-Existent ID 123', (done) => {
         agent
-          .delete('/api/recipes/123')
+          .delete('/api/v1/recipes/123')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -274,7 +275,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not delete recipe for Non-Existent ID abc', (done) => {
         agent
-          .delete('/api/recipes/abc')
+          .delete('/api/v1/recipes/abc')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -290,7 +291,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not delete recipe', (done) => {
         request(app)
-          .delete('/api/recipes/1')
+          .delete('/api/v1/recipes/1')
           .send(recipe)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -328,7 +329,7 @@ describe('Routes: Recipe API Tests', () => {
         ];
 
         agent
-          .post('/api/recipes/')
+          .post('/api/v1/recipes/')
           .send(recipe2)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -348,7 +349,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should get all recipes', (done) => {
         agent
-          .get('/api/recipes')
+          .get('/api/v1/recipes')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -367,7 +368,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised wrong input', () => {
       it('should not get all recipes for url with parameter', (done) => {
         agent
-          .get('/api/recipes/1')
+          .get('/api/v1/recipes/1')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(409);
@@ -382,7 +383,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not get any recipes', (done) => {
         request(app)
-          .get('/api/recipes')
+          .get('/api/v1/recipes')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
@@ -406,7 +407,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised right input', () => {
       it('should review recipe', (done) => {
         agent
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -423,7 +424,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not review recipe', (done) => {
         agent
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -441,7 +442,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised wrong input', () => {
       it('should not review recipe for Non-Existent ID 123', (done) => {
         agent
-          .post('/api/recipes/123/reviews')
+          .post('/api/v1/recipes/123/reviews')
           .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -454,7 +455,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not review recipe for Non-Existent ID abc', (done) => {
         agent
-          .post('/api/recipes/abc/reviews')
+          .post('/api/v1/recipes/abc/reviews')
           .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -467,7 +468,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not review recipe because of wrong input data', (done) => {
         agent
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(badReview1)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -481,7 +482,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not review recipe because of wrong input data', (done) => {
         agent
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(badReview2)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -495,7 +496,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should not review recipe because of wrong input data', (done) => {
         agent
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(badReview3)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -512,7 +513,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not review recipe', (done) => {
         request(app)
-          .post('/api/recipes/2/reviews')
+          .post('/api/v1/recipes/2/reviews')
           .send(review)
           .set('Accept', 'application/json')
           .end((err, res) => {
@@ -635,7 +636,7 @@ describe('Routes: Recipe API Tests', () => {
 
       it('should get favorite recipes', (done) => {
         agent
-          .get('/api/users/1/recipes')
+          .get('/api/v1/users/1/recipes')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -654,7 +655,7 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for authorised wrong input', () => {
       it('should not get favorite recipes for url with wrong user id', (done) => {
         agent
-          .get('/api/users/2/recipes')
+          .get('/api/v1/users/2/recipes')
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
@@ -669,7 +670,230 @@ describe('Routes: Recipe API Tests', () => {
     describe('## Check for unauthorised input', () => {
       it('should not get any recipes', (done) => {
         request(app)
-          .get('/api/users/1/recipes')
+          .get('/api/v1/users/1/recipes')
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  describe('## Get Upvoted Recipes for User Iveren in Ascending Order', () => {
+    describe('## Check for authorised  with right input with no liked recipes', () => {
+      it('should get no upvoted recipes with message \'There are no upvoted recipes\'', (done) => {
+        agent
+          .get('/api/v1/recipes')
+          .query({ sort: 'upvotes', order: 'ascending' })
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('There are no upvoted recipes');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised right input with liked recipes', () => {
+      before(() => User.bulkCreate([
+        {
+          firstname: 'Terry',
+          lastname: 'Shaguy',
+          username: 'terryshaguy',
+          email: 'terryshaguy@gmail.com',
+          password: 'terryshaguy',
+          aboutMe: 'Minister of the Gospel',
+          occupation: 'Writer',
+          updatedAt: '2017-10-30T00:47:03.687Z',
+          createdAt: '2017-10-30T00:47:03.687Z',
+        },
+        {
+          firstname: 'Laruba',
+          lastname: 'Adama',
+          username: 'larubaadama',
+          email: 'larubaadama@gmail.com',
+          password: 'larubaadama',
+          aboutMe: 'Non Conformist',
+          occupation: 'Web Developer',
+          updatedAt: '2017-10-30T00:47:03.687Z',
+          createdAt: '2017-10-30T00:47:03.687Z',
+        },
+        {
+          firstname: 'Joyce',
+          lastname: 'Ayoola',
+          username: 'joyceayoola',
+          email: 'joyceayoola@gmail.com',
+          password: 'joyceayoola',
+          aboutMe: 'Fashionista',
+          occupation: 'Lecturer',
+          updatedAt: '2017-10-30T00:47:03.687Z',
+          createdAt: '2017-10-30T00:47:03.687Z',
+        },
+        {
+          firstname: 'Emiola',
+          lastname: 'Olasanmi',
+          username: 'emiolaolasanmi',
+          email: 'emiolaolasanmi@gmail.com',
+          password: 'emiolaolasanmi',
+          aboutMe: 'Food Lover',
+          occupation: 'Fashion Designer',
+          updatedAt: '2017-10-30T00:47:03.687Z',
+          createdAt: '2017-10-30T00:47:03.687Z',
+        },
+      ]).then(() => Like.bulkCreate([
+        {
+          upvote: true,
+          recipeId: 3,
+          userId: 1
+        },
+
+        {
+          upvote: true,
+          recipeId: 4,
+          userId: 2
+        },
+
+        {
+          upvote: false,
+          recipeId: 5,
+          userId: 3
+        },
+
+        {
+          upvote: true,
+          recipeId: 6,
+          userId: 4
+        },
+
+        {
+          upvote: true,
+          recipeId: 3,
+          userId: 5
+        },
+
+        {
+          upvote: true,
+          recipeId: 3,
+          userId: 1
+        },
+
+        {
+          upvote: false,
+          recipeId: 4,
+          userId: 2
+        },
+
+        {
+          upvote: true,
+          recipeId: 3,
+          userId: 3
+        },
+
+        {
+          upvote: true,
+          recipeId: 6,
+          userId: 4
+        },
+
+        {
+          upvote: true,
+          recipeId: 6,
+          userId: 5
+        },
+
+        {
+          upvote: false,
+          recipeId: 2,
+          userId: 1
+        },
+
+        {
+          upvote: true,
+          recipeId: 2,
+          userId: 2
+        },
+
+        {
+          upvote: true,
+          recipeId: 2,
+          userId: 3
+        },
+
+        {
+          upvote: true,
+          recipeId: 3,
+          userId: 4
+        },
+
+        {
+          upvote: false,
+          recipeId: 3,
+          userId: 5
+        },
+
+        {
+          upvote: true,
+          recipeId: 6,
+          userId: 1
+        }
+      ]))
+        .then(() => Like.findAll()).then(likes => likes));
+
+      it('should get upvoted recipes in ascending order', (done) => {
+        agent
+          .get('/api/v1/recipes')
+          .query({ sort: 'upvotes', order: 'ascending' })
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.lengthOf(4);
+            expect(res.body[0].recipeName).to.equal('Jollof Rice');
+            expect(res.body[1].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body[2].recipeName).to.equal('Bean Pottage');
+            expect(res.body[3].recipeName).to.equal('Coconut Rice');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+
+    describe('## Check for authorised wrong input', () => {
+      it('should get all recipes for url with wrong query instead of favorite recipes', (done) => {
+        agent
+          .get('/api/v1/recipes')
+          .query({ sort: 'likes', order: 'ascending' })
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.lengthOf(6);
+            expect(res.body[0].recipeName).to.equal('Bean Pottage');
+            expect(res.body[3].recipeName).to.equal('Fried Rice');
+            expect(res.body[5].recipeName).to.equal('Egusi Soup');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
+
+    describe('## Check for unauthorised input', () => {
+      it('should not get any recipes', (done) => {
+        request(app)
+          .get('/api/v1/recipes')
+          .query({ sort: 'upvotes', order: 'ascending' })
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
@@ -688,8 +912,8 @@ describe('Routes: Recipe API Tests', () => {
     before(() => User.create({
       firstname: 'Favour',
       lastname: 'Shaguy',
-      username: 'favourshaguy',
-      email: 'favourshaguy@gmail.com',
+      username: 'dfavourshaguy',
+      email: 'dfavourshaguy@gmail.com',
       password: 'LionJudah',
       aboutMe: 'I am great',
       occupation: 'Chef'
@@ -698,11 +922,11 @@ describe('Routes: Recipe API Tests', () => {
 
     before((done) => {
       const user = {};
-      user.email = 'favourshaguy@gmail.com';
+      user.email = 'dfavourshaguy@gmail.com';
       user.password = 'LionJudah';
 
       agent
-        .post('/api/users/signin')
+        .post('/api/v1/users/signin')
         .send(user)
         .set('Accept', 'application/json')
         .end((err, res) => {
@@ -721,7 +945,7 @@ describe('Routes: Recipe API Tests', () => {
       recipe.ingredients = '2 cups of beans';
 
       agent
-        .put('/api/recipes/1')
+        .put('/api/v1/recipes/1')
         .send(recipe)
         .set('Accept', 'application/json')
         .end((err, res) => {
@@ -737,7 +961,7 @@ describe('Routes: Recipe API Tests', () => {
 
     it('should not delete recipe', (done) => {
       agent
-        .delete('/api/recipes/1')
+        .delete('/api/v1/recipes/1')
         .send(recipe)
         .set('Accept', 'application/json')
         .end((err, res) => {
@@ -753,7 +977,7 @@ describe('Routes: Recipe API Tests', () => {
 
     it('should get all recipes', (done) => {
       agent
-        .get('/api/recipes')
+        .get('/api/v1/recipes')
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
@@ -770,7 +994,7 @@ describe('Routes: Recipe API Tests', () => {
 
     it('should return no favorite recipes', (done) => {
       agent
-        .get('/api/users/2/recipes')
+        .get('/api/v1/users/6/recipes')
         .set('Accept', 'application/json')
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);

@@ -1,4 +1,4 @@
-import { Recipe, User, Review } from '../models';
+import { sequelize, Recipe, User, Review, Like } from '../models';
 
 export default {
   create(req, recipeData, res) {
@@ -87,6 +87,31 @@ export default {
               })
               .then(review => res.status(201).send(review));
           });
+      });
+  },
+
+  getUpvoted(req, res) {
+    return Recipe.findAll({
+      attributes: {
+        include: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), 'upvotes']],
+      },
+      include: [{
+        model: Like,
+        as: 'likes',
+        where: {
+          upvote: true
+        },
+        attributes: []
+      }],
+      order: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), 'DESC']],
+      group: ['Recipe.id']
+    })
+      .then((recipes) => {
+        if (recipes.length === 0) {
+          return res.status(200).send({ message: 'There are no upvoted recipes' });
+        }
+
+        return res.status(200).send(recipes);
       });
   },
 

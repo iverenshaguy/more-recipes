@@ -6,7 +6,7 @@ export default {
       primaryKey: true,
       type: Sequelize.INTEGER
     },
-    like: {
+    upvote: {
       type: Sequelize.BOOLEAN
     },
     createdAt: {

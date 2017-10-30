@@ -305,5 +305,5 @@ export default {
       .withMessage('User must be specified')
       .isInt()
       .withMessage('User Not Found'),
-  ],
+  ]
 };
