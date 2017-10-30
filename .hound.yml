@@ -1,5 +1,11 @@
 jshint:
   enabled: false
+  
+coffeescript:
+  enabled: false
+  
+scss:
+  config_file: .scss-lint.yml
 
 eslint:
   enabled: true
