@@ -168,6 +168,7 @@ export default (sequelize, DataTypes) => {
       }
     }
   });
+  
   Recipe.associate = (models) => {
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId',
