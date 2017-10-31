@@ -1,2 +1,3 @@
 exclude:
   - 'template/src/assets/font-awesome'
+  - 'template/src/assets/kitchen-font'
