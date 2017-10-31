@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../../server/src/bin/www';
-import { sequelize, User, Recipe, Favorite, Like } from '../../server/src/models';
+import { sequelize, User, Recipe, Like } from '../../server/src/models';
 import './user.api.test';
 
 const agent = request.agent(app);
@@ -607,32 +607,32 @@ describe('Routes: Recipe API Tests', () => {
           ],
           userId: 1
         },
-      ]).then(() => Favorite.bulkCreate([
+      ]).then(() => Like.bulkCreate([
         {
-          favorite: true,
+          upvote: true,
           recipeId: 3,
           userId: 1
         },
 
         {
-          favorite: true,
+          upvote: true,
           recipeId: 4,
           userId: 1
         },
 
         {
-          favorite: false,
+          upvote: false,
           recipeId: 5,
           userId: 1
         },
 
         {
-          favorite: true,
+          upvote: true,
           recipeId: 6,
           userId: 1
         }
       ]))
-        .then(() => Favorite.findAll()).then(favorites => favorites));
+        .then(() => Like.findAll()).then(likes => likes));
 
       it('should get favorite recipes', (done) => {
         agent
@@ -668,6 +668,8 @@ describe('Routes: Recipe API Tests', () => {
 
 
     describe('## Check for unauthorised input', () => {
+      before(() => Like.sync({ force: true }).then(likes => likes));
+
       it('should not get any recipes', (done) => {
         request(app)
           .get('/api/v1/users/1/recipes')
@@ -685,7 +687,7 @@ describe('Routes: Recipe API Tests', () => {
     });
   });
 
-  describe('## Get Upvoted Recipes for User Iveren in Ascending Order', () => {
+  describe('## Get All Upvoted Recipes for User Iveren in Ascending Order', () => {
     describe('## Check for authorised  with right input with no liked recipes', () => {
       it('should get no upvoted recipes with message \'There are no upvoted recipes\'', (done) => {
         agent
@@ -871,7 +873,7 @@ describe('Routes: Recipe API Tests', () => {
     });
 
     describe('## Check for authorised wrong input', () => {
-      it('should get all recipes for url with wrong query instead of favorite recipes', (done) => {
+      it('should get all recipes for url with wrong query instead of upvoted recipes', (done) => {
         agent
           .get('/api/v1/recipes')
           .query({ sort: 'likes', order: 'ascending' })

@@ -1,4 +1,4 @@
-import { User, Recipe, Favorite } from '../models';
+import { User, Recipe, Like } from '../models';
 import { verifyPassword } from '../validations/password_hash';
 
 export default {
@@ -52,11 +52,11 @@ export default {
 
     return Recipe.findAll({
       include: [{
-        model: Favorite,
-        as: 'favorites',
+        model: Like,
+        as: 'likes',
         attributes: [],
         where: {
-          favorite: true
+          upvote: true
         }
       }],
       where: {
