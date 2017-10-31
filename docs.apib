@@ -12,7 +12,7 @@ This is version 1 of the API.
 
 Resources related to users in the API.
 
-## User Authentication
+## Group User Authentication
 
 Resources related to user authentication.
 
@@ -105,14 +105,145 @@ You may signin to your account using this action. It takes a JSON object contain
                 "updatedAt": "2017-10-31T10:41:59:048Z",
             }
 
-## Favorite Recipes [/users/{userId}/recipes]
+## Group Favorite Recipe
+
+Resources related to favorite recipes.
+
+## Add Favorite Recipe [/recipes/{recipeId}/favorites]
+
+This action allows you add a recipe to your favorites.
+
++ Parameters
+    + recipeId: 9 (required, number) - ID of the Recipe to add to favorites in form of an integer.
+
+### Add Recipe to Favorites [POST]
+
+You may add a recipe tp your favorite recipes using this action. It takes no input.
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /recipes/9/favorites/1
+    
+    + Body
+
+            {
+                "id": 1,
+                "favorite": true,
+                "recipeId": 9,
+                "userId": 1
+            }
+
+
+## View Favorite Recipes [/users/{userId}/recipes]
+
+This action allows you to view all your favorite recipes.
 
 + Parameters
     + userId: 1 (required, number) - ID of the User in form of an integer.
 
-This action allows you to view all your favorite recipes.
+### View Favorite Recipes [GET]
 
 + Response 200 (application/json)
 
-        {
-        }
+        [
+            {
+                "id": 9,
+                "recipeName": "Jollof Rice",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Put already fried tomato stew on fire, add water and seasoning to taste"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1
+            },
+            {
+                "id": 14,
+                "recipeName": "Sweet Potatoe Pottage",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "Sweet Potatoes",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "My cursor is jumping"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1
+            },
+            {
+                "id": 1,
+                "recipeName": "Coconut Rice",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1 Coconut"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                    "Grate coconut and strain milk from it by boiling for a few minutes"
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Put already fried tomato stew on fire, add water and seasoning to taste"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1
+            }
+        ]      
+
+# Group Recipe
+
+Resources related to recipes in the API.
+
+## Recipes [/recipes]
+
+A Recipe Object has the following attributes:
+
++ id - Recipe id
++ recipeName
++ prepTime - Recipe Preparation Time
++ cookTime - Recipe Cook Time
++ totalTime - Total Time
++ difficulty - A List of Strings to Choose from
++ extraInfo - Extra Information about Recipe
++ vegetarian - Boolean showing if suitable for vegetarians
++ ingredients - Array of ingredients
++ preparations - Array of preparation steps
++ directions - Array of direction steps
