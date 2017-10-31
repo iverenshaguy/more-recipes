@@ -641,8 +641,8 @@ describe('Routes: Recipe API Tests', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(3);
-            expect(res.body[0].Recipe.recipeName).to.equal('Jollof Rice');
-            expect(res.body[2].Recipe.recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body[0].recipeName).to.equal('Jollof Rice');
+            expect(res.body[2].recipeName).to.equal('Sweet Potatoe Pottage');
 
             if (err) {
               return done(err);

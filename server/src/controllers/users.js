@@ -50,13 +50,17 @@ export default {
       return res.status(401).send({ message: 'You are not authorized to access this page' });
     }
 
-    return Favorite.findAll({
+    return Recipe.findAll({
       include: [{
-        model: Recipe
+        model: Favorite,
+        as: 'favorites',
+        attributes: [],
+        where: {
+          favorite: true
+        }
       }],
       where: {
         userId: req.params.userId,
-        favorite: true
       }
     })
       .then((recipes) => {
