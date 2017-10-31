@@ -6,6 +6,113 @@ More-Recipes is an API provides a platform for users to share the awesome and ex
 
 # More Recipes Root [/api/v1/]
 
-This resource does not have any attributes. Instead it offers the initial API affordances in the form of the links in the JSON body.
+This is version 1 of the API.
 
-It is recommend to follow the “url” link values, [Link](https://tools.ietf.org/html/rfc5988) or Location headers where applicable to retrieve resources. Instead of constructing your own URLs, to keep your client decoupled from implementation details.
+# Group Users
+
+Resources related to users in the API.
+
+## User Authentication
+
+Resources related to user authentication.
+
+## User SignUp [/users/signup]
+
+This action allows you to create a new account.
+
+### Create a New Account [POST]
+
+You may create a new account using this action. It takes a JSON object containing user details.
+
++ firstname (required, string) - The user's firstname.
++ lastname (optional, string) - The user's lastname.
++ username (required, unique, string) - The user's chosen username.
++ email (required, unique, string) - The user's email address.
++ password (required, string) - The user's chosen password.
++ aboutMe (optional, string) - Information about User.
++ occupation (optional, string) - The user's occupation.
+
++ Request (application/json)
+
+        {
+            "firstname": "Iveren",
+            "lastname": "Shaguy",
+            "username": "iverenshaguy",
+            "email": "iverenshaguy@gmail.com",
+            "password": "iverenshaguy",
+            "aboutMe": "Food lover. Bookworm",
+            "occupation": "Software Developer",
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users/1
+    
+    + Body
+
+            {
+                "id": 1,
+                "firstname": "Iveren",
+                "lastname": "Shaguy",
+                "username": "iverenshaguy",
+                "email": "iverenshaguy@gmail.com",
+                "password": "iverenshaguy",
+                "aboutMe": "Food lover. Bookworm",
+                "occupation": "Software Developer",
+                "updatedAt": "2017-10-31T10:41:59:048Z",
+                "createdAt": "2017-10-31T10:41:59:048Z",
+                "passwordHash": "000000100007a120970eb35af11422542078d97ebc5166123fc9ba942ef89b69136fca53ee882c79ab8f0356f6b62804990ae5603d5a3712",
+            }
+
+## User SignIn [/users/signin]
+
+This action allows you to signin to your account.
+
+### Authenticate User [POST]
+
+You may signin to your account using this action. It takes a JSON object containing user details.
+
++ email (required, unique, string) - The user's email address.
++ password (required, string) - The user's password.
+
++ Request (application/json)
+
+        {
+            "email": "iverenshaguy@gmail.com",
+            "password": "iverenshaguy"
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /users/1
+    
+    + Body
+
+            {
+                "id": 1,
+                "firstname": "Iveren",
+                "lastname": "Shaguy",
+                "username": "iverenshaguy",
+                "email": "iverenshaguy@gmail.com",
+                "password": "iverenshaguy",
+                "aboutMe": "Food lover. Bookworm",
+                "occupation": "Software Developer",
+                "createdAt": "2017-10-31T10:41:59:048Z",
+                "updatedAt": "2017-10-31T10:41:59:048Z",
+            }
+
+## Favorite Recipes [/users/{userId}/recipes]
+
++ Parameters
+    + userId: 1 (required, number) - ID of the User in form of an integer.
+
+This action allows you to view all your favorite recipes.
+
++ Response 200 (application/json)
+
+        {
+        }
