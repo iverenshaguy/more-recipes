@@ -13,7 +13,7 @@ recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  // matchedData returns only the subset of data validated by the middleware
+  
   const recipeData = matchedData(req);
 
   return recipesController.create(req, recipeData, res);
@@ -44,7 +44,7 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  // matchedData returns only the subset of data validated by the middleware
+
   const reviewData = matchedData(req);
 
   return recipesController.reviewRecipe(req, reviewData, res);

@@ -18,7 +18,6 @@ userRoutes.post('/signup', validation.register, (req, res) => {
     return res.status(422).json({ errors: errors.mapped() });
   }
 
-  // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
 
   return usersController.create(req, userData, res);
@@ -30,7 +29,6 @@ userRoutes.post('/signin', validation.login, (req, res) => {
     return res.status(422).json({ errors: errors.mapped() });
   }
 
-  // matchedData returns only the subset of data validated by the middleware
   const userData = matchedData(req);
 
   return usersController.signin(req, userData, res);
