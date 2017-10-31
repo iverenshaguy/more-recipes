@@ -35,7 +35,7 @@ export default {
           }
           req.session.user = user.dataValues;
 
-          res.status(200).send({ message: 'You\'ve been signed in successfully' });
+          res.status(200).send(user);
         });
       });
   },

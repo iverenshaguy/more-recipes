@@ -13,7 +13,7 @@ recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  
+
   const recipeData = matchedData(req);
 
   return recipesController.create(req, recipeData, res);
