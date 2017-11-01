@@ -36,6 +36,15 @@ userRoutes.post('/signin', validation.login, (req, res) => {
 
 userRoutes.get('/profile', authenticate, (req, res) => usersController.retrieve(req, res));
 
-userRoutes.get('/:userId/recipes', authenticate, validation.favoriteRecipes, (req, res) => usersController.getFavorites(req, res));
+userRoutes.get('/:userId/recipes', authenticate, validation.favoriteRecipes, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const favoriteRecipeData = matchedData(req);
+
+  usersController.getFavorites(req, favoriteRecipeData, res);
+});
 
 export default userRoutes;

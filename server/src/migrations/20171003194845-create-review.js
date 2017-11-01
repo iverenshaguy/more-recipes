@@ -7,8 +7,7 @@ export default {
       type: Sequelize.INTEGER
     },
     rating: {
-      type: Sequelize.ENUM,
-      values: ['1', '2', '3', '4', '5'],
+      type: Sequelize.INTEGER,
       allowNull: false
     },
     comment: {
@@ -24,21 +23,23 @@ export default {
     },
     userId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      allowNull: true,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
+        as: 'userId'
       },
-      allowNull: false,
-      foreignKey: true
     },
     recipeId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      allowNull: true,
       references: {
         model: 'Recipes',
-        key: 'id'
+        key: 'id',
+        as: 'recipeId'
       },
-      allowNull: false,
-      foreignKey: true
     },
   }),
   down: queryInterface => queryInterface.dropTable('Reviews')

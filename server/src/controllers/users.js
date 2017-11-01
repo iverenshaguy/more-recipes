@@ -45,7 +45,7 @@ export default {
       .then(user => res.status(200).send(user));
   },
 
-  getFavorites(req, res) {
+  getFavorites(req, favoriteRecipeData, res) {
     if (+req.session.user.id !== +req.params.userId) {
       return res.status(401).send({ message: 'You are not authorized to access this page' });
     }
@@ -56,12 +56,10 @@ export default {
         as: 'likes',
         attributes: [],
         where: {
-          upvote: true
+          upvote: true,
+          userId: +favoriteRecipeData.userId,
         }
       }],
-      where: {
-        userId: req.params.userId,
-      }
     })
       .then((recipes) => {
         if (recipes.length === 0) {

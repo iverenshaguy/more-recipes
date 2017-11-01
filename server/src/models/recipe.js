@@ -171,16 +171,15 @@ export default (sequelize, DataTypes) => {
   Recipe.associate = (models) => {
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
     Recipe.hasMany(models.Like, {
       foreignKey: 'recipeId',
       as: 'likes',
-      onDelete: 'cascade',
     });
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',
       as: 'reviews',
-      onDelete: 'cascade',
     });
   };
 
