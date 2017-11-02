@@ -16,21 +16,19 @@ Resources related to users in the API.
 
 Resources related to user authentication.
 
-## User SignUp [/users/signup]
-
-This action allows you to create a new account.
-
-### Create a New Account [POST]
+### Create a New Account [POST /users/signup]
 
 You may create a new account using this action. It takes a JSON object containing user details.
 
-+ firstname (required, string) - The user's firstname.
-+ lastname (optional, string) - The user's lastname.
-+ username (required, unique, string) - The user's chosen username.
-+ email (required, unique, string) - The user's email address.
-+ password (required, string) - The user's chosen password.
-+ aboutMe (optional, string) - Information about User.
-+ occupation (optional, string) - The user's occupation.
++ Attributes
+
+    + firstname (string, required) - The user's firstname.
+    + lastname (string, required) - The user's lastname.
+    + username (string, required) - The user's chosen username.
+    + email (string, required) - The user's email address.
+    + password (string, required) - The user's chosen password.
+    + aboutMe (string, optional) - Information about User.
+    + occupation (string, optional) - The user's occupation.
 
 + Request (application/json)
 
@@ -66,16 +64,13 @@ You may create a new account using this action. It takes a JSON object containin
                 "passwordHash": "000000100007a120970eb35af11422542078d97ebc5166123fc9ba942ef89b69136fca53ee882c79ab8f0356f6b62804990ae5603d5a3712",
             }
 
-## User SignIn [/users/signin]
-
-This action allows you to signin to your account.
-
-### Authenticate User [POST]
+### Authenticate User [POST /users/signin]
 
 You may signin to your account using this action. It takes a JSON object containing user details.
 
-+ email (required, unique, string) - The user's email address.
-+ password (required, string) - The user's password.
++ Attributes
+    + email (string, required) - The user's email address.
+    + password (string, required) - The user's password.
 
 + Request (application/json)
 
@@ -105,14 +100,29 @@ You may signin to your account using this action. It takes a JSON object contain
                 "updatedAt": "2017-10-31T10:41:59:048Z",
             }
 
-## View Favorite Recipes [/users/{userId}/recipes]
+### View User Profile [GET /users/profile]
 
-This action allows you to view all your favorite recipes.
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "firstname": "Iveren",
+            "lastname": "Shaguy",
+            "username": "iverenshaguy",
+            "email": "iverenshaguy@gmail.com",
+            "passwordHash": "000000100007a12016262f8e438082795b2154dae2c51201fe24c8007b4a11507183a1f9cf425de1218dac3804b30c7412f34d0c8cee1332",
+            "aboutMe": "Smart",
+            "occupation": "Software Developer",
+            "profilePic": null,
+            "coverPhoto": null,
+            "createdAt": "2017-10-30T00:47:03.687Z",
+            "updatedAt": "2017-10-30T00:47:03.687Z"
+        }
+
+### View Favorite Recipes [GET /users/{userId}/recipes]
 
 + Parameters
-    + userId: 1 (required, number) - ID of the User in form of an integer.
-
-### View Favorite Recipes [GET]
+    + userId: `1` (required, number) - ID of the User in form of an integer.
 
 + Response 200 (application/json)
 
@@ -310,19 +320,21 @@ Resources related to recipes in the API.
 
 A Recipe Object has the following attributes:
 
-+ id - Recipe id
-+ recipeName
-+ prepTime - Recipe Preparation Time
-+ cookTime - Recipe Cook Time
-+ totalTime - Total Time
-+ difficulty - A List of Strings to Choose from
-+ extraInfo - Extra Information about Recipe
-+ vegetarian - Boolean showing if suitable for vegetarians
-+ ingredients - Array of ingredients
-+ preparations - Array of preparation steps
-+ directions - Array of direction steps
-+ rating - Float of Average Recipe rating
-+ likes - Array of upvotes and downvotes
++ Attributes
+
+    + id (number) - Recipe id
+    + recipeName (string) - Recipe Name
+    + prepTime (string) - Recipe Preparation Time
+    + cookTime (string) - Recipe Cook Time
+    + totalTime (string) - Total Time
+    + difficulty (string) - A List of Strings to Choose from
+    + extraInfo (string) - Extra Information about Recipe
+    + vegetarian (string) - Boolean showing if suitable for vegetarians
+    + ingredients (array) - Array of ingredients
+    + preparations (array) - Array of preparation steps
+    + directions (array) - Array of direction steps
+    + rating (number) - Float of Average Recipe rating
+    + likes (array) - Array of upvotes and downvotes
 
 ### Get All Recipes in the App [GET]
 
@@ -1163,20 +1175,441 @@ A Recipe Object has the following attributes:
             }
         ]
 
+### Get Recipes with the Most Upvotes [GET /recipes{?sort}&{?order}]
+
++ Parameters
+    + sort: upvotes (string, required) - String to be sorted by.
+    + order: ascending (string, required) - Order to be arranged by. 
+
++ Response 200 (application/json)
+
+        [
+    {
+        "id": 11,
+        "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
+        "recipeImage": null,
+        "prepTime": "10 Minutes",
+        "cookTime": "30 Minutes",
+        "totalTime": "40 Minutes",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "Okro",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Add Okro to little boiling water and beat until it draws",
+            "Add ingredients"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 6,
+        "upvotes": "10"
+    },
+    {
+        "id": 5,
+        "recipeName": "Egusi Soup",
+        "recipeImage": null,
+        "prepTime": "10 Minutes",
+        "cookTime": "30 Minutes",
+        "totalTime": "40 Minutes",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Ground Egusi",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Fry Onions in Palm Oil till transluscent",
+            "Add Egusi and fry till oil separates from egusi"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 6,
+        "upvotes": "9"
+    },
+    {
+        "id": 15,
+        "recipeName": "White Soup",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "I don't even know how to cook white soup"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 8,
+        "upvotes": "7"
+    },
+    {
+        "id": 10,
+        "recipeName": "Peppered Chicken",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "1 Cup of Tomato Stew",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Put already fried tomato stew on fire, add little water and seasoning to taste",
+            "Add chicken and stir",
+            "Simmer on low heat for 3 minutes"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 2,
+        "upvotes": "7"
+    },
+    {
+        "id": 12,
+        "recipeName": "Ogbona Soup",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "Ogbona",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Cook the soup abeg"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 8,
+        "upvotes": "6"
+    },
+    {
+        "id": 7,
+        "recipeName": "Chicken Stew",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "30 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "Stew Base",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Fry already boiled stew base till done",
+            "Add chicken stock and ingredients to taste"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 9,
+        "upvotes": "5"
+    },
+    {
+        "id": 14,
+        "recipeName": "Sweet Potatoe Pottage",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "Sweet Potatoes",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "My cursor is jumping"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 1,
+        "upvotes": "4"
+    },
+    {
+        "id": 8,
+        "recipeName": "Vegetable Soup",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "Vegetables",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Fry stew base and add chicken stock and ingredients",
+            "Add Vegetables last and steam for 5 minutes"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 10,
+        "upvotes": "3"
+    },
+    {
+        "id": 2,
+        "recipeName": "Fried Rice",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Rice",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+            "Cut ingredients into small pieces"
+        ],
+        "directions": [
+            "Parboil Rice till half done",
+            "Steam ingredients in oil till almost soft"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 2,
+        "upvotes": "3"
+    },
+    {
+        "id": 13,
+        "recipeName": "Moimoi",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "30 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Beans",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "I'm tired of forming things to write"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 9,
+        "upvotes": "3"
+    },
+    {
+        "id": 1,
+        "recipeName": "Coconut Rice",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Rice",
+            "1 Coconut"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+            "Grate coconut and strain milk from it by boiling for a few minutes"
+        ],
+        "directions": [
+            "Parboil Rice till half done",
+            "Put already fried tomato stew on fire, add water and seasoning to taste"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 1,
+        "upvotes": "2"
+    },
+    {
+        "id": 3,
+        "recipeName": "Rice and Beans",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Rice",
+            "1.5 Cups of Beans",
+            "1 kilo of chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Parboil Rice till half done",
+            "Cook beans with onions till almost done"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 3,
+        "upvotes": "2"
+    },
+    {
+        "id": 4,
+        "recipeName": "Beans and Plantain",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": true,
+        "ingredients": [
+            "2 Cups of Beans",
+            "3 Plantains"
+        ],
+        "preparations": [
+            "Soak beans for 1 hour before cooking to reduce bloating"
+        ],
+        "directions": [
+            "Cook beans with Onions till soft",
+            "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 5,
+        "upvotes": "2"
+    },
+    {
+        "id": 9,
+        "recipeName": "Jollof Rice",
+        "recipeImage": null,
+        "prepTime": "30 Minutes",
+        "cookTime": "20 Minutes",
+        "totalTime": "1 Hour",
+        "difficulty": "Normal",
+        "extraInfo": "Nigerian Party Staple",
+        "vegetarian": false,
+        "ingredients": [
+            "2 Cups of Rice",
+            "1 Kilo of Chicken"
+        ],
+        "preparations": [
+            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+        ],
+        "directions": [
+            "Parboil Rice till half done",
+            "Put already fried tomato stew on fire, add water and seasoning to taste"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 1,
+        "upvotes": "1"
+    },
+    {
+        "id": 6,
+        "recipeName": "Yam Pottage",
+        "recipeImage": null,
+        "prepTime": "5 Minutes",
+        "cookTime": "30 Minutes",
+        "totalTime": "35 Minutes",
+        "difficulty": "Normal",
+        "extraInfo": "",
+        "vegetarian": false,
+        "ingredients": [
+            "1 tuber of yam",
+            "1/2 cup of Palmoil"
+        ],
+        "preparations": null,
+        "directions": [
+            "Boil Yam on Fire with Maggi, Crayfish and Onions",
+            "When soft add Palm oil and other ingredients"
+        ],
+        "createdAt": "2017-10-30T00:47:03.687Z",
+        "updatedAt": "2017-10-30T00:47:03.687Z",
+        "userId": 8,
+        "upvotes": "1"
+    }
+]
+
 ### Create a New Recipe [POST]
 
 You may add you own recipe using this action. It takes a JSON object containing a recipe.
 
-+ recipeName (required, string)
-+ prepTime - Recipe Preparation Time (string)
-+ cookTime - Recipe Cook Time (string)
-+ totalTime - Total Time (required, string)
-+ difficulty - A List of Strings to Choose from ('Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
-+ extraInfo - Extra Information about Recipe (string)
-+ vegetarian - Boolean showing if suitable for vegetarians (boolean)
-+ ingredients - Array of ingredients (required, string)
-+ preparations - Array of preparation steps (string)
-+ directions - Array of direction steps (required, string)
++ Attributes
+
+    + recipeName (string, required) - Recipe Name
+    + prepTime (string, optional) - Recipe Preparation Time
+    + cookTime (string, optional) - Recipe Cook Time
+    + totalTime (string, required) - Total Time
+    + difficulty (enum[string], optional) - A List of Strings to Choose from
+    + extraInfo (string, optional) - Extra Information about Recipe
+    + vegetarian (string, optional) - Boolean showing if suitable for vegetarians
+    + ingredients (array, required) - Array of ingredients
+    + preparations (array, optional) - Array of preparation steps
+    + directions (array, required) - Array of direction steps
+
+    + Difficulty Values
+        + `Easy`
+        + `Normal`
+        + `A Bit Difficult'
+        + `Difficult'
+        + `Very Difficult'
+
 
 + Request (apllication/json)
 
@@ -1203,9 +1636,9 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
 + Response 201 (application/json)
 
-    // + Headers
+    + Headers
 
-            // Location: /recipes/16
+            Location: /recipes/16
     
     + Body 
 
@@ -1237,25 +1670,102 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "createdAt": "2017-11-02T11:18:48.820Z"
             }
 
-## Modify/Delete Recipe [/recipes/{recipeId}]
+### Get/Modify/Delete Recipe [/recipes/{recipeId}]
 
 + Parameters
-    + recipeId: 16 (required, number) - ID of the Recipe in form of an integer
+    + recipeId: `16` (number, required) - ID of the Recipe in form of an integer
+
+### Get a Recipe [GET]
+
++ Response 200 (application/json)
+
+    + Body 
+
+            {
+                "id": 15,
+                "recipeName": "White Soup",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "I don't even know how to cook white soup"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 8,
+                "rating": "5.0000000000000000",
+                "likes": [
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": true
+                    },
+                    {
+                        "upvote": false
+                    },
+                    {
+                        "upvote": false
+                    }
+                ],
+                "reviews": [
+                    {
+                        "rating": 5,
+                        "comment": "Excellent",
+                        "userId": 6
+                    }
+                ]
+            }
 
 ### Modify Recipe [PUT]
 
 This action allows you to modify an existing recipe added by you.
 
-+ recipeName (string)
-+ prepTime - Recipe Preparation Time (string)
-+ cookTime - Recipe Cook Time (string)
-+ totalTime - Total Time (string)
-+ difficulty - A List of Strings to Choose from ('Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
-+ extraInfo - Extra Information about Recipe (string)
-+ vegetarian - Boolean showing if suitable for vegetarians (boolean)
-+ ingredients - Array of ingredients (required, string)
-+ preparations - Array of preparation steps (string)
-+ directions - Array of direction steps (string)
++ Attributes
+
+    + recipeName (string, required) - Recipe Name
+    + prepTime (string, optional) - Recipe Preparation Time
+    + cookTime (string, optional) - Recipe Cook Time
+    + totalTime (string, required) - Total Time
+    + difficulty (enum[string], optional) - A List of Strings to Choose from
+    + extraInfo (string, optional) - Extra Information about Recipe
+    + vegetarian (string, optional) - Boolean showing if suitable for vegetarians
+    + ingredients (array, required) - Array of ingredients
+    + preparations (array, optional) - Array of preparation steps
+    + directions (array, required) - Array of direction steps
+
+    + Difficulty Values
+        + `Easy`
+        + `Normal`
+        + `A Bit Difficult'
+        + `Difficult'
+        + `Very Difficult'
 
 + Request (application/json)
 
@@ -1265,9 +1775,9 @@ This action allows you to modify an existing recipe added by you.
 
 + Response 200 (application/json)
 
-    // + Headers
+    + Headers
 
-            // Location: /recipes/16
+            Location: /recipes/16
     
     + Body 
 
@@ -1304,27 +1814,24 @@ This action allows you to delete an existing recipe added by you.
 
 + Response 204(application/json)
 
-## Group Favorite/Review Recipe
-
-Resources related to favorite recipes.
-
-## Add Favorite Recipe [/recipes/{recipeId}/upvotes{?upvote}]
-
-This action allows you add a recipe to your favorites (upvote a recipe).
-
-+ Parameters
-    + recipeId: 4 (number, required) - ID of the Recipe to add to favorites in form of an integer.
-    + upvote: true (boolean, required) - true upvotes a recipe while false downvotes a recipe. 
-
-### Add Recipe to Favorites [POST]
+### Upvote/Downvote a Recipe [POST /recipes/{recipeId}/upvotes{?upvote}]
 
 You may add a recipe to your favorite recipes using this action. It takes no input.
 
++ Parameters
+    + recipeId: `4` (number, required) - ID of the Recipe to add to favorites in form of an integer.
+    + upvote: `true` (boolean, optional) - true upvotes a recipe while false downvotes a recipe. 
+
+
++ Request Upvote a Recipe
+
+        Request without a query (defaults to upvote) or request with query=true.
+
 + Response 201 (application/json)
 
-    // + Headers
+    + Headers
 
-            // Location: /recipes/4/upvotes/62
+            Location: /recipes/4/upvotes/62
     
     + Body
 
@@ -1337,24 +1844,15 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
                 "userId": 1
             }
 
++ Request Downvote a Recipe
 
-## Downvote a Recipe [/recipes/{recipeId}/downvotes]
-
-This action allows you downvote a recipe.
-
-+ Parameters
-    + recipeId: 7 (required, number) - ID of the Recipe to downvote in form of an integer.
-
-
-### Downvote a Recipe [POST]
-
-You may add a recipe to your favorite recipes using this action. It takes no input.
+        Request with query upvote=false is a downvote.
 
 + Response 201 (application/json)
 
-    // + Headers
+    + Headers
 
-            // Location: /recipes/7/upvotes/43
+            Location: /recipes/7/upvotes/43
     
     + Body
 
@@ -1367,20 +1865,17 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
                 "userId": 1
             }
 
-## Review a Recipe [/recipes/{recipeId}/reviews]
-
-This action allows you review a recipe.
-
-+ Parameters
-    + recipeId: 8 (required, number) - ID of the Recipe to review in form of an integer.
-
-
-### Review a Recipe [POST]
+### Review a Recipe [POST /recipes/{recipeId}/reviews]
 
 You may review a recipe using this action. It takes a JSON object containing a review.
 
-+ rating - A number from 1 - 5 with 1 being the lowest and 5 being the highest rating (required, number)
-+ comment - A comment to add to the review (string)
++ Parameters
+    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer.
+
++ Attributes 
+
+    + rating (number, required)  - A number from 1 - 5 with 1 being the lowest and 5 being the highest rating.
+    + comment (string, optional) - A comment to add to the review.
 
 + Request (application/json)
 
@@ -1391,9 +1886,9 @@ You may review a recipe using this action. It takes a JSON object containing a r
 
 + Response 201 (application/json)
 
-    // + Headers
+    + Headers
 
-            // Location: /recipes/8/reviews/22
+            Location: /recipes/8/reviews/22
     
     + Body
 
