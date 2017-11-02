@@ -8,13 +8,9 @@ More-Recipes is an API provides a platform for users to share the awesome and ex
 
 This is version 1 of the API.
 
-# Group Users
+## Group Users
 
 Resources related to users in the API.
-
-## Group User Authentication
-
-Resources related to user authentication.
 
 ### Create a New Account [POST /users/signup]
 
@@ -312,11 +308,11 @@ You may signin to your account using this action. It takes a JSON object contain
             }
         ]      
 
-# Group Recipe
+## Group Recipe
 
 Resources related to recipes in the API.
 
-## Recipes [/recipes]
+### Recipes [/recipes]
 
 A Recipe Object has the following attributes:
 
@@ -336,7 +332,7 @@ A Recipe Object has the following attributes:
     + rating (number) - Float of Average Recipe rating
     + likes (array) - Array of upvotes and downvotes
 
-### Get All Recipes in the App [GET]
+#### Get All Recipes in the App [GET]
 
 + Response 200 (application/json)
 
@@ -1175,418 +1171,7 @@ A Recipe Object has the following attributes:
             }
         ]
 
-### Get Recipes with the Most Upvotes [GET /recipes{?sort}&{?order}]
-
-+ Parameters
-    + sort: upvotes (string, required) - String to be sorted by.
-    + order: ascending (string, required) - Order to be arranged by. 
-
-+ Response 200 (application/json)
-
-        [
-    {
-        "id": 11,
-        "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
-        "recipeImage": null,
-        "prepTime": "10 Minutes",
-        "cookTime": "30 Minutes",
-        "totalTime": "40 Minutes",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "Okro",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Add Okro to little boiling water and beat until it draws",
-            "Add ingredients"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 6,
-        "upvotes": "10"
-    },
-    {
-        "id": 5,
-        "recipeName": "Egusi Soup",
-        "recipeImage": null,
-        "prepTime": "10 Minutes",
-        "cookTime": "30 Minutes",
-        "totalTime": "40 Minutes",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Ground Egusi",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Fry Onions in Palm Oil till transluscent",
-            "Add Egusi and fry till oil separates from egusi"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 6,
-        "upvotes": "9"
-    },
-    {
-        "id": 15,
-        "recipeName": "White Soup",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "I don't even know how to cook white soup"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 8,
-        "upvotes": "7"
-    },
-    {
-        "id": 10,
-        "recipeName": "Peppered Chicken",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "1 Cup of Tomato Stew",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Put already fried tomato stew on fire, add little water and seasoning to taste",
-            "Add chicken and stir",
-            "Simmer on low heat for 3 minutes"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 2,
-        "upvotes": "7"
-    },
-    {
-        "id": 12,
-        "recipeName": "Ogbona Soup",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "Ogbona",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Cook the soup abeg"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 8,
-        "upvotes": "6"
-    },
-    {
-        "id": 7,
-        "recipeName": "Chicken Stew",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "30 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "Stew Base",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Fry already boiled stew base till done",
-            "Add chicken stock and ingredients to taste"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 9,
-        "upvotes": "5"
-    },
-    {
-        "id": 14,
-        "recipeName": "Sweet Potatoe Pottage",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "Sweet Potatoes",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "My cursor is jumping"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 1,
-        "upvotes": "4"
-    },
-    {
-        "id": 8,
-        "recipeName": "Vegetable Soup",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "Vegetables",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Fry stew base and add chicken stock and ingredients",
-            "Add Vegetables last and steam for 5 minutes"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 10,
-        "upvotes": "3"
-    },
-    {
-        "id": 2,
-        "recipeName": "Fried Rice",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Rice",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-            "Cut ingredients into small pieces"
-        ],
-        "directions": [
-            "Parboil Rice till half done",
-            "Steam ingredients in oil till almost soft"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 2,
-        "upvotes": "3"
-    },
-    {
-        "id": 13,
-        "recipeName": "Moimoi",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "30 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Beans",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "I'm tired of forming things to write"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 9,
-        "upvotes": "3"
-    },
-    {
-        "id": 1,
-        "recipeName": "Coconut Rice",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Rice",
-            "1 Coconut"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-            "Grate coconut and strain milk from it by boiling for a few minutes"
-        ],
-        "directions": [
-            "Parboil Rice till half done",
-            "Put already fried tomato stew on fire, add water and seasoning to taste"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 1,
-        "upvotes": "2"
-    },
-    {
-        "id": 3,
-        "recipeName": "Rice and Beans",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Rice",
-            "1.5 Cups of Beans",
-            "1 kilo of chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Parboil Rice till half done",
-            "Cook beans with onions till almost done"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 3,
-        "upvotes": "2"
-    },
-    {
-        "id": 4,
-        "recipeName": "Beans and Plantain",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": true,
-        "ingredients": [
-            "2 Cups of Beans",
-            "3 Plantains"
-        ],
-        "preparations": [
-            "Soak beans for 1 hour before cooking to reduce bloating"
-        ],
-        "directions": [
-            "Cook beans with Onions till soft",
-            "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 5,
-        "upvotes": "2"
-    },
-    {
-        "id": 9,
-        "recipeName": "Jollof Rice",
-        "recipeImage": null,
-        "prepTime": "30 Minutes",
-        "cookTime": "20 Minutes",
-        "totalTime": "1 Hour",
-        "difficulty": "Normal",
-        "extraInfo": "Nigerian Party Staple",
-        "vegetarian": false,
-        "ingredients": [
-            "2 Cups of Rice",
-            "1 Kilo of Chicken"
-        ],
-        "preparations": [
-            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-        ],
-        "directions": [
-            "Parboil Rice till half done",
-            "Put already fried tomato stew on fire, add water and seasoning to taste"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 1,
-        "upvotes": "1"
-    },
-    {
-        "id": 6,
-        "recipeName": "Yam Pottage",
-        "recipeImage": null,
-        "prepTime": "5 Minutes",
-        "cookTime": "30 Minutes",
-        "totalTime": "35 Minutes",
-        "difficulty": "Normal",
-        "extraInfo": "",
-        "vegetarian": false,
-        "ingredients": [
-            "1 tuber of yam",
-            "1/2 cup of Palmoil"
-        ],
-        "preparations": null,
-        "directions": [
-            "Boil Yam on Fire with Maggi, Crayfish and Onions",
-            "When soft add Palm oil and other ingredients"
-        ],
-        "createdAt": "2017-10-30T00:47:03.687Z",
-        "updatedAt": "2017-10-30T00:47:03.687Z",
-        "userId": 8,
-        "upvotes": "1"
-    }
-]
-
-### Create a New Recipe [POST]
+#### Create a New Recipe [POST]
 
 You may add you own recipe using this action. It takes a JSON object containing a recipe.
 
@@ -1670,12 +1255,423 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "createdAt": "2017-11-02T11:18:48.820Z"
             }
 
+### Get Recipes with the Most Upvotes [GET /recipes{?sort}&{?order}]
+
++ Parameters
+    + sort: upvotes (string, required) - String to be sorted by.
+    + order: ascending (string, required) - Order to be arranged by. 
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 11,
+                "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
+                "recipeImage": null,
+                "prepTime": "10 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "40 Minutes",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "Okro",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Add Okro to little boiling water and beat until it draws",
+                    "Add ingredients"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 6,
+                "upvotes": "10"
+            },
+            {
+                "id": 5,
+                "recipeName": "Egusi Soup",
+                "recipeImage": null,
+                "prepTime": "10 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "40 Minutes",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Ground Egusi",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Fry Onions in Palm Oil till transluscent",
+                    "Add Egusi and fry till oil separates from egusi"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 6,
+                "upvotes": "9"
+            },
+            {
+                "id": 15,
+                "recipeName": "White Soup",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "I don't even know how to cook white soup"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 8,
+                "upvotes": "7"
+            },
+            {
+                "id": 10,
+                "recipeName": "Peppered Chicken",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "1 Cup of Tomato Stew",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Put already fried tomato stew on fire, add little water and seasoning to taste",
+                    "Add chicken and stir",
+                    "Simmer on low heat for 3 minutes"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 2,
+                "upvotes": "7"
+            },
+            {
+                "id": 12,
+                "recipeName": "Ogbona Soup",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "Ogbona",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Cook the soup abeg"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 8,
+                "upvotes": "6"
+            },
+            {
+                "id": 7,
+                "recipeName": "Chicken Stew",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "Stew Base",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Fry already boiled stew base till done",
+                    "Add chicken stock and ingredients to taste"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 9,
+                "upvotes": "5"
+            },
+            {
+                "id": 14,
+                "recipeName": "Sweet Potatoe Pottage",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "Sweet Potatoes",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "My cursor is jumping"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1,
+                "upvotes": "4"
+            },
+            {
+                "id": 8,
+                "recipeName": "Vegetable Soup",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "Vegetables",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Fry stew base and add chicken stock and ingredients",
+                    "Add Vegetables last and steam for 5 minutes"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 10,
+                "upvotes": "3"
+            },
+            {
+                "id": 2,
+                "recipeName": "Fried Rice",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                    "Cut ingredients into small pieces"
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Steam ingredients in oil till almost soft"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 2,
+                "upvotes": "3"
+            },
+            {
+                "id": 13,
+                "recipeName": "Moimoi",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Beans",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "I'm tired of forming things to write"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 9,
+                "upvotes": "3"
+            },
+            {
+                "id": 1,
+                "recipeName": "Coconut Rice",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1 Coconut"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                    "Grate coconut and strain milk from it by boiling for a few minutes"
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Put already fried tomato stew on fire, add water and seasoning to taste"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1,
+                "upvotes": "2"
+            },
+            {
+                "id": 3,
+                "recipeName": "Rice and Beans",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1.5 Cups of Beans",
+                    "1 kilo of chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Cook beans with onions till almost done"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 3,
+                "upvotes": "2"
+            },
+            {
+                "id": 4,
+                "recipeName": "Beans and Plantain",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": true,
+                "ingredients": [
+                    "2 Cups of Beans",
+                    "3 Plantains"
+                ],
+                "preparations": [
+                    "Soak beans for 1 hour before cooking to reduce bloating"
+                ],
+                "directions": [
+                    "Cook beans with Onions till soft",
+                    "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 5,
+                "upvotes": "2"
+            },
+            {
+                "id": 9,
+                "recipeName": "Jollof Rice",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "2 Cups of Rice",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Parboil Rice till half done",
+                    "Put already fried tomato stew on fire, add water and seasoning to taste"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 1,
+                "upvotes": "1"
+            },
+            {
+                "id": 6,
+                "recipeName": "Yam Pottage",
+                "recipeImage": null,
+                "prepTime": "5 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "35 Minutes",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": false,
+                "ingredients": [
+                    "1 tuber of yam",
+                    "1/2 cup of Palmoil"
+                ],
+                "preparations": null,
+                "directions": [
+                    "Boil Yam on Fire with Maggi, Crayfish and Onions",
+                    "When soft add Palm oil and other ingredients"
+                ],
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 8,
+                "upvotes": "1"
+            }
+        ]
+
 ### Get/Modify/Delete Recipe [/recipes/{recipeId}]
 
 + Parameters
     + recipeId: `16` (number, required) - ID of the Recipe in form of an integer
 
-### Get a Recipe [GET]
+#### Get a Recipe [GET]
 
 + Response 200 (application/json)
 
@@ -1743,7 +1739,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 ]
             }
 
-### Modify Recipe [PUT]
+#### Modify Recipe [PUT]
 
 This action allows you to modify an existing recipe added by you.
 
@@ -1808,7 +1804,7 @@ This action allows you to modify an existing recipe added by you.
                 "userId": 1
             }
 
-### Delete Recipe [DELETE]
+#### Delete Recipe [DELETE]
 
 This action allows you to delete an existing recipe added by you.
 
