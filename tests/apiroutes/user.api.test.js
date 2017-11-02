@@ -300,7 +300,7 @@ describe('Routes: User API Tests', () => {
           });
       });
 
-      it('should validate user and return \'You\'ve been signed in successfully\'', (done) => {
+      it('should validate user and return User', (done) => {
         const user = {};
         user.email = 'iverenshaguy@gmail.com';
         user.password = 'LionJudah56';
@@ -311,7 +311,13 @@ describe('Routes: User API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.message).to.equal('You\'ve been signed in successfully');
+            expect(res.body.firstname).to.equal('Iveren');
+            expect(res.body.lastname).to.equal('Shaguy');
+            expect(res.body.username).to.equal('iverenshaguy');
+            expect(res.body.email).to.equal('iverenshaguy@gmail.com');
+            expect(res.body.passwordHash).to.be.a('string');
+            expect(res.body.aboutMe).to.equal('I am great');
+            expect(res.body.occupation).to.equal('Coder');
             if (err) return done(err);
             done();
           });

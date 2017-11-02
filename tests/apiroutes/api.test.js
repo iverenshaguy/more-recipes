@@ -1,1 +1,1 @@
-import './recipe.api.test';
+import './upvotes.recipe.api.test';

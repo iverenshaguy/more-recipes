@@ -13,10 +13,21 @@ recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  
+
   const recipeData = matchedData(req);
 
   return recipesController.create(req, recipeData, res);
+});
+
+recipeRoutes.get('/:recipeId', authenticate, validation.getSingleRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const recipeData = matchedData(req);
+
+  return recipesController.getSingleRecipe(req, recipeData, res);
 });
 
 recipeRoutes.put('/:recipeId', authenticate, validation.updateRecipe, (req, res) => {
@@ -36,7 +47,9 @@ recipeRoutes.delete('/:recipeId', authenticate, validation.deleteRecipe, (req, r
     return res.status(422).json({ errors: errors.mapped() });
   }
 
-  return recipesController.delete(req, res);
+  const recipeData = matchedData(req);
+
+  return recipesController.delete(req, recipeData, res);
 });
 
 recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (req, res) => {
@@ -48,6 +61,28 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   const reviewData = matchedData(req);
 
   return recipesController.reviewRecipe(req, reviewData, res);
+});
+
+recipeRoutes.post('/:recipeId/upvote', authenticate, validation.voteRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const upvoteData = matchedData(req);
+
+  return recipesController.upvoteRecipe(req, upvoteData, res);
+});
+
+recipeRoutes.post('/:recipeId/downvote', authenticate, validation.voteRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const downvoteData = matchedData(req);
+
+  return recipesController.downvoteRecipe(req, downvoteData, res);
 });
 
 recipeRoutes.get('/', authenticate, (req, res) => {

@@ -19,12 +19,13 @@ export default {
     },
     userId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      allowNull: true,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
+        as: 'userId'
       },
-      allowNull: false,
-      foreignKey: true
     },
   }),
   down: queryInterface => queryInterface.dropTable('Notifications')
