@@ -231,6 +231,12 @@ export default {
   },
 
   getUpvoted(req, res) {
+    let orderBy = 'DESC';
+
+    if (req.query.order === 'descending') {
+      orderBy = 'ASC';
+    }
+
     return Recipe.findAll({
       attributes: {
         include: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), 'upvotes']],
@@ -243,7 +249,7 @@ export default {
         },
         attributes: []
       }],
-      order: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), 'DESC']],
+      order: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), orderBy]],
       group: ['Recipe.id']
     })
       .then((recipes) => {
