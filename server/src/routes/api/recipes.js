@@ -63,7 +63,7 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   return recipesController.reviewRecipe(req, reviewData, res);
 });
 
-recipeRoutes.post('/:recipeId/upvote', authenticate, validation.voteRecipe, (req, res) => {
+recipeRoutes.post('/:recipeId/upvotes', authenticate, validation.voteRecipe, (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
@@ -71,18 +71,15 @@ recipeRoutes.post('/:recipeId/upvote', authenticate, validation.voteRecipe, (req
 
   const upvoteData = matchedData(req);
 
-  return recipesController.upvoteRecipe(req, upvoteData, res);
-});
-
-recipeRoutes.post('/:recipeId/downvote', authenticate, validation.voteRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
+  if (upvoteData.upvote === 'true') {
+    return recipesController.upvoteRecipe(req, upvoteData, res);
   }
 
-  const downvoteData = matchedData(req);
+  if (upvoteData.upvote === 'false') {
+    return recipesController.downvoteRecipe(req, upvoteData, res);
+  }
 
-  return recipesController.downvoteRecipe(req, downvoteData, res);
+  return recipesController.upvoteRecipe(req, upvoteData, res);
 });
 
 recipeRoutes.get('/', authenticate, (req, res) => {

@@ -354,10 +354,6 @@ describe('Routes: Recipe API Tests', () => {
 
   describe('## Favorite Recipes for User', () => {
     before(() => Like.sync().then(() => Like.create({
-      upvote: true,
-      recipeId: 4,
-      userId: 1
-    }).then(() => Like.create({
       upvote: false,
       recipeId: 5,
       userId: 1
@@ -365,13 +361,13 @@ describe('Routes: Recipe API Tests', () => {
       upvote: true,
       recipeId: 1,
       userId: 1
-    }).then(likes => likes)))));
+    }).then(likes => likes))));
 
     describe('## Upvote an Existing Recipe for User Iveren', () => {
       describe('## Check for authorised right input', () => {
         it('should upvote recipe', (done) => {
           agent
-            .post('/api/v1/recipes/3/upvote')
+            .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
@@ -386,9 +382,27 @@ describe('Routes: Recipe API Tests', () => {
             });
         });
 
+        it('should upvote recipe', (done) => {
+          agent
+            .post('/api/v1/recipes/4/upvotes')
+            .query({ upvote: 'true' })
+            .set('Accept', 'application/json')
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(201);
+              expect(res.body.upvote).to.equal(true);
+              expect(res.body.recipeId).to.equal(4);
+              expect(res.body.userId).to.equal(1);
+
+              if (err) {
+                return done(err);
+              }
+              done();
+            });
+        });
+
         it('should upvote recipe that was formerly downvoted', (done) => {
           agent
-            .post('/api/v1/recipes/5/upvote')
+            .post('/api/v1/recipes/5/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
@@ -405,7 +419,7 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not upvote recipe again', (done) => {
           agent
-            .post('/api/v1/recipes/3/upvote')
+            .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
@@ -420,7 +434,7 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not upvote recipe that belongs to user', (done) => {
           agent
-            .post('/api/v1/recipes/2/upvote')
+            .post('/api/v1/recipes/2/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
@@ -437,7 +451,7 @@ describe('Routes: Recipe API Tests', () => {
       describe('## Check for authorised wrong input', () => {
         it('should not upvote recipe for Non-Existent ID 123', (done) => {
           agent
-            .post('/api/v1/recipes/123/upvote')
+            .post('/api/v1/recipes/123/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(404);
@@ -449,7 +463,7 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not upvote recipe for Non-Existent ID abc', (done) => {
           agent
-            .post('/api/v1/recipes/abc/upvote')
+            .post('/api/v1/recipes/abc/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
@@ -464,7 +478,7 @@ describe('Routes: Recipe API Tests', () => {
       describe('## Check for unauthorised input', () => {
         it('should not upvote recipe', (done) => {
           request(app)
-            .post('/api/v1/recipes/3/upvote')
+            .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);
@@ -483,7 +497,8 @@ describe('Routes: Recipe API Tests', () => {
       describe('## Check for authorised right input', () => {
         it('should downvote recipe', (done) => {
           agent
-            .post('/api/v1/recipes/6/downvote')
+            .post('/api/v1/recipes/6/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
@@ -500,7 +515,8 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should downvote recipe that was formerly upvoted', (done) => {
           agent
-            .post('/api/v1/recipes/4/downvote')
+            .post('/api/v1/recipes/4/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
@@ -517,7 +533,8 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not downvote recipe again', (done) => {
           agent
-            .post('/api/v1/recipes/6/downvote')
+            .post('/api/v1/recipes/6/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
@@ -532,7 +549,8 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not downvote recipe that belongs to user', (done) => {
           agent
-            .post('/api/v1/recipes/2/downvote')
+            .post('/api/v1/recipes/2/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
@@ -549,7 +567,8 @@ describe('Routes: Recipe API Tests', () => {
       describe('## Check for authorised wrong input', () => {
         it('should not downvote recipe for Non-Existent ID 123', (done) => {
           agent
-            .post('/api/v1/recipes/123/downvote')
+            .post('/api/v1/recipes/123/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(404);
@@ -561,7 +580,8 @@ describe('Routes: Recipe API Tests', () => {
 
         it('should not downvote recipe for Non-Existent ID abc', (done) => {
           agent
-            .post('/api/v1/recipes/abc/downvote')
+            .post('/api/v1/recipes/abc/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
@@ -576,7 +596,8 @@ describe('Routes: Recipe API Tests', () => {
       describe('## Check for unauthorised input', () => {
         it('should not downvote recipe', (done) => {
           request(app)
-            .post('/api/v1/recipes/6/downvote')
+            .post('/api/v1/recipes/6/upvotes')
+            .query({ upvote: 'false' })
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);

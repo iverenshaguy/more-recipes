@@ -312,6 +312,10 @@ export default {
       .withMessage('Recipe must be specified')
       .isInt()
       .withMessage('Recipe Not Found'),
+    check('upvote')
+      .optional({ checkFalsy: true })
+      .isBoolean()
+      .withMessage('Upvote should be either true or false'),
   ],
   favoriteRecipes: [
     check('userId')
