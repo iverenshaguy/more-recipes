@@ -246,9 +246,6 @@ form small {
     #more-recipes-navbar #search-form {
         display: none;
     }
-    #result-search-form-div {
-        display: block;
-    }
 }
 
 .navbar a.nav-link {
@@ -339,8 +336,17 @@ form small {
 }
 
 .page-margin {
-    margin-top: 5rem;
+    margin-top: 1.5rem;
     margin-bottom: 5rem;
+}
+
+.sticky-bar-wrapper {
+    width: 100%;
+    /*height: 6rem;*/
+    /* padding: 0 0; */
+    position: fixed;
+    bottom: 0;
+    color: white;
 }
 
 .sticky-bar {
@@ -348,8 +354,7 @@ form small {
     /*height: 6rem;*/
     background-color: #d50000;
     padding: 1rem 0;
-    position: fixed;
-    bottom: 0;
+    /* bottom: 0; */
     color: white;
 }
 
@@ -870,6 +875,9 @@ form small,
     }
 }
 
+#side-rating-toolbar .fa-thumbs-down {
+    color: #1B5E20;
+}
 
 /*REVIEW WRAPPER*/
 
@@ -890,7 +898,7 @@ body.user-profile {
     background-color: #F5F6FE!important;
 }
 
-.user-profile-div {}
+/* .user-profile-div {} */
 
 .user-profile .navbar {
     background-color: white;
@@ -927,7 +935,7 @@ body.user-profile {
 }
 
 .profile-picture {
-    margin-top: -10vh;
+    margin-top: -11vh;
 }
 
 .user-profile-details {
@@ -964,16 +972,12 @@ body.user-profile {
     padding: 4rem 0;
 }
 
-.user-info .name {
-    font-size: 2rem;
-}
-
-.user-info .username {
-    font-size: 1.2rem;
-}
-
-.user-info .about-me {
+.profile-details .name {
     font-size: 1.3rem;
+}
+
+.profile-details .about-me {
+    font-size: 1rem;
 }
 
 .user-profile-cards {
@@ -1129,9 +1133,8 @@ body.user-profile {
 }
 
 .recipe-img-div {
-    width: 100%;
-    height: 20rem;
-    background-color: #dfdfdf;
+    padding-left: 0rem;
+    padding-right: 0rem;
 }
 
 #recipe-photo-preview {
@@ -1186,4 +1189,14 @@ body.user-profile {
 }
 .alert#downvoted {
 	border: 1px solid #D50000!important;
+}
+
+.ingredient-div-child,
+.preparation-div-child,
+.direction-div-child {
+    margin-top: 1rem;
+}
+
+.black {
+    color: #333;
 }

@@ -41,9 +41,6 @@
                     </div>
                 </form>
                 <ul class="navbar-nav" id="navbar-right">
-                    <li class="hidden-xs-down hidden-md-up nav-item search-icon">
-                        <a href="javascript:void(0)" class="nav-link"><i class="fa fa-search"></i> Search...</a>
-                    </li>
                     <li class="hidden-xs-down nav-item">
                         <a href="#signin-modal" data-toggle="modal"><button class="btn btn-outline-success" type="button">SIGN IN</button></a>
                     </li>
@@ -53,21 +50,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="container-fluid">
-            <div class="row" id="result-search-form-div">
-                <div class="col-12 w-100 py-3">
-                    <form id="search-form">
-                        <div class="input-group">
-                            <label class="sr-only" for="search">Search for Recipe</label>
-                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
-                            <span class="input-group-btn">
-                    <button type="submit" class="btn">Submit</button>
-                  </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </header>
     <!-- CONTENT -->
     <div class="container-fluid pb-5 background-grey page-margin" id="search-result-wrapper">
@@ -295,6 +277,29 @@
                     </div>
                 </a>
             </div>
+        </div>
+    </div>
+    <div class="sticky-bar-wrapper text-center hidden-md-up">
+        <div class="container-fluid">
+            <div class="row" id="result-search-form-div">
+                <div class="col-12 w-100 py-3">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <label class="sr-only" for="search">Search for Recipe</label>
+                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-bar text-center">
+            <a href="#social-modal" class="nav-link d-inline" data-toggle="modal"><i class="fa fa-share-alt fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#add-edit-modal" data-toggle="modal" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#"><i class="fa fa-search fa-lg search-icon"></i></a>
+            <a class="nav-link d-inline" href="#" title="Favorite Recipes" data-toggle="dropdown"><i class="fa fa-heart fa-lg"></i></a>
         </div>
     </div>
     <!-- Modal -->
