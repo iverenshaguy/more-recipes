@@ -1,18 +1,14 @@
 FORMAT: 1A
 
-# More Recipes
+# More Recipes [api/v1]
 
-More-Recipes is an API provides a platform for users to share the awesome and exciting recipes idea they have invented or learnt.  
+More-Recipes is an API provides a platform for users to share the awesome and exciting recipes idea they have invented or learnt.  This is version 1 of the API.
 
-# More Recipes Root [/api/v1/]
-
-This is version 1 of the API.
-
-## Group Users
+# Group User
 
 Resources related to users in the API.
 
-### Create a New Account [POST /users/signup]
+## Create a New Account [POST /users/signup]
 
 You may create a new account using this action. It takes a JSON object containing user details.
 
@@ -60,7 +56,7 @@ You may create a new account using this action. It takes a JSON object containin
                 "passwordHash": "000000100007a120970eb35af11422542078d97ebc5166123fc9ba942ef89b69136fca53ee882c79ab8f0356f6b62804990ae5603d5a3712",
             }
 
-### Authenticate User [POST /users/signin]
+## Authenticate User [POST /users/signin]
 
 You may signin to your account using this action. It takes a JSON object containing user details.
 
@@ -96,7 +92,7 @@ You may signin to your account using this action. It takes a JSON object contain
                 "updatedAt": "2017-10-31T10:41:59:048Z",
             }
 
-### View User Profile [GET /users/profile]
+## View User Profile [GET /users/profile]
 
 + Response 200 (application/json)
 
@@ -308,11 +304,11 @@ You may signin to your account using this action. It takes a JSON object contain
             }
         ]      
 
-## Group Recipe
+# Group Recipe
 
 Resources related to recipes in the API.
 
-### Recipes [/recipes]
+## Recipes [/recipes]
 
 A Recipe Object has the following attributes:
 
@@ -332,7 +328,7 @@ A Recipe Object has the following attributes:
     + rating (number) - Float of Average Recipe rating
     + likes (array) - Array of upvotes and downvotes
 
-#### Get All Recipes in the App [GET]
+### Get All Recipes in the App [GET]
 
 + Response 200 (application/json)
 
@@ -1171,7 +1167,7 @@ A Recipe Object has the following attributes:
             }
         ]
 
-#### Create a New Recipe [POST]
+### Create a New Recipe [POST]
 
 You may add you own recipe using this action. It takes a JSON object containing a recipe.
 
@@ -1255,7 +1251,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "createdAt": "2017-11-02T11:18:48.820Z"
             }
 
-### Get Recipes with the Most Upvotes [GET /recipes{?sort}&{?order}]
+## Get Recipes with the Most Upvotes [GET /recipes{?sort}&{?order}]
 
 + Parameters
     + sort: upvotes (string, required) - String to be sorted by.
@@ -1666,12 +1662,12 @@ You may add you own recipe using this action. It takes a JSON object containing 
             }
         ]
 
-### Get/Modify/Delete Recipe [/recipes/{recipeId}]
+## Get/Modify/Delete Recipe [/recipes/{recipeId}]
 
 + Parameters
     + recipeId: `16` (number, required) - ID of the Recipe in form of an integer
 
-#### Get a Recipe [GET]
+### Get a Recipe [GET]
 
 + Response 200 (application/json)
 
@@ -1739,7 +1735,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 ]
             }
 
-#### Modify Recipe [PUT]
+### Modify Recipe [PUT]
 
 This action allows you to modify an existing recipe added by you.
 
@@ -1804,13 +1800,13 @@ This action allows you to modify an existing recipe added by you.
                 "userId": 1
             }
 
-#### Delete Recipe [DELETE]
+### Delete Recipe [DELETE]
 
 This action allows you to delete an existing recipe added by you.
 
 + Response 204(application/json)
 
-### Upvote/Downvote a Recipe [POST /recipes/{recipeId}/upvotes{?upvote}]
+## Upvote/Downvote a Recipe [POST /recipes/{recipeId}/upvotes{?upvote}]
 
 You may add a recipe to your favorite recipes using this action. It takes no input.
 
@@ -1861,7 +1857,7 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
                 "userId": 1
             }
 
-### Review a Recipe [POST /recipes/{recipeId}/reviews]
+## Review a Recipe [POST /recipes/{recipeId}/reviews]
 
 You may review a recipe using this action. It takes a JSON object containing a review.
 
