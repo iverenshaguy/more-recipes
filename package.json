@@ -36,7 +36,6 @@
     "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
     "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
     "lint": "eslint **/*.js --fix",
-    "docs": "aglio --theme-variables slate -i docs.apib -o docs/index.html",
     "coverage": "npm-run-all --parallel coveralls codeclimate",
     "coveralls": "nyc report --reporter=lcov | coveralls",
     "codeclimate": "nyc report --reporter=lcov | codeclimate-test-reporter"
