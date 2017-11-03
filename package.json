@@ -43,7 +43,6 @@
   "author": "Iveren Shaguy",
   "license": "ISC",
   "dependencies": {
-    "aglio": "^2.3.0",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
