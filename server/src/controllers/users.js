@@ -1,4 +1,4 @@
-import { User, Recipe, Favorite } from '../models';
+import { User, Recipe, Like } from '../models';
 import { verifyPassword } from '../validations/password_hash';
 
 export default {
@@ -35,7 +35,7 @@ export default {
           }
           req.session.user = user.dataValues;
 
-          res.status(200).send({ message: 'You\'ve been signed in successfully' });
+          res.status(200).send(user);
         });
       });
   },
@@ -45,19 +45,21 @@ export default {
       .then(user => res.status(200).send(user));
   },
 
-  getFavorites(req, res) {
+  getFavorites(req, favoriteRecipeData, res) {
     if (+req.session.user.id !== +req.params.userId) {
       return res.status(401).send({ message: 'You are not authorized to access this page' });
     }
 
-    return Favorite.findAll({
+    return Recipe.findAll({
       include: [{
-        model: Recipe
+        model: Like,
+        as: 'likes',
+        attributes: [],
+        where: {
+          upvote: true,
+          userId: +favoriteRecipeData.userId,
+        }
       }],
-      where: {
-        userId: req.params.userId,
-        favorite: true
-      }
     })
       .then((recipes) => {
         if (recipes.length === 0) {

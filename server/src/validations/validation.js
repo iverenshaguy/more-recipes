@@ -181,6 +181,13 @@ export default {
       .trim()
       .escape(),
   ],
+  getSingleRecipe: [
+    check('recipeId')
+      .exists()
+      .withMessage('Recipe to delete must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
+  ],
   updateRecipe: [
     check('recipeId')
       .exists()
@@ -283,7 +290,7 @@ export default {
     check('rating')
       .exists()
       .withMessage('Recipe must be rated')
-      .isIn(['1', '2', '3', '4', '5'])
+      .isIn([1, 2, 3, 4, 5])
       .withMessage('Recipe must be rated from 1 - 5')
       .trim()
       .escape(),
@@ -298,6 +305,17 @@ export default {
       .withMessage('Review can only contain letters and the characters (,.\'-)')
       .trim()
       .escape(),
+  ],
+  voteRecipe: [
+    check('recipeId')
+      .exists()
+      .withMessage('Recipe must be specified')
+      .isInt()
+      .withMessage('Recipe Not Found'),
+    check('upvote')
+      .optional({ checkFalsy: true })
+      .isBoolean()
+      .withMessage('Upvote should be either true or false'),
   ],
   favoriteRecipes: [
     check('userId')

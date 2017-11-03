@@ -13,10 +13,21 @@ recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  // matchedData returns only the subset of data validated by the middleware
+
   const recipeData = matchedData(req);
 
   return recipesController.create(req, recipeData, res);
+});
+
+recipeRoutes.get('/:recipeId', authenticate, validation.getSingleRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const recipeData = matchedData(req);
+
+  return recipesController.getSingleRecipe(req, recipeData, res);
 });
 
 recipeRoutes.put('/:recipeId', authenticate, validation.updateRecipe, (req, res) => {
@@ -36,7 +47,9 @@ recipeRoutes.delete('/:recipeId', authenticate, validation.deleteRecipe, (req, r
     return res.status(422).json({ errors: errors.mapped() });
   }
 
-  return recipesController.delete(req, res);
+  const recipeData = matchedData(req);
+
+  return recipesController.delete(req, recipeData, res);
 });
 
 recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (req, res) => {
@@ -44,10 +57,29 @@ recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
-  // matchedData returns only the subset of data validated by the middleware
+
   const reviewData = matchedData(req);
 
   return recipesController.reviewRecipe(req, reviewData, res);
+});
+
+recipeRoutes.post('/:recipeId/upvotes', authenticate, validation.voteRecipe, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.mapped() });
+  }
+
+  const upvoteData = matchedData(req);
+
+  if (upvoteData.upvote === 'true') {
+    return recipesController.upvoteRecipe(req, upvoteData, res);
+  }
+
+  if (upvoteData.upvote === 'false') {
+    return recipesController.downvoteRecipe(req, upvoteData, res);
+  }
+
+  return recipesController.upvoteRecipe(req, upvoteData, res);
 });
 
 recipeRoutes.get('/', authenticate, (req, res) => {

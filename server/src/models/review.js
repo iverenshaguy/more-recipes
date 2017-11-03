@@ -1,15 +1,14 @@
 export default (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
     rating: {
-      type: DataTypes.ENUM,
-      values: ['1', '2', '3', '4', '5'],
+      type: DataTypes.INTEGER,
       allowNull: {
         args: false,
         msg: 'This is a required field'
       },
       validate: {
         isIn: {
-          args: [['1', '2', '3', '4', '5']],
+          args: [[1, 2, 3, 4, 5]],
           msg: 'Please rate the recipe'
         }
       }
@@ -31,9 +30,11 @@ export default (sequelize, DataTypes) => {
   Review.associate = (models) => {
     Review.belongsTo(models.Recipe, {
       foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
     });
     Review.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
   };
 

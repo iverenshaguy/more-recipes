@@ -12,8 +12,8 @@ $(document).ready(function() {
     $('.search-icon').on("click", () => {
         // e.preventDefault();
         $('#result-search-form-div').toggle('5000');
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        // document.body.scrollTop = 0;
+        // document.documentElement.scrollTop = 0;
     });
 
     var toggleAffix = function(affixElement, scrollElement, wrapper) {
@@ -100,4 +100,48 @@ $(document).ready(function() {
         });
     }, 4000);
 
+    $("#add-ingredient").click(function(event) {
+        event.preventDefault();
+        $('.ingredient-div').append(`
+        <div class="input-group ingredient-div-child">
+            <input type="text" class="form-control" name="ingredients[]" aria-label="Remove Ingredient" aria-describedby="remove-ingredient">
+            <span class="input-group-addon remove-ingredient"><i class="fa fa-times"></i></span>
+        </div>`);
+    });
+
+    $('#add-recipe').on('click', '.remove-ingredient', function(event) {
+        event.preventDefault();
+        $(this).parents('.ingredient-div-child').remove();
+        return false;
+    });
+
+    $("#add-preparation").click(function(event) {
+        event.preventDefault();
+        $('.preparation-div').append(`
+        <div class="input-group preparation-div-child">
+            <input type="text" class="form-control" name="preparations[]" aria-label="Remove Preparation" aria-describedby="remove-preparation">
+            <span class="input-group-addon remove-preparation"><i class="fa fa-times"></i></span>
+        </div>`);
+    });
+
+    $('#add-recipe').on('click', '.remove-preparation', function(event) {
+        event.preventDefault();
+        $(this).parents('.preparation-div-child').remove();
+        return false;
+    });
+
+    $("#add-direction").click(function(event) {
+        event.preventDefault();
+        $('.direction-div').append(`
+        <div class="input-group direction-div-child">
+            <input type="text" class="form-control" name="directions[]" aria-label="Remove Direction" aria-describedby="remove-direction">
+            <span class="input-group-addon remove-direction"><i class="fa fa-times"></i></span>
+        </div>`);
+    });
+
+    $('#add-recipe').on('click', '.remove-direction', function(event) {
+        event.preventDefault();
+        $(this).parents('.direction-div-child').remove();
+        return false;
+    });
 });

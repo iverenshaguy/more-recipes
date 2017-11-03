@@ -5,7 +5,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         isIn: {
           args: [[false, true]],
-          msg: 'Please select a field'
+          msg: 'Please true for Upvote and false for Downvote'
         }
       }
     },
@@ -13,9 +13,11 @@ export default (sequelize, DataTypes) => {
   Like.associate = (models) => {
     Like.belongsTo(models.Recipe, {
       foreignKey: 'recipeId',
+      onDelete: 'CASCADE',
     });
     Like.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE',
     });
   };
 

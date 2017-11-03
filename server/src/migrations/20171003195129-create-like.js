@@ -19,21 +19,23 @@ export default {
     },
     userId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      allowNull: true,
       references: {
         model: 'Users',
-        key: 'id'
+        key: 'id',
+        as: 'userId'
       },
-      allowNull: false,
-      foreignKey: true
     },
     recipeId: {
       type: Sequelize.INTEGER,
+      onDelete: 'CASCADE',
+      allowNull: true,
       references: {
         model: 'Recipes',
-        key: 'id'
+        key: 'id',
+        as: 'recipeId'
       },
-      allowNull: false,
-      foreignKey: true
     },
   }),
   down: queryInterface => queryInterface.dropTable('Likes')
