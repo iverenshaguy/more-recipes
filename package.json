@@ -1,0 +1,91 @@
+{
+  "name": "more-recipes-personal",
+  "version": "1.0.0",
+  "description": "More Recipes App",
+  "main": "server/dist/bin/www.js",
+  "directories": {
+    "test": "tests"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 95,
+    "statements": 95,
+    "functions": 95,
+    "branches": 70,
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "cache": true,
+    "report-dir": "./coverage"
+  },
+  "scripts": {
+    "start:dev": "nodemon ./server/dist/bin/www.js",
+    "test": "cross-env NODE_ENV=test nyc mocha tests/test.js --recursive --timeout 15000",
+    "pretest": "npm run lint",
+    "clean": "cd server && rm -rf dist",
+    "prebuild:init": "cd server && mkdir dist",
+    "prebuild": "npm-run-all clean prebuild:init",
+    "build": "babel server/src -d server/dist",
+    "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
+    "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
+    "lint": "eslint **/*.js --fix",
+    "coverage": "npm-run-all --parallel coveralls codeclimate",
+    "coveralls": "nyc report --reporter=lcov | coveralls",
+    "codeclimate": "nyc report --reporter=lcov | codeclimate-test-reporter"
+  },
+  "author": "Iveren Shaguy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "cookie-parser": "^1.4.3",
+    "env2": "^2.2.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "global": "^4.3.2",
+    "mocha": "^3.5.3",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.0",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.20.1",
+    "supertest": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.5",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "codeclimate-test-reporter": "^0.5.0",
+    "coveralls": "^2.13.3",
+    "cross-env": "^5.1.1",
+    "del": "^3.0.0",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-watch": "^3.1.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.6.1",
+    "istanbul": "^0.4.5",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.3.0"
+  }
+}

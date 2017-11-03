@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>More Recipes - View Recipe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel='stylesheet' href="src/assets/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' href="src/assets/kitchen-font/flaticon.css">
+    <link rel="stylesheet" href="src/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="view-recipe background-grey">
+    <!-- NAVIGATION -->
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="navbar navbar-toggleable-xl navbar-light bg-faded" data-toggle="affix" id="more-recipes-navbar">
+            <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-reorder fa-lg"></i>
+          </button>
+            <a class="navbar-brand hidden-md-down" href="index.html">MORE RECIPES</a>
+            <a class="navbar-brand hidden-lg-up" id="navbar-brand-right" href="index.html">MORE RECIPES</a>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="hidden-xs-down nav-item text-left">
+                        <a class="nav-link" href="top-recipes.html">TRENDING</a>
+                    </li>
+                </ul>
+                <form class="hidden-sm-down form-inline mx-2 my-auto d-inline" id="search-form">
+                    <div class="input-group input-group">
+                        <label class="sr-only" for="search">Search for Recipes</label>
+                        <input type="text" class="form-control" id="search" placeholder="Search for Recipes">
+                        <span class="input-group-btn">
+                  <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+                </span>
+                    </div>
+                </form>
+                <ul class="navbar-nav" id="navbar-right">
+                    <li class="hidden-xs-down nav-item">
+                        <a href="#signin-modal" data-toggle="modal"><button class="btn btn-outline-success" type="button">SIGN IN</button></a>
+                    </li>
+                    <li class="hidden-sm-up nav-item">
+                        <a class="nav-link" href="#signin-modal" data-toggle="modal">SIGN IN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- CONTENT -->
+    <div class="container page-margin" id="recipe-wrapper">
+        <div class="recipe-picture-wrapper">
+            <div class="image-container">
+                <img src="src/images/fish-img.jpg" class="img-fluid">
+            </div>
+        </div>
+        <div class="row px-xs-1 px-sm-2 px-md-2 px-lg-4 px-xl-5" id="recipe-details">
+            <div class="col-12 px-5">
+                <div class="heading p-5 text-center">
+                    <h3>Jollof Rice</h3>
+                </div>
+                <div class="row" id="recipe-rating">
+                    <div class="col-xs-12 col-md-6 col-lg-4 pt-3 pb-1">
+                        <p><span class="text-muted">Posted By</span> @janesmith</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-8 pt-3 pb-1" id="recipe-rating-info">
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-star"></i> 4.5 &nbsp; &nbsp;</p>
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-heart"></i> 200 &nbsp;&nbsp;</p>
+                        <p class="text-muted inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350 &nbsp;&nbsp;</p>
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3 &nbsp; &nbsp;</p>
+                    </div>
+                </div>
+                <div class="p-xs-1 p-md-5" id="recipe-details-div">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <h4>Ingredients</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1" id="recipe-details-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o fa-lg"></i> 45 Minutes<span class="hidden-sm-down">  |</span></p>
+                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Normal</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-justify" id="ingredient-list">
+                        <p class="mb-3"> 3 cigar cups | 750g long grain parboiled rice</p>
+                        <p class="mb-3"> Tomato Stew 500 mls</p>
+                        <p class="mb-3"> Chicken (whole chicken, drumsticks or chicken breast)</p>
+                        <p class="mb-3"> Pepper and salt (to taste)</p>
+                        <p class="mb-3"> 2 medium onions</p>
+                        <p class="mb-3"> 3 Knorr cubes</p>
+                        <p class="mb-3"> 2 teaspoons thyme</p>
+                        <p class="mb-3"> 2 teaspoons curry powder (Nigerian curry powder)</p>
+                    </div>
+                </div>
+                <div class="px-xs-1 px-md-5">
+                    <div class="row ">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <h4>Preparation</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1" id="recipe-prep-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o fa-lg"></i> 20 Minutes</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-5 px-4" id="preparation">
+                        <div class="text-justify">
+                            <p class="mb-3"> Prepare the tomato stew. Visit the Tomato Stew page for details on how to do that. It is advisable to prepare tomato stew before hand and keep in the freezer. This is so that whenever you want to cook any jollof rice related dish,
+                            it is just a matter of adding it to your cooking.</p>
+                            <p class="mb-3"> If you will use whole chicken then wash and cut it into pieces. Cook with the thyme, Knorr cubes and 2 bulbs of onions (chopped). The cooking time depends on the type of chicken. The rooster or cockerel cooks much faster than the
+                            hen but the hen is definitely tastier. When done, grill it in an oven. You may also fry it. This is to give it a golden look which is more presentable especially if you have guests for dinner.</p>
+                            <p class="mb-3"> Parboil the rice using the method detailed in parboiling rice for cooking jollof rice. Rinse the parboiled rice and put in a sieve to drain.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-xs-1 px-md-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <h4>Cooking Directions</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1 mr-0 text-right" id="recipe-cooking-directions-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o"></i> 20 Minutes <span class="hidden-sm-down"> |</span></p>
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o"></i> Ready - 45 Minutes</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-5 px-4" id="cooking-directions">
+                        <div class="text-justify">
+                            <p class="mb-3"> Pour the chicken stock and the tomato stew into a sizeable pot and leave to boil.</p>
+                            <p class="mb-3"> Add the drained parboiled rice, curry powder, salt and pepper to taste. The water level should be the same level of the rice. This is to ensure that all the water dries up by the time the rice is cooked.</p>
+                            <p class="mb-3"> Cover the pot and leave to cook on low to medium heat. This way the rice does not burn before the water dries up.</p>
+                            <p class="mb-3"> Keep cooking till done</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-3 pb-1 row align-items-center" id="call-to-action">
+                    <a href="#review-wrapper" data-toggle="collapse" data-target="#review-wrapper" aria-expanded="false" aria-controls="review-wrapper"><i class="fa fa-star fa-lg"></i> <p class="hidden-md-down">Review</p></a>
+                    <a href="#" class="favorite"><i class="fa fa-heart fa-lg"></i> <p class="hidden-md-down">Favorite It</p></a>
+                    <a href="javascript:void(0)" class="like"><i class="fa fa-thumbs-up fa-lg"></i> <p class="hidden-md-down">Upvote</p></a>
+                    <a href="javascript:void(0)" class="downvote"><i class="fa fa-thumbs-down fa-lg"></i> <p class="hidden-md-down">Downvote</p></a>
+                </div>
+                <div class="hidden-xs-up alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>You must be logged in to do this. <a href="#">Log In Here</a>.</p>
+                    <p>Don't have an account? <a href="#">Sign Up Here</a>.</p>
+                </div>
+                <div class="collapse my-3" id="review-wrapper">
+                    <div class="" id="review-div">
+                        <div class="card card-block px-md-5 px-sm-3">
+                            <h5>Review this Recipe</h5>
+                            <form class="review-form">
+                                <p class="mt-3"><span id="rating col-xs-12"><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></p>
+                                <!-- Add radio element to rating star -->
+                                <div class="form-group">
+                                    <label for="review-comment" class="col-form-label col-form-label-lg mb-3">Add a Comment:</label>
+                                    <textarea class="form-control" id="review-comment" rows="5" placeholder="I love this recipe..."></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn">Add Your Review</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-5 p-xs-1 p-md-5" id="reviews">
+                    <div class="col-12">
+                        <h4>Reviews</h4>
+                        <hr>
+                    </div>
+                    <div class="px-5 pb-5 review-heading">
+                        <div class="row">
+                            <div class="col-4 rounded-circle text-left">
+                                <img src="src/images/user3.jpg" alt="user picture" class="review-picture">
+                            </div>
+                            <div class="col-8 mr-0 text-right">
+                                <p class="">Jane Smithy</p>
+                                <p class="inline-p text-muted pl-0"><i class="aria-hidden flaticon flaticon-chef-hat-with-cutlery-restaurant-symbol"></i> 20</p>
+                                <p class="inline-p text-muted"> | </p>
+                                <p class="inline-p text-muted"><i class="aria-hidden fa fa-heart"></i> 50</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mt-3 mb-2 user-rating-wrapper"><span id="user-rating"><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></p>
+                        <p>Really Loved the Recipe</p>
+                    </div>
+                    <div class="px-5 pb-5 review-heading">
+                        <div class="row">
+                            <div class="col-4 rounded-circle text-left">
+                                <img src="src/images/user2.jpg" alt="user picture" class="review-picture">
+                            </div>
+                            <div class="col-8 mr-0 text-right">
+                                <p class="">Jane Smithy</p>
+                                <p class="inline-p text-muted pl-0"><i class="aria-hidden flaticon flaticon-chef-hat-with-cutlery-restaurant-symbol"></i> 20</p>
+                                <p class="inline-p text-muted"> | </p>
+                                <p class="inline-p text-muted"><i class="aria-hidden fa fa-heart"></i> 50</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mt-3 mb-2 user-rating-wrapper"><span id="user-rating"><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></p>
+                        <p>Really Loved the Recipe</p>
+                    </div>
+                    <div class="alert alert-success notif fade show" id="favorited" role="alert">
+                        Added to Favorites!
+                    </div>
+                    <div class="alert alert-success notif fade show" id="liked" role="alert">
+                        Upvoted!
+                    </div>
+                    <div class="alert alert-danger notif fade show" id="downvoted" role="alert">
+                        Downvoted!
+                    </div>
+                </div>
+                <div class="alert alert-success notif fade show" id="favorited" role="alert">
+                    Added to Favorites!
+                </div>
+                <div class="alert alert-success notif fade show" id="liked" role="alert">
+                    Upvoted!
+                </div>
+                <div class="alert alert-danger notif fade show" id="downvoted" role="alert">
+                    Downvoted!
+                </div>
+            </div>
+        </div>
+        <div class="hidden-sm-down align-self-center" id="side-rating-toolbar">
+            <p><a href="#review-wrapper" data-toggle="collapse" data-target="#review-wrapper" aria-expanded="false" title="Rate"><i class="fa fa-star fa-lg"></i></a></p>
+            <p><a href="javascript:void(0)" class="favorite"><i class="fa fa-lg fa-heart"></i></a></p>
+            <p><a href="javascript:void(0)" class="downvote"><i class="fa fa-lg fa-thumbs-down"></i></a></p>
+            <br>
+            <p><i class="fa fa-lg fa-facebook"></i></p>
+            <p><i class="fa fa-lg fa-pinterest"></i></p>
+            <p><i class="fa fa-lg fa-twitter"></i></p>
+        </div>
+    </div>
+    <div class="sticky-bar-wrapper text-center hidden-md-up">
+        <div class="container-fluid">
+            <div class="row" id="result-search-form-div">
+                <div class="col-12 w-100 py-3">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <label class="sr-only" for="search">Search for Recipe</label>
+                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-bar text-center hidden-md-up">
+            <a href="#social-modal" class="nav-link d-inline" data-toggle="modal"><i class="fa fa-share-alt fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#add-edit-modal" data-toggle="modal" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#" data-toggle="" title="Rate"><i class="fa fa-star fa-lg"></i></a>
+            <!-- Add alert box to thumbs down and favorite -->
+            <a class="nav-link d-inline" href="#" title="Favorite Recipes" data-toggle="dropdown"><i class="fa fa-heart fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#" title="Downvote" aria-haspopup="true" aria-expanded="false"><i class="fa fa-thumbs-down fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#"><i class="fa fa-search fa-lg search-icon"></i></a>
+        </div>
+    </div>
+    <div class="modal fade" id="social-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="social-modal">Share this Recipe</h3>
+                    <button type="button" class="close ml-auto main-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-5">
+                    <div class="mb-5 container">
+                        <div class="row ">
+                            <div class="col-4">
+                                <p><i class="fa fa-facebook fa-2x"></i></p>
+                                <p>Facebook</p>
+                            </div>
+                            <div class="col-4">
+                                <p><i class="fa fa-pinterest fa-2x"></i></p>
+                                <p>Pinterest</p>
+                            </div>
+                            <div class="col-4">
+                                <p><i class="fa fa-twitter fa-2x"></i></p>
+                                <p>Twitter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div>
+                            <h4 class="text-center">Sign In to Your Account</h4>
+                            <hr>
+                            <form id="signin-form" class="modal-for mt-4 mb-2 px-2 pb-3">
+                                <div class="form-group">
+                                    <label for="email-username" class="col-form-label">Username/Email Address</label>
+                                    <input type="email" class="form-control" id="email-username" placeholder="janesmith">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-form-label">Password</label>
+                                    <input type="password" class="form-control mb-4" id="password" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
+                                </div>
+                                <div class="form-check mb-0">
+                                    <label for="remember-me" class="form-check-label col-form-label col-form-label-lg">
+                        <input type="checkbox" class="form-check-input" id="remember-me">
+                    Remember Me
+                      </label>
+                                </div>
+                                <a href="user-profile.html"><button class="btn btn-block btn-success mt-0" type="button">SIGN IN</button></a>
+                                <p class="mt-3">Don't have an account? <a href="login-signup.html">Sign Up Here</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>© 2017 More Recipes</p>
+        </div>
+    </footer>
+
+    <script src="src/assets/jquery.js"></script>
+    <script src="src/assets/tether/dist/js/tether.min.js"></script>
+    <script src="src/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>

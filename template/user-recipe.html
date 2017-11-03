@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>More Recipes - User Recipe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800">
+    <link rel='stylesheet' href="src/assets/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' href="src/assets/kitchen-font/flaticon.css">
+    <link rel="stylesheet" href="src/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body class="add-recipe user-recipe">
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="navbar navbar-toggleable-xl navbar-light bg-faded" data-toggle="affix" id="more-recipes-navbar">
+            <a class="navbar-brand hidden-md-down" href="index.html">MORE RECIPES</a>
+            <a class="navbar-brand hidden-lg-up" id="navbar-brand-right" href="index.html">MORE RECIPES</a>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+
+                <form class="hidden-sm-down form-inline mx-2 my-auto d-inline" id="search-form">
+                    <div class="input-group input-group">
+                        <label class="sr-only" for="search">Search for Recipes</label>
+                        <input type="text" class="form-control" id="search" placeholder="Search for Recipes">
+                        <span class="input-group-btn">
+                  <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+                </span>
+                    </div>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link menu-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-reorder fa-lg"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="search-recipes.html">All Recipes</a>
+                            <a class="dropdown-item" href="favorite-recipes.html">Favorite Recipes</a>
+                            <a class="dropdown-item" href="top-recipes.html">Top Recipes</a>
+                        </div>
+                    </li>
+                    <li class="hidden-xs-down nav-item justify-content-start">
+                        <a class="nav-link" href="#add-edit-modal" data-toggle="modal" class="add-recipe" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item justify-content-start notifications-link">
+                        <a class="nav-link" href="#" title="Notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="container-fluid">
+                                <p>You have a new review</p>
+                                <div class="dropdown-divider"></div>
+                                <p>3 people viewed your recipe</p>
+                                <div class="dropdown-divider"></div>
+                                <p>Review your security details</p>
+                                <div class="dropdown-divider"></div>
+                                <p>Chef Steve just posted a new recipe</p>
+                                <div class="dropdown-divider"></div>
+                                <p>1 person added your recipe to their favorites</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="hidden-xs-down nav-item mr-1">
+                        <a class="nav-link" href="favorite-recipes.html" title="Favorite Recipes"><i class="fa fa-heart fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-profile-picture-div rounded-cirle dropdown">
+                            <a class="nav-link" href="#" title="Profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="src/images/user1.jpg" class="rounded-cirle" alt="..."></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="user-profile.html">Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Edit Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#user-profile?#recipes">My Recipes</a>
+                                <a class="dropdown-item" href="favorite-recipes.html">Favourite Recipes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)">Log out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- CONTENT -->
+    <div class="container page-margin" id="recipe-wrapper">
+        <div class="row recipe-edit-div align-items-center">
+            <div class="col py-2 text-left">
+                <p class="px-3 d-inline"><a href="#add-edit-modal" data-toggle="modal" class="add-recipe"><i class="fa fa-lg fa-plus"></i> <span class="hidden-md-down">Add Another Recipe</span></a></p>
+                <p class="px-3 d-inline"><a href="#add-edit-modal" data-toggle="modal" class="text-success edit-recipe"><i class="fa fa-lg fa-edit"></i> <span class="hidden-md-down">Edit Recipe</span></a></p>
+                <p class="px-3 d-inline"><a href="#delete-confirm-modal" data-toggle="modal" class="text-danger delete-recipe"><i class="fa fa-lg fa-trash"></i> <span class="hidden-md-down">Delete Recipe</a></span>
+                </p>
+            </div>
+        </div>
+        <div class="recipe-picture-wrapper">
+            <div class="image-container">
+                <img src="src/images/fish-img.jpg" class="img-fluid">
+            </div>
+        </div>
+        <div class="row px-xs-1 px-sm-2 px-md-2 px-lg-4 px-xl-5" id="recipe-details">
+            <div class="col-12 px-5">
+                <div class="heading p-5 text-center">
+                    <h3>Jollof Rice</h3>
+                </div>
+                <div class="row" id="recipe-rating">
+                    <div class="col-xs-12 col-md-6 col-lg-4 pt-3">
+                        <p><span class="text-muted">Posted By</span> @janesmith</p>
+                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-8 pt-3" id="recipe-rating-info">
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-star"></i> 4.5 &nbsp; &nbsp;</p>
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-heart"></i> 200 &nbsp;&nbsp;</p>
+                        <p class="text-muted inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350 &nbsp;&nbsp;</p>
+                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3 &nbsp; &nbsp;</p>
+                    </div>
+                </div>
+                <div class="p-xs-1 p-md-5" id="recipe-details-div">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-lg-4 pt-3">
+                            <h4>Ingredients</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pt-3 pb-1" id="recipe-details-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o fa-lg"></i> 45 Minutes<span class="hidden-sm-down">  |</span></p>
+                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Normal</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-justify" id="ingredient-list">
+                        <p class="mb-3"> 3 cigar cups | 750g long grain parboiled rice</p>
+                        <p class="mb-3"> Tomato Stew 500 mls</p>
+                        <p class="mb-3"> Chicken (whole chicken, drumsticks or chicken breast)</p>
+                        <p class="mb-3"> Pepper and salt (to taste)</p>
+                        <p class="mb-3"> 2 medium onions</p>
+                        <p class="mb-3"> 3 Knorr cubes</p>
+                        <p class="mb-3"> 2 teaspoons thyme</p>
+                        <p class="mb-3"> 2 teaspoons curry powder (Nigerian curry powder)</p>
+                    </div>
+                </div>
+                <div class="px-xs-1 px-md-5">
+                    <div class="row ">
+                        <div class="col-xs-12 col-md-4 col-lg-4 pt-3">
+                            <h4>Preparation</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pt-3 pb-1" id="recipe-prep-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o fa-lg"></i> 20 Minutes</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-5 px-4" id="preparation">
+                        <div class="text-justify">
+                            <p class="mb-3"> Prepare the tomato stew. Visit the Tomato Stew page for details on how to do that. It is advisable to prepare tomato stew before hand and keep in the freezer. This is so that whenever you want to cook any jollof rice related dish,
+                            it is just a matter of adding it to your cooking.</p>
+                            <p class="mb-3"> If you will use whole chicken then wash and cut it into pieces. Cook with the thyme, Knorr cubes and 2 bulbs of onions (chopped). The cooking time depends on the type of chicken. The rooster or cockerel cooks much faster than the
+                            hen but the hen is definitely tastier. When done, grill it in an oven. You may also fry it. This is to give it a golden look which is more presentable especially if you have guests for dinner.</p>
+                            <p class="mb-3"> Parboil the rice using the method detailed in parboiling rice for cooking jollof rice. Rinse the parboiled rice and put in a sieve to drain.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-xs-1 px-md-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4 col-lg-4 pt-3">
+                            <h4>Cooking Directions</h4>
+                        </div>
+                        <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pt-3 pb-1 mr-0 text-right" id="recipe-cooking-directions-info">
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o"></i> 20 Minutes <span class="hidden-sm-down"> |</span></p>
+                            <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o"></i> Ready - 45 Minutes</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-5 px-4" id="cooking-directions">
+                        <div class="text-justify">
+                            <p class="mb-3"> Pour the chicken stock and the tomato stew into a sizeable pot and leave to boil.</p>
+                            <p class="mb-3"> Add the drained parboiled rice, curry powder, salt and pepper to taste. The water level should be the same level of the rice. This is to ensure that all the water dries up by the time the rice is cooked.</p>
+                            <p class="mb-3"> Cover the pot and leave to cook on low to medium heat. This way the rice does not burn before the water dries up.</p>
+                            <p class="mb-3"> Keep cooking till done</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-5 p-xs-1 p-md-5" id="reviews">
+                    <div class="col-12">
+                        <h4>Reviews</h4>
+                        <hr>
+                    </div>
+                    <div class="px-5 pb-5 review-heading">
+                        <div class="row">
+                            <div class="col-4 rounded-circle text-left">
+                                <img src="src/images/user3.jpg" alt="user picture" class="review-picture">
+                            </div>
+                            <div class="col-8 mr-0 text-right">
+                                <p class="">Jane Smithy</p>
+                                <p class="inline-p text-muted pl-0"><i class="aria-hidden flaticon flaticon-chef-hat-with-cutlery-restaurant-symbol"></i> 20</p>
+                                <p class="inline-p text-muted"> | </p>
+                                <p class="inline-p text-muted"><i class="aria-hidden fa fa-heart"></i> 50</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mt-3 mb-2 user-rating-wrapper"><span id="user-rating"><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></p>
+                        <p>Really Loved the Recipe</p>
+                    </div>
+                    <div class="px-5 pb-5 review-heading">
+                        <div class="row">
+                            <div class="col-4 rounded-circle text-left">
+                                <img src="src/images/user2.jpg" alt="user picture" class="review-picture">
+                            </div>
+                            <div class="col-8 mr-0 text-right">
+                                <p class="">Jane Smithy</p>
+                                <p class="inline-p text-muted pl-0"><i class="aria-hidden flaticon flaticon-chef-hat-with-cutlery-restaurant-symbol"></i> 20</p>
+                                <p class="inline-p text-muted"> | </p>
+                                <p class="inline-p text-muted"><i class="aria-hidden fa fa-heart"></i> 50</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="mt-3 mb-2 user-rating-wrapper"><span id="user-rating"><i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i></span></p>
+                        <p>Really Loved the Recipe</p>
+                    </div>
+                    <div class="alert alert-success notif fade show" id="favorited" role="alert">
+                        Added to Favorites!
+                    </div>
+                    <div class="alert alert-success notif fade show" id="liked" role="alert">
+                        Upvoted!
+                    </div>
+                    <div class="alert alert-danger notif fade show" id="downvoted" role="alert">
+                        Downvoted!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-sm-down  align-self-center" id="side-rating-toolbar">
+        <p><a href="#add-edit-modal" data-toggle="modal" class="add-recipe"><i class="fa fa-lg fa-plus"></i></a></p>
+        <p><a href="#add-edit-modal" data-toggle="modal" class="text-success edit-recipe"><i class="fa fa-lg fa-edit"></i></a></p>
+        <p><a href="#delete-confirm-modal" data-toggle="modal" class="text-danger delete-recipe"><i class="fa fa-lg fa-trash"></i></span></p>
+            <br>
+        <p><i class="fa fa-lg fa-facebook"></i></p>
+        <p><i class="fa fa-lg fa-pinterest"></i></p>
+        <p><i class="fa fa-lg fa-twitter"></i></p>
+    </div>
+    </div>
+    <div class="sticky-bar-wrapper text-center hidden-md-up">
+        <div class="container-fluid">
+            <div class="row" id="result-search-form-div">
+                <div class="col-12 w-100 py-3">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <label class="sr-only" for="search">Search for Recipe</label>
+                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-bar text-center">
+            <a href="#social-modal" class="nav-link d-inline" data-toggle="modal"><i class="fa fa-share-alt fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#add-edit-modal" data-toggle="modal" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#"><i class="fa fa-search fa-lg search-icon"></i></a>
+            <a class="nav-link d-inline" href="#" title="Favorite Recipes" data-toggle="dropdown"><i class="fa fa-heart fa-lg"></i></a>
+        </div>
+    </div>
+    <!-- Modal(s) -->
+    <div class="modal fade" id="add-edit-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="recipe-modal" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="dynamic-modal-title">Edit Recipe</h3>
+                    <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row" id="add-edit-recipe ">
+                            <div class="offset-md-1 col-md-10 col-xs-12 col-sm-12 ">
+                                <form id="add-recipe" class="add-edit-form row">
+                                    <input type="file" class="hidden-xs-up " id="add-edit-image ">
+                                    <div class="form-group mt-5 col-12 ">
+                                        <label for="recipe-name " class="col-form-label col-form-label-lg ">Recipe Name</label>
+                                        <input type="text " class="form-control " id="recipe-name " placeholder="Jollof Rice and Curried Chicken ">
+                                    </div>
+                                    <div class="recipe-img-div col-12">
+                                        <img src="" id="recipe-photo-preview" class="img-fluid">
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label for="recipe-image" id="dynamic-image-label" class="col-form-label col-form-label-lg "> Change the Recipe Image</label><br>
+                                            <label class="custom-file"> 
+                                              <input type="file" id="recipe-image" class="recipe-image">
+                                              <span class="custom-file-control"></span>
+                                            </label>
+                                    </div>
+                                    <div class="form-group col-12 ingredient-div">
+                                        <label for="ingredients" class="col-form-label col-form-label-lg ">Ingredients</label>
+                                        <input type="text" class="form-control" id="ingredients" name="ingredients[]" placeholder="1 tbsp of pureed scotch bonnet pepper" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="text-muted mt-2 mb-0" id="add-ingredient"><i class="fa fa-plus"></i> Add Another Ingredient</a>
+                                    </div>
+                                    <div class="form-group col-12 preparation-div">
+                                        <label for="preparations" class="col-form-label col-form-label-lg ">Preparation</label>
+                                        <input type="text" class="form-control " id="preparations" name="preparations[]" placeholder="Cut up the chicken ">
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="text-muted mt-2 mb-0" id="add-preparation"><i class="fa fa-plus"></i> Add</a>
+                                    </div>
+                                    <div class="form-group col-12 direction-div">
+                                        <label for="directions" class="col-form-label col-form-label-lg ">Directions</label>
+                                        <input type="text" class="form-control " id="directions" name="directions[]" placeholder="Put the spiced chicken in a hot oven for 15 minutes ">
+                                    </div>
+                                    <div class="col-12">
+                                        <a class="text-muted mt-2 mb-0" id="add-direction"><i class="fa fa-plus"></i> Add</a>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="prep-time " class="col-form-label col-form-label-lg ">Preparation Time</label>
+                                        <input type="text " class="form-control " id="prep-time " placeholder="20 Minutes ">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="cook-time " class="col-form-label col-form-label-lg ">Cooking Time</label>
+                                        <input type="text " class="form-control " id="cook-time " placeholder="1 Hour 30 Minutes ">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-lg-4 ">
+                                        <label for="total-time " class="col-form-label col-form-label-lg ">Total Time to Cook</label>
+                                        <input type="text " class="form-control " id="total-time " placeholder="1 Hour 50 Minutes ">
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="country " class="col-form-label-lg ">Difficulty</label>
+                                        <select class="custom-select form-control " id="country ">
+                                                <option value="Easy " selected>Easy</option>
+                                                <option value="Normal ">Normal</option>
+                                                <option value="A Bit Difficult ">A Bit Difficult</option>
+                                                <option value="Difficult ">Difficult</option>
+                                                <option value="Very Difficult ">Very Difficult</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                              <input class="form-check-input" type="checkbox" value="">
+                                            Suitable For Vegetarians
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 ">
+                                        <label for="extra-info " class="col-form-label col-form-label-lg ">Extra Information (Allergy Warnings etc)</label>
+                                        <textarea class="form-control " id="extra-info " rows="5 " placeholder="Contains Mushrooms "></textarea>
+                                    </div>
+                                    <div class="form-group col-12 mt-3 ">
+                                        <button class="btn btn-success btn-block ">ADD RECIPE</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="delete-confirm-modal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="dynamic-modal-title">Confirm Delete</h3>
+                    <button type="button" class="close ml-auto main-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body text-center py-5">
+                    <div class="mb-5">
+                        <h5>Are You Sure About This?</h5>
+                        <h5><small><a href="javascript:void(0)" class="edit-recipe-inner" >You can edit the recipe instead.</a></small></h5>
+                    </div>
+                    <div class="confirm-delete-btns text-center">
+                        <button type="button" class="btn btn-danger w-75 mb-4" id="confirmed-delete"> Yes I am sure </button>
+                        <button type="button" class="btn w-75" data-dismiss="modal"> No it was a mistake </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="social-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title text-center" id="social-modal">Share this Recipe</h3>
+                    <button type="button" class="close ml-auto main-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-5">
+                    <div class="mb-5 container">
+                        <div class="row ">
+                            <div class="col-4">
+                                <p><i class="fa fa-facebook fa-2x"></i></p>
+                                <p>Facebook</p>
+                            </div>
+                            <div class="col-4">
+                                <p><i class="fa fa-pinterest fa-2x"></i></p>
+                                <p>Pinterest</p>
+                            </div>
+                            <div class="col-4">
+                                <p><i class="fa fa-twitter fa-2x"></i></p>
+                                <p>Twitter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2017 More Recipes</p>
+        </div>
+    </footer>
+
+    <script src="src/assets/jquery.js "></script>
+    <script src="src/assets/tether/dist/js/tether.min.js "></script>
+    <script src="src/assets/bootstrap/js/bootstrap.min.js "></script>
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>
