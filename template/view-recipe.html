@@ -42,9 +42,6 @@
                     </div>
                 </form>
                 <ul class="navbar-nav" id="navbar-right">
-                    <li class="hidden-xs-down hidden-md-up nav-item search-icon">
-                        <a href="javascript:void(0)" class="nav-link"><i class="fa fa-search"></i> Search...</a>
-                    </li>
                     <li class="hidden-xs-down nav-item">
                         <a href="#signin-modal" data-toggle="modal"><button class="btn btn-outline-success" type="button">SIGN IN</button></a>
                     </li>
@@ -54,21 +51,6 @@
                 </ul>
             </div>
         </nav>
-        <div class="container-fluid">
-            <div class="row" id="result-search-form-div">
-                <div class="col-12 w-100 py-3">
-                    <form id="search-form">
-                        <div class="input-group">
-                            <label class="sr-only" for="search">Search for Recipe</label>
-                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
-                            <span class="input-group-btn">
-                    <button type="submit" class="btn">Submit</button>
-                  </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </header>
     <!-- CONTENT -->
     <div class="container page-margin" id="recipe-wrapper">
@@ -90,7 +72,6 @@
                         <p class="text-muted inline-p"><i class="aria-hidden fa fa-star"></i> 4.5 &nbsp; &nbsp;</p>
                         <p class="text-muted inline-p"><i class="aria-hidden fa fa-heart"></i> 200 &nbsp;&nbsp;</p>
                         <p class="text-muted inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350 &nbsp;&nbsp;</p>
-                        <p class="text-muted inline-p"><i class="aria-hidden fa fa-thumbs-up"></i> 200 &nbsp; &nbsp;</p>
                         <p class="text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3 &nbsp; &nbsp;</p>
                     </div>
                 </div>
@@ -101,9 +82,7 @@
                         </div>
                         <div class="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1" id="recipe-details-info">
                             <p class="inline-p text-muted"><i class="aria-hidden fa fa-clock-o fa-lg"></i> 45 Minutes<span class="hidden-sm-down">  |</span></p>
-                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Normal<span class="hidden-sm-down">  |</span></p>
-                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-fork-and-knife-cutlery-circle-interface-symbol-for-restaurant"></i> 3 Servings<span class="hidden-sm-down">  |</span></p>
-                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-kitchen-scale-tool"></i> 220 Cal</p>
+                            <p class="inline-p text-muted"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> Normal</p>
                         </div>
                     </div>
                     <hr>
@@ -248,22 +227,40 @@
             </div>
         </div>
         <div class="hidden-sm-down align-self-center" id="side-rating-toolbar">
-            <p><a href="javascript:void(0)" class="search-icon"><i class="fa fa-lg fa-search"></i></a></p>
+            <p><a href="#review-wrapper" data-toggle="collapse" data-target="#review-wrapper" aria-expanded="false" title="Rate"><i class="fa fa-star fa-lg"></i></a></p>
             <p><a href="javascript:void(0)" class="favorite"><i class="fa fa-lg fa-heart"></i></a></p>
-            <p><a href="javascript:void(0)" class="like"><i class="fa fa-lg fa-thumbs-up"></i></a></p>
+            <p><a href="javascript:void(0)" class="downvote"><i class="fa fa-lg fa-thumbs-down"></i></a></p>
             <br>
             <p><i class="fa fa-lg fa-facebook"></i></p>
             <p><i class="fa fa-lg fa-pinterest"></i></p>
             <p><i class="fa fa-lg fa-twitter"></i></p>
         </div>
     </div>
-    <div class="sticky-bar text-center hidden-md-up">
-        <a href="#social-modal" class="nav-link d-inline" data-toggle="modal"><i class="fa fa-pinterest fa-lg"></i></a>
-        <a class="nav-link d-inline" href="#add-edit-modal" data-toggle="modal" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
-        <a class="nav-link d-inline" href="#" data-toggle="" title="Rate"><i class="fa fa-star fa-lg"></i></a>
-        <a class="nav-link d-inline" href="#" title="Favorite" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-thumbs-up fa-lg"></i></a>
-        <!-- Add alert box to thumbs up and favorite -->
-        <a class="nav-link d-inline" href="#" title="Favorite Recipes"><i class="fa fa-heart fa-lg"></i></a>
+    <div class="sticky-bar-wrapper text-center hidden-md-up">
+        <div class="container-fluid">
+            <div class="row" id="result-search-form-div">
+                <div class="col-12 w-100 py-3">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <label class="sr-only" for="search">Search for Recipe</label>
+                            <input type="text" class="form-control" id="search" placeholder="Search for More Recipes">
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn">Submit</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="sticky-bar text-center hidden-md-up">
+            <a href="#social-modal" class="nav-link d-inline" data-toggle="modal"><i class="fa fa-share-alt fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#add-edit-modal" data-toggle="modal" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#" data-toggle="" title="Rate"><i class="fa fa-star fa-lg"></i></a>
+            <!-- Add alert box to thumbs down and favorite -->
+            <a class="nav-link d-inline" href="#" title="Favorite Recipes" data-toggle="dropdown"><i class="fa fa-heart fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#" title="Downvote" aria-haspopup="true" aria-expanded="false"><i class="fa fa-thumbs-down fa-lg"></i></a>
+            <a class="nav-link d-inline" href="#"><i class="fa fa-search fa-lg search-icon"></i></a>
+        </div>
     </div>
     <div class="modal fade" id="social-modal" tabindex="-1" role="dialog" aria-labelledby="signin-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
