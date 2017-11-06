@@ -6,7 +6,7 @@ import './recipe.api.test';
 
 const agent = request.agent(app);
 
-describe('Routes: Recipe API Tests', () => {
+describe('Routes: Recipe API Tests, Reviews', () => {
   before(() => sequelize.sync().then(() => User.create({
     firstname: 'Iveren',
     lastname: 'Shaguy',
