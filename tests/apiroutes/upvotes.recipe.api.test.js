@@ -6,7 +6,7 @@ import './reviews.recipe.api.test';
 
 const agent = request.agent(app);
 
-describe('Routes: Recipe API Tests', () => {
+describe('Routes: Recipe API Tests, Upvotes', () => {
   before(() => sequelize.sync().then(() => User.create({
     firstname: 'Iveren',
     lastname: 'Shaguy',
@@ -307,6 +307,26 @@ describe('Routes: Recipe API Tests', () => {
             expect(res.body[1].recipeName).to.equal('Fried Rice');
             expect(res.body[2].recipeName).to.equal('Sweet Potatoe Pottage');
             expect(res.body[3].recipeName).to.equal('White Soup');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+
+      it('should get upvoted recipes in descending order', (done) => {
+        agent
+          .get('/api/v1/recipes')
+          .query({ sort: 'upvotes', order: 'descending' })
+          .set('Accept', 'application/json')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.lengthOf(4);
+            expect(res.body[0].recipeName).to.equal('White Soup');
+            expect(res.body[1].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body[2].recipeName).to.equal('Fried Rice');
+            expect(res.body[3].recipeName).to.equal('Egusi Soup');
 
             if (err) {
               return done(err);
