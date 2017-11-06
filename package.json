@@ -18,7 +18,8 @@
     ],
     "reporter": [
       "lcov",
-      "text"
+      "text",
+      "text-lcov"
     ],
     "sourceMap": false,
     "instrument": false,
@@ -36,7 +37,7 @@
     "build:single": "babel tests/apiroutes/userapiroutes.test.js -o tests/apiroutes/babeluserapiroutes.test.js",
     "build:single2": "babel server/src/password_hash/password_hash.js -o server/dist/password_hash/password_hash.js",
     "lint": "eslint **/*.js --fix",
-    "coverage": "nyc report --reporter=lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "author": "Iveren Shaguy",
   "license": "ISC",
