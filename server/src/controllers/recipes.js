@@ -1,5 +1,6 @@
 import { sequelize, Recipe, User, Review, Like } from '../models';
 
+// Recipes Controller
 export default {
   create(req, recipeData, res) {
     return Recipe
