@@ -8,4 +8,11 @@ engines:
 ratings:
    paths:
    - "server/src/**.js"
+exclude_paths:
+- "node_modules/"
+- ".nyc_output"
+- "coverage"
+- "**.min.js"
+- "**.min.css"
+- "template"
    

@@ -1,6 +1,6 @@
 import { check } from 'express-validator/check';
 // import { sanitize } from 'express-validator/filter';
-import { User } from '../models';
+import { User, Recipe } from '../models';
 
 export default {
   register: [
@@ -68,12 +68,6 @@ export default {
       .matches(/^[a-zA-Z0-9\s]*$/).withMessage('Occupation must be alphanumeric')
       .isLength({ max: 144 })
       .withMessage('Text must not be more than 144 characters')
-      .trim()
-      .escape(),
-    check('profilePic')
-      .trim()
-      .escape(),
-    check('coverPhoto')
       .trim()
       .escape()
   ],
@@ -151,9 +145,6 @@ export default {
       .withMessage('This field can only accept true or false')
       .trim()
       .escape(),
-    check('recipeImage')
-      .trim()
-      .escape(),
     check('ingredients')
       .exists()
       .withMessage('Ingredient must be specified')
@@ -184,16 +175,28 @@ export default {
   getSingleRecipe: [
     check('recipeId')
       .exists()
-      .withMessage('Recipe to delete must be specified')
+      .withMessage('Recipe must be specified')
       .isInt()
-      .withMessage('Recipe Not Found'),
+      .withMessage('Recipe Not Found')
+      .custom(value => Recipe.findOne({ where: { id: value } }).then((recipe) => {
+        if (recipe === null) {
+          throw new Error('Recipe Not Found');
+        }
+        return true;
+      })),
   ],
   updateRecipe: [
     check('recipeId')
       .exists()
       .withMessage('Recipe to edit must be specified')
       .isInt()
-      .withMessage('Recipe Not Found'),
+      .withMessage('Recipe Not Found')
+      .custom(value => Recipe.findOne({ where: { id: value } }).then((recipe) => {
+        if (recipe === null) {
+          throw new Error('Recipe Not Found');
+        }
+        return true;
+      })),
     check('recipeName')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
@@ -274,19 +277,18 @@ export default {
       .trim()
       .escape(),
   ],
-  deleteRecipe: [
-    check('recipeId')
-      .exists()
-      .withMessage('Recipe to delete must be specified')
-      .isInt()
-      .withMessage('Recipe Not Found'),
-  ],
   reviewRecipe: [
     check('recipeId')
       .exists()
       .withMessage('Recipe to review must be specified')
       .isInt()
-      .withMessage('Recipe Not Found'),
+      .withMessage('Recipe Not Found')
+      .custom(value => Recipe.findOne({ where: { id: value } }).then((recipe) => {
+        if (recipe === null) {
+          throw new Error('Recipe Not Found');
+        }
+        return true;
+      })),
     check('rating')
       .exists()
       .withMessage('Recipe must be rated')
@@ -306,22 +308,11 @@ export default {
       .trim()
       .escape(),
   ],
-  voteRecipe: [
-    check('recipeId')
-      .exists()
-      .withMessage('Recipe must be specified')
-      .isInt()
-      .withMessage('Recipe Not Found'),
-    check('upvote')
-      .optional({ checkFalsy: true })
-      .isBoolean()
-      .withMessage('Upvote should be either true or false'),
-  ],
   favoriteRecipes: [
     check('userId')
       .exists()
       .withMessage('User must be specified')
       .isInt()
       .withMessage('User Not Found'),
-  ]
+  ],
 };

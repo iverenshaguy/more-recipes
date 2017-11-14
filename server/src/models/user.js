@@ -1,4 +1,4 @@
-import { hashPassword } from '../validations/password_hash';
+import { hashPassword } from '../helpers/password_hash';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -37,28 +37,16 @@ export default (sequelize, DataTypes) => {
     },
     profilePic: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
         is: {
-          args: /^[a-zA-Z0-9\s]*$/,
+          args: /^[a-zA-Z0-9._\s]*$/,
           msg: 'Input is not valid'
         },
-        // notEmpty: {
-        //   args: true,
-        //   msg: 'Input cannot be empty'
-        // }
-      }
-    },
-    coverPhoto: {
-      type: DataTypes.STRING,
-      validate: {
-        is: {
-          args: /^[a-zA-Z0-9\s]*$/,
-          msg: 'Input is not valid'
-        },
-        // notEmpty: {
-        //   args: true,
-        //   msg: 'Input cannot be empty'
-        // }
+        notEmpty: {
+          args: true,
+          msg: 'Input cannot be empty'
+        }
       }
     },
   }, {
@@ -84,6 +72,14 @@ export default (sequelize, DataTypes) => {
     User.hasMany(models.Notification, {
       foreignKey: 'userId',
       as: 'notifications',
+    });
+    User.hasMany(models.Favorite, {
+      foreignKey: 'userId',
+      as: 'favorites',
+    });
+    User.hasMany(models.Category, {
+      foreignKey: 'userId',
+      as: 'categories',
     });
   };
 
