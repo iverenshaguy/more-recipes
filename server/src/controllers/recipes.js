@@ -5,6 +5,7 @@ import { Sequelize, sequelize, Recipe, User, Review, Like, Favorite } from '../m
 const { Op } = Sequelize;
 const uploadPath = path.resolve(__dirname, '../../../public/images');
 
+// Recipes Controller
 export default {
   create(req, recipeData, res, next) {
     return Recipe
