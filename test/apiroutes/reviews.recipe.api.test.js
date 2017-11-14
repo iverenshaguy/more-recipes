@@ -246,4 +246,22 @@ describe('Routes: Recipe API Tests: Reviews', () => {
       });
     });
   });
+
+  describe('## Get All Upvoted Recipes in Ascending Order: Check for authorised right input with no liked recipes', () => {
+    it('should get no upvoted recipes with message \'There are no upvoted recipes\'', (done) => {
+      agent
+        .get('/api/v1/recipes')
+        .query({ sort: 'upvotes', order: 'ascending' })
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body.message).to.equal('There are no upvoted recipes');
+
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
 });

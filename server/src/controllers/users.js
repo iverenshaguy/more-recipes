@@ -54,13 +54,10 @@ export default {
 
   retrieve(req, res, next) {
     return User.findOne({
-      where: { email: req.session.user.email },
+      where: { id: req.session.user.id },
       include: [{
         model: Recipe,
-        as: 'recipes',
-        where: {
-          userId: req.session.user.id,
-        }
+        as: 'recipes'
       }]
     })
       .then(user => res.status(200).send(user))

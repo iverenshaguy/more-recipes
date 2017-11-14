@@ -35,8 +35,8 @@
   },
   "scripts": {
     "start:dev": "nodemon ./server/dist/bin/www.js",
-    "test": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 15000",
-    "test:unlint": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 15000",
+    "test": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 30000",
+    "test:unlint": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 30000",
     "pretest": "npm run lint",
     "clean": "cd server && rm -rf dist",
     "prebuild:init": "cd server && mkdir dist",

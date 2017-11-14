@@ -224,7 +224,7 @@ export default {
               }
             }],
           })
-            .then(recipes => res.status(200).send({
+            .then(recipes => res.status(201).send({
               message: 'Recipe has been added to favorites',
               recipes
             })))
@@ -256,7 +256,7 @@ export default {
               alreadyLiked.update({ upvote: true })
                 .then(() => recipe.increment('upvotes')
                   .then(() => recipe.decrement('downvotes')
-                    .then(newRecipe => res.status(200).send({
+                    .then(newRecipe => res.status(201).send({
                       message: 'Your vote has been recorded',
                       upvotes: newRecipe.upvotes,
                       downvotes: newRecipe.downvotes
@@ -271,7 +271,7 @@ export default {
                   userId: req.session.user.id
                 })
                 .then(() => recipe.increment('upvotes')
-                  .then(newRecipe => res.status(200).send({
+                  .then(newRecipe => res.status(201).send({
                     message: 'Your vote has been recorded',
                     upvotes: newRecipe.upvotes,
                     downvotes: newRecipe.downvotes
@@ -307,7 +307,7 @@ export default {
               alreadyLiked.update({ upvote: false })
                 .then(() => recipe.increment('downvotes')
                   .then(() => recipe.decrement('upvotes')
-                    .then(newRecipe => res.status(200).send({
+                    .then(newRecipe => res.status(201).send({
                       message: 'Your vote has been recorded',
                       upvotes: newRecipe.upvotes,
                       downvotes: newRecipe.downvotes
@@ -322,7 +322,7 @@ export default {
                   userId: req.session.user.id
                 })
                 .then(() => recipe.increment('downvotes')
-                  .then(newRecipe => res.status(200).send({
+                  .then(newRecipe => res.status(201).send({
                     message: 'Your vote has been recorded',
                     upvotes: newRecipe.upvotes,
                     downvotes: newRecipe.downvotes

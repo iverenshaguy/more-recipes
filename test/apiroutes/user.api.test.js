@@ -9,7 +9,7 @@ const agent = request.agent(app);
 
 
 describe('Routes: User API Tests', () => {
-  before(() => User.sync({ force: true }).then(() => User.create({
+  before(() => sequelize.sync().then(() => User.create({
     firstname: 'Iveren',
     lastname: 'Shaguy',
     username: 'iverenshaguy',
@@ -19,7 +19,7 @@ describe('Routes: User API Tests', () => {
     occupation: 'Coder'
   })).then(user => user));
 
-  after(() => sequelize.drop());
+  after(() => sequelize.drop({ force: true }));
 
   describe('## Create a New User', () => {
     describe('## Check For Wrong Input ', () => {

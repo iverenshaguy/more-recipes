@@ -65,7 +65,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
     directions: [
       'Parboil Rice till half done'
     ],
-    upvotes: 0,
+    upvotes: 2,
     downvotes: 0,
     views: 4,
     userId: 2
@@ -195,24 +195,6 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
   after(() => sequelize.drop({ force: true }));
 
   describe('## Get All Upvoted Recipes in Ascending Order', () => {
-    describe('## Check for authorised  with right input with no liked recipes', () => {
-      it('should get no upvoted recipes with message \'There are no upvoted recipes\'', (done) => {
-        agent
-          .get('/api/v1/recipes')
-          .query({ sort: 'upvotes', order: 'ascending' })
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            expect(res.body.message).to.equal('There are no upvoted recipes');
-
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
-      });
-    });
-
     describe('## Check for authorised right input with liked recipes', () => {
       before(() => Like.bulkCreate([
         {
@@ -311,7 +293,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           userId: 3
         }
       ])
-        .then(() => Like.findAll().then(likes => likes)));
+        .then(() => Like.findAll().then((likes => likes))));
 
       it('should get upvoted recipes in ascending order', (done) => {
         agent
@@ -320,11 +302,11 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body).to.have.lengthOf(4);
+            expect(res.body).to.have.lengthOf(5);
             expect(res.body[0].recipeName).to.equal('Egusi Soup');
             expect(res.body[1].recipeName).to.equal('Fried Rice');
-            expect(res.body[2].recipeName).to.equal('Sweet Potatoe Pottage');
-            expect(res.body[3].recipeName).to.equal('White Soup');
+            expect(res.body[2].recipeName).to.equal('Coconut Rice');
+            expect(res.body[3].recipeName).to.equal('Sweet Potatoe Pottage');
 
             if (err) {
               return done(err);
@@ -340,11 +322,11 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body).to.have.lengthOf(4);
+            expect(res.body).to.have.lengthOf(5);
             expect(res.body[0].recipeName).to.equal('White Soup');
-            expect(res.body[1].recipeName).to.equal('Sweet Potatoe Pottage');
-            expect(res.body[2].recipeName).to.equal('Fried Rice');
-            expect(res.body[3].recipeName).to.equal('Egusi Soup');
+            expect(res.body[1].recipeName).to.equal('Coconut Rice');
+            expect(res.body[2].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body[3].recipeName).to.equal('Fried Rice');
 
             if (err) {
               return done(err);
@@ -390,7 +372,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
     });
   });
 
-  describe('## Favorite Recipes for User', () => {
+  describe('## Vote Recipes', () => {
     before(() => Like.sync().then(() => Like.create({
       upvote: false,
       recipeId: 5,
@@ -409,27 +391,9 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.upvote).to.equal(true);
-              expect(res.body.recipeId).to.equal(3);
-              expect(res.body.userId).to.equal(1);
-
-              if (err) {
-                return done(err);
-              }
-              done();
-            });
-        });
-
-        it('should upvote recipe', (done) => {
-          agent
-            .post('/api/v1/recipes/4/upvotes')
-            .query({ upvote: 'true' })
-            .set('Accept', 'application/json')
-            .end((err, res) => {
-              expect(res.statusCode).to.equal(201);
-              expect(res.body.upvote).to.equal(true);
-              expect(res.body.recipeId).to.equal(4);
-              expect(res.body.userId).to.equal(1);
+              expect(res.body.message).to.equal('Your vote has been recorded');
+              expect(res.body.upvotes).to.equal(6);
+              expect(res.body.downvotes).to.equal(1);
 
               if (err) {
                 return done(err);
@@ -444,9 +408,9 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.upvote).to.equal(true);
-              expect(res.body.recipeId).to.equal(5);
-              expect(res.body.userId).to.equal(1);
+              expect(res.body.message).to.equal('Your vote has been recorded');
+              expect(res.body.upvotes).to.equal(1);
+              expect(res.body.downvotes).to.equal(0);
 
               if (err) {
                 return done(err);
@@ -455,13 +419,15 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             });
         });
 
-        it('should not upvote recipe again', (done) => {
+        it('should remove upvote on already upvoted recipe', (done) => {
           agent
             .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
-              expect(res.statusCode).to.equal(400);
-              expect(res.body.message).to.equal('Recipe Already Upvoted');
+              expect(res.statusCode).to.equal(200);
+              expect(res.body.message).to.equal('Your vote has been removed');
+              expect(res.body.upvotes).to.equal(5);
+              expect(res.body.downvotes).to.equal(1);
 
               if (err) {
                 return done(err);
@@ -535,14 +501,13 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
       describe('## Check for authorised right input', () => {
         it('should downvote recipe', (done) => {
           agent
-            .post('/api/v1/recipes/6/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.upvote).to.equal(false);
-              expect(res.body.recipeId).to.equal(6);
-              expect(res.body.userId).to.equal(1);
+              expect(res.body.message).to.equal('Your vote has been recorded');
+              expect(res.body.upvotes).to.equal(4);
+              expect(res.body.downvotes).to.equal(1);
 
               if (err) {
                 return done(err);
@@ -553,14 +518,13 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
 
         it('should downvote recipe that was formerly upvoted', (done) => {
           agent
-            .post('/api/v1/recipes/4/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/1/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
-              expect(res.body.upvote).to.equal(false);
-              expect(res.body.recipeId).to.equal(4);
-              expect(res.body.userId).to.equal(1);
+              expect(res.body.message).to.equal('Your vote has been recorded');
+              expect(res.body.upvotes).to.equal(1);
+              expect(res.body.downvotes).to.equal(1);
 
               if (err) {
                 return done(err);
@@ -569,14 +533,15 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             });
         });
 
-        it('should not downvote recipe again', (done) => {
+        it('should removed downvote on already downvoted recipe', (done) => {
           agent
-            .post('/api/v1/recipes/6/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
-              expect(res.statusCode).to.equal(400);
-              expect(res.body.message).to.equal('Recipe Already Downvoted');
+              expect(res.statusCode).to.equal(200);
+              expect(res.body.message).to.equal('Your vote has been removed');
+              expect(res.body.upvotes).to.equal(4);
+              expect(res.body.downvotes).to.equal(0);
 
               if (err) {
                 return done(err);
@@ -587,8 +552,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
 
         it('should not downvote recipe that belongs to user', (done) => {
           agent
-            .post('/api/v1/recipes/2/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/2/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
@@ -605,8 +569,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
       describe('## Check for authorised wrong input', () => {
         it('should not downvote recipe for Non-Existent ID 123', (done) => {
           agent
-            .post('/api/v1/recipes/123/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/123/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
@@ -618,8 +581,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
 
         it('should not downvote recipe for Non-Existent ID abc', (done) => {
           agent
-            .post('/api/v1/recipes/abc/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/abc/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
@@ -634,8 +596,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
       describe('## Check for unauthorised input', () => {
         it('should not downvote recipe', (done) => {
           request(app)
-            .post('/api/v1/recipes/6/upvotes')
-            .query({ upvote: 'false' })
+            .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);
@@ -647,108 +608,6 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
               done();
             });
         });
-      });
-    });
-
-    describe('## Get Favorites Recipes for User Iveren', () => {
-      describe('## Check for authorised right input', () => {
-        it('should get favorite recipes', (done) => {
-          agent
-            .get('/api/v1/users/1/recipes')
-            .set('Accept', 'application/json')
-            .end((err, res) => {
-              expect(res.statusCode).to.equal(200);
-              expect(res.body).to.have.lengthOf(3);
-              expect(res.body[0].recipeName).to.equal('Coconut Rice');
-              expect(res.body[1].recipeName).to.equal('Egusi Soup');
-              expect(res.body[2].recipeName).to.equal('Jollof Rice');
-
-              if (err) {
-                return done(err);
-              }
-              done();
-            });
-        });
-      });
-
-      describe('## Check for authorised wrong input', () => {
-        it('should not get favorite recipes for url with wrong user id', (done) => {
-          agent
-            .get('/api/v1/users/2/recipes')
-            .set('Accept', 'application/json')
-            .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
-              expect(res.body.message).to.equal('You are not authorized to access this page');
-              if (err) return done(err);
-              done();
-            });
-        });
-
-        it('should not get favorite recipes for Non-Existent user abc', (done) => {
-          agent
-            .get('/api/v1/users/abc/recipes')
-            .set('Accept', 'application/json')
-            .end((err, res) => {
-              expect(res.statusCode).to.equal(422);
-              expect(res.body.errors.userId.msg).to.equal('User Not Found');
-              if (err) return done(err);
-              done();
-            });
-        });
-      });
-
-      describe('## Check for unauthorised input', () => {
-        it('should not get any recipes', (done) => {
-          request(app)
-            .get('/api/v1/users/1/recipes')
-            .set('Accept', 'application/json')
-            .end((err, res) => {
-              expect(res.statusCode).to.equal(401);
-              expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
-
-              if (err) {
-                return done(err);
-              }
-              done();
-            });
-        });
-      });
-    });
-
-    describe('## Check for Another User', () => {
-      before((done) => {
-        const user = {
-          email: 'praiseshaguy@gmail.com',
-          password: 'LionJudah'
-        };
-
-        agent
-          .post('/api/v1/users/signin')
-          .send(user)
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            expect('Location', '/server');
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
-      });
-
-      it('should return no favorite recipes', (done) => {
-        agent
-          .get('/api/v1/users/2/recipes')
-          .set('Accept', 'application/json')
-          .end((err, res) => {
-            expect(res.statusCode).to.equal(200);
-            expect(res.body.message).to.equal('You have no favorite recipes');
-
-            if (err) {
-              return done(err);
-            }
-            done();
-          });
       });
     });
   });
