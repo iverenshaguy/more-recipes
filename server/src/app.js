@@ -1,8 +1,10 @@
 import express from 'express';
+import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import routes from './routes';
+import errorHandler from './middlewares/errorHandler';
 
 // Set up the express app
 const app = express();
@@ -11,6 +13,10 @@ const logger = morgan;
 
 // Log requests to the console.
 app.use(logger('dev'));
+
+app.use(cors({
+  credentials: true,
+}));
 
 // Parse incoming requests data
 app.use(bodyParser.json());
@@ -42,5 +48,7 @@ app.use('/docs', express.static('docs'));
 app.get('*', (req, res) => res.status(409).send({
   message: 'Where Are You Going? Page Not Found',
 }));
+
+app.use(errorHandler);
 
 export default app;
