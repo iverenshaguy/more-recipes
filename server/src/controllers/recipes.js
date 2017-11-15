@@ -1,8 +1,13 @@
-import { sequelize, Recipe, User, Review, Like } from '../models';
+import del from 'del';
+import path from 'path';
+import { Sequelize, sequelize, Recipe, User, Review, Like, Favorite } from '../models';
+
+const { Op } = Sequelize;
+const uploadPath = path.resolve(__dirname, '../../../public/images');
 
 // Recipes Controller
 export default {
-  create(req, recipeData, res) {
+  create(req, recipeData, res, next) {
     return Recipe
       .create({
         recipeName: recipeData.recipeName,
@@ -12,7 +17,6 @@ export default {
         difficulty: recipeData.difficulty,
         extraInfo: recipeData.extraInfo,
         vegetarian: recipeData.vegetarian,
-        recipeImage: recipeData.recipeImage,
         userId: req.session.user.id,
         ingredients: recipeData.ingredients,
         preparations: recipeData.preparations,
@@ -22,10 +26,31 @@ export default {
           User
         ]
       })
-      .then(recipe => res.status(201).send(recipe));
+      .then(recipe => res.status(201).send(recipe))
+      .catch(next);
   },
 
-  getSingleRecipe(req, recipeData, res) {
+  upload(req, recipeData, res, next) {
+    return Recipe
+      .findOne({ where: { id: +recipeData.recipeId, userId: req.session.user.id } })
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(404).send({ message: 'Recipe Not Found' });
+        }
+
+        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+
+        del.sync([savedImage]);
+
+        return recipe
+          .update({ recipeImage: req.file.filename })
+          .then(() => res.status(201).send(recipe))
+          .catch(next);
+      })
+      .catch(next);
+  },
+
+  viewRecipe(req, recipeData, res, next) {
     return Recipe
       .findOne({
         where: { id: +recipeData.recipeId },
@@ -49,15 +74,15 @@ export default {
         group: ['Recipe.id', 'reviews.id', 'likes.id']
       })
       .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe Not Found' });
-        }
-
-        return res.status(200).send(recipe);
-      });
+        recipe.increment('views').then(() => {
+          recipe.reload()
+            .then(() => res.status(200).send(recipe));
+        });
+      })
+      .catch(next);
   },
 
-  update(req, recipeData, res) {
+  update(req, recipeData, res, next) {
     return Recipe
       .findOne({ where: { id: +recipeData.recipeId, userId: req.session.user.id } })
       .then((recipe) => {
@@ -67,11 +92,13 @@ export default {
 
         return recipe
           .update(Object.assign(recipe, recipeData))
-          .then(() => res.status(200).send(recipe));
-      });
+          .then(() => res.status(200).send(recipe))
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  delete(req, recipeData, res) {
+  delete(req, recipeData, res, next) {
     return Recipe
       .findOne({ where: { id: recipeData.recipeId, userId: req.session.user.id } })
       .then((recipe) => {
@@ -79,13 +106,19 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
+        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+
+        del.sync([savedImage]);
+
         return recipe
           .destroy()
-          .then(() => res.status(204).send());
-      });
+          .then(() => res.status(204).send())
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  list(req, res) {
+  list(req, res, next) {
     return Recipe
       .findAll({
         attributes: {
@@ -110,17 +143,14 @@ export default {
         ],
         group: ['Recipe.id', 'likes.id']
       })
-      .then(recipes => res.status(200).send(recipes));
+      .then(recipes => res.status(200).send(recipes))
+      .catch(next);
   },
 
-  reviewRecipe(req, reviewData, res) {
+  reviewRecipe(req, reviewData, res, next) {
     return Recipe
       .findOne({ where: { id: +reviewData.recipeId } })
       .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe Not Found' });
-        }
-
         if (recipe.userId === req.session.user.id) {
           return res.status(400).send({ message: 'You can\'t review your own recipe' });
         }
@@ -144,19 +174,70 @@ export default {
                   Recipe
                 ]
               })
-              .then(review => res.status(201).send(review));
-          });
-      });
+              .then(review => res.status(201).send(review))
+              .catch(next);
+          })
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  upvoteRecipe(req, upvoteData, res) {
+  addFavoriteRecipe(req, favoriteData, res, next) {
+    return Favorite.findOne({
+      where: {
+        recipeId: +favoriteData.recipeId,
+        userId: req.session.user.id
+      }
+    })
+      .then((favorited) => {
+        if (favorited) {
+          favorited.destroy().then(() => Recipe.findAll({
+            include: [{
+              model: Favorite,
+              as: 'favorites',
+              attributes: [],
+              where: {
+                userId: req.session.user.id,
+              }
+            }],
+          })
+            .then(recipes => res.status(200).send({
+              message: 'Recipe has been removed from favorites',
+              recipes
+            })))
+            .catch(next);
+          return;
+        }
+
+        return Favorite
+          .create({
+            favorite: true,
+            recipeId: +favoriteData.recipeId,
+            userId: req.session.user.id
+          })
+          .then(() => Recipe.findAll({
+            include: [{
+              model: Favorite,
+              as: 'favorites',
+              attributes: [],
+              where: {
+                userId: req.session.user.id,
+              }
+            }],
+          })
+            .then(recipes => res.status(201).send({
+              message: 'Recipe has been added to favorites',
+              recipes
+            })))
+          .catch(next);
+      })
+      .catch(next);
+  },
+
+  upvoteRecipe(req, upvoteData, res, next) {
     return Recipe
       .findOne({ where: { id: +upvoteData.recipeId } })
       .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe Not Found' });
-        }
-
         if (recipe.userId === req.session.user.id) {
           return res.status(400).send({ message: 'You can\'t upvote your own recipe' });
         }
@@ -165,39 +246,49 @@ export default {
           .findOne({ where: { recipeId: +upvoteData.recipeId, userId: req.session.user.id } })
           .then((alreadyLiked) => {
             if (alreadyLiked && alreadyLiked.upvote) {
-              return res.status(400).send({ message: 'Recipe Already Upvoted' });
+              alreadyLiked.destroy().then(() => recipe.decrement('upvotes')
+                .then(newRecipe => res.status(200).send({
+                  message: 'Your vote has been removed',
+                  upvotes: newRecipe.upvotes,
+                  downvotes: newRecipe.downvotes
+                })))
+                .catch(next);
+            } else if (alreadyLiked && !alreadyLiked.upvote) {
+              alreadyLiked.update({ upvote: true })
+                .then(() => recipe.increment('upvotes')
+                  .then(() => recipe.decrement('downvotes')
+                    .then(newRecipe => res.status(201).send({
+                      message: 'Your vote has been recorded',
+                      upvotes: newRecipe.upvotes,
+                      downvotes: newRecipe.downvotes
+                    })).catch(next))
+                  .catch(next))
+                .catch(next);
+            } else {
+              return Like
+                .create({
+                  upvote: true,
+                  recipeId: +upvoteData.recipeId,
+                  userId: req.session.user.id
+                })
+                .then(() => recipe.increment('upvotes')
+                  .then(newRecipe => res.status(201).send({
+                    message: 'Your vote has been recorded',
+                    upvotes: newRecipe.upvotes,
+                    downvotes: newRecipe.downvotes
+                  })).catch(next))
+                .catch(next);
             }
-
-            if (alreadyLiked && !alreadyLiked.upvote) {
-              return alreadyLiked
-                .update({ upvote: true })
-                .then(newLike => res.status(201).send(newLike));
-            }
-
-            return Like
-              .create({
-                upvote: true,
-                recipeId: +upvoteData.recipeId,
-                userId: req.session.user.id
-              }, {
-                include: [
-                  User,
-                  Recipe
-                ]
-              })
-              .then(like => res.status(201).send(like));
-          });
-      });
+          })
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  downvoteRecipe(req, upvoteData, res) {
+  downvoteRecipe(req, upvoteData, res, next) {
     return Recipe
       .findOne({ where: { id: +upvoteData.recipeId } })
       .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe Not Found' });
-        }
-
         if (recipe.userId === req.session.user.id) {
           return res.status(400).send({ message: 'You can\'t downvote your own recipe' });
         }
@@ -206,32 +297,46 @@ export default {
           .findOne({ where: { recipeId: +upvoteData.recipeId, userId: req.session.user.id } })
           .then((alreadyLiked) => {
             if (alreadyLiked && !alreadyLiked.upvote) {
-              return res.status(400).send({ message: 'Recipe Already Downvoted' });
+              alreadyLiked.destroy().then(() => recipe.decrement('downvotes')
+                .then(newRecipe => res.status(200).send({
+                  message: 'Your vote has been removed',
+                  upvotes: newRecipe.upvotes,
+                  downvotes: newRecipe.downvotes
+                })))
+                .catch(next);
+            } else if (alreadyLiked && alreadyLiked.upvote) {
+              alreadyLiked.update({ upvote: false })
+                .then(() => recipe.increment('downvotes')
+                  .then(() => recipe.decrement('upvotes')
+                    .then(newRecipe => res.status(201).send({
+                      message: 'Your vote has been recorded',
+                      upvotes: newRecipe.upvotes,
+                      downvotes: newRecipe.downvotes
+                    })).catch(next))
+                  .catch(next))
+                .catch(next);
+            } else {
+              return Like
+                .create({
+                  upvote: false,
+                  recipeId: +upvoteData.recipeId,
+                  userId: req.session.user.id
+                })
+                .then(() => recipe.increment('downvotes')
+                  .then(newRecipe => res.status(201).send({
+                    message: 'Your vote has been recorded',
+                    upvotes: newRecipe.upvotes,
+                    downvotes: newRecipe.downvotes
+                  })).catch(next))
+                .catch(next);
             }
-
-            if (alreadyLiked && alreadyLiked.upvote) {
-              return alreadyLiked
-                .update({ upvote: false })
-                .then(newLike => res.status(201).send(newLike));
-            }
-
-            return Like
-              .create({
-                upvote: false,
-                recipeId: +upvoteData.recipeId,
-                userId: req.session.user.id
-              }, {
-                include: [
-                  User,
-                  Recipe
-                ]
-              })
-              .then(downvote => res.status(201).send(downvote));
-          });
-      });
+          })
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  getUpvoted(req, res) {
+  getUpvoted(req, res, next) {
     let orderBy = 'DESC';
 
     if (req.query.order === 'descending') {
@@ -239,19 +344,8 @@ export default {
     }
 
     return Recipe.findAll({
-      attributes: {
-        include: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), 'upvotes']],
-      },
-      include: [{
-        model: Like,
-        as: 'likes',
-        where: {
-          upvote: true
-        },
-        attributes: []
-      }],
-      order: [[sequelize.fn('COUNT', sequelize.col('likes.upvote')), orderBy]],
-      group: ['Recipe.id']
+      where: { upvotes: { [Op.ne]: 0 } },
+      order: [['upvotes', orderBy]]
     })
       .then((recipes) => {
         if (recipes.length === 0) {
@@ -259,7 +353,8 @@ export default {
         }
 
         return res.status(200).send(recipes);
-      });
+      })
+      .catch(next);
   },
 
 };

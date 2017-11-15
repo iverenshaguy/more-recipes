@@ -55,6 +55,21 @@ export default {
       allowNull: false,
       defaultValue: []
     },
+    upvotes: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    downvotes: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
+    views: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE
