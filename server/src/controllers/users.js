@@ -1,8 +1,10 @@
-import { User, Recipe, Like } from '../models';
-import { verifyPassword } from '../validations/password_hash';
+import path from 'path';
+import del from 'del';
+import { User, Recipe } from '../models';
+import { verifyPassword } from '../helpers/passwordHash';
 
 export default {
-  create(req, userData, res) {
+  create(req, userData, res, next) {
     return User.create({
       firstname: userData.firstname,
       lastname: userData.lastname,
@@ -10,23 +12,33 @@ export default {
       email: userData.email.toLowerCase(),
       password: userData.password,
       aboutMe: userData.aboutMe,
-      occupation: userData.occupation,
-      profilePic: userData.profilePic,
-      coverPhoto: userData.coverPhoto,
+      occupation: userData.occupation
     })
       .then((user) => {
         req.session.user = user.dataValues;
         res.status(201).send(user);
-      });
+      })
+      .catch(next);
   },
 
-  list(req, res) {
+  upload(req, res, next) {
     return User
-      .all()
-      .then(users => res.status(200).send(users));
+      .findOne({ where: { id: req.session.user.id } })
+      .then((user) => {
+        const uploadPath = path.resolve(__dirname, '../../../public/images');
+        const savedImage = `${uploadPath}/profile/${user.profilePic}`;
+
+        del.sync([savedImage]);
+
+        return user
+          .update({ profilePic: req.file.filename })
+          .then(() => res.status(201).send(user))
+          .catch(next);
+      })
+      .catch(next);
   },
 
-  signin(req, userData, res) {
+  signin(req, userData, res, next) {
     return User.findOne({ where: { email: userData.email } })
       .then((user) => {
         verifyPassword(userData.password, user.passwordHash).then((verify) => {
@@ -34,39 +46,21 @@ export default {
             return res.status(401).send({ error: 'Username/Password do not match' });
           }
           req.session.user = user.dataValues;
-
           res.status(200).send(user);
         });
-      });
+      })
+      .catch(next);
   },
 
-  retrieve(req, res) {
-    return User.findOne({ where: { email: req.session.user.email } })
-      .then(user => res.status(200).send(user));
-  },
-
-  getFavorites(req, favoriteRecipeData, res) {
-    if (+req.session.user.id !== +req.params.userId) {
-      return res.status(401).send({ message: 'You are not authorized to access this page' });
-    }
-
-    return Recipe.findAll({
+  retrieve(req, res, next) {
+    return User.findOne({
+      where: { id: req.session.user.id },
       include: [{
-        model: Like,
-        as: 'likes',
-        attributes: [],
-        where: {
-          upvote: true,
-          userId: +favoriteRecipeData.userId,
-        }
-      }],
+        model: Recipe,
+        as: 'recipes'
+      }]
     })
-      .then((recipes) => {
-        if (recipes.length === 0) {
-          return res.status(200).send({ message: 'You have no favorite recipes' });
-        }
-
-        return res.status(200).send(recipes);
-      });
+      .then(user => res.status(200).send(user))
+      .catch(next);
   }
 };

@@ -1,93 +1,81 @@
 import express from 'express';
+import del from 'del';
+import path from 'path';
 import { validationResult } from 'express-validator/check';
 import { matchedData } from 'express-validator/filter';
-import validation from '../../validations/validation';
-import { authenticate } from '../../validations/authentication';
-import * as recipesController from '../../controllers/recipes';
+import { recipes as recipeValidation } from '../../validations';
+import { validationHandler, authentication } from '../../middlewares';
+import { recipes, reviews, votes, favorites } from '../../controllers';
+import { recipeImageUpload } from '../../helpers/imageUpload';
 
 const recipeRoutes = express.Router();
 
 
-recipeRoutes.post('/', authenticate, validation.addRecipe, (req, res) => {
+recipeRoutes.post('/', authentication.authenticate, recipeValidation.addRecipe, validationHandler, (req, res, next) => {
+  const recipeData = matchedData(req);
+  return recipes.create(req, recipeData, res, next);
+});
+
+recipeRoutes.post('/:recipeId/uploads', authentication.authenticate, recipeValidation.getSingleRecipe, recipeImageUpload, (req, res, next) => {
   const errors = validationResult(req);
+  if (!req.file) {
+    return res.status(422).send({ error: 'File is Empty!' });
+  }
+
   if (!errors.isEmpty()) {
+    const uploadPath = path.resolve(__dirname, '../../../../public/images');
+    const createdImage = `${uploadPath}/recipes/${req.file.filename}`;
+
+    del.sync([createdImage]);
+
     return res.status(422).json({ errors: errors.mapped() });
   }
 
   const recipeData = matchedData(req);
-
-  return recipesController.create(req, recipeData, res);
+  return recipes.upload(req, recipeData, res, next);
 });
 
-recipeRoutes.get('/:recipeId', authenticate, validation.getSingleRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
+recipeRoutes.get('/:recipeId', authentication.authenticate, recipeValidation.getSingleRecipe, validationHandler, (req, res, next) => {
   const recipeData = matchedData(req);
-
-  return recipesController.getSingleRecipe(req, recipeData, res);
+  return recipes.viewRecipe(req, recipeData, res, next);
 });
 
-recipeRoutes.put('/:recipeId', authenticate, validation.updateRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
+recipeRoutes.put('/:recipeId', authentication.authenticate, recipeValidation.updateRecipe, validationHandler, (req, res, next) => {
   const recipeData = matchedData(req);
-
-  return recipesController.update(req, recipeData, res);
+  return recipes.update(req, recipeData, res, next);
 });
 
-recipeRoutes.delete('/:recipeId', authenticate, validation.deleteRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
+recipeRoutes.delete('/:recipeId', authentication.authenticate, recipeValidation.getSingleRecipe, validationHandler, (req, res, next) => {
   const recipeData = matchedData(req);
-
-  return recipesController.delete(req, recipeData, res);
+  return recipes.delete(req, recipeData, res, next);
 });
 
-recipeRoutes.post('/:recipeId/reviews', authenticate, validation.reviewRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
+recipeRoutes.post('/:recipeId/reviews', authentication.authenticate, recipeValidation.reviewRecipe, validationHandler, (req, res, next) => {
   const reviewData = matchedData(req);
-
-  return recipesController.reviewRecipe(req, reviewData, res);
+  return reviews.reviewRecipe(req, reviewData, res, next);
 });
 
-recipeRoutes.post('/:recipeId/upvotes', authenticate, validation.voteRecipe, (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-
+recipeRoutes.post('/:recipeId/upvotes', authentication.authenticate, recipeValidation.getSingleRecipe, validationHandler, (req, res, next) => {
   const upvoteData = matchedData(req);
-
-  if (upvoteData.upvote === 'true') {
-    return recipesController.upvoteRecipe(req, upvoteData, res);
-  }
-
-  if (upvoteData.upvote === 'false') {
-    return recipesController.downvoteRecipe(req, upvoteData, res);
-  }
-
-  return recipesController.upvoteRecipe(req, upvoteData, res);
+  return votes.upvoteRecipe(req, upvoteData, res, next);
 });
 
-recipeRoutes.get('/', authenticate, (req, res) => {
+recipeRoutes.post('/:recipeId/downvotes', authentication.authenticate, recipeValidation.getSingleRecipe, validationHandler, (req, res, next) => {
+  const downvoteData = matchedData(req);
+  return votes.downvoteRecipe(req, downvoteData, res, next);
+});
+
+recipeRoutes.post('/:recipeId/favorites', authentication.authenticate, recipeValidation.getSingleRecipe, validationHandler, (req, res, next) => {
+  const favoriteData = matchedData(req);
+  return favorites.addFavoriteRecipe(req, favoriteData, res, next);
+});
+
+recipeRoutes.get('/', authentication.authenticate, (req, res, next) => {
   if (req.query.sort === 'upvotes') {
-    return recipesController.getUpvoted(req, res);
+    return votes.getUpvoted(req, res, next);
   }
 
-  return recipesController.list(req, res);
+  return recipes.list(req, res, next);
 });
 
 export default recipeRoutes;
