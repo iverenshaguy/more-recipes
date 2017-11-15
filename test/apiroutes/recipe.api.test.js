@@ -576,6 +576,7 @@ describe('Routes: Recipe API Tests: Main', () => {
             expect(res.body.directions).to.be.an('array');
             expect(res.body.ingredients[0]).to.equal('2 cups of beans');
             expect(res.body.preparations).to.have.lengthOf(1);
+            expect(res.body.views).to.equal(1);
 
             if (err) {
               return done(err);

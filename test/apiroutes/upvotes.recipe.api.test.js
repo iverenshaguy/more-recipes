@@ -424,6 +424,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
+              console.log(res.body);
               expect(res.statusCode).to.equal(200);
               expect(res.body.message).to.equal('Your vote has been removed');
               expect(res.body.upvotes).to.equal(5);
@@ -538,6 +539,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
             .end((err, res) => {
+              console.log(res.body);
               expect(res.statusCode).to.equal(200);
               expect(res.body.message).to.equal('Your vote has been removed');
               expect(res.body.upvotes).to.equal(4);

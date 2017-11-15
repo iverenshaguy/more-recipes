@@ -1,4 +1,4 @@
-import { hashPassword } from '../helpers/password_hash';
+import { hashPassword } from '../helpers/passwordHash';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {

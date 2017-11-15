@@ -1,6 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { hashPassword, verifyPassword } from '../../server/src/helpers/password_hash';
+import { hashPassword, verifyPassword } from '../../server/src/helpers/passwordHash';
 
 chai.use(chaiAsPromised);
 chai.should();
