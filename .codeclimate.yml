@@ -8,6 +8,7 @@ engines:
 ratings:
    paths:
    - "server/src/**.js"
+
 exclude_paths:
 - "node_modules/"
 - ".nyc_output"
@@ -15,3 +16,7 @@ exclude_paths:
 - "**.min.js"
 - "**.min.css"
 - "template"
+- "server/src/seeders"
+- "server/src/models"
+- "server/src/migrations"
+- "test"

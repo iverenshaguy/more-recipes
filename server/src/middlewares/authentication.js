@@ -1,5 +1,4 @@
 export default {
-
   // middleware function to check for authenticated users
   authenticate: (req, res, next) => {
     if (!(req.session.user && req.session.cookie)) {
