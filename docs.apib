@@ -326,7 +326,9 @@ A Recipe Object has the following attributes:
     + preparations (array) - Array of preparation steps
     + directions (array) - Array of direction steps
     + rating (number) - Float of Average Recipe rating
-    + likes (array) - Array of upvotes and downvotes
+    + upvotes (number) - Sum of recipe upvotes
+    + downvotes (number) - Sum of recipe downvotes
+    + views (number) - Sum of recipe views
 
 ### Get All Recipes in the App [GET]
 
@@ -1261,17 +1263,17 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
         [
             {
-                "id": 11,
-                "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
+                "id": 10,
+                "recipeName": "Peppered Chicken",
                 "recipeImage": null,
-                "prepTime": "10 Minutes",
-                "cookTime": "30 Minutes",
-                "totalTime": "40 Minutes",
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
                 "difficulty": "Normal",
-                "extraInfo": "",
+                "extraInfo": "Nigerian Party Staple",
                 "vegetarian": false,
                 "ingredients": [
-                    "Okro",
+                    "1 Cup of Tomato Stew",
                     "1 Kilo of Chicken"
                 ],
                 "preparations": [
@@ -1279,13 +1281,17 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
                 ],
                 "directions": [
-                    "Add Okro to little boiling water and beat until it draws",
-                    "Add ingredients"
+                    "Put already fried tomato stew on fire, add little water and seasoning to taste",
+                    "Add chicken and stir",
+                    "Simmer on low heat for 3 minutes"
                 ],
+                "upvotes": 10,
+                "downvotes": 0,
+                "views": 50,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 6,
-                "upvotes": "10"
+                "userId": 2,
+                "rating": "4.0000000000000000"
             },
             {
                 "id": 5,
@@ -1309,10 +1315,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Fry Onions in Palm Oil till transluscent",
                     "Add Egusi and fry till oil separates from egusi"
                 ],
+                "upvotes": 9,
+                "downvotes": 0,
+                "views": 30,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 6,
-                "upvotes": "9"
+                "rating": "4.5000000000000000"
             },
             {
                 "id": 15,
@@ -1334,23 +1343,26 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "directions": [
                     "I don't even know how to cook white soup"
                 ],
+                "upvotes": 7,
+                "downvotes": 2,
+                "views": 49,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 8,
-                "upvotes": "7"
+                "rating": "5.0000000000000000"
             },
             {
-                "id": 10,
-                "recipeName": "Peppered Chicken",
+                "id": 11,
+                "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
                 "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
+                "prepTime": "10 Minutes",
+                "cookTime": "30 Minutes",
+                "totalTime": "40 Minutes",
                 "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
+                "extraInfo": "",
                 "vegetarian": false,
                 "ingredients": [
-                    "1 Cup of Tomato Stew",
+                    "Okro",
                     "1 Kilo of Chicken"
                 ],
                 "preparations": [
@@ -1358,40 +1370,16 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
                 ],
                 "directions": [
-                    "Put already fried tomato stew on fire, add little water and seasoning to taste",
-                    "Add chicken and stir",
-                    "Simmer on low heat for 3 minutes"
+                    "Add Okro to little boiling water and beat until it draws",
+                    "Add ingredients"
                 ],
+                "upvotes": 6,
+                "downvotes": 3,
+                "views": 27,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 2,
-                "upvotes": "7"
-            },
-            {
-                "id": 12,
-                "recipeName": "Ogbona Soup",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "Ogbona",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Cook the soup abeg"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 8,
-                "upvotes": "6"
+                "userId": 6,
+                "rating": "5.0000000000000000"
             },
             {
                 "id": 7,
@@ -1415,10 +1403,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Fry already boiled stew base till done",
                     "Add chicken stock and ingredients to taste"
                 ],
+                "upvotes": 5,
+                "downvotes": 4,
+                "views": 20,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 9,
-                "upvotes": "5"
+                "rating": "3.0000000000000000"
             },
             {
                 "id": 14,
@@ -1441,37 +1432,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "directions": [
                     "My cursor is jumping"
                 ],
+                "upvotes": 4,
+                "downvotes": 5,
+                "views": 19,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 1,
-                "upvotes": "4"
-            },
-            {
-                "id": 8,
-                "recipeName": "Vegetable Soup",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "Vegetables",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Fry stew base and add chicken stock and ingredients",
-                    "Add Vegetables last and steam for 5 minutes"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 10,
-                "upvotes": "3"
+                "rating": "2.0000000000000000"
             },
             {
                 "id": 2,
@@ -1496,10 +1463,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Parboil Rice till half done",
                     "Steam ingredients in oil till almost soft"
                 ],
+                "upvotes": 3,
+                "downvotes": 4,
+                "views": 9,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 2,
-                "upvotes": "3"
+                "rating": "4.5000000000000000"
             },
             {
                 "id": 13,
@@ -1522,14 +1492,17 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "directions": [
                     "I'm tired of forming things to write"
                 ],
+                "upvotes": 3,
+                "downvotes": 6,
+                "views": 25,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 9,
-                "upvotes": "3"
+                "rating": "4.0000000000000000"
             },
             {
-                "id": 1,
-                "recipeName": "Coconut Rice",
+                "id": 8,
+                "recipeName": "Vegetable Soup",
                 "recipeImage": null,
                 "prepTime": "30 Minutes",
                 "cookTime": "20 Minutes",
@@ -1538,22 +1511,82 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "extraInfo": "",
                 "vegetarian": false,
                 "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Coconut"
+                    "Vegetables",
+                    "1 Kilo of Chicken"
                 ],
                 "preparations": [
                     "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Grate coconut and strain milk from it by boiling for a few minutes"
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
                 ],
                 "directions": [
-                    "Parboil Rice till half done",
-                    "Put already fried tomato stew on fire, add water and seasoning to taste"
+                    "Fry stew base and add chicken stock and ingredients",
+                    "Add Vegetables last and steam for 5 minutes"
                 ],
+                "upvotes": 3,
+                "downvotes": 6,
+                "views": 36,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 1,
-                "upvotes": "2"
+                "userId": 10,
+                "rating": "5.0000000000000000"
+            },
+            {
+                "id": 12,
+                "recipeName": "Ogbona Soup",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "Nigerian Party Staple",
+                "vegetarian": false,
+                "ingredients": [
+                    "Ogbona",
+                    "1 Kilo of Chicken"
+                ],
+                "preparations": [
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                ],
+                "directions": [
+                    "Cook the soup abeg"
+                ],
+                "upvotes": 2,
+                "downvotes": 7,
+                "views": 39,
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 8,
+                "rating": "4.0000000000000000"
+            },
+            {
+                "id": 4,
+                "recipeName": "Beans and Plantain",
+                "recipeImage": null,
+                "prepTime": "30 Minutes",
+                "cookTime": "20 Minutes",
+                "totalTime": "1 Hour",
+                "difficulty": "Normal",
+                "extraInfo": "",
+                "vegetarian": true,
+                "ingredients": [
+                    "2 Cups of Beans",
+                    "3 Plantains"
+                ],
+                "preparations": [
+                    "Soak beans for 1 hour before cooking to reduce bloating"
+                ],
+                "directions": [
+                    "Cook beans with Onions till soft",
+                    "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
+                ],
+                "upvotes": 2,
+                "downvotes": 7,
+                "views": 19,
+                "createdAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "userId": 5,
+                "rating": "4.0000000000000000"
             },
             {
                 "id": 3,
@@ -1578,36 +1611,44 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Parboil Rice till half done",
                     "Cook beans with onions till almost done"
                 ],
+                "upvotes": 2,
+                "downvotes": 7,
+                "views": 10,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 3,
-                "upvotes": "2"
+                "rating": "5.0000000000000000"
             },
             {
-                "id": 4,
-                "recipeName": "Beans and Plantain",
+                "id": 1,
+                "recipeName": "Coconut Rice",
                 "recipeImage": null,
                 "prepTime": "30 Minutes",
                 "cookTime": "20 Minutes",
                 "totalTime": "1 Hour",
                 "difficulty": "Normal",
                 "extraInfo": "",
-                "vegetarian": true,
+                "vegetarian": false,
                 "ingredients": [
-                    "2 Cups of Beans",
-                    "3 Plantains"
+                    "2 Cups of Rice",
+                    "1 Coconut"
                 ],
                 "preparations": [
-                    "Soak beans for 1 hour before cooking to reduce bloating"
+                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                    "Grate coconut and strain milk from it by boiling for a few minutes"
                 ],
                 "directions": [
-                    "Cook beans with Onions till soft",
-                    "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
+                    "Parboil Rice till half done",
+                    "Put already fried tomato stew on fire, add water and seasoning to taste"
                 ],
+                "upvotes": 2,
+                "downvotes": 7,
+                "views": 9,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 5,
-                "upvotes": "2"
+                "userId": 1,
+                "rating": "3.5000000000000000"
             },
             {
                 "id": 9,
@@ -1631,10 +1672,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Parboil Rice till half done",
                     "Put already fried tomato stew on fire, add water and seasoning to taste"
                 ],
+                "upvotes": 1,
+                "downvotes": 8,
+                "views": 17,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 1,
-                "upvotes": "1"
+                "rating": "3.0000000000000000"
             },
             {
                 "id": 6,
@@ -1655,12 +1699,15 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Boil Yam on Fire with Maggi, Crayfish and Onions",
                     "When soft add Palm oil and other ingredients"
                 ],
+                "upvotes": 1,
+                "downvotes": 8,
+                "views": 9,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 8,
-                "upvotes": "1"
+                "rating": "5.0000000000000000"
             }
-        ]
+        ]       
 
 ## Get/Modify/Delete Recipe [/recipes/{recipeId}]
 
@@ -1693,39 +1740,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "directions": [
                     "I don't even know how to cook white soup"
                 ],
+                "upvotes": 7,
+                "downvotes": 2,
+                "views": 50,
                 "createdAt": "2017-10-30T00:47:03.687Z",
                 "updatedAt": "2017-10-30T00:47:03.687Z",
                 "userId": 8,
                 "rating": "5.0000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ],
                 "reviews": [
                     {
                         "rating": 5,
@@ -1795,9 +1816,14 @@ This action allows you to modify an existing recipe added by you.
                     "Work up with more pieces",
                     "When it is all broken pound till soft and soft"
                 ],
+                "upvotes": 0,
+                "downvotes": 0,
+                "views": 0,
                 "createdAt": "2017-11-02T11:18:48.820Z",
                 "updatedAt": "2017-11-02T11:18:48.820Z",
-                "userId": 1
+                "userId": 1,
+                "rating": "0",
+                "reviews": []
             }
 
 ### Delete Recipe [DELETE]
@@ -1806,18 +1832,12 @@ This action allows you to delete an existing recipe added by you.
 
 + Response 204(application/json)
 
-## Upvote/Downvote a Recipe [POST /recipes/{recipeId}/upvotes{?upvote}]
+## Upvote a Recipe [POST /recipes/{recipeId}/upvotes]
 
-You may add a recipe to your favorite recipes using this action. It takes no input.
+You may upvote recipes using this action. It takes no input. Sending it again will unvote the recipe.
 
 + Parameters
-    + recipeId: `4` (number, required) - ID of the Recipe to add to favorites in form of an integer.
-    + upvote: `true` (boolean, optional) - true upvotes a recipe while false downvotes a recipe. 
-
-
-+ Request Upvote a Recipe
-
-        Request without a query (defaults to upvote) or request with query=true.
+    + recipeId: `4` (number, required) - ID of the Recipe to upvote in form of an integer.
 
 + Response 201 (application/json)
 
@@ -1828,33 +1848,30 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
     + Body
 
             {
-                "id": 62,
-                "upvote": true,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-11-02T10:54:32.077Z",
-                "recipeId": 4,
-                "userId": 1
+                message: 'Your vote has been recored',
+                upvotes: 12,
+                downvotes: 1
             }
 
-+ Request Downvote a Recipe
+## Downvote a Recipe [POST /recipes/{recipeId}/downvotes]
 
-        Request with query upvote=false is a downvote.
+You may downvote recipes using this action. It takes no input. Sending it again will unvote the recipe.
+
++ Parameters
+    + recipeId: `4` (number, required) - ID of the Recipe to downvote in form of an integer.
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /recipes/7/upvotes/43
+            Location: /recipes/4/downvotes/63
     
     + Body
 
             {
-                "id": 43,
-                "upvote": false,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-11-02T10:56:49.498Z",
-                "recipeId": 7,
-                "userId": 1
+                message: 'Your vote has been recored',
+                upvotes: 11,
+                downvotes: 2
             }
 
 ## Review a Recipe [POST /recipes/{recipeId}/reviews]
@@ -1892,4 +1909,368 @@ You may review a recipe using this action. It takes a JSON object containing a r
                 "userId": 1,
                 "updatedAt": "2017-11-02T11:55:26.941Z",
                 "createdAt": "2017-11-02T11:55:26.941Z"
+            }
+
+## Add a Recipe to Favorites [POST /recipes/{recipeId}/favorites]
+
+You may add a recipe to your favorite recipes using this action. It takes no input. Sending it again will unfavorite the recipe.
+
++ Parameters
+    + recipeId: `4` (number, required) - ID of the Recipe to add to favorites in form of an integer.
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /recipes/4/favorites/6
+        
+    + Body
+    
+            {
+                "message": "Recipe has been added to favorites",
+                "recipes": [
+                    {
+                        "id": 5,
+                        "recipeName": "Egusi Soup",
+                        "recipeImage": null,
+                        "prepTime": "10 Minutes",
+                        "cookTime": "30 Minutes",
+                        "totalTime": "40 Minutes",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Ground Egusi",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Fry Onions in Palm Oil till transluscent",
+                            "Add Egusi and fry till oil separates from egusi"
+                        ],
+                        "upvotes": 9,
+                        "downvotes": 0,
+                        "views": 30,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 6
+                    },
+                    {
+                        "id": 11,
+                        "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
+                        "recipeImage": null,
+                        "prepTime": "10 Minutes",
+                        "cookTime": "30 Minutes",
+                        "totalTime": "40 Minutes",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "Okro",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Add Okro to little boiling water and beat until it draws",
+                            "Add ingredients"
+                        ],
+                        "upvotes": 6,
+                        "downvotes": 3,
+                        "views": 27,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 6
+                    },
+                    {
+                        "id": 10,
+                        "recipeName": "Peppered Chicken",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "1 Cup of Tomato Stew",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Put already fried tomato stew on fire, add little water and seasoning to taste",
+                            "Add chicken and stir",
+                            "Simmer on low heat for 3 minutes"
+                        ],
+                        "upvotes": 10,
+                        "downvotes": 0,
+                        "views": 50,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 2
+                    },
+                    {
+                        "id": 2,
+                        "recipeName": "Fried Rice",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Rice",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                            "Cut ingredients into small pieces"
+                        ],
+                        "directions": [
+                            "Parboil Rice till half done",
+                            "Steam ingredients in oil till almost soft"
+                        ],
+                        "upvotes": 3,
+                        "downvotes": 4,
+                        "views": 9,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 2
+                    },
+                    {
+                        "id": 13,
+                        "recipeName": "Moimoi",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "30 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Beans",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "I'm tired of forming things to write"
+                        ],
+                        "upvotes": 3,
+                        "downvotes": 6,
+                        "views": 25,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 9
+                    },
+                    {
+                        "id": 7,
+                        "recipeName": "Chicken Stew",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "30 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "Stew Base",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Fry already boiled stew base till done",
+                            "Add chicken stock and ingredients to taste"
+                        ],
+                        "upvotes": 5,
+                        "downvotes": 4,
+                        "views": 20,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 9
+                    },
+                    {
+                        "id": 3,
+                        "recipeName": "Rice and Beans",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Rice",
+                            "1.5 Cups of Beans",
+                            "1 kilo of chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Parboil Rice till half done",
+                            "Cook beans with onions till almost done"
+                        ],
+                        "upvotes": 2,
+                        "downvotes": 7,
+                        "views": 10,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 3
+                    },
+                    {
+                        "id": 15,
+                        "recipeName": "White Soup",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "I don't even know how to cook white soup"
+                        ],
+                        "upvotes": 7,
+                        "downvotes": 2,
+                        "views": 50,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-11-16T18:32:37.253Z",
+                        "userId": 8
+                    },
+                    {
+                        "id": 8,
+                        "recipeName": "Vegetable Soup",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "Vegetables",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Fry stew base and add chicken stock and ingredients",
+                            "Add Vegetables last and steam for 5 minutes"
+                        ],
+                        "upvotes": 3,
+                        "downvotes": 6,
+                        "views": 36,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 10
+                    },
+                    {
+                        "id": 12,
+                        "recipeName": "Ogbona Soup",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "Nigerian Party Staple",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "Ogbona",
+                            "1 Kilo of Chicken"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                        ],
+                        "directions": [
+                            "Cook the soup abeg"
+                        ],
+                        "upvotes": 2,
+                        "downvotes": 7,
+                        "views": 39,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 8
+                    },
+                    {
+                        "id": 6,
+                        "recipeName": "Yam Pottage",
+                        "recipeImage": null,
+                        "prepTime": "5 Minutes",
+                        "cookTime": "30 Minutes",
+                        "totalTime": "35 Minutes",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "1 tuber of yam",
+                            "1/2 cup of Palmoil"
+                        ],
+                        "preparations": null,
+                        "directions": [
+                            "Boil Yam on Fire with Maggi, Crayfish and Onions",
+                            "When soft add Palm oil and other ingredients"
+                        ],
+                        "upvotes": 1,
+                        "downvotes": 8,
+                        "views": 9,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 8
+                    },
+                    {
+                        "id": 4,
+                        "recipeName": "Beans and Plantain",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": true,
+                        "ingredients": [
+                            "2 Cups of Beans",
+                            "3 Plantains"
+                        ],
+                        "preparations": [
+                            "Soak beans for 1 hour before cooking to reduce bloating"
+                        ],
+                        "directions": [
+                            "Cook beans with Onions till soft",
+                            "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
+                        ],
+                        "upvotes": 2,
+                        "downvotes": 7,
+                        "views": 19,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "userId": 5
+                    }
+                ]       
             }
