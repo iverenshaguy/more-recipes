@@ -22,6 +22,7 @@
       "**/*.test.js",
       "**/__tests__/**",
       "**/node_modules/**",
+      "config",
       "server/src/models/index.js"
     ],
     "reporter": [

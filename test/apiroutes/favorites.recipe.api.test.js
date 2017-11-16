@@ -84,7 +84,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
     directions: [
       'Boil Potatoes for 25 minutes till a bit soft'
     ],
-    favorites: 2,
+    upvotes: 2,
     downvotes: 1,
     views: 9,
     userId: 1
@@ -105,7 +105,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
       'Add chopped onions to oil and fry till it\'s transluscent',
       'Add already mixed Egusi and fry till oil separates'
     ],
-    favorites: 5,
+    upvotes: 5,
     downvotes: 1,
     views: 14,
     userId: 3
@@ -126,7 +126,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
       'Add chopped onions to oil and fry till it\'s transluscent',
       'Whatever2'
     ],
-    favorites: 1,
+    upvotes: 1,
     downvotes: 1,
     views: 4,
     userId: 2
@@ -147,7 +147,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
       'Parboil Rice till half done',
       'Put already fried tomato stew on fire, add water and seasoning to taste'
     ],
-    favorites: 0,
+    upvotes: 0,
     downvotes: 1,
     views: 5,
     userId: 3
@@ -167,7 +167,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
     directions: [
       'Parboil Rice till half done'
     ],
-    favorites: 4,
+    upvotes: 4,
     downvotes: 0,
     views: 15,
     userId: 2
