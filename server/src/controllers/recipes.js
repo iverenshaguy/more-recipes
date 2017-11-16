@@ -2,7 +2,7 @@ import del from 'del';
 import path from 'path';
 import { sequelize, Recipe, User, Review, Like } from '../models';
 
-const uploadPath = path.resolve(__dirname, '../../../public/images');
+const uploadPath = path.resolve(__dirname, '../../../public/images/recipes');
 
 export default {
   create(req, recipeData, res, next) {
@@ -36,7 +36,7 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
-        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
 
         del.sync([savedImage]);
 
@@ -99,7 +99,7 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
-        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
 
         del.sync([savedImage]);
 
