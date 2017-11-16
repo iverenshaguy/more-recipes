@@ -1,1 +1,1 @@
-import './favorites.recipe.api.test';
+import './search.recipe.api.test';
