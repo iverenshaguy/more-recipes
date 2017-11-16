@@ -7,22 +7,18 @@ const validationHandler = (req, res, controllerMethod, next) => {
   const errors = validationResult(req);
   const data = matchedData(req);
 
-  if ((req.url).endsWith('/uploads')) {
-    if (!req.file) {
-      return res.status(422).send({ error: 'File is Empty!' });
-    }
+  if (((req.url).endsWith('/uploads')) && !req.file) {
+    return res.status(422).send({ error: 'File is Empty!' });
+  }
 
-    if (!errors.isEmpty()) {
+  if (!errors.isEmpty()) {
+    if (req.file) {
       const uploadPath = path.resolve(__dirname, '../../../public/images/profile');
       const createdImage = `${uploadPath}/${req.file.filename}`;
 
       del.sync([createdImage]);
-
-      return res.status(422).json({ errors: errors.mapped() });
     }
-  }
 
-  if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
   }
 
