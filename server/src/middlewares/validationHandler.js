@@ -7,10 +7,8 @@ const validationHandler = (req, res, controllerMethod, next) => {
   const errors = validationResult(req);
   const data = matchedData(req);
 
-  if ((req.url).endsWith('/uploads')) {
-    if (!req.file) {
-      return res.status(422).send({ error: 'File is Empty!' });
-    }
+  if (((req.url).endsWith('/uploads')) && !req.file) {
+    return res.status(422).send({ error: 'File is Empty!' });
   }
 
   if (!errors.isEmpty()) {
