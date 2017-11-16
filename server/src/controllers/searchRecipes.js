@@ -1,4 +1,4 @@
-import { Sequelize, Recipe } from '../models';
+import { Sequelize, sequelize, Recipe, Review } from '../models';
 
 const { Op } = Sequelize;
 
@@ -12,7 +12,20 @@ export default {
 
     return Recipe.findAll({
       where: { upvotes: { [Op.ne]: 0 } },
-      order: [['upvotes', orderBy]]
+      attributes: {
+        include: [
+          [sequelize.fn('AVG', sequelize.col('reviews.rating')), 'rating'],
+        ],
+      },
+      include: [
+        {
+          model: Review,
+          as: 'reviews',
+          attributes: []
+        }
+      ],
+      order: [['upvotes', orderBy]],
+      group: ['Recipe.id']
     })
       .then((recipes) => {
         if (recipes.length === 0) {

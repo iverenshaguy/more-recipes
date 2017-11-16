@@ -346,7 +346,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(6);
             expect(res.body[0].recipeName).to.equal('Coconut Rice');
-            expect(res.body[3].recipeName).to.equal('White Soup');
+            expect(res.body[3].recipeName).to.equal('Sweet Potatoe Pottage');
             if (err) return done(err);
             done();
           });
