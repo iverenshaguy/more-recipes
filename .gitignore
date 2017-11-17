@@ -6,3 +6,6 @@ node_modules
 stray_scripts
 .nyc_output
 public/images/**/*.jpg
+npm-debug.log
+.DS_Store
+/*.env
