@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 //  Connect all our routes to our application
 app.use('/', routes);
 
-app.use('/docs', express.static('docs'));
+app.use('/api/v1/docs', express.static('docs'));
 
 // Default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(409).send({

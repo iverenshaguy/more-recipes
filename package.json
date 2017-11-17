@@ -1,7 +1,9 @@
 {
   "name": "more-recipes-personal",
   "version": "1.0.0",
-  "description": "More Recipes App",
+  "description": "A Recipe Management Application written in Javscript (ES6)",
+  "author": "Iveren Shaguy",
+  "license": "ISC",
   "main": "server/dist/bin/www.js",
   "directories": {
     "test": "test"
@@ -35,9 +37,9 @@
     "report-dir": "./coverage"
   },
   "scripts": {
+    "start": "node ./server/dist/bin/www.js",
     "start:dev": "nodemon ./server/dist/bin/www.js",
     "test": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 30000",
-    "test:unlint": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 30000",
     "pretest": "npm run lint",
     "clean": "cd server && rm -rf dist",
     "prebuild:init": "cd server && mkdir dist",
@@ -46,8 +48,6 @@
     "lint": "eslint **/*.js --fix",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
-  "author": "Iveren Shaguy",
-  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
