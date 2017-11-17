@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "A Recipe Management Application written in Javscript (ES6)",
   "author": "Iveren Shaguy",
-  "license": "ISC",
+  "license": "MIT",
+  "engines": {
+    "node": "8.4.2"
+  },
   "main": "server/dist/bin/www.js",
   "directories": {
     "test": "test"
