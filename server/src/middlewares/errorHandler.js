@@ -11,7 +11,7 @@ const errorHandler = (err, req, res, next) => {
     res.status(422).send({ error: 'File too large!' });
   }
 
-  res.status(err.status || 500).send(err);
+  res.status(err.status || 500).send(err.message);
   // render through template
   // res.render('error', { error: err });
 };

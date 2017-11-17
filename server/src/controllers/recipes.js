@@ -1,8 +1,8 @@
 import del from 'del';
 import path from 'path';
-import { sequelize, Recipe, User, Review, Like } from '../models';
+import { sequelize, Recipe, User, Review } from '../models';
 
-const uploadPath = path.resolve(__dirname, '../../../public/images');
+const uploadPath = path.resolve(__dirname, '../../../public/images/recipes');
 
 export default {
   create(req, recipeData, res, next) {
@@ -36,7 +36,7 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
-        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
 
         del.sync([savedImage]);
 
@@ -59,17 +59,12 @@ export default {
         },
         include: [
           {
-            model: Like,
-            as: 'likes',
-            attributes: ['upvote']
-          },
-          {
             model: Review,
             as: 'reviews',
             attributes: ['rating', 'comment', 'userId']
           },
         ],
-        group: ['Recipe.id', 'reviews.id', 'likes.id']
+        group: ['Recipe.id', 'reviews.id']
       })
       .then(recipe => recipe.increment('views').then(() => res.status(200).send(recipe)))
       .catch(next);
@@ -99,7 +94,7 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
-        const savedImage = `${uploadPath}/recipes/${recipe.recipeImage}`;
+        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
 
         del.sync([savedImage]);
 
@@ -121,20 +116,12 @@ export default {
         },
         include: [
           {
-            model: Like,
-            as: 'likes',
-            // where: {
-            //   upvote: true
-            // },
-            attributes: ['upvote'],
-          },
-          {
             model: Review,
             as: 'reviews',
             attributes: []
           },
         ],
-        group: ['Recipe.id', 'likes.id']
+        group: ['Recipe.id']
       })
       .then(recipes => res.status(200).send(recipes))
       .catch(next);

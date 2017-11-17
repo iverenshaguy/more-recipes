@@ -21,12 +21,12 @@ export default {
       .catch(next);
   },
 
-  upload(req, res, next) {
+  upload(req, userData, res, next) {
     return User
       .findOne({ where: { id: req.session.user.id } })
       .then((user) => {
-        const uploadPath = path.resolve(__dirname, '../../../public/images');
-        const savedImage = `${uploadPath}/profile/${user.profilePic}`;
+        const uploadPath = path.resolve(__dirname, '../../../public/images/profile');
+        const savedImage = `${uploadPath}/${user.profilePic}`;
 
         del.sync([savedImage]);
 
