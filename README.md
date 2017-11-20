@@ -12,7 +12,7 @@ A Recipe Management Application written in Javscript (ES6).
 * [Postgres](https://www.postgresql.org/) - Database
 * [Yarn](https://www.yarnpkg.com/) - Dependency Manager
 * [React](https://reactjs.com/) - Interface Builder
-* [Redux](https://expressjs.com/) - Application State Manager
+* [Redux](https://redux.js.com/) - Application State Manager
 
 ### Supporting Packages
 
@@ -52,25 +52,25 @@ Navigate to [http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/doc
 
 #### Users
 
-* [Signup] - POST [http://localhost:8000/api/v1/users/signup](http://localhost:8000/api/v1/users/signup)
-* [Signin] - POST [http://localhost:8000/api/v1/users/signin](http://localhost:8000/api/v1/users/signin)
-* [Fetch User] - GET [http://localhost:8000/api/v1/users/profile](http://localhost:8000/api/v1/users/profile)
-* [Upload User Profile Pic] - POST [http://localhost:8000/api/v1/users/uploads](http://localhost:8000/api/v1/users/uploads)
-* [Fetch User's Favorite Recipes] - GET [http://localhost:8000/api/v1/users//:userId/recipes](http://localhost:8000/api/v1/users//:userId/recipes)
+* Signup - POST [http://localhost:8000/api/v1/users/signup](http://localhost:8000/api/v1/users/signup)
+* Signin - POST [http://localhost:8000/api/v1/users/signin](http://localhost:8000/api/v1/users/signin)
+* Fetch User - GET [http://localhost:8000/api/v1/users/profile](http://localhost:8000/api/v1/users/profile)
+* Upload User Profile Pic - POST [http://localhost:8000/api/v1/users/uploads](http://localhost:8000/api/v1/users/uploads)
+* Fetch User's Favorite Recipes - GET [http://localhost:8000/api/v1/users//:userId/recipes](http://localhost:8000/api/v1/users//:userId/recipes)
 
 #### Recipes
 
-* [Create Recipe] - POST [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
-* [User Recipe Image] - POST [http://localhost:8000/api/v1/recipes/uploads](http://localhost:8000/api/v1/recipes/uploads)
-* [Modify Recipe] - PUT [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
-* [Delete Recipe] - DELETE [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
-* [Fetch Recipe and Update Views] - GET [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
-* [Fetch All Recipes in App] - GET [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
-* [Review Recipe] - POST [http://localhost:8000/api/v1/recipes/:recipeId/reviews](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
-* [Upvote Recipe] - POST [http://localhost:8000/api/v1/recipes/:recipeId/upvotes](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
-* [Downvote Recipe] - POST [http://localhost:8000/api/v1/recipes/:recipeId/downvotes](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
-* [Add Recipe to Favorite] - POST [http://localhost:8000/api/v1/recipes/:recipeId/favorites](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
-* [Fetch Recipes by Upvotes in Ascending Order] - GET [http://localhost:8000/api/v1/recipes?sort=upvotes&order=ascending](http://localhost:8000/api/v1/recipes?sort=upvotes&order=ascending)
+* Create Recipe - POST [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
+* User Recipe Image - POST [http://localhost:8000/api/v1/recipes/uploads](http://localhost:8000/api/v1/recipes/uploads)
+* Modify Recipe - PUT [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
+* Delete Recipe - DELETE [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
+* Fetch Recipe and Update Views - GET [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
+* Fetch All Recipes in App - GET [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
+* Review Recipe - POST [http://localhost:8000/api/v1/recipes/:recipeId/reviews](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
+* Upvote Recipe - POST [http://localhost:8000/api/v1/recipes/:recipeId/upvotes](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
+* Downvote Recipe - POST [http://localhost:8000/api/v1/recipes/:recipeId/downvotes](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
+* Add Recipe to Favorite - POST [http://localhost:8000/api/v1/recipes/:recipeId/favorites](http://localhost:8000/api/v1/recipes/:recipeId/reviews)
+* Fetch Recipes by Upvotes in Ascending Order - GET [http://localhost:8000/api/v1/recipes?sort=upvotes&order=ascending](http://localhost:8000/api/v1/recipes?sort=upvotes&order=ascending)
 
 ## Getting Started
 
@@ -89,7 +89,8 @@ DB_HOST=your_host
 ```
 
 * Run `sequelize db:migrate` to run database migrations
-* Run `npm start` to start the server
+* Run `yarn build` or `npm run build` to build the project
+* Run `yarn start` or `npm start` to start the server
 * Navigate to [localhost:8000](http://localhost:8000/) in browser to access the application
 
 ### Testing
@@ -112,7 +113,7 @@ DB_HOST=your_host
 DB_DATABASE_TEST=your_test_database
 ```
 
-* Run `npm test`
+* Run `yarn test` or `npm test`
 * It will lint code, run test and display coverage data as generated by Istanbul's [nyc](https://github.com/istanbuljs/nyc) 
 
 ### Deployment
