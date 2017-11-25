@@ -8,3 +8,6 @@ stray_scripts
 public/images/**/*.jpg
 .gitattributes
 .vscode
+npm-debug.log
+.DS_Store
+/*.env
