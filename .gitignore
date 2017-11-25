@@ -6,6 +6,8 @@ node_modules
 stray_scripts
 .nyc_output
 public/images/**/*.jpg
+.gitattributes
+.vscode
 npm-debug.log
 .DS_Store
 /*.env
