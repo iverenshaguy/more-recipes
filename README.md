@@ -85,6 +85,7 @@ Navigate to [http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/doc
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_DATABASE=your_database
+DB_DATABASE_TEST=your_test_database
 DB_HOST=your_host
 ```
 
