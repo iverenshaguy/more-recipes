@@ -2,16 +2,34 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8000/",
   "dependencies": {
+    "bootstrap": "4.0.0-beta",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "jest-enzyme": "^4.0.1",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.11.0",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.17"
+    "react-logger": "^1.1.0",
+    "react-popper": "^0.7.4",
+    "react-scripts": "1.0.17",
+    "react-test-renderer": "^16.1.1",
+    "react-thunk": "^1.0.0",
+    "react-transition-group": "^2.2.1",
+    "reactstrap": "^5.0.0-alpha.4",
+    "selenium-standalone": "^6.11.0",
+    "source-map-explorer": "^1.5.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:coverage": "react-scripts test -- --coverage",
+    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "proxy": "http://localhost:8000"
+  }
 }

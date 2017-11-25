@@ -5,11 +5,9 @@ import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
 
 
-gulp.task('default', ['build:watch']);
+gulp.task('default', ['build']);
 
-const watcher = gulp.watch('server/src/**/*.js', ['build:watch']);
-watcher.on('change', event => `File ${event.path} was ${event.type}, running tasks...`);
-
+gulp.watch('server/src/**/*.js', ['build']);
 
 // gulp.task('prebuild', () => gulp.src('server/src/**/*.js')
 //   .pipe(babel())
@@ -26,9 +24,5 @@ gulp.task('sourcemaps', () => gulp.src('server/src/**/*.js')
   .pipe(gulp.dest('server/dist')));
 
 gulp.task('build', ['clean', 'sourcemaps'], () => gulp.src('server/src/**/*.js')
-  .pipe(babel())
-  .pipe(gulp.dest('server/dist')));
-
-gulp.task('build:watch', () => gulp.src('server/src/**/*.js')
   .pipe(babel())
   .pipe(gulp.dest('server/dist')));
