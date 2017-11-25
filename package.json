@@ -5,7 +5,7 @@
   "author": "Iveren Shaguy",
   "license": "MIT",
   "engines": {
-    "node": "8.4.2"
+    "node": "8.2.1"
   },
   "main": "server/dist/bin/www.js",
   "directories": {
@@ -18,9 +18,7 @@
     "statements": 70,
     "functions": 70,
     "branches": 70,
-    "require": [
-      "babel-register"
-    ],
+    "require": ["babel-register"],
     "exclude": [
       "coverage/**', 'test/**",
       "test{,-*}.js",
@@ -30,10 +28,7 @@
       "config",
       "server/src/models/index.js"
     ],
-    "reporter": [
-      "lcov",
-      "text"
-    ],
+    "reporter": ["lcov", "text"],
     "sourceMap": false,
     "instrument": false,
     "cache": true,
