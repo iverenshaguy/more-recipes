@@ -45,7 +45,7 @@
     "build": "babel server/src -d server/dist",
     "lint": "eslint **/*.js --fix",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "postinstall": "yarn run build"
+    "postinstall": "yarn run build && sequelize db:migrate"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -78,6 +78,7 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.20.1",
+    "sequelize-cli": "^3.1.0",
     "supertest": "^3.0.0"
   },
   "devDependencies": {
