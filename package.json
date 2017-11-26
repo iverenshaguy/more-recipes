@@ -45,7 +45,7 @@
     "build": "babel server/src -d server/dist",
     "lint": "eslint **/*.js --fix",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "postinstall": "yarn run build && sequelize db:migrate"
+    "postinstall": "yarn run build"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
