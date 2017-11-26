@@ -143,6 +143,9 @@ DB_DATABASE_TEST=your_test_database
 
 ### Deployment
 
+App is hosted on heroku at
+[https://more-recipes-sivy.herokuapp.com](https://more-recipes-sivy.herokuapp.com)
+
 ### Development
 
 You can run `npm run start:dev` in devlopment to use
