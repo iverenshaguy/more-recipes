@@ -38,13 +38,14 @@
     "start": "node ./server/dist/bin/www.js",
     "start:dev": "nodemon ./server/dist/bin/www.js",
     "test": "cross-env NODE_ENV=test nyc mocha test/test.js --recursive --timeout 30000",
-    "pretest": "npm run lint",
+    "pretest": "yarn run lint",
     "clean": "cd server && rm -rf dist",
     "prebuild:init": "cd server && mkdir dist",
     "prebuild": "npm-run-all clean prebuild:init",
     "build": "babel server/src -d server/dist",
     "lint": "eslint **/*.js --fix",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "postinstall": "yarn run build"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
