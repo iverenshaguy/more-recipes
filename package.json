@@ -57,6 +57,9 @@
     "del": "^3.0.0",
     "dotenv": "4.0.0",
     "env2": "^2.2.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "enzyme-to-json": "^3.2.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
@@ -108,8 +111,6 @@
     "chai-fs": "^2.0.0",
     "coveralls": "^2.13.3",
     "cross-env": "^5.1.1",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^1.9.0",
@@ -158,8 +159,8 @@
     "report-dir": "./server/coverage"
   },
   "jest": {
-    "collectCoverageFrom": ["client/src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": ["<rootDir>/client/src/**/*.{js,jsx,mjs}"],
+    "setupFiles": ["<rootDir>/client/config/polyfills.js"],
     "coveragePathIgnorePatterns": [
       "<rootDir>/nightwatch.conf.js",
       "<rootDir>/gulpfile.babel.js",
@@ -169,6 +170,7 @@
       "<rootDir>/client/scripts",
       "<rootDir>/server/"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/client/src/setupTests.js",
     "testMatch": [
       "<rootDir>/client/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/client/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -177,8 +179,8 @@
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^.+\\.css$": "<rootDir>/client/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/client/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
     "moduleNameMapper": {
