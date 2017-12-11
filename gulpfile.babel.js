@@ -11,18 +11,18 @@ gulp.watch('server/src/**/*.js', ['build']);
 
 // gulp.task('prebuild', () => gulp.src('server/src/**/*.js')
 //   .pipe(babel())
-//   .pipe(gulp.dest('server/dist'))
+//   .pipe(gulp.dest('server/build'))
 // );
 
-gulp.task('clean', () => del(['server/dist/**/*', '!server/dist'], { force: true }));
+gulp.task('clean', () => del(['server/build/**/*', '!server/build'], { force: true }));
 
 gulp.task('sourcemaps', () => gulp.src('server/src/**/*.js')
   .pipe(sourcemaps.init())
   .pipe(babel())
   .pipe(concat('all.js'))
   .pipe(sourcemaps.write('.'))
-  .pipe(gulp.dest('server/dist')));
+  .pipe(gulp.dest('server/build')));
 
 gulp.task('build', ['clean', 'sourcemaps'], () => gulp.src('server/src/**/*.js')
   .pipe(babel())
-  .pipe(gulp.dest('server/dist')));
+  .pipe(gulp.dest('server/build')));

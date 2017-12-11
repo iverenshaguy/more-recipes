@@ -12,7 +12,7 @@ export default {
       email: userData.email.toLowerCase(),
       password: userData.password,
       aboutMe: userData.aboutMe,
-      occupation: userData.occupation
+      occupation: userData.occupation,
     })
       .then((user) => {
         req.session.user = user.dataValues;
@@ -22,10 +22,9 @@ export default {
   },
 
   upload(req, userData, res, next) {
-    return User
-      .findOne({ where: { id: req.session.user.id } })
+    return User.findOne({ where: { id: req.session.user.id } })
       .then((user) => {
-        const uploadPath = path.resolve(__dirname, '../../../public/images/profile');
+        const uploadPath = path.resolve(__dirname, '../../../client/public/images/profile');
         const savedImage = `${uploadPath}/${user.profilePic}`;
 
         del.sync([savedImage]);
@@ -55,12 +54,14 @@ export default {
   retrieve(req, res, next) {
     return User.findOne({
       where: { id: req.session.user.id },
-      include: [{
-        model: Recipe,
-        as: 'recipes'
-      }]
+      include: [
+        {
+          model: Recipe,
+          as: 'recipes',
+        },
+      ],
     })
       .then(user => res.status(200).send(user))
       .catch(next);
-  }
+  },
 };
