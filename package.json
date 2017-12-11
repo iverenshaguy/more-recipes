@@ -14,8 +14,10 @@
     "start:client": "node client/scripts/start.js",
     "build:server": "cross-env NODE_ENV=development babel server/src -d server/build",
     "build:client": "node client/scripts/build.js",
-    "test:server": "cross-env NODE_ENV=test nyc mocha server/tests/test.js --recursive --timeout 30000",
-    "test:server:watch": "cross-env NODE_ENV=test nyc mocha server/tests/test.js --recursive --timeout 30000 --watch",
+    "test:server":
+      "cross-env NODE_ENV=test nyc mocha server/tests/test.js --recursive --timeout 30000",
+    "test:server:watch":
+      "cross-env NODE_ENV=test nyc mocha server/tests/test.js --recursive --timeout 30000 --watch",
     "test:client": "node client/scripts/test.js --env=jsdom --coverage",
     "test:client:watch": "node client/scripts/test.js --env=jsdom",
     "pretest": "npm run lint",

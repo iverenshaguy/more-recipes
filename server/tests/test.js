@@ -1,3 +1,3 @@
-import './server.test';
+import './home.test';
 import './apiroutes/api.test';
 import './helpers/helpers.test';
