@@ -1,5 +1,10 @@
 node_modules
-server/dist/*
 template
-stray_scripts
-coverage
+client/build
+client/config
+client/coverage
+client/scripts
+client/src/registerServiceWorker.js
+server/config
+server/build/
+server/coverage
