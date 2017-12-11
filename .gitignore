@@ -4,7 +4,10 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.DS_Store
+.gitattributes
 .nyc_output
+.vscode
 client/build
 client/public/images/
 coverage
