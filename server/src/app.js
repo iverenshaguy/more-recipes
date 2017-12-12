@@ -1,9 +1,10 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import routes from './routes';
+import { apiRoutes } from './routes';
 import errorHandler from './middlewares/errorHandler';
 
 // Set up the express app
@@ -39,15 +40,29 @@ app.use((req, res, next) => {
   next();
 });
 
-//  Connect all our routes to our application
-app.use('/', routes);
+// Return client index.html
+app.get('/', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../../client/', 'build', 'index.html'));
+});
 
+//  Connect all our routes to our application
+app.use('/api/', apiRoutes);
+
+// Documentation
 app.use('/api/v1/docs', express.static('docs'));
 
-// Default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(409).send({
-  message: 'Where Are You Going? Page Not Found',
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '../../client/', 'build')));
+
+// Default catch-all route that sends back a not found warning for wrong api routes.
+app.get('/api/*', (req, res) => res.status(409).send({
+  message: 'Where Are You Going? Page Not Found'
 }));
+
+// Return client index.html file for unknown routes
+app.get('*', (req, res) => {
+  res.status(409).sendFile(path.resolve(__dirname, '../../client/', 'build', 'index.html'));
+});
 
 app.use(errorHandler);
 

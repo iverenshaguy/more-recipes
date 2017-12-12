@@ -3,8 +3,16 @@
   "extends": "airbnb",
   "env": {
     "node": true,
+    "browser": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "shallow": true,
+    "mount": true,
+    "toJson": true,
+    "$": true
   },
   "rules": {
     "one-var": 0,
@@ -17,20 +25,30 @@
     "import/no-unresolved": [2, { "commonjs": true }],
     "linebreak-style": ["error", "unix"],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
-    "valid-jsdoc": ["error", {
-      "requireReturn": true,
-      "requireReturnType": true,
-      "requireParamDescription": false,
-      "requireReturnDescription": true
-    }],
-    "require-jsdoc": ["error", {
+    "valid-jsdoc": [
+      "error",
+      {
+        "requireReturn": true,
+        "requireReturnType": true,
+        "requireParamDescription": false,
+        "requireReturnDescription": true
+      }
+    ],
+    "require-jsdoc": [
+      "error",
+      {
         "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
         }
-    }],
+      }
+    ],
     "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+    "react/jsx-uses-react": 2,
+    "react/react-in-jsx-scope": 2
   }
 }
