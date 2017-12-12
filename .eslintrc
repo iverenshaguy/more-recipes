@@ -3,8 +3,16 @@
   "extends": "airbnb",
   "env": {
     "node": true,
+    "browser": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    "shallow": true,
+    "mount": true,
+    "toJson": true,
+    "$": true
   },
   "rules": {
     "one-var": 0,
@@ -37,6 +45,10 @@
       }
     ],
     "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+    "react/jsx-uses-react": 2,
+    "react/react-in-jsx-scope": 2
   }
 }
