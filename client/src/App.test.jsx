@@ -1,4 +1,4 @@
-/* global expect */
+/* global shallow toJson expect */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
