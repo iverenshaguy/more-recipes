@@ -9,22 +9,18 @@ describe('App Home', () => {
         .get('/')
         .expect('Content-Type', /html/)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
           expect(res.text).to.contain('<div id="root"></div>');
 
           if (err) return done(err);
           done();
         });
     });
-  });
 
-  describe('App Fallback Route', () => {
     it('should return a fallback page', (done) => {
       request(app)
         .get('/yadayada')
         .expect('Content-Type', /html/)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(409);
           expect(res.text).to.contain('<div id="root"></div>');
 
           if (err) return done(err);
