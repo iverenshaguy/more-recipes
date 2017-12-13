@@ -40,28 +40,29 @@ app.use((req, res, next) => {
   next();
 });
 
-// Return client index.html
-app.get('/', (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, '../../client/', 'build', 'index.html'));
-});
-
-//  Connect all our routes to our application
-app.use('/api/', apiRoutes);
-
 // Documentation
 app.use('/api/v1/docs', express.static('docs'));
 
-// Serve static assets
-app.use(express.static(path.resolve(__dirname, '../../client/', 'build')));
+//  Connect all our routes to our application
+app.use('/api', apiRoutes);
 
 // Default catch-all route that sends back a not found warning for wrong api routes.
 app.get('/api/*', (req, res) => res.status(409).send({
   message: 'Where Are You Going? Page Not Found'
 }));
 
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '../../client/', 'build')));
+
+// app.get('*.js', (req, res, next) => {
+//   req.url += '.gz';
+//   res.set('Content-Encoding', 'gzip');
+//   next();
+// });
+
 // Return client index.html file for unknown routes
 app.get('*', (req, res) => {
-  res.status(409).sendFile(path.resolve(__dirname, '../../client/', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../../client/', 'build', 'index.html'));
 });
 
 app.use(errorHandler);

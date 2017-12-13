@@ -6,11 +6,15 @@
   "license": "ISC",
   "main": "server/build/bin/www.js",
   "scripts": {
-    "start": "npm-run-all start:server start:client",
+    "start": "npm run start:server",
+    "start:dev": "npm-run-all --parallel start:server:dev start:client",
     "build": "npm-run-all build:server build:client",
     "test": "npm-run-all test:server test:client",
+    "test:e2e": "cross-env NODE_ENV=test nightwatch",
+    "e2e-setup": "selenium-standalone install",
     "start:server": "node ./server/build/bin/www.js",
-    "start:server:dev": "nodemon ./server/build/bin/www.js",
+    "start:server:dev":
+      "cross-env NODE_ENV=development nodemon --exec babel-node ./server/build/bin/www.js",
     "start:client": "node client/scripts/start.js",
     "build:server": "cross-env NODE_ENV=development babel server/src -d server/build",
     "build:client": "node client/scripts/build.js",
@@ -22,13 +26,13 @@
     "test:client:watch": "node client/scripts/test.js --env=jsdom",
     "pretest": "npm run lint",
     "prebuild:init": "cd server && mkdir build",
-    "prebuild": "npm-run-all clean:server prebuild:init",
+    "prebuild": "npm-run-all clean prebuild:init",
+    "clean": "npm-run-all clean:server clean:client",
     "clean:server": "cd server && rm -rf build",
+    "clean:client": "cd client && rm -rf build",
     "lint": "eslint **/*.js --fix",
-    "coverage:server": "nyc report --reporter=text-lcov | coveralls",
-    "analyze": "source-map-explorer client/build/static/js/main.*",
-    "test:coverage": "node client/scripts/test.js -- --coverage",
-    "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "analyze": "source-map-explorer client/build/static/js/main.*"
   },
   "dependencies": {
     "autoprefixer": "^7.2.2",
@@ -42,7 +46,9 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-react-app": "^3.1.0",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.2",
@@ -75,6 +81,7 @@
     "mocha": "^3.5.3",
     "morgan": "^1.9.0",
     "multer": "^1.3.0",
+    "nightwatch": "^0.9.19",
     "node-sass": "^4.7.2",
     "npm-run-all": "^4.1.1",
     "object-assign": "^4.1.1",
@@ -130,62 +137,5 @@
     "node-sass-chokidar": "^0.0.3",
     "nodemon": "^1.12.1",
     "nyc": "^11.3.0"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "per-file": true,
-    "lines": 90,
-    "statements": 90,
-    "functions": 90,
-    "branches": 90,
-    "require": ["babel-register"],
-    "exclude": [
-      "**/*.test.js",
-      "**/__tests__/**",
-      "**/node_modules/**",
-      "nightwatch.conf.js",
-      "gulpfile.babel.js",
-      "client",
-      "server/config",
-      "server/coverage/**",
-      "server/src/models/index.js",
-      "server/tests/**",
-      "server/test{,-*}.js"
-    ],
-    "reporter": ["lcov", "text"],
-    "sourceMap": false,
-    "instrument": false,
-    "cache": true,
-    "report-dir": "./server/coverage"
-  },
-  "jest": {
-    "collectCoverageFrom": ["<rootDir>/client/src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/client/config/polyfills.js"],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/nightwatch.conf.js",
-      "<rootDir>/gulpfile.babel.js",
-      "<rootDir>/node_modules/",
-      "<rootDir>/client/src/index.js",
-      "<rootDir>/client/src/registerServiceWorker.js",
-      "<rootDir>/client/scripts",
-      "<rootDir>/server/"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/client/src/setupTests.js",
-    "testMatch": [
-      "<rootDir>/client/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/client/src/**/?(*.)(spec|test).{js,jsx,mjs}"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/client/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/client/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    },
-    "moduleFileExtensions": ["web.js", "mjs", "js", "json", "web.jsx", "jsx", "node"]
   }
 }
