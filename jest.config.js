@@ -7,9 +7,9 @@ module.exports = {
     '<rootDir>/gulpfile.babel.js',
     '<rootDir>/node_modules/',
     '<rootDir>/client/src/index.js',
-    '<rootDir>/client/scripts',
+    '<rootDir>/client/scripts/',
     '<rootDir>/server/',
-    '<rootDir>/client/config',
+    '<rootDir>/client/config/',
   ],
   setupTestFrameworkScriptFile: '<rootDir>/client/src/setupTests.js',
   testMatch: [

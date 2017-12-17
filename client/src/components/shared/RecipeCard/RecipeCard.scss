@@ -1,0 +1,39 @@
+@import '../../../assets/scss/_modules.scss';
+
+.recipe-card .card, .category-card .card, .user-profile-cards .card, .dropdown-menu {
+  box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-card a, .category-card a {
+  text-decoration: none;
+  color: initial;
+}
+
+.recipe-card:hover .card, .category-card:hover .card {
+  -ms-transform: scale(1.025);
+  -webkit-transform: scale(1.025);
+  transform: scale(1.025);
+}
+
+.recipe-card {
+  .recipe-details {
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    padding: 0.5rem 1rem;
+  }
+
+  .recipe-tags p {
+    border: 1px solid #449D44;
+    border-radius: 0.2rem;
+
+    /*color: #636C72;*/
+    color: white;
+    margin-right: 0.3rem;
+    padding: 0.05rem 0.2rem;
+    background-color: #449D44;
+  }
+
+  img {
+    width: 100% !important;
+  }
+}
