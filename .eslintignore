@@ -1,5 +1,6 @@
 node_modules
 template
+client/assets
 client/build
 client/config
 client/coverage
