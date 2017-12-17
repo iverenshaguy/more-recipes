@@ -20,6 +20,7 @@ exclude_paths:
 - "client/coverage"
 - "client/reports"
 - "client/scripts"
+- "client/src/assets"
 - "server/config"
 - "server/coverage"
 - "server/src/migrations"
