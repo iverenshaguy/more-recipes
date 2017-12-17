@@ -8,19 +8,19 @@
 
   "selenium": {
     "start_process": true,
-    "server_path": "node_modules/selenium-standalone/.selenium/selenium-server/3.7.1-server.jar",
+    "server_path": "./client/bin/.selenium/selenium-server/3.7.1-server.jar",
     "log_path": "./client/reports",
     "host": "127.0.0.1",
     "port": 4444,
     "cli_args": {
       "webdriver.chrome.driver":
-        "node_modules/selenium-standalone/.selenium/chromedriver/2.33-x64-chromedriver.exe",
+        "./client/bin/.selenium/chromedriver/2.33-x64-chromedriver.exe",
       "webdriver.ie.driver":
-        "node_modules/selenium-standalone/.selenium/iedriver/3.7.0-x64-IEDriverServer.exe",
+        "./client/bin/.selenium/iedriver/3.7.0-x64-IEDriverServer.exe",
       "webdriver.gecko.driver":
-        "node_modules/selenium-standalone/.selenium/geckodriver/0.19.1-x64-geckodriver.exe",
+        "./client/bin/.selenium/geckodriver/0.19.1-x64-geckodriver.exe",
       "webdriver.edge.driver":
-        "node_modules/selenium-standalone/.selenium/edgedriver/16299-MicrosoftEdgeDriver.exe"
+        "./client/bin/.selenium/edgedriver/16299-MicrosoftEdgeDriver.exe"
     }
   },
 

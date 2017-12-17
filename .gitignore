@@ -11,6 +11,7 @@
 .vscode
 client/build
 client/public/images/
+client/bin/.selenium
 coverage
 node_modules
 server/build

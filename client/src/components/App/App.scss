@@ -1,0 +1,174 @@
+@import '../../assets/scss/_modules.scss';
+body:not(.user-profile) {
+  background: $background-gradient,
+    url('../../assets/images/background.jpg') #ffe9ba no-repeat fixed;
+  background-size: cover;
+  margin: 0;
+}
+
+a,
+.text-green {
+  color: $light-green;
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    color: $green;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+  }
+}
+
+h4 {
+  font-weight: 400;
+}
+
+input {
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none !important;
+    border: 1px solid $light-green;
+  }
+}
+
+select {
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none !important;
+    border: 1px solid $light-green;
+  }
+}
+
+form {
+  small {
+    font-size: 1.05em;
+  }
+  &-control:focus {
+    border-color: $green;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+      0px 0px 8px rgba(27, 94, 32, 0.8);
+  }
+}
+
+.breadcrumb li {
+  a {
+    color: #636c72;
+  }
+  &:hover,
+  &:focus,
+  &:active {
+    color: $green;
+  }
+}
+
+.background-grey {
+  background-color: $background-grey;
+}
+
+.fa-star,
+.fa-star-o {
+  color: #f1c40f;
+}
+
+.fa-heart,
+.fa-heart-o {
+  color: red;
+}
+
+.fa-thumbs-up,
+.fa-thumbs-o-up {
+  color: #f1c40f;
+}
+
+.fa-thumbs-down,
+.fa-thumbs-o-down {
+  color: #636c72;
+}
+
+.fa-facebook {
+  color: #3b5998;
+}
+
+.fa-twitter {
+  color: #1da1f3;
+}
+
+.fa-pinterest {
+  color: #c92228;
+}
+
+.fa-home {
+  font-size: 1.5rem !important;
+}
+
+.btn {
+  &:not(.btn-danger) {
+    color: white;
+    background-color: $light-green;
+    border: 1px solid $light-green;
+    border-radius: 3px;
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  &:not(.btn-danger) {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: white;
+      background-color: $green;
+      border: 1px solid $green;
+    }
+  }
+
+  li {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      color: white;
+      background-color: $green;
+      border: 1px solid $green;
+    }
+  }
+}
+
+#search {
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+  border: 1px solid white !important;
+  border-right: none !important;
+  box-shadow: none !important;
+
+  &:focus,
+  &:active {
+    border-right: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.search-btn {
+  background-color: white !important;
+  border: 1px solid white !important;
+  outline: none !important;
+  color: $light-green !important;
+  box-shadow: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $green !important;
+    cursor: pointer !important;
+    border-left: none;
+  }
+}

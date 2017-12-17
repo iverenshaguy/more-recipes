@@ -176,6 +176,7 @@ module.exports = {
                       // Necessary for external CSS imports to work
                       // https://github.com/facebookincubator/create-react-app/issues/2677
                       ident: 'postcss',
+                      sourceMap: true,
                       plugins: () => [
                         FlexBugFix,
                         autoprefixer({
@@ -239,6 +240,7 @@ module.exports = {
                       // Necessary for external CSS imports to work
                       // https://github.com/facebookincubator/create-react-app/issues/2677
                       ident: 'postcss',
+                      sourceMap: true,
                       plugins: () => [
                         FlexBugFix,
                         autoprefixer({
@@ -248,7 +250,7 @@ module.exports = {
                             'Firefox ESR',
                             'not ie < 9' // React doesn't support IE8 anyway
                           ],
-                          flexbox: 'no-2009'
+                          flexbox: 'no-2009',
                         })
                       ]
                     }
@@ -258,6 +260,12 @@ module.exports = {
               extractTextPluginOptions
             ))
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          { test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000&name=[path][name].[ext]' },
+          { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[path][name].[ext]' },
+          {
+            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+            loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=[path][name].[ext]'
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
