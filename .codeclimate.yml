@@ -15,6 +15,7 @@ exclude_paths:
 - "**.min.css"
 - "node_modules/"
 - "template"
+- "client/assets"
 - "client/config"
 - "client/coverage"
 - "client/reports"
