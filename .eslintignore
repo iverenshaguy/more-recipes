@@ -1,10 +1,10 @@
 node_modules
 template
-client/assets
 client/build
 client/config
 client/coverage
 client/scripts
+client/src/assets
 client/src/registerServiceWorker.js
 server/config
 server/build/
