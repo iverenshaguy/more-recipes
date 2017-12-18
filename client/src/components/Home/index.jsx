@@ -11,6 +11,11 @@ import './Home.scss';
  * @returns {component} Home
  */
 class Home extends Component {
+  static propTypes = {
+    toggleModal: PropTypes.func.isRequired,
+    updateLocationState: PropTypes.func.isRequired,
+  };
+
   /**
    * @memberof Home
    * @returns {function} updateLocationState
@@ -32,10 +37,5 @@ class Home extends Component {
     );
   }
 }
-
-Home.propTypes = {
-  toggleModal: PropTypes.func.isRequired,
-  updateLocationState: PropTypes.func.isRequired,
-};
 
 export default Home;

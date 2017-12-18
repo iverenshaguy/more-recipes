@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from '../index';
+import Home from '../../Home';
+import LoginSignup from '../../LoginSignup';
 
 describe('App', () => {
   it('renders without crashing', () => {
@@ -49,5 +52,18 @@ describe('App', () => {
     expect(toJson(mountedWrapper)).toMatchSnapshot();
     expect(mountedWrapper.instance().state.location).toBe('home');
     mountedWrapper.unmount();
+  });
+
+  it('renders correct routes', () => {
+    const wrapper = shallow(<App />);
+    const routePath = wrapper.find(Route).reduce((pathMap, route) => {
+      const routeProps = route.props();
+      pathMap[routeProps.path] = routeProps.render();
+      return pathMap;
+    }, {});
+
+    expect(routePath['/'].type).toBe(Home);
+    expect(routePath['/login'].type).toBe(LoginSignup);
+    expect(routePath['/signup'].type).toBe(LoginSignup);
   });
 });

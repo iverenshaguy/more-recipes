@@ -51,5 +51,6 @@
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "react/jsx-uses-react": 2,
     "react/react-in-jsx-scope": 2
-  }
+  },
+  "parser": "babel-eslint"
 }

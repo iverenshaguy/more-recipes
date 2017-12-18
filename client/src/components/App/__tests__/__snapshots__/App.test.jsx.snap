@@ -30,10 +30,12 @@ exports[`App changes addRecipeModal state when Add Recipe Button is clicked 1`] 
       >
         <Header
           auth={true}
+          type="home"
         >
           <header>
             <NavbarWrapper
               auth={true}
+              type="home"
             >
               <Navbar
                 className="navbar-expand"
@@ -1705,10 +1707,12 @@ exports[`App changes location state when location changes to Home 1`] = `
       >
         <Header
           auth={true}
+          type="home"
         >
           <header>
             <NavbarWrapper
               auth={true}
+              type="home"
             >
               <Navbar
                 className="navbar-expand"
@@ -3349,10 +3353,12 @@ exports[`App changes socialModal state when Share Recipe Icon in StickyBar is cl
       >
         <Header
           auth={true}
+          type="home"
         >
           <header>
             <NavbarWrapper
               auth={true}
+              type="home"
             >
               <Navbar
                 className="navbar-expand"
@@ -5000,6 +5006,7 @@ exports[`App renders correctly 1`] = `
   >
     <Header
       auth={true}
+      type=""
     />
     <div
       className="content"
@@ -5008,6 +5015,14 @@ exports[`App renders correctly 1`] = `
         <Route
           exact={true}
           path="/"
+          render={[Function]}
+        />
+        <Route
+          path="/login"
+          render={[Function]}
+        />
+        <Route
+          path="/signup"
           render={[Function]}
         />
       </Switch>

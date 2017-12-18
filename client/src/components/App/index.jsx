@@ -8,6 +8,7 @@ import Footer from '../shared/Footer';
 import StickyBar from '../shared/StickyBar';
 import Modal from '../shared/Modals';
 import Home from '../Home';
+import LoginSignup from '../LoginSignup';
 import './App.scss';
 
 /**
@@ -27,9 +28,6 @@ class App extends Component {
       socialModal: false,
       location: '',
     };
-
-    this.toggleModal = this.toggleModal.bind(this);
-    this.updateLocationState = this.updateLocationState.bind(this);
   }
 
   /**
@@ -37,22 +35,22 @@ class App extends Component {
    * @param {string} location
    * @return {state} New location State
    */
-  updateLocationState(location) {
+  updateLocationState = (location) => {
     this.setState({
       location,
     });
-  }
+  };
 
   /**
    * @memberof App
    * @param {string} modal - Type of Modal
    * @override
    */
-  toggleModal(modal) {
+  toggleModal = (modal) => {
     this.setState(prevState => ({
       [modal]: !prevState[modal],
     }));
-  }
+  };
 
   /**
    * @memberof App
@@ -62,7 +60,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
-          <Header auth />
+          <Header auth type={this.state.location} />
           <div className="content">
             <Switch>
               <Route
@@ -74,6 +72,18 @@ class App extends Component {
                     toggleModal={this.toggleModal}
                     updateLocationState={this.updateLocationState}
                   />
+                )}
+              />
+              <Route
+                path="/login"
+                render={props => (
+                  <LoginSignup {...props} updateLocationState={this.updateLocationState} login />
+                )}
+              />
+              <Route
+                path="/signup"
+                render={props => (
+                  <LoginSignup {...props} updateLocationState={this.updateLocationState} signup />
                 )}
               />
             </Switch>

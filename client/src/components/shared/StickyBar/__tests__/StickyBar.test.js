@@ -20,6 +20,26 @@ describe('StickyBar', () => {
     wrapper.unmount();
   });
 
+  it("renders no sticky bar when type 'login' is passed", () => {
+    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="login" />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+
+    expect(wrapper.instance()).toBeNull();
+
+    wrapper.unmount();
+  });
+
+  it("renders no sticky bar when type 'signup' is passed", () => {
+    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="signup" />);
+
+    expect(toJson(wrapper)).toMatchSnapshot();
+
+    expect(wrapper.instance()).toBeNull();
+
+    wrapper.unmount();
+  });
+
   it("renders share icon when type 'home' is passed", () => {
     const wrapper = mount(<StickyBar toggleModal={toggleMock} type="home" />);
 
