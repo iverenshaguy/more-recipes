@@ -11,6 +11,7 @@
   "globals": {
     "shallow": true,
     "mount": true,
+    "expect": true,
     "render": true,
     "toJson": true,
     "$": true
