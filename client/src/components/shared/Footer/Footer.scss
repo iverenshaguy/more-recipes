@@ -1,0 +1,40 @@
+@import '../../../assets/scss/_modules.scss';
+
+.footer {
+  position: absolute;
+  z-index: -5;
+  /* bottom: 0; */
+  width: 100%;
+  line-height: 2rem;
+  padding-top: 1rem;
+  background-color: transparent;
+  color: white !important;
+  text-align: center;
+
+  @at-root .login-signup-body & {
+    line-height: 1rem;
+  }
+
+  @at-root .search-recipes &,
+    .view-recipe &,
+    .add-recipe &,
+    .favorite-recipes & {
+    position: relative;
+  }
+
+  @at-root .user-recipe & {
+    line-height: 0.5rem;
+  }
+
+  @at-root .user-profile & {
+    position: relative;
+    line-height: 2rem;
+    color: $darkgrey !important;
+  }
+
+  @media only screen and (max-width: 500px) {
+    & {
+      position: relative;
+    }
+  }
+}

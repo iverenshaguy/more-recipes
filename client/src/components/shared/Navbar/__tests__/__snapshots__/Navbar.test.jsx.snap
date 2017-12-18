@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly when authenticated 1`] = `
+<Navbar
+  className="navbar-expand"
+  color="faded"
+  expand={false}
+  id="more-recipes-navbar"
+  light={true}
+  tag="nav"
+>
+  <NavLink
+    activeClassName="active"
+    ariaCurrent="true"
+    className="navbar-brand"
+    to="/"
+  >
+    MORE RECIPES
+  </NavLink>
+  <div
+    className="collapse navbar-collapse justify-content-between"
+    id="navbarNav"
+  >
+    <Nav
+      className="ml-auto"
+      navbar={true}
+      tag="ul"
+      vertical={false}
+    >
+      <NavItem
+        tag="li"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          className="nav-link"
+          to="/"
+        >
+          <FontAwesome
+            name="home"
+          />
+        </NavLink>
+      </NavItem>
+      <UncontrolledDropdown
+        className="justify-content-start notifications-link"
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="bell"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <div
+            className="container-fluid"
+          >
+            <p>
+              You have a new review
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              3 people viewed your recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Review your security details
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Chef Steve just posted a new recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              1 person added your recipe to their favorites
+            </p>
+          </div>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <div
+          className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline"
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            color="secondary"
+            nav={true}
+          >
+            <img
+              alt="User"
+              className="rounded-cirle"
+              src="images/profile/user1.jpg"
+            />
+             Jane
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            right={true}
+            tag="div"
+          >
+            <a
+              className="dropdown-item"
+              href="user-profile.html"
+            >
+              Profile
+            </a>
+            <a
+              className="dropdown-item"
+            >
+              Edit Profile
+            </a>
+            <div
+              className="dropdown-divider"
+            />
+            <a
+              className="dropdown-item"
+              href="user-profile.html"
+            >
+              My Recipes
+            </a>
+            <div
+              className="dropdown-divider"
+            />
+            <a
+              className="dropdown-item"
+            >
+              Settings
+            </a>
+            <div
+              className="dropdown-divider"
+            />
+            <a
+              className="dropdown-item"
+            >
+              Log out
+            </a>
+          </DropdownMenu>
+        </div>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          className="menu-dropdown"
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="reorder"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <a
+            className="dropdown-item add-recipe"
+            data-toggle="modal"
+            href="#add-edit-modal"
+            title="New Recipe"
+          >
+            Add a Recipe
+          </a>
+          <a
+            className="dropdown-item"
+            href="search-recipes-user.html"
+          >
+            All Recipes
+          </a>
+          <a
+            className="dropdown-item get-favorites"
+            href="user-profile.html"
+          >
+            Favorite Recipes
+          </a>
+          <a
+            className="dropdown-item"
+            href="top-recipes-user.html"
+          >
+            Top Recipes
+          </a>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </Nav>
+  </div>
+</Navbar>
+`;
+
+exports[`Home renders correctly when not authenticated 1`] = `
+<div>
+  <Navbar
+    color="faded"
+    expand="md"
+    id="more-recipes-navbar"
+    light={true}
+    tag="nav"
+  >
+    <NavLink
+      activeClassName="active"
+      ariaCurrent="true"
+      className="navbar-brand"
+      to="/"
+    >
+      MORE RECIPES
+    </NavLink>
+  </Navbar>
+</div>
+`;

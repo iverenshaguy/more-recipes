@@ -2,7 +2,7 @@ import del from 'del';
 import path from 'path';
 import { sequelize, Recipe, User, Review } from '../models';
 
-const uploadPath = path.resolve(__dirname, '../../../public/images/recipes');
+const uploadPath = path.resolve(__dirname, '../../../client/public/images/recipes');
 
 export default {
   create(req, recipeData, res, next) {

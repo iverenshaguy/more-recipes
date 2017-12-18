@@ -103,16 +103,19 @@ form small {
     color: #F1C40F;
 }
 
-.fa-heart {
+.fa-heart,
+.fa-heart-o {
     color: red;
 }
 
-.fa-thumbs-up {
+.fa-thumbs-up,
+.fa-thumbs-o-up  {
     color: #F1C40F;
 }
 
-.fa-thumbs-down {
-    color: #F1C40F;
+.fa-thumbs-down,
+.fa-thumbs-o-down {
+    color: #636c72;
 }
 
 .fa-facebook {
@@ -246,9 +249,6 @@ form small {
     #more-recipes-navbar #search-form {
         display: none;
     }
-    #result-search-form-div {
-        display: block;
-    }
 }
 
 .navbar a.nav-link {
@@ -257,14 +257,7 @@ form small {
 
 .navbar .dropdown-menu {
     position: absolute!important;
-    left: 0%!important;
-}
-
-@media only screen and (max-width: 575px) {
-    .navbar .dropdown-menu {
-        position: absolute!important;
-        left: -200%!important;
-    }
+    right: 0%!important;
 }
 
 .navbar .btn {
@@ -333,14 +326,24 @@ form small {
 }
 
 #more-recipes-navbar.affix .nav-item>a,
+#more-recipes-navbar.affix.navbar a.nav-link,
 #more-recipes-navbar.affix .navbar-brand,
 #more-recipes-navbar.affix .fa-heart {
     color: #333!important;
 }
 
 .page-margin {
-    margin-top: 5rem;
+    margin-top: 1.5rem;
     margin-bottom: 5rem;
+}
+
+.sticky-bar-wrapper {
+    width: 100%;
+    /*height: 6rem;*/
+    /* padding: 0 0; */
+    position: fixed;
+    bottom: 0;
+    color: white;
 }
 
 .sticky-bar {
@@ -348,13 +351,121 @@ form small {
     /*height: 6rem;*/
     background-color: #d50000;
     padding: 1rem 0;
-    position: fixed;
-    bottom: 0;
+    /* bottom: 0; */
     color: white;
 }
 
 .sticky-bar i {
     color: white!important;
+}
+
+.user-profile .sticky-bar a:first-child,
+.favorite-recipes .sticky-bar a:first-child,
+.user-recipe .sticky-bar a:first-child,
+.top-recipes .sticky-bar a:first-child,
+.search-recipes .sticky-bar a:first-child,
+.view-recipe .sticky-bar a:first-child  {
+    padding-left: 0em;
+}
+
+.view-recipe .sticky-bar a {
+    padding-right: 1.5em;
+}
+
+.user-profile .sticky-bar a,
+.favorite-recipes .sticky-bar a,
+.user-recipe .sticky-bar a,
+.top-recipes .sticky-bar a,
+.search-recipes .sticky-bar a {
+    padding-right: 2.5em;
+}
+
+.view-recipe .sticky-bar a:last-child {
+    padding-right: .5em;
+}
+
+.user-profile .sticky-bar a:last-child,
+.favorite-recipes .sticky-bar a:last-child,
+.user-recipe .sticky-bar a:last-child,
+.top-recipes .sticky-bar a:last-child,
+.search-recipes .sticky-bar a:last-child  {
+    padding-right: 1em;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 576px) {
+    .user-profile .sticky-bar a:first-child,
+    .favorite-recipes .sticky-bar a:first-child,
+    .user-recipe .sticky-bar a:first-child,
+    .top-recipes .sticky-bar a:first-child,
+    .search-recipes .sticky-bar a:first-child {
+        padding-left: 0em;
+    }
+    
+    .user-profile .sticky-bar a,
+    .favorite-recipes .sticky-bar a,
+    .user-recipe .sticky-bar a,
+    .top-recipes .sticky-bar a,
+    .search-recipes .sticky-bar a {
+        padding-right: 7em;
+    }
+
+    .user-profile .sticky-bar a:last-child,
+    .favorite-recipes .sticky-bar a:last-child,
+    .user-recipe .sticky-bar a:last-child,
+    .top-recipes .sticky-bar a:last-child,
+    .search-recipes .sticky-bar a:last-child {
+        padding-right: 2em;
+    }
+
+    .view-recipe .sticky-bar a:first-child {
+        padding-left: 0em;
+    }
+
+    .view-recipe .sticky-bar a {
+        padding-right: 4.2em;
+    }
+
+    .view-recipe .sticky-bar a:last-child {
+        padding-right: .2em;
+    }
+}
+
+@media only screen and (max-width: 575px) and (min-width: 450px) {
+    .user-profile .sticky-bar a:first-child,
+    .favorite-recipes .sticky-bar a:first-child,
+    .user-recipe .sticky-bar a:first-child,
+    .top-recipes .sticky-bar a:first-child,
+    .search-recipes .sticky-bar a:first-child {
+        padding-left: 2em;
+    }
+    
+    .user-profile .sticky-bar a,
+    .favorite-recipes .sticky-bar a,
+    .user-recipe .sticky-bar a,
+    .top-recipes .sticky-bar a,
+    .search-recipes .sticky-bar a {
+        padding-right: 5em;
+    }
+
+    .user-profile .sticky-bar a:last-child,
+    .favorite-recipes .sticky-bar a:last-child,
+    .user-recipe .sticky-bar a:last-child,
+    .top-recipes .sticky-bar a:last-child,
+    .search-recipes .sticky-bar a:last-child {
+        padding-right: 2em;
+    }
+
+    .view-recipe .sticky-bar a:first-child {
+        padding-left: .5em;
+    }
+
+    .view-recipe .sticky-bar a {
+        padding-right: 2em;
+    }
+
+    .view-recipe .sticky-bar a:last-child {
+        padding-right: .5em;
+    }
 }
 
 #call-to-action {
@@ -382,13 +493,13 @@ form small {
 }
 
 .home #hero-image {
-    height: 100vh;
+    height: 40vh;
     max-width: 100%;
     position: relative;
 }
 
 .home #hero-image-text {
-    padding-top: 30vh;
+    padding-top: 10vh;
     width: 100%;
     color: white;
     text-align: center;
@@ -523,7 +634,7 @@ form small,
 .footer {
     position: absolute;
     z-index: -5;
-    bottom: 0;
+    /* bottom: 0; */
     width: 100%;
     line-height: 2rem;
     padding-top: 1rem;
@@ -870,6 +981,16 @@ form small,
     }
 }
 
+#side-rating-toolbar .fa-star,
+#side-rating-toolbar .fa-star-o,
+#side-rating-toolbar .fa-heart,
+#side-rating-toolbar .fa-heart-o,
+#side-rating-toolbar .fa-thumbs-up,
+#side-rating-toolbar .fa-thumbs-o-up,
+#side-rating-toolbar .fa-thumbs-down,
+#side-rating-toolbar .fa-thumbs-o-down {
+    color: #2E7D32;
+}
 
 /*REVIEW WRAPPER*/
 
@@ -890,7 +1011,7 @@ body.user-profile {
     background-color: #F5F6FE!important;
 }
 
-.user-profile-div {}
+/* .user-profile-div {} */
 
 .user-profile .navbar {
     background-color: white;
@@ -919,7 +1040,7 @@ body.user-profile {
 
 .user-profile-hero {
     width: 100%;
-    height: 38vh;
+    height: 12vh;
     background: url('../images/chicken-fajitas.jpg') #fff no-repeat;
     background-size: cover;
     position: relative;
@@ -927,7 +1048,11 @@ body.user-profile {
 }
 
 .profile-picture {
-    margin-top: -10vh;
+    margin-top: -11vh;
+}
+
+.black {
+    color: #333;
 }
 
 .user-profile-details {
@@ -937,23 +1062,27 @@ body.user-profile {
     height: 4rem;
 }
 
+@media only screen and (min-width: 768px) {
+    .user-profile-details {
+        border-bottom: 0px solid #dfdfdf;
+    }
+}
+
 .user-profile-details p {
     font-size: 1.2rem;
     text-transform: uppercase;
 }
 
-.profile-details small {
-    font-size: 1.15rem;
-}
-
-.profile-details p {
-   font-size: 1.2rem;
-}
-
 .user-profile .card-img-top {
-    height: 10rem!important;
+    height: 8rem!important;
     width: 100%;
 }
+
+.user-profile .card-block {
+    padding-top: 0.5em!important;
+    padding-bottom: 0.5em!important;
+}
+
 
 .user-profile .card-top {
     height: 10rem!important;
@@ -965,15 +1094,25 @@ body.user-profile {
 }
 
 .user-info .name {
-    font-size: 2rem;
+    font-size: 1.5rem;
+}
+
+.user-info .name-div {
+    border-right: 0px solid #dfdfdf;
+}
+
+@media only screen and (min-width: 768px) {
+    .user-info .name-div {
+        border-right: 1px solid #dfdfdf;
+    }
 }
 
 .user-info .username {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .user-info .about-me {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
 .user-profile-cards {
@@ -984,17 +1123,68 @@ body.user-profile {
     margin-top: -3rem;
 }
 
+.add-recipe-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333;
+}
+
+.add-category-text {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333;
+    /* padding-top: 0px; */
+}
+
+.category-card p {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.user-info .recipe-count p {
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+.user-dashboard-pills {
+    padding: 2em 5em 0.5em;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #bababa;
+    border-radius: 20px;
+    color: #333;
+}
+
+.settings-collapse .heading a {
+    border-radius: 5px;
+    color: #333;
+    /* font-size: 1em; */
+    /* font-weight: bold; */
+    padding: .4em 1em .5em;
+    text-transform: uppercase;
+}
+
+.nav-pills .nav-link {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: .4em 1em .5em;
+    text-transform: uppercase;
+}
+
 .nav-profile-picture-div {
-    height: 2.6rem;
-    width: 2.8rem;
+    height: 2rem;
+    width: 2rem;
     text-transform: capitalize;
     border-radius: 50%;
     /*margin-top: -0.06rem;*/
 }
 
 .nav-profile-picture-div img {
-    height: 2.6rem;
-    width: 2.8rem;
+    height: 2rem;
+    width: 2rem;
     text-transform: capitalize;
     border-radius: 50%;
     margin-top: -0.3rem;
@@ -1114,14 +1304,11 @@ body.user-profile {
 
 .nav-profile-picture-div .dropdown-menu {
     width: 20%;
-    left: -260%!important;
-    right: 100%!important;
 }
 
 .notifications-link .dropdown-menu {
     width: 40%!important;
-    left: 60%!important;
-    right: 0!important;
+    left: 58%!important;
 }
 
 .user-recipe .footer {
@@ -1129,9 +1316,8 @@ body.user-profile {
 }
 
 .recipe-img-div {
-    width: 100%;
-    height: 20rem;
-    background-color: #dfdfdf;
+    padding-left: 0rem;
+    padding-right: 0rem;
 }
 
 #recipe-photo-preview {
@@ -1174,16 +1360,57 @@ body.user-profile {
 /*ALERTS*/
 
 .notif {
-    display: none;
     position: fixed;
     top: 78%;
     left: 65%;
+    opacity: 0.8;
+    font-size: 1.1em;
+}
+
+.notif#unauthorised-alert {
+    left: 55%;
+    border: 1px solid #C4B390!important;
+}
+
+@media only screen and (max-width: 768px) {
+    .notif#unauthorised-alert {
+        top: 68%;
+        left: 55%;
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .notif#unauthorised-alert {
+        top: 68%;
+        left: 30%;
+    }
 }
 
 .alert#favorited,
-.alert#liked {
+.alert#upvoted,
+.alert#downvoted,
+.alert#reviewed {
 	border: 1px solid #2E7D32!important;
 }
-.alert#downvoted {
-	border: 1px solid #D50000!important;
+
+.alert#favorited.hide,
+.alert#upvoted.hide,
+.alert#downvoted.hide,
+.alert#unauthorised-alert.hide,
+.alert#reviewed.hide {
+    display: none;
+}
+
+.section-rating-label input {
+    display: none;
+}
+
+.ingredient-div-child,
+.preparation-div-child,
+.direction-div-child {
+    margin-top: 1rem;
+}
+
+.black {
+    color: #333;
 }

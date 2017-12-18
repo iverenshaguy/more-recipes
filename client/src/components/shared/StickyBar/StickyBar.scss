@@ -1,0 +1,143 @@
+.sticky-bar-wrapper {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  color: white;
+}
+
+.sticky-bar {
+  width: 100%;
+
+  /*height: 6rem;*/
+  background-color: #d50000;
+  padding: 1rem 0;
+
+  /* bottom: 0; */
+  color: white;
+
+  i,
+  span {
+    color: white !important;
+  }
+}
+
+.home .sticky-bar a:first-child,
+.user-profile .sticky-bar a:first-child,
+.favorite-recipes .sticky-bar a:first-child,
+.user-recipe .sticky-bar a:first-child,
+.top-recipes .sticky-bar a:first-child,
+.search-recipes .sticky-bar a:first-child {
+  padding-left: 0em;
+}
+
+.view-recipe .sticky-bar a {
+  &:first-child {
+    padding-left: 0em;
+  }
+
+  padding-right: 1.5em;
+}
+
+.home .sticky-bar a,
+.user-profile .sticky-bar a,
+.favorite-recipes .sticky-bar a,
+.user-recipe .sticky-bar a,
+.top-recipes .sticky-bar a,
+.search-recipes .sticky-bar a {
+  padding-right: 2.5em;
+}
+
+.view-recipe .sticky-bar a:last-child {
+  padding-right: 0.5em;
+}
+
+.home .sticky-bar a:last-child,
+.user-profile .sticky-bar a:last-child,
+.favorite-recipes .sticky-bar a:last-child,
+.user-recipe .sticky-bar a:last-child,
+.top-recipes .sticky-bar a:last-child,
+.search-recipes .sticky-bar a:last-child {
+  padding-right: 1em;
+}
+
+@media only screen and (max-width: 768px) and (min-width: 576px) {
+  .home .sticky-bar a:first-child,
+  .user-profile .sticky-bar a:first-child,
+  .favorite-recipes .sticky-bar a:first-child,
+  .user-recipe .sticky-bar a:first-child,
+  .top-recipes .sticky-bar a:first-child,
+  .search-recipes .sticky-bar a:first-child {
+    padding-left: 0em;
+  }
+
+  .home .sticky-bar a,
+  .user-profile .sticky-bar a,
+  .favorite-recipes .sticky-bar a,
+  .user-recipe .sticky-bar a,
+  .top-recipes .sticky-bar a,
+  .search-recipes .sticky-bar a {
+    padding-right: 7em;
+  }
+
+  .home .sticky-bar a:last-child,
+  .user-profile .sticky-bar a:last-child,
+  .favorite-recipes .sticky-bar a:last-child,
+  .user-recipe .sticky-bar a:last-child,
+  .top-recipes .sticky-bar a:last-child,
+  .search-recipes .sticky-bar a:last-child {
+    padding-right: 2em;
+  }
+
+  .view-recipe .sticky-bar a {
+    &:first-child {
+      padding-left: 0em;
+    }
+
+    padding-right: 4.2em;
+
+    &:last-child {
+      padding-right: 0.2em;
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) and (min-width: 450px) {
+  .home .sticky-bar a:first-child,
+  .user-profile .sticky-bar a:first-child,
+  .favorite-recipes .sticky-bar a:first-child,
+  .user-recipe .sticky-bar a:first-child,
+  .top-recipes .sticky-bar a:first-child,
+  .search-recipes .sticky-bar a:first-child {
+    padding-left: 2em;
+  }
+
+  .home .sticky-bar a,
+  .user-profile .sticky-bar a,
+  .favorite-recipes .sticky-bar a,
+  .user-recipe .sticky-bar a,
+  .top-recipes .sticky-bar a,
+  .search-recipes .sticky-bar a {
+    padding-right: 5em;
+  }
+
+  .home .sticky-bar a:last-child,
+  .user-profile .sticky-bar a:last-child,
+  .favorite-recipes .sticky-bar a:last-child,
+  .user-recipe .sticky-bar a:last-child,
+  .top-recipes .sticky-bar a:last-child,
+  .search-recipes .sticky-bar a:last-child {
+    padding-right: 2em;
+  }
+
+  .view-recipe .sticky-bar a {
+    &:first-child {
+      padding-left: 0.5em;
+    }
+
+    padding-right: 2em;
+
+    &:last-child {
+      padding-right: 0.5em;
+    }
+  }
+}
