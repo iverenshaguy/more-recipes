@@ -1,0 +1,17 @@
+options:
+  merge-default-rules: true
+files:
+  include: 'client/src/**/*.scss'
+  ignore:
+  - 'template/src/assets/font-awesome/*.scss'
+  - 'template/src/assets/kitchen-font/_flaticon.scss'
+  - 'template/src/assets/kitchen-font/*.scss'
+  - 'client/src/assets/**/*.scss'
+rules:
+  nesting-depth:
+    - 1
+    -
+      max-depth: 4
+  no-ids: 0
+  leading-zero: 0
+  no-important: 0

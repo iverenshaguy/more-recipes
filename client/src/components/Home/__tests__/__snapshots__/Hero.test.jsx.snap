@@ -35,7 +35,7 @@ exports[`Home: Hero renders correctly 1`] = `
             >
               <Label
                 className="sr-only"
-                htmlFor="search"
+                for="search"
                 tag="label"
                 widths={
                   Array [
@@ -133,7 +133,7 @@ exports[`Home: Hero renders correctly when mouted fully 1`] = `
                   >
                     <Label
                       className="sr-only"
-                      htmlFor="search"
+                      for="search"
                       tag="label"
                       widths={
                         Array [

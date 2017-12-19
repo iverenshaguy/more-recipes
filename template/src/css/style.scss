@@ -2,7 +2,7 @@
 @import '../../assets/scss/_modules.scss';
 
 body:not(.user-profile) {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/background.jpg") #FFE9BA no-repeat fixed;
+  background: $background-gradient, url("../../assets/images/background.jpg") $app-background-color no-repeat fixed;
   background-size: cover;
   margin: 0;
 }
@@ -54,7 +54,7 @@ form small {
 
 .btn {
   &:not(.btn-danger) {
-    color: white;
+    color: $white;
     background-color: $light-green;
     border: 1px solid $light-green;
     border-radius: 3px;
@@ -66,7 +66,7 @@ form small {
 
   &:not(.btn-danger) {
     &:hover, &:focus, &:active, &.active {
-      color: white;
+      color: $white;
       background-color: $green;
       border: 1px solid $green;
     }
@@ -74,7 +74,7 @@ form small {
 
   li {
     &:hover, &:focus, &:active, &.active {
-      color: white;
+      color: $white;
       background-color: $green;
       border: 1px solid $green;
     }
@@ -88,7 +88,7 @@ form small {
 
 .breadcrumb li {
   a {
-    color: #636C72;
+    color: $navbar-grey;
   }
 
   &:hover, &:focus, &.active {
@@ -101,31 +101,31 @@ form small {
 }
 
 .fa-star, .fa-star-o {
-  color: #F1C40F;
+  color: $fa-gold;
 }
 
 .fa-heart, .fa-heart-o {
-  color: red;
+  color: $red;
 }
 
 .fa-thumbs-up, .fa-thumbs-o-up {
-  color: #F1C40F;
+  color: $fa-gold;
 }
 
 .fa-thumbs-down, .fa-thumbs-o-down {
-  color: #636c72;
+  color: $navbar-grey;
 }
 
 .fa-facebook {
-  color: #3b5998;
+  color: $facebook;
 }
 
 .fa-twitter {
-  color: #1DA1F3;
+  color: $twitter;
 }
 
 .fa-pinterest {
-  color: #C92228;
+  color: $pinterest;
 }
 
 .fa-home {
@@ -135,7 +135,7 @@ form small {
 #search {
   border-top-left-radius: 5px !important;
   border-bottom-left-radius: 5px !important;
-  border: 1px solid white !important;
+  border: 1px solid $white !important;
   border-right: none !important;
   box-shadow: none !important;
 
@@ -146,8 +146,8 @@ form small {
 }
 
 .search-btn {
-  background-color: white !important;
-  border: 1px solid white !important;
+  background-color: $white !important;
+  border: 1px solid $white !important;
   outline: none !important;
   color: $light-green !important;
   box-shadow: none !important;
@@ -162,7 +162,7 @@ form small {
 /*HEADER*/
 
 .navbar-brand {
-  color: white !important;
+  color: $white !important;
 }
 
 #more-recipes-navbar {
@@ -190,7 +190,7 @@ form small {
     }
 
     .input-group-btn button {
-      color: #fff;
+      color: $white;
       background-color: $light-green;
       border-color: $light-green;
     }
@@ -236,7 +236,7 @@ form small {
     }
 
     .search-icon a {
-      color: white !important;
+      color: $white !important;
 
       /*padding: 0.5rem 1rem 0 0 ;*/
     }
@@ -251,7 +251,7 @@ form small {
 
 .navbar {
   a.nav-link {
-    color: white !important;
+    color: $white !important;
   }
 
   .dropdown-menu {
@@ -260,25 +260,25 @@ form small {
   }
 
   .btn {
-    border: 1px solid white;
+    border: 1px solid $white;
     background-color: transparent;
     outline: none;
-    color: white;
+    color: $white;
 
     &:hover, &:focus, &:active {
-      color: white;
+      color: $white;
       border: 1px solid $green;
       background-color: $green;
     }
   }
 
   .fa-heart {
-    color: white;
+    color: $white;
   }
 
   li.active a {
     /*color: $green;*/
-    border-bottom: 2px solid white !important;
+    border-bottom: 2px solid $white !important;
   }
 }
 
@@ -318,7 +318,7 @@ form small {
 }
 
 #more-recipes-navbar.affix {
-  background-color: white;
+  background-color: $white;
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.1);
 
   .nav-item > a, &.navbar a.nav-link, .navbar-brand, .fa-heart {
@@ -335,7 +335,7 @@ form small {
   width: 100%;
   position: fixed;
   bottom: 0;
-  color: white;
+  color: $white;
 }
 
 .sticky-bar {
@@ -346,10 +346,10 @@ form small {
   padding: 1rem 0;
 
   /* bottom: 0; */
-  color: white;
+  color: $white;
 
   i, span {
-    color: white !important;
+    color: $white !important;
   }
 }
 
@@ -462,7 +462,7 @@ form small {
   #hero-image-text {
     padding-top: 10vh;
     width: 100%;
-    color: white;
+    color: $white;
     text-align: center;
   }
 
@@ -473,12 +473,12 @@ form small {
   #hero-image button {
     background-color: $light-green;
     border: 1px solid $light-green;
-    color: white;
+    color: $white;
 
     &:hover, &:focus, &:active {
       background-color: $green;
       border: 1px solid $green;
-      color: white;
+      color: $white;
     }
   }
 }
@@ -497,7 +497,7 @@ form small {
 /*SIGNIN AND LOGIN */
 
 .nav-tabs {
-  border-bottom: 0 solid #ddd;
+  border-bottom: 0 solid $d-white;
 
   .nav-item {
     width: 50%;
@@ -505,31 +505,31 @@ form small {
 
   .nav-link {
     color: $green;
-    border-bottom: 2px solid #ddd !important;
+    border-bottom: 2px solid $d-white !important;
     font-size: 1.3rem;
   }
 
   .nav-item.show .nav-link {
     color: $green;
-    background-color: #fff;
+    background-color: $white;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 2px solid red !important;
+    border-bottom: 2px solid $red !important;
   }
 
   .nav-link {
     &.active {
       color: $green;
-      background-color: #fff;
+      background-color: $white;
       border-top: 0;
       border-left: 0;
       border-right: 0;
-      border-bottom: 2px solid red !important;
+      border-bottom: 2px solid $red !important;
     }
 
     &:focus, &:hover {
-      border-bottom: 2px solid red !important;
+      border-bottom: 2px solid $red !important;
       border-top: 0;
       border-left: 0;
       border-right: 0;
@@ -580,7 +580,7 @@ form small {
 }*/
 
 .modal-header {
-  border-bottom: 0px solid #eceeef;
+  border-bottom: 0px solid $e-white;
 
   .main-close {
     flex: end;
@@ -602,7 +602,7 @@ form small, #register-form-div small {
   line-height: 2rem;
   padding-top: 1rem;
   background-color: transparent;
-  color: white !important;
+  color: $white !important;
   text-align: center;
 }
 
@@ -620,9 +620,9 @@ form small, #register-form-div small {
 
 #login-signup-wrapper {
   border-radius: 0.5rem;
-  border: 1px solid white;
+  border: 1px solid $white;
   margin-bottom: 6rem;
-  background-color: white;
+  background-color: $white;
   height: auto;
 
   .tab-content {
@@ -696,7 +696,7 @@ form small, #register-form-div small {
 
 .login-signup-body {
   .nav-tabs {
-    border-bottom: 0 solid #ddd;
+    border-bottom: 0 solid $d-white;
     width: 75%;
     text-align: center;
 
@@ -706,34 +706,34 @@ form small, #register-form-div small {
 
     .nav-link {
       color: $green;
-      border-bottom: 2px solid #ddd !important;
+      border-bottom: 2px solid $d-white !important;
       font-size: 1.3rem;
     }
 
     .nav-item.show .nav-link {
       color: $green;
-      background-color: #fff;
+      background-color: $white;
       border-top: 0;
       border-left: 0;
       border-right: 0;
-      border-bottom: 2px solid red !important;
+      border-bottom: 2px solid $red !important;
     }
 
     .nav-link {
       &.active {
         color: $green;
-        background-color: #fff;
+        background-color: $white;
         border-top: 0;
         border-left: 0;
         border-right: 0;
-        border-bottom: 2px solid red !important;
+        border-bottom: 2px solid $red !important;
       }
 
       &:focus, &:hover {
         border-top: 0;
         border-left: 0;
         border-right: 0;
-        border-bottom: 2px solid red !important;
+        border-bottom: 2px solid $red !important;
       }
 
       border: 0.1rem solid transparent;
@@ -770,18 +770,18 @@ form small, #register-form-div small {
 /*SEARCH RECIPE*/
 
 .search-recipes {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/background.jpg") #FFE9BA no-repeat fixed;
+  background: $background-gradient, url("../../assets/images/background.jpg") $app-background-color no-repeat fixed;
   background-size: cover;
 }
 
 #search-result-wrapper hr {
-  border-top-color: #727D87;
+  border-top-color: $border-top-grey;
   margin-top: 2rem;
   width: 30%;
 }
 
 #search-result #side-sorter {
-  border-right: 1px solid #bdbdbd;
+  border-right: 1px solid $light-grey;
 }
 
 .search-recipes .footer, .view-recipe .footer, .add-recipe .footer, .favorite-recipes .footer {
@@ -807,20 +807,20 @@ form small, #register-form-div small {
 
 .recipe-card {
   .recipe-details {
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
+    border-top: 1px solid $recipe-card-grey;
+    border-bottom: 1px solid $recipe-card-grey;
     padding: 0.5rem 1rem;
   }
 
   .recipe-tags p {
-    border: 1px solid #449D44;
+    border: 1px solid $recipe-tags-green;
     border-radius: 0.2rem;
 
-    /*color: #636C72;*/
-    color: white;
+    /*color: $navbar-grey;*/
+    color: $white;
     margin-right: 0.3rem;
     padding: 0.05rem 0.2rem;
-    background-color: #449D44;
+    background-color: $recipe-tags-green;
   }
 
   img {
@@ -832,8 +832,8 @@ form small, #register-form-div small {
 
 #recipe-wrapper {
   border-radius: 0.5rem;
-  border: 1px solid white;
-  background-color: white;
+  border: 1px solid $white;
+  background-color: $white;
   height: auto;
 
   /*text-align: justify;*/
@@ -867,14 +867,14 @@ form small, #register-form-div small {
 
 .view-recipe #recipe-rating, .add-recipe #recipe-rating {
   border-bottom: 1px solid #DFDFDF;
-  background-color: white;
+  background-color: $white;
 }
 
 #ingredient-list p:before {
   font-family: Flaticon;
   content: "\f1d4";
   font-size: 1.2rem;
-  color: #676C72;
+  color: $recipe-details-icon-grey;
 }
 
 #cooking-directions p:before {
@@ -884,7 +884,7 @@ form small, #register-form-div small {
   padding-right: 3px;
   vertical-align: middle;
   font-size: 1.2rem;
-  color: #676C72;
+  color: $recipe-details-icon-grey;
 }
 
 #preparation p:before {
@@ -894,7 +894,7 @@ form small, #register-form-div small {
   padding-right: 3px;
   vertical-align: middle;
   font-size: 1.2rem;
-  color: #676C72;
+  color: $recipe-details-icon-grey;
 }
 
 #ingredient-list p, #cooking-directions ol li {
@@ -906,7 +906,7 @@ form small, #register-form-div small {
   font-size: 1.3rem;
 
   p .fa {
-    color: #676C72;
+    color: $recipe-details-icon-grey;
   }
 }
 
@@ -967,36 +967,36 @@ body.user-profile {
 
 .user-profile {
   .navbar {
-    background-color: white;
+    background-color: $white;
 
     a, i, .fa-heart {
-      color: #636C72 !important;
+      color: $navbar-grey !important;
     }
   }
 
   .navbar-brand {
-    color: #636C72 !important;
+    color: $navbar-grey !important;
   }
 
   #search {
-    border: 1px solid #636C72 !important;
+    border: 1px solid $navbar-grey !important;
     border-right: none !important;
   }
 
   #search-form .input-group-btn button {
-    border-color: #636C72 !important;
+    border-color: $navbar-grey !important;
     border-left: none !important;
   }
 
   #more-recipes-navbar.affix .fa-heart {
-    color: #636C72 !important;
+    color: $navbar-grey !important;
   }
 }
 
 .user-profile-hero {
   width: 100%;
   height: 12vh;
-  background: url('../../assets/images/chicken-fajitas.jpg') #fff no-repeat;
+  background: url('../../assets/images/chicken-fajitas.jpg') $white no-repeat;
   background-size: cover;
   position: relative;
 
@@ -1013,8 +1013,8 @@ body.user-profile {
 
 .user-profile-details {
   /*box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.1);*/
-  /*border-top: 1px solid #636C72;*/
-  border-bottom: 1px solid #dfdfdf;
+  /*border-top: 1px solid $navbar-grey;*/
+  border-bottom: 1px solid $recipe-card-grey;
   height: 4rem;
 
   p {
@@ -1025,7 +1025,7 @@ body.user-profile {
 
 @media only screen and (min-width: 768px) {
   .user-profile-details {
-    border-bottom: 0px solid #dfdfdf;
+    border-bottom: 0px solid $recipe-card-grey;
   }
 }
 
@@ -1042,7 +1042,7 @@ body.user-profile {
 
   .card-top {
     height: 10rem !important;
-    color: #636C72;
+    color: $navbar-grey;
 
     i {
       padding: 4rem 0;
@@ -1056,7 +1056,7 @@ body.user-profile {
   }
 
   .name-div {
-    border-right: 0px solid #dfdfdf;
+    border-right: 0px solid $recipe-card-grey;
   }
 
   .username, .about-me {
@@ -1066,7 +1066,7 @@ body.user-profile {
 
 @media only screen and (min-width: 768px) {
   .user-info .name-div {
-    border-right: 1px solid #dfdfdf;
+    border-right: 1px solid $recipe-card-grey;
   }
 }
 
@@ -1109,7 +1109,7 @@ body.user-profile {
 }
 
 .nav-pills .nav-link.active {
-  background-color: #bababa;
+  background-color: $user-navpills-grey;
   border-radius: 20px;
   color: $darkgrey;
 }
@@ -1248,7 +1248,7 @@ body.user-profile {
   #hero-image {
     height: 25vh;
     max-width: 100%;
-    background: url("") red no-repeat fixed;
+    background: url("") $red no-repeat fixed;
 
     h4 {
       font-weight: 400;

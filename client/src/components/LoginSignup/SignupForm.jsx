@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabPane, Form, Label, Input, FormGroup, FormText, Button } from 'reactstrap';
 
+const placeholder = '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
 const SignupForm = () => (
   <TabPane tabId="2" id="register-form-div">
     <h4 className="text-center">Register for a New Account</h4>
@@ -44,11 +45,7 @@ const SignupForm = () => (
           Password
           <span className="text-danger">*</span>
         </Label>
-        <Input
-          type="password"
-          id="signup-password"
-          placeholder={'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
-        />
+        <Input type="password" id="signup-password" placeholder={placeholder} />
         <FormText tag="small" className="text-muted">
           Password should be more than 8 characters!
         </FormText>
@@ -58,11 +55,7 @@ const SignupForm = () => (
           Password Confirmation
           <span className="text-danger">*</span>
         </Label>
-        <Input
-          type="password"
-          id="signup-passwordconfirm"
-          placeholder={'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
-        />
+        <Input type="password" id="signup-passwordconfirm" placeholder={placeholder} />
       </FormGroup>
       <FormGroup>
         <Label htmlFor="user-info" className="col-form-label col-form-label-lg">

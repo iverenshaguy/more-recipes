@@ -1,30 +1,113 @@
-@import '../../assets/scss/_modules.scss';
+@import '../../assets/scss/modules';
+
 .login-signup-body {
-  .navbar li {
-    margin: 0 1rem 0 0;
+  .navbar {
+    li {
+      margin: 0 1rem 0 0;
+    }
   }
 
   .footer {
     line-height: 1rem;
   }
-}
 
-#login-signup-wrapper {
-  border-radius: 0.5rem;
-  border: 1px solid white;
-  margin-bottom: 6rem;
-  background-color: white;
-  height: auto;
+  .nav-tabs {
+    border-bottom: 0 solid $d-white;
+    text-align: center;
+    width: 75%;
 
-  .tab-content {
-    padding-right: 3rem !important;
-    padding-left: 3rem !important;
+    .nav-item {
+      width: 50%;
+
+      &.show {
+        .nav-link {
+          background-color: $white;
+          border-bottom: 2px solid $red !important;
+          border-left: 0;
+          border-right: 0;
+          border-top: 0;
+          color: $green;
+        }
+      }
+    }
+
+    .nav-link {
+      border: 0.1rem solid transparent;
+      border-bottom: 2px solid $d-white !important;
+      border-top-left-radius: 0.25rem;
+      border-top-right-radius: 0.25rem;
+      color: $green;
+      font-size: 1.3rem;
+
+      &.active {
+        background-color: $white;
+        border-bottom: 2px solid $red !important;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        color: $green;
+      }
+
+      &:focus,
+      &:hover {
+        border-bottom: 2px solid $red !important;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+      }
+    }
+  }
+
+  &.nav-link {
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .tab-pane {
+    h4 {
+      font-weight: 400;
+      margin: 2rem 0 1rem;
+    }
+
+    hr {
+      background-color: $grey;
+      width: 60%;
+    }
+
+    form {
+      .col-form-label {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  form {
+    button {
+      margin-top: 2.5rem;
+    }
   }
 }
 
-#signin-modal .tab-content {
-  padding-right: 3rem !important;
-  padding-left: 3rem !important;
+#login-signup-wrapper {
+  background-color: $white;
+  border: 1px solid $white;
+  border-radius: 0.5rem;
+  height: auto;
+  margin-bottom: 6rem;
+
+  .tab-content {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
+}
+
+#signin-modal {
+  .tab-content {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
@@ -36,7 +119,11 @@
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  #login-signup-wrapper,
+  #login-signup-wrapper {
+    margin-left: 10rem;
+    margin-right: 10rem;
+  }
+
   #signin-modal {
     margin-left: 10rem;
     margin-right: 10rem;
@@ -44,120 +131,89 @@
 }
 
 @media only screen and (min-width: 453px) and (max-width: 575px) {
-  #login-signup-wrapper,
+  #login-signup-wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    .tab-content {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
+  }
+
   #signin-modal {
     margin-left: 2rem;
     margin-right: 2rem;
-  }
 
-  #login-signup-wrapper .tab-content,
-  #signin-modal .tab-content {
-    padding-right: 0.5rem !important;
-    padding-left: 0.5rem !important;
+    .tab-content {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+    }
   }
 }
 
 @media only screen and (max-width: 452px) {
-  #login-signup-wrapper,
+  #login-signup-wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    .tab-content {
+      padding-left: 0.05rem !important;
+      padding-right: 0.05rem !important;
+    }
+
+    .nav-item {
+      #nav-tab-link-1 {
+        padding-left: 0.2rem;
+      }
+
+      #nav-tab-link {
+        padding-left: 0.2rem;
+      }
+    }
+  }
+
   #signin-modal {
     margin-left: 2rem;
     margin-right: 2rem;
+
+    .tab-content {
+      padding-left: 0.05rem !important;
+      padding-right: 0.05rem !important;
+    }
+
+    .nav-item {
+      #nav-tab-link-1 {
+        padding-left: 0.2rem;
+      }
+
+      #nav-tab-link {
+        padding-left: 0.2rem;
+      }
+    }
   }
 
-  #login-signup-wrapper .tab-content,
-  #signin-modal .tab-content {
-    padding-right: 0.05rem !important;
-    padding-left: 0.05rem !important;
-  }
-
-  #login-signup-wrapper .nav-item #nav-tab-link,
-  #signin-modal .nav-item #nav-tab-link-1 {
-    padding-left: 0.2rem;
-  }
-
-  .login-signup-body .nav-tabs {
-    width: 100%;
+  .login-signup-body {
+    .nav-tabs {
+      width: 100%;
+    }
   }
 }
 
 @media only screen and (max-width: 330px) {
-  #login-signup-wrapper .nav-item #nav-tab-link-2,
-  #signin-modal .nav-item #nav-tab-link-2 {
-    padding-bottom: 2.6rem;
-  }
-}
-
-.login-signup-body {
-  .nav-tabs {
-    border-bottom: 0 solid #ddd;
-    width: 75%;
-    text-align: center;
-
+  #login-signup-wrapper {
     .nav-item {
-      width: 50%;
-    }
-
-    .nav-link {
-      color: $green;
-      border-bottom: 2px solid #ddd !important;
-      font-size: 1.3rem;
-    }
-
-    .nav-item.show .nav-link {
-      color: $green;
-      background-color: #fff;
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-      border-bottom: 2px solid red !important;
-    }
-
-    .nav-link {
-      &.active {
-        color: $green;
-        background-color: #fff;
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 2px solid red !important;
+      #nav-tab-link-2 {
+        padding-bottom: 2.6rem;
       }
+    }
+  }
 
-      &:focus,
-      &:hover {
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 2px solid red !important;
+  #signin-modal {
+    .nav-item {
+      #nav-tab-link-2 {
+        padding-bottom: 2.6rem;
       }
-
-      border: 0.1rem solid transparent;
-      border-top-right-radius: 0.25rem;
-      border-top-left-radius: 0.25rem;
     }
-  }
-
-  .nav-link:focus,
-  &.nav-link:hover {
-    text-decoration: none;
-  }
-
-  .tab-pane {
-    h4 {
-      margin: 2rem 0 1rem;
-      font-weight: 400;
-    }
-
-    hr {
-      background-color: $grey;
-      width: 60%;
-    }
-
-    form .col-form-label {
-      font-size: 1.2rem;
-    }
-  }
-
-  form button {
-    margin-top: 2.5rem;
   }
 }

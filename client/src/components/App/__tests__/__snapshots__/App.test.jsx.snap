@@ -551,7 +551,7 @@ exports[`App changes addRecipeModal state when Add Recipe Button is clicked 1`] 
                                     >
                                       <Label
                                         className="sr-only"
-                                        htmlFor="search"
+                                        for="search"
                                         tag="label"
                                         widths={
                                           Array [
@@ -2228,7 +2228,7 @@ exports[`App changes location state when location changes to Home 1`] = `
                                     >
                                       <Label
                                         className="sr-only"
-                                        htmlFor="search"
+                                        for="search"
                                         tag="label"
                                         widths={
                                           Array [
@@ -3874,7 +3874,7 @@ exports[`App changes socialModal state when Share Recipe Icon in StickyBar is cl
                                     >
                                       <Label
                                         className="sr-only"
-                                        htmlFor="search"
+                                        for="search"
                                         tag="label"
                                         widths={
                                           Array [
