@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabPane, Form, Label, Input, FormGroup, Button } from 'reactstrap';
 
+const placeholder = '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
 const LoginForm = () => (
   <TabPane tabId="1" id="signin-form-div" role="tabpanel">
     <h4 className="text-center">Sign In to Your Account</h4>
@@ -20,7 +21,7 @@ const LoginForm = () => (
           type="password"
           className="mb-4"
           id="login-password"
-          placeholder={'\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022'}
+          placeholder={placeholder}
         />
       </FormGroup>
       <FormGroup check className="mb-0">
