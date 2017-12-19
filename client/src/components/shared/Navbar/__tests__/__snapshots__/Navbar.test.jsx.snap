@@ -224,30 +224,6 @@ exports[`Home renders correctly when not authenticated 1`] = `
     >
       MORE RECIPES
     </NavLink>
-    <div
-      className="collapse navbar-collapse justify-content-between"
-      id="navbarNav"
-    >
-      <Nav
-        className="ml-auto"
-        navbar={true}
-        tag="ul"
-        vertical={false}
-      >
-        <NavItem
-          tag="li"
-        >
-          <a>
-            <Button
-              color="outline-success"
-              tag="button"
-            >
-              SIGNIN
-            </Button>
-          </a>
-        </NavItem>
-      </Nav>
-    </div>
   </Navbar>
 </div>
 `;

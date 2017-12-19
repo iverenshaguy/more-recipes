@@ -23,7 +23,7 @@ describe('Home', () => {
     mountedWrapper.unmount();
   });
 
-  it('calls componet=nt will mount when mounted', () => {
+  it('calls component will mount when mounted', () => {
     const mountedWrapper = mount(wrapper);
     expect(updateLocationStateMock).toHaveBeenCalledWith('home');
     mountedWrapper.unmount();

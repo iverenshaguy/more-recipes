@@ -14,7 +14,7 @@ const Hero = props => (
           <div className="col-8 py-4">
             <Form id="search-form">
               <InputGroup size="lg">
-                <Label className="sr-only" htmlFor="search">
+                <Label className="sr-only" for="search">
                   Search for Recipes
                 </Label>
                 <Input id="search" placeholder="Curried Chicken Gravy..." />

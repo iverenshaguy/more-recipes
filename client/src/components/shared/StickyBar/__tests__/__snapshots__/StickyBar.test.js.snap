@@ -212,6 +212,20 @@ exports[`StickyBar renders heart-o, thumbs-up-o, thumbs-down-o icons and does no
 </StickyBar>
 `;
 
+exports[`StickyBar renders no sticky bar when type 'login' is passed 1`] = `
+<StickyBar
+  toggleModal={[Function]}
+  type="login"
+/>
+`;
+
+exports[`StickyBar renders no sticky bar when type 'signup' is passed 1`] = `
+<StickyBar
+  toggleModal={[Function]}
+  type="signup"
+/>
+`;
+
 exports[`StickyBar renders oven icon when type 'user-profile' is passed 1`] = `
 <StickyBar
   toggleModal={[Function]}

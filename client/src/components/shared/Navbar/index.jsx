@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button,
   Navbar,
   Nav,
   NavItem,
@@ -19,26 +18,18 @@ import './Navbar.scss';
  * @param {object} props
  */
 const NavbarWrapper = (props) => {
-  if (!props.auth) {
+  if (!props.auth || props.type === 'login' || props.type === 'signup') {
     return (
       <div>
         <Navbar color="faded" light expand="md" id="more-recipes-navbar">
           <NavLink to="/" className="navbar-brand">
             MORE RECIPES
           </NavLink>
-          <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <a>
-                  <Button color="outline-success">SIGNIN</Button>
-                </a>
-              </NavItem>
-            </Nav>
-          </div>
         </Navbar>
       </div>
     );
   }
+
   return (
     <Navbar color="faded" light className="navbar-expand" id="more-recipes-navbar">
       <NavLink to="/" className="navbar-brand">
@@ -126,6 +117,7 @@ NavbarWrapper.defaultProps = {
 
 NavbarWrapper.propTypes = {
   auth: PropTypes.bool,
+  type: PropTypes.string.isRequired
 };
 
 export default NavbarWrapper;

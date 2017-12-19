@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginSignup renders correctly when 'login' prop is passed 1`] = `
+<div
+  className="login-signup-body"
+>
+  <div
+    className="container"
+    id="login-signup-container"
+  >
+    <Row
+      className="my-auto"
+      id="login-signup-wrapper"
+      tag="div"
+    >
+      <Col
+        className="p-xs-2 p-lg-4"
+        id="login-signup-div"
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <Nav
+          className="mx-auto"
+          role="tablist"
+          tabs={true}
+          tag="ul"
+          vertical={false}
+        >
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="nav-link"
+              id="nav-tab-link-2"
+              onClick={[Function]}
+              role="tab"
+              to="/signup"
+            >
+              REGISTER
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="nav-link"
+              id="nav-tab-link-1"
+              onClick={[Function]}
+              role="tab"
+              to="/login"
+            >
+              SIGNIN
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent
+          activeTab="1"
+          tag="div"
+        >
+          <SignupForm />
+          <LoginForm />
+        </TabContent>
+      </Col>
+    </Row>
+  </div>
+</div>
+`;
+
+exports[`LoginSignup renders correctly when 'signup' prop is passed 1`] = `
+<div
+  className="login-signup-body"
+>
+  <div
+    className="container"
+    id="login-signup-container"
+  >
+    <Row
+      className="my-auto"
+      id="login-signup-wrapper"
+      tag="div"
+    >
+      <Col
+        className="p-xs-2 p-lg-4"
+        id="login-signup-div"
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <Nav
+          className="mx-auto"
+          role="tablist"
+          tabs={true}
+          tag="ul"
+          vertical={false}
+        >
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="nav-link"
+              id="nav-tab-link-2"
+              onClick={[Function]}
+              role="tab"
+              to="/signup"
+            >
+              REGISTER
+            </NavLink>
+          </NavItem>
+          <NavItem
+            tag="li"
+          >
+            <NavLink
+              activeClassName="active"
+              ariaCurrent="true"
+              className="nav-link"
+              id="nav-tab-link-1"
+              onClick={[Function]}
+              role="tab"
+              to="/login"
+            >
+              SIGNIN
+            </NavLink>
+          </NavItem>
+        </Nav>
+        <TabContent
+          activeTab="2"
+          tag="div"
+        >
+          <SignupForm />
+          <LoginForm />
+        </TabContent>
+      </Col>
+    </Row>
+  </div>
+</div>
+`;

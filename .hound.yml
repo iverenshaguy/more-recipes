@@ -3,9 +3,13 @@ jshint:
   
 coffeescript:
   enabled: false
-  
+
 scss:
-  config_file: .scss-lint.yml
+  enabled: false
+  
+sass:
+  enabled: true
+  config_file: .sass-lint.yml
 
 eslint:
   enabled: true

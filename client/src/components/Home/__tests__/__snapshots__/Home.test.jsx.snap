@@ -63,7 +63,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                       >
                         <Label
                           className="sr-only"
-                          htmlFor="search"
+                          for="search"
                           tag="label"
                           widths={
                             Array [

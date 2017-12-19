@@ -6,7 +6,9 @@ import SocialModal from './SocialModal';
 const Modals = (props) => {
   if (props.addRecipeModal) {
     return <AddRecipeModal isOpen toggle={() => props.toggle('addRecipeModal')} />;
-  } else if (props.socialModal) {
+  }
+
+  if (props.socialModal) {
     return <SocialModal isOpen toggle={() => props.toggle('socialModal')} />;
   }
 

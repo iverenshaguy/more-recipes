@@ -4,7 +4,7 @@ import Navbar from '../Navbar';
 
 const Header = props => (
   <header>
-    <Navbar auth={props.auth} />
+    <Navbar auth={props.auth} type={props.type} />
   </header>
 );
 
@@ -14,6 +14,7 @@ Header.defaultProps = {
 
 Header.propTypes = {
   auth: PropTypes.bool,
+  type: PropTypes.string.isRequired,
 };
 
 export default Header;

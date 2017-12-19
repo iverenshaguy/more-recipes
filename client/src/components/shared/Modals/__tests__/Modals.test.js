@@ -1,6 +1,4 @@
-/* global shallow toJson expect */
 import React from 'react';
-// import Modal from 'reactstrap';
 import Modals, { AddRecipeModal } from '../index';
 
 describe('Modals', () => {
@@ -18,13 +16,13 @@ describe('Modals', () => {
   it("renders correctly when 'addRecipeModal' props is passed", () => {
     const wrapper = shallow(<Modals addRecipeModal toggle={toggleMock} />);
     expect(toJson(wrapper)).toMatchSnapshot();
-    expect(wrapper.text()).toContain('AddRecipeModal');
+    expect(wrapper.find('AddRecipeModal')).toBeTruthy();
   });
 
   it("renders correctly when 'socialModal' props is passed", () => {
     const wrapper = shallow(<Modals socialModal toggle={toggleMock} />);
     expect(toJson(wrapper)).toMatchSnapshot();
-    expect(wrapper.text()).toContain('SocialModal');
+    expect(wrapper.find('SocialModal')).toBeTruthy();
   });
 
   it('should toggle modal', () => {

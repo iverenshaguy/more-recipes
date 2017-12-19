@@ -1,6 +1,36 @@
-$light-green: #2e7d32;
-$green: #1b5e20;
+$app-background-color: #ffe9ba;
 $background-gradient: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-$background-grey: #f5f6fe;
+
+$green: #1b5e20;
+$light-green: #2e7d32;
+$recipe-tags-green: #449d44;
+
 $grey: #989ea2;
+$background-grey: #f5f6fe;
+$border-top-grey: #727d87;
 $darkgrey: #333;
+$light-grey: #bdbdbd;
+$navbar-grey: #636c72;
+$navbar-btn: #555;
+$recipe-card-grey: #dfdfdf;
+$recipe-details-icon-grey: #676c72;
+$user-navpills-grey: #bababa;
+
+$white: white;
+$d-white: #ddd;
+$e-white: #eceeef;
+$red: red;
+$light-red: #d50000;
+
+$fa-gold: #f1c40f;
+$facebook: #3b5998;
+$twitter: #1da1f3;
+$pinterest: #c92228;
+
+$transparent: rgba(255, 255, 255, 0);
+$transparent-light: rgba(255, 255, 255, 0.5);
+
+$form-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+  0 0 8px rgba(27, 94, 32, 0.8);
+$navbar-affix-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.1);
+$recipe-card-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.05);

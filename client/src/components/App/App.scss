@@ -1,9 +1,14 @@
-@import '../../assets/scss/_modules.scss';
-body:not(.user-profile) {
-  background: $background-gradient,
-    url('../../assets/images/background.jpg') #ffe9ba no-repeat fixed;
-  background-size: cover;
-  margin: 0;
+@import '../../assets/scss/modules';
+
+// sass-lint:disable-block indentation
+body {
+  &:not(.user-profile) {
+    background: $background-gradient,
+      url('../../assets/images/background.jpg') $app-background-color no-repeat
+        fixed;
+    background-size: cover;
+    margin: 0;
+  }
 }
 
 a,
@@ -15,11 +20,11 @@ a {
   &:hover,
   &:focus,
   &:active {
-    color: $green;
-    outline: none;
-    border: none;
+    border: 0;
     box-shadow: none;
+    color: $green;
     cursor: pointer;
+    outline: none;
   }
 }
 
@@ -31,8 +36,8 @@ input {
   &:hover,
   &:focus,
   &:active {
-    outline: none !important;
     border: 1px solid $light-green;
+    outline: none;
   }
 }
 
@@ -40,8 +45,8 @@ select {
   &:hover,
   &:focus,
   &:active {
-    outline: none !important;
     border: 1px solid $light-green;
+    outline: none;
   }
 }
 
@@ -49,21 +54,26 @@ form {
   small {
     font-size: 1.05em;
   }
-  &-control:focus {
-    border-color: $green;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
-      0px 0px 8px rgba(27, 94, 32, 0.8);
+
+  &-control {
+    &:focus {
+      border-color: $green;
+      box-shadow: $form-box-shadow;
+    }
   }
 }
 
-.breadcrumb li {
-  a {
-    color: #636c72;
-  }
-  &:hover,
-  &:focus,
-  &:active {
-    color: $green;
+.breadcrumb {
+  li {
+    a {
+      color: $navbar-grey;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $green;
+    }
   }
 }
 
@@ -73,46 +83,54 @@ form {
 
 .fa-star,
 .fa-star-o {
-  color: #f1c40f;
+  color: $fa-gold;
 }
 
 .fa-heart,
 .fa-heart-o {
-  color: red;
+  color: $red;
 }
 
 .fa-thumbs-up,
 .fa-thumbs-o-up {
-  color: #f1c40f;
+  color: $fa-gold;
 }
 
 .fa-thumbs-down,
 .fa-thumbs-o-down {
-  color: #636c72;
+  color: $navbar-grey;
 }
 
 .fa-facebook {
-  color: #3b5998;
+  color: $facebook;
 }
 
 .fa-twitter {
-  color: #1da1f3;
+  color: $twitter;
 }
 
 .fa-pinterest {
-  color: #c92228;
+  color: $red;
 }
 
 .fa-home {
-  font-size: 1.5rem !important;
+  font-size: 1.5rem;
 }
 
 .btn {
   &:not(.btn-danger) {
-    color: white;
     background-color: $light-green;
     border: 1px solid $light-green;
     border-radius: 3px;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $green;
+      border: 1px solid $green;
+      color: $white;
+    }
   }
 
   &:hover,
@@ -120,55 +138,44 @@ form {
     cursor: pointer;
   }
 
-  &:not(.btn-danger) {
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-      color: white;
-      background-color: $green;
-      border: 1px solid $green;
-    }
-  }
-
   li {
     &:hover,
     &:focus,
     &:active,
     &.active {
-      color: white;
       background-color: $green;
       border: 1px solid $green;
+      color: $white;
     }
   }
 }
 
 #search {
-  border-top-left-radius: 5px !important;
-  border-bottom-left-radius: 5px !important;
-  border: 1px solid white !important;
-  border-right: none !important;
-  box-shadow: none !important;
+  border: 1px solid $white;
+  border-bottom-left-radius: 5px;
+  border-right: 0;
+  border-top-left-radius: 5px;
+  box-shadow: 0;
 
   &:focus,
   &:active {
-    border-right: none !important;
-    box-shadow: none !important;
+    border-right: 0;
+    box-shadow: 0;
   }
 }
 
 .search-btn {
-  background-color: white !important;
-  border: 1px solid white !important;
-  outline: none !important;
-  color: $light-green !important;
+  background-color: $white !important;
+  border: 1px solid $white !important;
   box-shadow: none !important;
+  color: $light-green !important;
+  outline: none !important;
 
   &:hover,
   &:focus,
   &:active {
+    border-left: 0;
     color: $green !important;
     cursor: pointer !important;
-    border-left: none;
   }
 }
