@@ -1,0 +1,27 @@
+{
+  "check-coverage": true,
+  "per-file": true,
+  "lines": 90,
+  "statements": 90,
+  "functions": 90,
+  "branches": 90,
+  "require": ["babel-register"],
+  "exclude": [
+    "**/*.test.js",
+    "**/__tests__/**",
+    "**/node_modules/**",
+    "nightwatch.conf.js",
+    "gulpfile.babel.js",
+    "client",
+    "server/config",
+    "server/coverage/**",
+    "server/src/models/index.js",
+    "server/tests/**",
+    "server/test{,-*}.js"
+  ],
+  "reporter": ["lcov", "text"],
+  "sourceMap": false,
+  "instrument": false,
+  "cache": true,
+  "report-dir": "./server/coverage"
+}

@@ -1,0 +1,15 @@
+@import '../../../assets/scss/modules';
+
+#search-result-wrapper {
+  hr {
+    border-top-color: $border-top-grey;
+    margin-top: 2rem;
+    width: 30%;
+  }
+}
+
+#search-result {
+  #side-sorter {
+    border-right: 1px solid $light-grey;
+  }
+}

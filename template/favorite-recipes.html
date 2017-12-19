@@ -14,81 +14,77 @@
 
     <body class="favorite-recipes">
       <!-- NAVIGATION -->
-       <header>
-        <nav class="navbar navbar-toggleable-xl navbar-light bg-faded" data-toggle="affix" id="more-recipes-navbar">
-            <a class="navbar-brand hidden-md-down" href="index.html">MORE RECIPES</a>
-            <a class="navbar-brand hidden-lg-up" id="navbar-brand-right" href="index.html">MORE RECIPES</a>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                
-                <form class="hidden-sm-down form-inline mx-2 my-auto d-inline" id="search-form">
-                    <div class="input-group input-group">
-                        <label class="sr-only" for="search">Search for Recipes</label>
-                        <input type="text" class="form-control" id="search" placeholder="Search for Recipes">
-                        <span class="input-group-btn">
-                  <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
-                </span>
-                    </div>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="fa fa-home"></i></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link menu-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-reorder fa-lg"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="search-recipes.html">All Recipes</a>
-                            <a class="dropdown-item" href="favorite-recipes.html">Favorite Recipes</a>
-                            <a class="dropdown-item" href="top-recipes.html">Top Recipes</a>
-                        </div>
-                    </li>
-                    <li class="hidden-xs-down nav-item justify-content-start">
-                        <a class="nav-link" href="#add-edit-modal" data-toggle="modal" class="add-recipe" title="New Recipe"><i class="fa fa-plus fa-lg"></i></a>
-                    </li>
-                    <li class="nav-item justify-content-start notifications-link">
-                        <a class="nav-link" href="#" title="Notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <div class="container-fluid">
-                              <p>You have a new review</p>
-                              <div class="dropdown-divider"></div>
-                              <p>3 people viewed your recipe</p>
-                              <div class="dropdown-divider"></div>
-                              <p>Review your security details</p>
-                              <div class="dropdown-divider"></div>
-                              <p>Chef Steve just posted a new recipe</p>
-                              <div class="dropdown-divider"></div>
-                              <p>1 person added your recipe to their favorites</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="hidden-xs-down nav-item mr-1">
-                        <a class="nav-link" href="favorite-recipes.html" title="Favorite Recipes"><i class="fa fa-heart fa-lg"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <div class="nav-profile-picture-div rounded-cirle dropdown">
-                            <a class="nav-link" href="#" title="Profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="src/images/user1.jpg" class="rounded-cirle" alt="..."></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="user-profile.html">Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)">Edit Profile</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#user-profile?#recipes">My Recipes</a>
-                                <a class="dropdown-item" href="favorite-recipes.html">Favourite Recipes</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)">Settings</a>
-                                <div class="dropdown-divider"></div>                                
-                                <a class="dropdown-item" href="javascript:void(0)">Log out</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+      <header>
+          <nav class="navbar navbar-toggleable-xl navbar-light bg-faded" data-toggle="affix" id="more-recipes-navbar">
+              <a class="navbar-brand hidden-md-down" href="index-user.html">MORE RECIPES</a>
+              <a class="navbar-brand hidden-lg-up" id="navbar-brand-right" href="index-user.html">MORE RECIPES</a>
+              <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                  <form class="hidden-sm-down form-inline mx-2 my-auto d-inline" id="search-form">
+                      <div class="input-group input-group">
+                          <label class="sr-only" for="search">Search for Recipes</label>
+                          <input type="text" class="form-control" id="search" placeholder="Search for Recipes">
+                          <span class="input-group-btn">
+                    <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+                  </span>
+                      </div>
+                  </form>
+                  <ul class="navbar-nav ml-auto">
+                      <li class="hidden-xs-down nav-item text-left">
+                          <a class="nav-link" href="top-recipes-user.html">TRENDING</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="index-user.html"><i class="fa fa-home"></i></a>
+                      </li>
+                      <li class="nav-item justify-content-start notifications-link">
+                          <a class="nav-link" href="#" title="Notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell fa-lg"></i></a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <div class="container-fluid">
+                                  <p>You have a new review</p>
+                                  <div class="dropdown-divider"></div>
+                                  <p>3 people viewed your recipe</p>
+                                  <div class="dropdown-divider"></div>
+                                  <p>Review your security details</p>
+                                  <div class="dropdown-divider"></div>
+                                  <p>Chef Steve just posted a new recipe</p>
+                                  <div class="dropdown-divider"></div>
+                                  <p>1 person added your recipe to their favorites</p>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <div class="nav-profile-picture-div rounded-cirle menu-dropdown d-inline">
+                              <a class="nav-link " href="#" title="Profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="src/images/user1.jpg" class="rounded-cirle" alt="User"> Jane</a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                  <a class="dropdown-item" href="user-profile.html">Profile</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">Edit Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="user-profile.html">My Recipes</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="javascript:void(0)">Settings</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="javascript:void(0)">Log out</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link menu-dropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-reorder fa-lg"></i></a>
+                          <div class="dropdown-menu dropdown-menu-right">
+                              <a class="dropdown-item add-recipe" href="#add-edit-modal" data-toggle="modal" title="New Recipe">Add a Recipe</a>
+                              <a class="dropdown-item" href="search-recipes-user.html">All Recipes</a>
+                              <a class="dropdown-item get-favorites" href="user-profile.html">Favorite Recipes</a>
+                              <a class="dropdown-item" href="top-recipes-user.html">Top Recipes</a>
+                          </div>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
+      </header>
       
       <!-- CONTENT -->
       <div class="container-fluid pb-5 background-grey page-margin" id="search-result-wrapper">
         <div class="heading pt-4 text-center" id="search-result-heading">
           <div class="col-xs-12 col-md-12 pt-3" id="title">
-            <h5>YOUR FAVOURITE RECIPES</h5>
+            <h5>YOUR { FAVOURITE CATEGORY} RECIPES</h5>
           </div>
         </div>
         <hr>
@@ -106,20 +102,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -137,20 +125,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -168,20 +148,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -199,20 +171,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -230,20 +194,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -261,20 +217,12 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
@@ -292,23 +240,26 @@
                   <p class="card-text text-muted mr-0 inline-p"> | </p>
                   <p class="card-text text-muted inline-p"><i class="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"></i> A Bit Difficult</p>
                 </div>
-                <div class="card-block my-0 text-center recipe-tags">
-                  <p class="card-text inline-p">Rice</p>
-                  <p class="card-text inline-p">Chicken</p>
-                  <p class="card-text inline-p">Healthy</p>
-                  </ul>
-                </div>
-                <div class="card-footer text-center text-muted px-2 recipe-rating">
+                <div class="card-block text-center text-muted px-2 recipe-rating">
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-star"></i> 4.5</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="aria-hidden fa fa-heart"></i> 200</p>
                   <p class="card-text text-muted mr-2 inline-p"> | </p>
                   <p class="card-text text-muted mr-2 inline-p"><i class="text-success aria-hidden fa fa-eye"></i> 350</p>
-                  <p class="card-text text-muted mr-2 inline-p"> | </p>
-                  <p class="card-text text-muted inline-p"><i class="aria-hidden fa fa-thumbs-down"></i> 3</p>
                 </div>
               </div>
             </a>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 hidden-sm-down">
+              <a href="#add-edit-modal" data-toggle="modal">
+                  <div class="card py-5">
+                      <div class="card-top text-center"><i class="fa fa-plus-circle fa-3x"></i></div>
+                      <div class="card-block">
+                          <p class="card-text text-center add-recipe-text">ADD A RECIPE</p>
+                      </div>
+                  </div>
+                  
+              </a>
           </div>
         </div>
       </div>

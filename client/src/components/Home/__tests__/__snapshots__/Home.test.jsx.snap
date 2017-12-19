@@ -1,0 +1,967 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home renders correctly 1`] = `
+<div
+  className="home"
+>
+  <Hero
+    toggle={[Function]}
+  />
+  <RecipeItems />
+</div>
+`;
+
+exports[`Home renders correctly when fully mounted 1`] = `
+<Home
+  toggleModal={[Function]}
+  updateLocationState={[Function]}
+>
+  <div
+    className="home"
+  >
+    <Hero
+      toggle={[Function]}
+    >
+      <div
+        className="container-fluid"
+        id="hero-image"
+      >
+        <div
+          className="row mx-auto"
+          id="hero-image-text"
+        >
+          <div
+            className="col align-self-center"
+          >
+            <div
+              className="row justify-content-center align-items-center mb-3"
+            >
+              <div
+                className="col-12"
+              >
+                <h3>
+                  Search for a Recipe
+                </h3>
+              </div>
+              <div
+                className="col-8 py-4"
+              >
+                <Form
+                  id="search-form"
+                  tag="form"
+                >
+                  <form
+                    className=""
+                    id="search-form"
+                  >
+                    <InputGroup
+                      size="lg"
+                      tag="div"
+                    >
+                      <div
+                        className="input-group input-group-lg"
+                      >
+                        <Label
+                          className="sr-only"
+                          for="search"
+                          tag="label"
+                          widths={
+                            Array [
+                              "xs",
+                              "sm",
+                              "md",
+                              "lg",
+                              "xl",
+                            ]
+                          }
+                        >
+                          <label
+                            className="sr-only  form-control-label"
+                            htmlFor="search"
+                          >
+                            Search for Recipes
+                          </label>
+                        </Label>
+                        <Input
+                          id="search"
+                          placeholder="Curried Chicken Gravy..."
+                          tag="p"
+                          type="text"
+                        >
+                          <input
+                            className="form-control"
+                            id="search"
+                            placeholder="Curried Chicken Gravy..."
+                            type="text"
+                          />
+                        </Input>
+                        <InputGroupButton
+                          tag="div"
+                        >
+                          <div
+                            className="input-group-btn"
+                          >
+                            <Button
+                              className="search-btn"
+                              color="secondary"
+                              tag="button"
+                              type="submit"
+                            >
+                              <button
+                                className="search-btn btn btn-secondary"
+                                onClick={[Function]}
+                                type="submit"
+                              >
+                                <FontAwesome
+                                  name="search"
+                                >
+                                  <span
+                                    aria-hidden={true}
+                                    className="fa fa-search"
+                                  />
+                                </FontAwesome>
+                              </button>
+                            </Button>
+                          </div>
+                        </InputGroupButton>
+                      </div>
+                    </InputGroup>
+                  </form>
+                </Form>
+              </div>
+            </div>
+            <Button
+              className="btn-default btn-lg"
+              color="secondary"
+              id="home-add-recipe-btn"
+              onClick={[Function]}
+              tag="button"
+              title="New Recipe"
+            >
+              <button
+                className="btn-default btn-lg btn btn-secondary"
+                id="home-add-recipe-btn"
+                onClick={[Function]}
+                title="New Recipe"
+                type="button"
+              >
+                Add a New Recipe
+              </button>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Hero>
+    <RecipeItems>
+      <div
+        className="container-fluid pb-5 background-grey page-margin"
+        id="search-result-wrapper"
+      >
+        <div
+          className="heading pt-4 text-center"
+          id="search-result-heading"
+        >
+          <div
+            className="col-xs-12 col-md-12 pt-3"
+            id="title"
+          >
+            <h5>
+              TOP RECIPES
+            </h5>
+          </div>
+        </div>
+        <hr />
+        <div
+          className="row pt-2 px-5"
+          id="search-result"
+        >
+          <RecipeCard>
+            <div
+              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+            >
+              <Card
+                tag="div"
+              >
+                <div
+                  className="card"
+                >
+                  <a
+                    href="view-recipe.html"
+                  >
+                    <CardImg
+                      alt="recipe"
+                      className="img-fluid"
+                      src="images/jollof-rice-img.jpg"
+                      tag="img"
+                      top={true}
+                      width="100%"
+                    >
+                      <img
+                        alt="recipe"
+                        className="img-fluid card-img-top"
+                        src="images/jollof-rice-img.jpg"
+                        width="100%"
+                      />
+                    </CardImg>
+                    <CardBody
+                      className="card-block text-center pb-0"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center pb-0 card-body"
+                      >
+                        <h5
+                          className="mb-1"
+                        >
+                          Jollof Rice and Chicken
+                        </h5>
+                        <CardText
+                          className="mb-2"
+                          tag="p"
+                        >
+                          <p
+                            className="mb-2 card-text"
+                          >
+                            <span
+                              className="text-muted"
+                            >
+                              Posted by 
+                            </span>
+                            @janesmith
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="card-block text-center recipe-details"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center recipe-details card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="clock-o"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-clock-o"
+                              />
+                            </FontAwesome>
+                             45 minutes
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-0 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-0 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted d-inline card-text"
+                          >
+                            <i
+                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+                            />
+                            A Bit Difficult
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="text-center text-muted px-2 recipe-rating"
+                      tag="div"
+                    >
+                      <div
+                        className="text-center text-muted px-2 recipe-rating card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="star"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-star"
+                              />
+                            </FontAwesome>
+                             4.5
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="heart"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-heart"
+                              />
+                            </FontAwesome>
+                             200
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              className="text-success"
+                              name="eye"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-eye text-success"
+                              />
+                            </FontAwesome>
+                             350
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                  </a>
+                </div>
+              </Card>
+            </div>
+          </RecipeCard>
+          <RecipeCard>
+            <div
+              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+            >
+              <Card
+                tag="div"
+              >
+                <div
+                  className="card"
+                >
+                  <a
+                    href="view-recipe.html"
+                  >
+                    <CardImg
+                      alt="recipe"
+                      className="img-fluid"
+                      src="images/jollof-rice-img.jpg"
+                      tag="img"
+                      top={true}
+                      width="100%"
+                    >
+                      <img
+                        alt="recipe"
+                        className="img-fluid card-img-top"
+                        src="images/jollof-rice-img.jpg"
+                        width="100%"
+                      />
+                    </CardImg>
+                    <CardBody
+                      className="card-block text-center pb-0"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center pb-0 card-body"
+                      >
+                        <h5
+                          className="mb-1"
+                        >
+                          Jollof Rice and Chicken
+                        </h5>
+                        <CardText
+                          className="mb-2"
+                          tag="p"
+                        >
+                          <p
+                            className="mb-2 card-text"
+                          >
+                            <span
+                              className="text-muted"
+                            >
+                              Posted by 
+                            </span>
+                            @janesmith
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="card-block text-center recipe-details"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center recipe-details card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="clock-o"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-clock-o"
+                              />
+                            </FontAwesome>
+                             45 minutes
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-0 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-0 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted d-inline card-text"
+                          >
+                            <i
+                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+                            />
+                            A Bit Difficult
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="text-center text-muted px-2 recipe-rating"
+                      tag="div"
+                    >
+                      <div
+                        className="text-center text-muted px-2 recipe-rating card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="star"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-star"
+                              />
+                            </FontAwesome>
+                             4.5
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="heart"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-heart"
+                              />
+                            </FontAwesome>
+                             200
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              className="text-success"
+                              name="eye"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-eye text-success"
+                              />
+                            </FontAwesome>
+                             350
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                  </a>
+                </div>
+              </Card>
+            </div>
+          </RecipeCard>
+          <RecipeCard>
+            <div
+              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+            >
+              <Card
+                tag="div"
+              >
+                <div
+                  className="card"
+                >
+                  <a
+                    href="view-recipe.html"
+                  >
+                    <CardImg
+                      alt="recipe"
+                      className="img-fluid"
+                      src="images/jollof-rice-img.jpg"
+                      tag="img"
+                      top={true}
+                      width="100%"
+                    >
+                      <img
+                        alt="recipe"
+                        className="img-fluid card-img-top"
+                        src="images/jollof-rice-img.jpg"
+                        width="100%"
+                      />
+                    </CardImg>
+                    <CardBody
+                      className="card-block text-center pb-0"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center pb-0 card-body"
+                      >
+                        <h5
+                          className="mb-1"
+                        >
+                          Jollof Rice and Chicken
+                        </h5>
+                        <CardText
+                          className="mb-2"
+                          tag="p"
+                        >
+                          <p
+                            className="mb-2 card-text"
+                          >
+                            <span
+                              className="text-muted"
+                            >
+                              Posted by 
+                            </span>
+                            @janesmith
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="card-block text-center recipe-details"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center recipe-details card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="clock-o"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-clock-o"
+                              />
+                            </FontAwesome>
+                             45 minutes
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-0 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-0 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted d-inline card-text"
+                          >
+                            <i
+                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+                            />
+                            A Bit Difficult
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="text-center text-muted px-2 recipe-rating"
+                      tag="div"
+                    >
+                      <div
+                        className="text-center text-muted px-2 recipe-rating card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="star"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-star"
+                              />
+                            </FontAwesome>
+                             4.5
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="heart"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-heart"
+                              />
+                            </FontAwesome>
+                             200
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              className="text-success"
+                              name="eye"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-eye text-success"
+                              />
+                            </FontAwesome>
+                             350
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                  </a>
+                </div>
+              </Card>
+            </div>
+          </RecipeCard>
+          <RecipeCard>
+            <div
+              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+            >
+              <Card
+                tag="div"
+              >
+                <div
+                  className="card"
+                >
+                  <a
+                    href="view-recipe.html"
+                  >
+                    <CardImg
+                      alt="recipe"
+                      className="img-fluid"
+                      src="images/jollof-rice-img.jpg"
+                      tag="img"
+                      top={true}
+                      width="100%"
+                    >
+                      <img
+                        alt="recipe"
+                        className="img-fluid card-img-top"
+                        src="images/jollof-rice-img.jpg"
+                        width="100%"
+                      />
+                    </CardImg>
+                    <CardBody
+                      className="card-block text-center pb-0"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center pb-0 card-body"
+                      >
+                        <h5
+                          className="mb-1"
+                        >
+                          Jollof Rice and Chicken
+                        </h5>
+                        <CardText
+                          className="mb-2"
+                          tag="p"
+                        >
+                          <p
+                            className="mb-2 card-text"
+                          >
+                            <span
+                              className="text-muted"
+                            >
+                              Posted by 
+                            </span>
+                            @janesmith
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="card-block text-center recipe-details"
+                      tag="div"
+                    >
+                      <div
+                        className="card-block text-center recipe-details card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="clock-o"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-clock-o"
+                              />
+                            </FontAwesome>
+                             45 minutes
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-0 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-0 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted d-inline card-text"
+                          >
+                            <i
+                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+                            />
+                            A Bit Difficult
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                    <CardBody
+                      className="text-center text-muted px-2 recipe-rating"
+                      tag="div"
+                    >
+                      <div
+                        className="text-center text-muted px-2 recipe-rating card-body"
+                      >
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="star"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-star"
+                              />
+                            </FontAwesome>
+                             4.5
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              name="heart"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-heart"
+                              />
+                            </FontAwesome>
+                             200
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                             | 
+                          </p>
+                        </CardText>
+                        <CardText
+                          className="text-muted mr-2 d-inline"
+                          tag="p"
+                        >
+                          <p
+                            className="text-muted mr-2 d-inline card-text"
+                          >
+                            <FontAwesome
+                              className="text-success"
+                              name="eye"
+                            >
+                              <span
+                                aria-hidden={true}
+                                className="fa fa-eye text-success"
+                              />
+                            </FontAwesome>
+                             350
+                          </p>
+                        </CardText>
+                      </div>
+                    </CardBody>
+                  </a>
+                </div>
+              </Card>
+            </div>
+          </RecipeCard>
+        </div>
+      </div>
+    </RecipeItems>
+  </div>
+</Home>
+`;

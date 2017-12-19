@@ -1,0 +1,231 @@
+@import '../../../assets/scss/modules';
+
+.navbar-brand {
+  color: $white !important;
+}
+
+#more-recipes-navbar {
+  background-color: $transparent;
+  padding: 1rem;
+  // transition: all 0.3s ease-out;
+  transition: 0.3s ease-out;
+  width: 100%;
+
+  #navbar-right {
+    float: right;
+  }
+
+  .affix {
+    background-color: $white;
+    box-shadow: $navbar-affix-shadow;
+
+    .nav-item > a,
+    .navbar-brand,
+    .fa-heart {
+      color: $darkgrey !important;
+    }
+
+    &.navbar {
+      a {
+        &.nav-link {
+          color: $darkgrey !important;
+        }
+      }
+    }
+  }
+}
+
+#result-search-form-div {
+  background-color: $transparent-light;
+  display: none;
+
+  #search-form {
+    #search {
+      border: 1px solid $light-green !important;
+    }
+
+    .input-group-btn {
+      button {
+        background-color: $light-green;
+        border-color: $light-green;
+        color: $white;
+      }
+    }
+  }
+}
+
+.input-group {
+  &.blur {
+    z-index: -1 !important;
+  }
+}
+
+.search-icon {
+  a {
+    padding: 0.46rem 0.5rem 0 0;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $green !important;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #more-recipes-navbar {
+    #search-form {
+      width: 70%;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  #more-recipes-navbar {
+    #search-form {
+      width: 60%;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  #more-recipes-navbar {
+    #search-form {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  #more-recipes-navbar {
+    #search-form {
+      display: none !important;
+    }
+
+    .search-icon {
+      a {
+        color: $white !important;
+        // padding: 0.5rem 1rem 0 0 ;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  #more-recipes-navbar {
+    #search-form {
+      display: none;
+    }
+  }
+}
+
+.navbar {
+  a {
+    &.nav-link {
+      color: $white !important;
+    }
+  }
+
+  .dropdown-menu {
+    position: absolute !important;
+    right: 0% !important;
+  }
+
+  .btn {
+    background-color: transparent;
+    border: 1px solid $white;
+    color: $white;
+    outline: none;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $green;
+      border: 1px solid $green;
+      color: $white;
+    }
+  }
+
+  .fa-heart {
+    color: $white;
+  }
+
+  li {
+    &.active {
+      a {
+        //color: #light-green;
+        border-bottom: 2px solid $white !important;
+      }
+    }
+  }
+}
+
+// Navbaar on scroll
+
+.affix {
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1030;
+
+  #search {
+    border: 1px solid $grey !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+  }
+
+  button {
+    background-color: transparent;
+    border: 1px solid $grey !important;
+    color: $navbar-btn !important;
+    outline: none;
+  }
+
+  .search-btn {
+    border: 1px solid $grey !important;
+    border-left: 0 !important;
+    box-shadow: none !important;
+    color: $light-green !important;
+  }
+
+  &.navbar {
+    li {
+      &.active {
+        a {
+          // color: $light-green;
+          border-bottom: 2px solid $darkgrey !important;
+        }
+      }
+    }
+  }
+}
+
+.nav-profile-picture-div {
+  border-radius: 50%;
+  height: 2rem;
+  text-transform: capitalize;
+  width: 2rem;
+  // margin-top: -0.06rem;
+
+  img {
+    border-radius: 50%;
+    height: 2rem;
+    margin-top: -0.3rem;
+    text-transform: capitalize;
+    width: 2rem;
+  }
+
+  .dropdown-menu {
+    width: 20%;
+  }
+}
+
+.notifications-link {
+  .dropdown-menu {
+    left: 58% !important;
+    width: 40% !important;
+  }
+}

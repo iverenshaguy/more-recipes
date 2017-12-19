@@ -1,0 +1,40 @@
+@import '../../../assets/scss/modules';
+
+.footer {
+  background-color: transparent;
+  color: $white;
+  line-height: 2rem;
+  padding-top: 1rem;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: -5;
+
+  @at-root .login-signup-body & {
+    line-height: 1rem;
+  }
+
+  // sass-lint:disable-block indentation
+  @at-root .search-recipes &,
+    .add-recipe &,
+    .favorite-recipes &,
+    .view-recipe & {
+    position: relative;
+  }
+
+  @at-root .user-recipe & {
+    line-height: 0.5rem;
+  }
+
+  @at-root .user-profile & {
+    color: $darkgrey;
+    line-height: 2rem;
+    position: relative;
+  }
+
+  @media only screen and (max-width: 500px) {
+    & {
+      position: relative;
+    }
+  }
+}

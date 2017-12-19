@@ -1,0 +1,362 @@
+@import '../../../assets/scss/modules';
+
+.sticky-bar-wrapper {
+  bottom: 0;
+  color: $white;
+  position: fixed;
+  width: 100%;
+}
+
+.sticky-bar {
+  background-color: $light-red;
+  // bottom: 0;
+  color: $white;
+  // height: 6rem;
+  padding: 1rem 0;
+  width: 100%;
+
+  i,
+  span {
+    color: $white;
+  }
+}
+
+.home {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.user-profile {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.favorite-recipes {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.user-recipe {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.top-recipes {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.search-recipes {
+  .sticky-bar {
+    a {
+      padding-right: 2.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 1em;
+      }
+    }
+  }
+}
+
+.view-recipe {
+  .sticky-bar {
+    a {
+      padding-right: 1.5em;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0.5em;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 576px) {
+  .home {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .user-profile {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .favorite-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .user-recipe {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .top-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .search-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 7em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 1em;
+        }
+      }
+    }
+  }
+
+  .view-recipe {
+    .sticky-bar {
+      a {
+        padding-right: 4.2em;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0.2em;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) and (min-width: 450px) {
+  .search-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .home {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .user-profile {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .favorite-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .user-recipe {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .top-recipes {
+    .sticky-bar {
+      a {
+        padding-right: 5em;
+
+        &:first-child {
+          padding-left: 2em;
+        }
+
+        &:last-child {
+          padding-right: 2em;
+        }
+      }
+    }
+  }
+
+  .view-recipe {
+    .sticky-bar {
+      a {
+        padding-right: 2em;
+
+        &:first-child {
+          padding-left: 0.5em;
+        }
+
+        &:last-child {
+          padding-right: 0.5em;
+        }
+      }
+    }
+  }
+}

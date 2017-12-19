@@ -1,0 +1,181 @@
+@import '../../assets/scss/modules';
+
+// sass-lint:disable-block indentation
+body {
+  &:not(.user-profile) {
+    background: $background-gradient,
+      url('../../assets/images/background.jpg') $app-background-color no-repeat
+        fixed;
+    background-size: cover;
+    margin: 0;
+  }
+}
+
+a,
+.text-green {
+  color: $light-green;
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:active {
+    border: 0;
+    box-shadow: none;
+    color: $green;
+    cursor: pointer;
+    outline: none;
+  }
+}
+
+h4 {
+  font-weight: 400;
+}
+
+input {
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid $light-green;
+    outline: none;
+  }
+}
+
+select {
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid $light-green;
+    outline: none;
+  }
+}
+
+form {
+  small {
+    font-size: 1.05em;
+  }
+
+  &-control {
+    &:focus {
+      border-color: $green;
+      box-shadow: $form-box-shadow;
+    }
+  }
+}
+
+.breadcrumb {
+  li {
+    a {
+      color: $navbar-grey;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $green;
+    }
+  }
+}
+
+.background-grey {
+  background-color: $background-grey;
+}
+
+.fa-star,
+.fa-star-o {
+  color: $fa-gold;
+}
+
+.fa-heart,
+.fa-heart-o {
+  color: $red;
+}
+
+.fa-thumbs-up,
+.fa-thumbs-o-up {
+  color: $fa-gold;
+}
+
+.fa-thumbs-down,
+.fa-thumbs-o-down {
+  color: $navbar-grey;
+}
+
+.fa-facebook {
+  color: $facebook;
+}
+
+.fa-twitter {
+  color: $twitter;
+}
+
+.fa-pinterest {
+  color: $red;
+}
+
+.fa-home {
+  font-size: 1.5rem;
+}
+
+.btn {
+  &:not(.btn-danger) {
+    background-color: $light-green;
+    border: 1px solid $light-green;
+    border-radius: 3px;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $green;
+      border: 1px solid $green;
+      color: $white;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  li {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: $green;
+      border: 1px solid $green;
+      color: $white;
+    }
+  }
+}
+
+#search {
+  border: 1px solid $white;
+  border-bottom-left-radius: 5px;
+  border-right: 0;
+  border-top-left-radius: 5px;
+  box-shadow: 0;
+
+  &:focus,
+  &:active {
+    border-right: 0;
+    box-shadow: 0;
+  }
+}
+
+.search-btn {
+  background-color: $white !important;
+  border: 1px solid $white !important;
+  box-shadow: none !important;
+  color: $light-green !important;
+  outline: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-left: 0;
+    color: $green !important;
+    cursor: pointer !important;
+  }
+}
