@@ -5,6 +5,8 @@ import { sequelize, User, Recipe, Favorite } from '../../src/models';
 import './upvotes.recipe.api.test';
 
 const agent = request.agent(app);
+let userToken1;
+let userToken2;
 
 describe('Routes: Recipe API Tests, Favorites', () => {
   before(() => sequelize.sync().then(() => User.create({
@@ -185,9 +187,8 @@ describe('Routes: Recipe API Tests, Favorites', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect('Location', '/server');
-        if (err) {
-          return done(err);
-        }
+        if (err) return done(err);
+        userToken1 = res.body.token;
         done();
       });
   });
@@ -276,6 +277,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .post('/api/v1/recipes/1/favorites')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
               expect(res.body.message).to.equal('Recipe has been added to favorites');
@@ -295,6 +297,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .post('/api/v1/recipes/3/favorites')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body.message).to.equal('Recipe has been removed from favorites');
@@ -315,6 +318,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .post('/api/v1/recipes/123/favorites')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -327,6 +331,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .post('/api/v1/recipes/abc/favorites')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -339,7 +344,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
 
       describe('## Check for unauthorised input', () => {
         it('should not add recipe to favorites', (done) => {
-          request(app)
+          agent
             .post('/api/v1/recipes/3/favorites')
             .set('Accept', 'application/json')
             .end((err, res) => {
@@ -361,6 +366,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .get('/api/v1/users/1/recipes')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body).to.have.lengthOf(2);
@@ -380,6 +386,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .get('/api/v1/users/2/recipes')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(401);
               expect(res.body.message).to.equal('You are not authorized to access this page');
@@ -392,6 +399,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           agent
             .get('/api/v1/users/abc/recipes')
             .set('Accept', 'application/json')
+            .set('token', userToken1)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.userId.msg).to.equal('User Not Found');
@@ -403,7 +411,7 @@ describe('Routes: Recipe API Tests, Favorites', () => {
 
       describe('## Check for unauthorised input', () => {
         it('should not get any recipes', (done) => {
-          request(app)
+          agent
             .get('/api/v1/users/1/recipes')
             .set('Accept', 'application/json')
             .end((err, res) => {
@@ -433,9 +441,8 @@ describe('Routes: Recipe API Tests, Favorites', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect('Location', '/server');
-            if (err) {
-              return done(err);
-            }
+            if (err) return done(err);
+            userToken2 = res.body.token;
             done();
           });
       });
@@ -444,13 +451,11 @@ describe('Routes: Recipe API Tests, Favorites', () => {
         agent
           .get('/api/v1/users/2/recipes')
           .set('Accept', 'application/json')
+          .set('token', userToken2)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.message).to.equal('You have no favorite recipes');
-
-            if (err) {
-              return done(err);
-            }
+            if (err) return done(err);
             done();
           });
       });

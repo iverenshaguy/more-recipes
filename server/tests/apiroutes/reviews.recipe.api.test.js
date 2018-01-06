@@ -5,6 +5,7 @@ import { sequelize, User, Recipe } from '../../src/models';
 import './recipe.api.test';
 
 const agent = request.agent(app);
+let userToken;
 
 describe('Routes: Recipe API Tests: Reviews', () => {
   before(() => sequelize.sync().then(() => User.create({
@@ -91,9 +92,8 @@ describe('Routes: Recipe API Tests: Reviews', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect('Location', '/server');
-        if (err) {
-          return done(err);
-        }
+        userToken = res.body.token;
+        if (err) return done(err);
         done();
       });
   });
@@ -112,6 +112,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/1/reviews')
           .send(review)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.rating).to.equal(4);
@@ -129,6 +130,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/1/reviews')
           .send(review)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body.message).to.equal('Review Already Submitted');
@@ -145,6 +147,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/2/reviews')
           .send(review)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body.message).to.equal('You can\'t review your own recipe');
@@ -163,6 +166,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/123/reviews')
           .send(review)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -176,6 +180,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/abc/reviews')
           .send(review)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -189,6 +194,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/1/reviews')
           .send(badReview1)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
@@ -203,6 +209,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/1/reviews')
           .send(badReview2)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.rating.msg).to.equal('Recipe must be rated from 1 - 5');
@@ -217,6 +224,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
           .post('/api/v1/recipes/1/reviews')
           .send(badReview3)
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.rating.msg).to.equal('Recipe must be rated');
@@ -230,7 +238,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
 
     describe('## Check for unauthorised input', () => {
       it('should not review recipe', (done) => {
-        request(app)
+        agent
           .post('/api/v1/recipes/1/reviews')
           .send(review)
           .set('Accept', 'application/json')
@@ -238,9 +246,7 @@ describe('Routes: Recipe API Tests: Reviews', () => {
             expect(res.statusCode).to.equal(401);
             expect(res.body.error).to.equal('You are not authorized to access this page, please signin');
 
-            if (err) {
-              return done(err);
-            }
+            if (err) return done(err);
             done();
           });
       });

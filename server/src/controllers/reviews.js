@@ -4,12 +4,12 @@ export default {
   reviewRecipe: (req, reviewData, res, next) => Recipe
     .findOne({ where: { id: +reviewData.recipeId } })
     .then((recipe) => {
-      if (recipe.userId === req.session.user.id) {
+      if (recipe.userId === req.id) {
         return res.status(400).send({ message: 'You can\'t review your own recipe' });
       }
 
       return Review
-        .findOne({ where: { recipeId: +reviewData.recipeId, userId: req.session.user.id } })
+        .findOne({ where: { recipeId: +reviewData.recipeId, userId: req.id } })
         .then((availableReview) => {
           if (availableReview) {
             return res.status(400).send({ message: 'Review Already Submitted' });
@@ -20,7 +20,7 @@ export default {
               rating: reviewData.rating,
               comment: reviewData.comment,
               recipeId: +reviewData.recipeId,
-              userId: req.session.user.id
+              userId: req.id
             }, {
               include: [
                 User,

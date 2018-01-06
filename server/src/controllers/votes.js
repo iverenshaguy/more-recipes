@@ -11,12 +11,12 @@ const handleVote = (req, res, upvoteData, bool, vote, voteOpp, next) => {
   return Recipe
     .findOne({ where: { id: +upvoteData.recipeId } })
     .then((recipe) => {
-      if (recipe.userId === req.session.user.id) {
+      if (recipe.userId === req.id) {
         return res.status(400).send({ message: warning });
       }
 
       return Like
-        .findOne({ where: { recipeId: +upvoteData.recipeId, userId: req.session.user.id } })
+        .findOne({ where: { recipeId: +upvoteData.recipeId, userId: req.id } })
         .then((alreadyLiked) => {
           if (alreadyLiked !== null) {
             if (alreadyLiked.upvote === bool) {
@@ -39,7 +39,7 @@ const handleVote = (req, res, upvoteData, bool, vote, voteOpp, next) => {
             .create({
               upvote: bool,
               recipeId: +upvoteData.recipeId,
-              userId: req.session.user.id
+              userId: req.id
             })
             .then(() => recipe.increment(`${vote}s`)
               .then(newRecipe => res.status(201).send(responseMessage(201, newRecipe, 'recorded')))

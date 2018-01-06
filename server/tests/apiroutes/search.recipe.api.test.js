@@ -5,6 +5,7 @@ import { sequelize, User, Recipe } from '../../src/models';
 import './favorites.recipe.api.test';
 
 const agent = request.agent(app);
+let userToken;
 
 describe('Routes: Recipe API Tests, Search', () => {
   before(() => sequelize.sync().then(() => User.create({
@@ -61,9 +62,9 @@ describe('Routes: Recipe API Tests, Search', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect('Location', '/server');
-        if (err) {
-          return done(err);
-        }
+        userToken = res.body.token;
+
+        if (err) return done(err);
         done();
       });
   });
@@ -76,6 +77,7 @@ describe('Routes: Recipe API Tests, Search', () => {
         .get('/api/v1/recipes')
         .query({ sort: 'upvotes', order: 'ascending' })
         .set('Accept', 'application/json')
+        .set('token', userToken)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('There are no upvoted recipes');
@@ -219,6 +221,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'ascending' })
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -239,6 +242,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'descending' })
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -261,6 +265,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'likes', order: 'ascending' })
           .set('Accept', 'application/json')
+          .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(6);
@@ -274,7 +279,7 @@ describe('Routes: Recipe API Tests, Search', () => {
 
     describe('## Check for unauthorised input', () => {
       it('should not get any recipes', (done) => {
-        request(app)
+        agent
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'ascending' })
           .set('Accept', 'application/json')
