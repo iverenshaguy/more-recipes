@@ -10,18 +10,18 @@ const recipeImageFileSize = 6291456; // 6MB
 const profilePicFileName = (req, file, cb) => {
   cb(
     null,
-    `${req.session.user.lastname.toLowerCase()}${req.session.user.id}${Date.now()}${path
+    `${req.lastname.toLowerCase()}${req.id}${Date.now()}${path
       .extname(file.originalname)
-      .toLowerCase()}`,
+      .toLowerCase()}`
   );
 };
 
 const recipeImageFileName = (req, file, cb) => {
   cb(
     null,
-    `${req.session.user.lastname.toLowerCase()}${req.session.user.id}${
-      req.params.recipeId
-    }${Date.now()}${path.extname(file.originalname).toLowerCase()}`,
+    `${req.lastname.toLowerCase()}${req.id}${req.params.recipeId}${Date.now()}${path
+      .extname(file.originalname)
+      .toLowerCase()}`
   );
 };
 
@@ -37,7 +37,7 @@ const uploadImage = (destination, filename, fileSize, field) => {
   const upload = multer({
     storage,
     limits: { fileSize },
-    fileFilter: imageFilter,
+    fileFilter: imageFilter
   });
 
   return upload.single(field);
@@ -47,13 +47,13 @@ const profilePicUpload = uploadImage(
   profilePicDestination,
   profilePicFileName,
   profilePicFileSize,
-  'profilePic',
+  'profilePic'
 );
 const recipeImageUpload = uploadImage(
   recipeImageDestination,
   recipeImageFileName,
   recipeImageFileSize,
-  'recipeImage',
+  'recipeImage'
 );
 const formDataOnly = multer().single();
 
@@ -61,5 +61,5 @@ export default {
   uploadImage,
   profilePicUpload,
   recipeImageUpload,
-  formDataOnly,
+  formDataOnly
 };

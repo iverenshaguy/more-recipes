@@ -4,7 +4,7 @@ export default {
   addFavoriteRecipe: (req, favoriteData, res, next) => Favorite.findOne({
     where: {
       recipeId: +favoriteData.recipeId,
-      userId: req.session.user.id
+      userId: req.id
     }
   })
     .then((favorited) => {
@@ -15,7 +15,7 @@ export default {
             as: 'favorites',
             attributes: [],
             where: {
-              userId: req.session.user.id,
+              userId: req.id,
             }
           }],
         })
@@ -31,7 +31,7 @@ export default {
         .create({
           favorite: true,
           recipeId: +favoriteData.recipeId,
-          userId: req.session.user.id
+          userId: req.id
         })
         .then(() => Recipe.findAll({
           include: [{
@@ -39,7 +39,7 @@ export default {
             as: 'favorites',
             attributes: [],
             where: {
-              userId: req.session.user.id,
+              userId: req.id,
             }
           }],
         })
@@ -52,7 +52,7 @@ export default {
     .catch(next),
 
   getFavorites: (req, favoriteRecipeData, res, next) => {
-    if (+req.session.user.id !== +req.params.userId) {
+    if (+req.id !== +req.params.userId) {
       return res.status(401).send({ message: 'You are not authorized to access this page' });
     }
 

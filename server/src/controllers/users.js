@@ -1,7 +1,11 @@
 import path from 'path';
 import del from 'del';
+import jwt from 'jsonwebtoken';
+import { config } from 'dotenv';
 import { User, Recipe } from '../models';
 import { verifyPassword } from '../helpers/passwordHash';
+
+config();
 
 export default {
   create(req, userData, res, next) {
@@ -12,17 +16,25 @@ export default {
       email: userData.email.toLowerCase(),
       password: userData.password,
       aboutMe: userData.aboutMe,
-      occupation: userData.occupation,
+      occupation: userData.occupation
     })
       .then((user) => {
-        req.session.user = user.dataValues;
-        res.status(201).send(user);
+        const token = jwt.sign(
+          {
+            id: user.id
+          },
+          process.env.SECRET,
+          {
+            expiresIn: 86400 // expires in 24 hours
+          }
+        );
+        res.status(201).send({ success: true, token });
       })
       .catch(next);
   },
 
   upload(req, userData, res, next) {
-    return User.findOne({ where: { id: req.session.user.id } })
+    return User.findOne({ where: { id: req.id } })
       .then((user) => {
         const uploadPath = path.resolve(__dirname, '../../../client/public/images/profile');
         const savedImage = `${uploadPath}/${user.profilePic}`;
@@ -42,10 +54,21 @@ export default {
       .then((user) => {
         verifyPassword(userData.password, user.passwordHash).then((verify) => {
           if (!verify) {
-            return res.status(401).send({ error: 'Username/Password do not match' });
+            return res
+              .status(401)
+              .send({ success: false, error: 'Username/Password do not match' });
           }
-          req.session.user = user.dataValues;
-          res.status(200).send(user);
+
+          const token = jwt.sign(
+            {
+              id: user.id
+            },
+            process.env.SECRET,
+            {
+              expiresIn: 86400 // expires in 24 hours
+            }
+          );
+          res.status(200).send({ success: true, token });
         });
       })
       .catch(next);
@@ -53,15 +76,15 @@ export default {
 
   retrieve(req, res, next) {
     return User.findOne({
-      where: { id: req.session.user.id },
+      where: { id: req.id },
       include: [
         {
           model: Recipe,
-          as: 'recipes',
-        },
-      ],
+          as: 'recipes'
+        }
+      ]
     })
       .then(user => res.status(200).send(user))
       .catch(next);
-  },
+  }
 };

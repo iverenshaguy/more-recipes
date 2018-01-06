@@ -15,7 +15,7 @@ export default {
         difficulty: recipeData.difficulty,
         extraInfo: recipeData.extraInfo,
         vegetarian: recipeData.vegetarian,
-        userId: req.session.user.id,
+        userId: req.id,
         ingredients: recipeData.ingredients,
         preparations: recipeData.preparations,
         directions: recipeData.directions
@@ -30,7 +30,7 @@ export default {
 
   upload(req, recipeData, res, next) {
     return Recipe
-      .findOne({ where: { id: +recipeData.recipeId, userId: req.session.user.id } })
+      .findOne({ where: { id: +recipeData.recipeId, userId: req.id } })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({ message: 'Recipe Not Found' });
@@ -72,7 +72,7 @@ export default {
 
   update(req, recipeData, res, next) {
     return Recipe
-      .findOne({ where: { id: +recipeData.recipeId, userId: req.session.user.id } })
+      .findOne({ where: { id: +recipeData.recipeId, userId: req.id } })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({ message: 'Recipe Not Found' });
@@ -88,7 +88,7 @@ export default {
 
   delete(req, recipeData, res, next) {
     return Recipe
-      .findOne({ where: { id: recipeData.recipeId, userId: req.session.user.id } })
+      .findOne({ where: { id: recipeData.recipeId, userId: req.id } })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({ message: 'Recipe Not Found' });
