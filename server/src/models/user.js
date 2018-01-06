@@ -1,85 +1,90 @@
 import { hashPassword } from '../helpers/passwordHash';
 
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    firstname: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastname: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    passwordHash: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.VIRTUAL,
-      allowNull: false,
-    },
-    aboutMe: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-    occupation: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    profilePic: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        is: {
-          args: /^[a-zA-Z0-9._\s]*$/,
-          msg: 'Input is not valid'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'Input cannot be empty'
+  const User = sequelize.define(
+    'User',
+    {
+      firstname: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastname: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+      },
+      passwordHash: {
+        type: DataTypes.STRING
+      },
+      password: {
+        type: DataTypes.VIRTUAL,
+        allowNull: false
+      },
+      aboutMe: {
+        type: DataTypes.TEXT,
+        allowNull: true
+      },
+      occupation: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
+      profilePic: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        validate: {
+          is: {
+            args: /^[a-zA-Z0-9._\s]*$/,
+            msg: 'Input is not valid'
+          },
+          notEmpty: {
+            args: true,
+            msg: 'Input cannot be empty'
+          }
         }
       }
     },
-  }, {
-    hooks: {
-      beforeCreate: user => hashPassword(user.password).then((hash) => {
-        user.passwordHash = hash;
-      })
+    {
+      hooks: {
+        beforeCreate: user =>
+          hashPassword(user.password).then((hash) => {
+            user.passwordHash = hash;
+          })
+      }
     }
-  });
+  );
   User.associate = (models) => {
     User.hasMany(models.Recipe, {
       foreignKey: 'userId',
-      as: 'recipes',
+      as: 'recipes'
     });
     User.hasMany(models.Like, {
       foreignKey: 'userId',
-      as: 'likes',
+      as: 'likes'
     });
     User.hasMany(models.Review, {
       foreignKey: 'userId',
-      as: 'reviews',
+      as: 'reviews'
     });
     User.hasMany(models.Notification, {
       foreignKey: 'userId',
-      as: 'notifications',
+      as: 'notifications'
     });
     User.hasMany(models.Favorite, {
       foreignKey: 'userId',
-      as: 'favorites',
+      as: 'favorites'
     });
     User.hasMany(models.Category, {
       foreignKey: 'userId',
-      as: 'categories',
+      as: 'categories'
     });
   };
 

@@ -1,10 +1,10 @@
-import authentication from './authentication';
+import authorization from './authorization';
 import errorHandler from './errorHandler';
 import validationHandler from './validationHandler';
 import searchHandler from './searchHandler';
 
 export default {
-  authentication,
+  authorization,
   errorHandler,
   validationHandler,
   searchHandler
