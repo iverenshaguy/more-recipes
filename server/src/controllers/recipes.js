@@ -1,5 +1,6 @@
 import del from 'del';
 import path from 'path';
+import Pagination from '../helpers/pagination';
 import { sequelize, Recipe, User, Review } from '../models';
 
 const uploadPath = path.resolve(__dirname, '../../../client/public/images/recipes');
@@ -123,7 +124,19 @@ export default {
         ],
         group: ['Recipe.id']
       })
-      .then(recipes => res.status(200).send(recipes))
+      .then((recipes) => {
+        const { limit, page } = req.query;
+
+        if (limit && page) {
+          const paginate = new Pagination(recipes, parseInt(limit, 10));
+
+          const { recipesByPage, metaData } = paginate.getRecipesForPage(parseInt(page, 10));
+
+          return res.status(200).send({ recipes: recipesByPage, metaData });
+        }
+
+        return res.status(200).send(recipes);
+      })
       .catch(next);
   }
 };
