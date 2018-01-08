@@ -7,7 +7,7 @@ class Pagination {
    * @param {array} items
    * @param {number} limit
    */
-  constructor(items, limit = 10) {
+  constructor(items, limit = 5) {
     this.items = items;
     this.totalItems = items.length;
     this.limit = limit;
@@ -19,10 +19,11 @@ class Pagination {
    */
   listPages() {
     const pages = [];
+
     for (let i = 1; i <= this.totalPages; i += 1) {
       pages.push(i);
     }
-    console.log(pages);
+
     return pages;
   }
 
