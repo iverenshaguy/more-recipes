@@ -13,12 +13,15 @@
     "test:e2e": "cross-env NODE_ENV=test nightwatch",
     "e2e:setup": "selenium-standalone install --config=./selenium.config.js",
     "start:server": "node ./server/build/bin/www.js",
-    "start:server:dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./server/build/bin/www.js",
+    "start:server:dev":
+      "cross-env NODE_ENV=development nodemon --exec babel-node ./server/build/bin/www.js",
     "start:client": "node client/scripts/start.js",
     "build:server": "cross-env NODE_ENV=development babel server/src -d server/build",
     "build:client": "node client/scripts/build.js",
-    "test:server": "cross-env NODE_ENV=test SECRET=mytestsecret nyc mocha server/tests/test.js --recursive --timeout 30000",
-    "test:server:watch": "cross-env NODE_ENV=test SECRET=mytestsecret nyc mocha server/tests/test.js --recursive --timeout 30000 --watch",
+    "test:server":
+      "cross-env NODE_ENV=test SECRET=mytestsecret nyc mocha server/tests/test.js --recursive --timeout 30000",
+    "test:server:watch":
+      "cross-env NODE_ENV=test SECRET=mytestsecret nyc mocha server/tests/test.js --recursive --timeout 30000 --watch",
     "test:client": "node client/scripts/test.js --env=jsdom --coverage",
     "test:client:watch": "node client/scripts/test.js --env=jsdom",
     "pretest": "npm run lint",
@@ -28,6 +31,8 @@
     "clean:server": "cd server && rm -rf build",
     "clean:client": "cd client && rm -rf build",
     "lint": "eslint **/*.js --fix",
+    "docs":
+      "aglio -i docs.apib --theme-variables flatly --theme-template triple -o docs/index.html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "analyze": "source-map-explorer client/build/static/js/main.*"
   },
