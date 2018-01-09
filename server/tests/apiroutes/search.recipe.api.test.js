@@ -224,11 +224,11 @@ describe('Routes: Recipe API Tests, Search', () => {
           .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.recipes).to.have.lengthOf(5);
-            expect(res.body.recipes[0].recipeName).to.equal('Egusi Soup');
-            expect(res.body.recipes[1].recipeName).to.equal('Fried Rice');
-            expect(res.body.recipes[2].recipeName).to.equal('Coconut Rice');
-            expect(res.body.recipes[3].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body).to.have.lengthOf(5);
+            expect(res.body[0].recipeName).to.equal('Egusi Soup');
+            expect(res.body[1].recipeName).to.equal('Fried Rice');
+            expect(res.body[2].recipeName).to.equal('Coconut Rice');
+            expect(res.body[3].recipeName).to.equal('Sweet Potatoe Pottage');
 
             if (err) {
               return done(err);
@@ -245,11 +245,11 @@ describe('Routes: Recipe API Tests, Search', () => {
           .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.recipes).to.have.lengthOf(5);
-            expect(res.body.recipes[0].recipeName).to.equal('White Soup');
-            expect(res.body.recipes[1].recipeName).to.equal('Coconut Rice');
-            expect(res.body.recipes[2].recipeName).to.equal('Sweet Potatoe Pottage');
-            expect(res.body.recipes[3].recipeName).to.equal('Fried Rice');
+            expect(res.body).to.have.lengthOf(5);
+            expect(res.body[0].recipeName).to.equal('White Soup');
+            expect(res.body[1].recipeName).to.equal('Coconut Rice');
+            expect(res.body[2].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body[3].recipeName).to.equal('Fried Rice');
 
             if (err) {
               return done(err);
@@ -293,9 +293,9 @@ describe('Routes: Recipe API Tests, Search', () => {
           .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.recipes).to.have.lengthOf(5);
-            expect(res.body.recipes[0].recipeName).to.equal('Coconut Rice');
-            expect(res.body.recipes[3].recipeName).to.equal('Sweet Potatoe Pottage');
+            expect(res.body).to.have.lengthOf(6);
+            expect(res.body[0].recipeName).to.equal('Coconut Rice');
+            expect(res.body[3].recipeName).to.equal('Sweet Potatoe Pottage');
             if (err) return done(err);
             done();
           });

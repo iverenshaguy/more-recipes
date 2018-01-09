@@ -548,21 +548,17 @@ describe('Routes: Recipe API Tests: Main', () => {
 
   describe('## Get all Recipes in App for User Iveren', () => {
     describe('## Check for authorised right input', () => {
-      it('should get all recipesw with default values for page = 1 and limit = 5', (done) => {
+      it('should get all recipes', (done) => {
         agent
           .get('/api/v1/recipes')
           .set('Accept', 'application/json')
           .set('token', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.recipes).to.have.lengthOf(3);
-            expect(res.body.metaData.totalRecipeCount).to.equal(3);
-            expect(res.body.metaData.pageRecipeCount).to.equal(3);
-            expect(res.body.metaData.page).to.equal(1);
-            expect(res.body.metaData.lastPage).to.equal(1);
-            expect(res.body.recipes[0].recipeName).to.equal('Jollof Rice');
-            expect(res.body.recipes[1].recipeName).to.equal('Bean Pottage');
-            expect(res.body.recipes[2].recipeName).to.equal('White Soup');
+            expect(res.body).to.have.lengthOf(3);
+            expect(res.body[0].recipeName).to.equal('Jollof Rice');
+            expect(res.body[1].recipeName).to.equal('Bean Pottage');
+            expect(res.body[2].recipeName).to.equal('White Soup');
 
             if (err) {
               return done(err);
