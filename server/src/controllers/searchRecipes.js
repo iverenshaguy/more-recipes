@@ -41,11 +41,7 @@ export default {
           return res.status(200).send({ recipes: recipesByPage, metaData });
         }
 
-        const paginate = new Pagination(recipes);
-
-        const { recipesByPage, metaData } = paginate.getRecipesForPage();
-
-        return res.status(200).send({ recipes: recipesByPage, metaData });
+        return res.status(200).send(recipes);
       })
       .catch(next);
   },
