@@ -136,7 +136,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/')
           .send(recipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.recipeName).to.equal('Bean Pottage');
@@ -158,7 +158,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/')
           .send(badRecipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body).to.have.property('errors');
@@ -205,7 +205,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/4/uploads')
           .attach('recipeImage', largeFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File too large!');
@@ -219,7 +219,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/4/uploads')
           .attach('recipeImage', noneImageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('Only image files are allowed!');
@@ -233,7 +233,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/4/uploads')
           .attach('recipeImage', '')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File is Empty!');
@@ -246,7 +246,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .post('/api/v1/recipes/4/uploads')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File is Empty!');
@@ -260,7 +260,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/123/uploads')
           .attach('recipeImage', imageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -274,7 +274,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/jdfl/uploads')
           .attach('recipeImage', imageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -292,7 +292,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/4/uploads')
           .attach('recipeImage', imageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.recipeName).to.equal('Bean Pottage');
@@ -310,7 +310,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/2/uploads')
           .attach('recipeImage', capsFileExt)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(path.extname(res.body.recipeImage)).to.equal('.jpg');
@@ -339,7 +339,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .post('/api/v1/recipes/3/uploads')
           .attach('recipeImage', imageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
             expect(res.body.message).to.equal('Recipe Not Found');
@@ -364,7 +364,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .put('/api/v1/recipes/4')
           .send(recipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipeName).to.equal('Beans and Plantain Pottage');
@@ -388,7 +388,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .put('/api/v1/recipes/1')
           .send(recipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
             expect(res.body.message).to.equal('Recipe Not Found');
@@ -404,7 +404,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .put('/api/v1/recipes/123')
           .send(recipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -418,7 +418,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .put('/api/v1/recipes/abc')
           .send(recipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -436,7 +436,7 @@ describe('Routes: Recipe API Tests: Main', () => {
           .put('/api/v1/recipes/4')
           .send(badRecipe)
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body).to.have.property('errors');
@@ -475,7 +475,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .delete('/api/v1/recipes/2')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(204);
             if (err) {
@@ -491,7 +491,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .delete('/api/v1/recipes/1')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
             expect(res.body.message).to.equal('Recipe Not Found');
@@ -504,7 +504,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .delete('/api/v1/recipes/123')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -517,7 +517,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .delete('/api/v1/recipes/abc')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -552,7 +552,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .get('/api/v1/recipes')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(3);
@@ -574,7 +574,7 @@ describe('Routes: Recipe API Tests: Main', () => {
             page: '2', limit: '2'
           })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(1);
@@ -616,7 +616,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .get('/api/v1/recipes/4')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipeName).to.equal('Bean Pottage');
@@ -638,7 +638,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .get('/api/v1/recipes/123')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -651,7 +651,7 @@ describe('Routes: Recipe API Tests: Main', () => {
         agent
           .get('/api/v1/recipes/abc')
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');

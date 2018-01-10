@@ -175,7 +175,7 @@ describe('Routes: User API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
-            expect(res.body.success).to.equal(true);
+            expect(res.body.user.firstname).to.equal('Iveren');
             expect(res.body).to.haveOwnProperty('token');
             if (err) return done(err);
             userToken1 = res.body.token;
@@ -197,7 +197,7 @@ describe('Routes: User API Tests', () => {
           .post('/api/v1/users/uploads')
           .attach('profilePic', largeFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File too large!');
@@ -211,7 +211,7 @@ describe('Routes: User API Tests', () => {
           .post('/api/v1/users/uploads')
           .attach('profilePic', noneImageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('Only image files are allowed!');
@@ -225,7 +225,7 @@ describe('Routes: User API Tests', () => {
           .post('/api/v1/users/uploads')
           .attach('profilePic', '')
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File is Empty!');
@@ -238,7 +238,7 @@ describe('Routes: User API Tests', () => {
         agent
           .post('/api/v1/users/uploads')
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(422);
             expect(res.body.error).to.equal('File is Empty!');
@@ -256,7 +256,7 @@ describe('Routes: User API Tests', () => {
           .post('/api/v1/users/uploads')
           .attach('profilePic', imageFilePath)
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body.firstname).to.equal('Iveren');
@@ -277,7 +277,7 @@ describe('Routes: User API Tests', () => {
           .post('/api/v1/users/uploads')
           .attach('profilePic', capsFileExt)
           .set('Accept', 'application/json')
-          .set('token', userToken1)
+          .set('authorization', userToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(path.extname(res.body.profilePic)).to.equal('.jpg');
@@ -441,7 +441,7 @@ describe('Routes: User API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.success).to.equal(true);
+            expect(res.body.user.firstname).to.equal('Iveren');
             expect(res.body).to.haveOwnProperty('token');
             if (err) return done(err);
             userToken2 = res.body.token;
@@ -453,7 +453,7 @@ describe('Routes: User API Tests', () => {
         agent
           .get('/api/v1/users/profile')
           .set('Accept', 'application/json')
-          .set('token', userToken2)
+          .set('authorization', userToken2)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.firstname).to.equal('Iveren');
@@ -483,7 +483,7 @@ describe('Routes: User API Tests', () => {
           request(app)
             .get('/api/v1/users/profile')
             .set('Accept', 'application/json')
-            .set('token', expiredToken)
+            .set('authorization', expiredToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(403);
               expect(res.body.error).to.equal('User authorization token is expired');
@@ -499,7 +499,7 @@ describe('Routes: User API Tests', () => {
         agent
           .get('/api/v1/users/profile')
           .set('Accept', 'application/json')
-          .set('token', invalidToken1)
+          .set('authorization', invalidToken1)
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
             expect(res.body.error).to.equal('Invalid user authorization token');
@@ -515,10 +515,27 @@ describe('Routes: User API Tests', () => {
         agent
           .get('/api/v1/users/profile')
           .set('Accept', 'application/json')
-          .set('token', invalidToken2)
+          .set('authorization', invalidToken2)
           .end((err, res) => {
             expect(res.statusCode).to.equal(500);
             expect(res.body.error).to.equal('Failed to authenticate token');
+
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+
+      it('should refresh user token based on token input', (done) => {
+        agent
+          .get('/api/v1/users/token')
+          .set('Accept', 'application/json')
+          .set('authorization', userToken2)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.user.firstname).to.equal('Iveren');
+            expect(res.body).to.haveOwnProperty('token');
 
             if (err) {
               return done(err);

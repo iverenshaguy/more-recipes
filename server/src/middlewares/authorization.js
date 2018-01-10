@@ -8,7 +8,7 @@ export default {
   // middleware function to check for authorised users
   authorize: (req, res, next) => {
     // token could provided via body, as a query string or in the header
-    const token = req.body.token || req.query.token || req.headers.token;
+    const token = req.body.token || req.query.token || req.headers.authorization;
 
     if (!token) {
       return res.status(401).send({
@@ -27,16 +27,6 @@ export default {
 
         return res.status(500).send({ error: 'Failed to authenticate token' });
       }
-
-      // {
-      //   id: decoded.id,
-      //   firstname: decoded.firstname,
-      //   lastname: decoded.lastname,
-      //   username: decoded.username,
-      //   email: decoded.email.toLowerCase(),
-      //   aboutMe: decoded.aboutMe,
-      //   occupation: decoded.occupation
-      // };
 
       // check user existence
       User.findById(decoded.id).then((userData) => {

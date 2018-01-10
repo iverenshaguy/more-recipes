@@ -1,4 +1,4 @@
-import handleVote from '../helpers/handleVote';
+import { handleVote } from '../helpers';
 
 export default {
   upvoteRecipe: (req, upvoteData, res, next) =>
