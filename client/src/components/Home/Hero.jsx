@@ -2,8 +2,9 @@ import React from 'react';
 import { InputGroup, InputGroupButton, Button, Form, Label, Input } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
+import { toggleModal } from '../../store/components/actions';
 
-const Hero = props => (
+const Hero = ({ dispatch }) => (
   <div className="container-fluid" id="hero-image">
     <div className="row mx-auto" id="hero-image-text">
       <div className="col align-self-center">
@@ -28,7 +29,7 @@ const Hero = props => (
           </div>
         </div>
         <Button
-          onClick={() => props.toggle('addRecipeModal')}
+          onClick={() => dispatch(toggleModal('addRecipe'))}
           className="btn-default btn-lg"
           id="home-add-recipe-btn"
           title="New Recipe"
@@ -41,7 +42,7 @@ const Hero = props => (
 );
 
 Hero.propTypes = {
-  toggle: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 export default Hero;

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeItems renders correctly 1`] = `
+<div
+  className="container-fluid pb-5 background-grey page-margin"
+  id="search-result-wrapper"
+>
+  <div
+    className="heading pt-4 text-center"
+    id="search-result-heading"
+  >
+    <div
+      className="col-xs-12 col-md-12 pt-3"
+      id="title"
+    >
+      <h5>
+        TOP RECIPES
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <div
+    className="row pt-2 px-5"
+    id="search-result"
+  >
+    <RecipeCard />
+    <RecipeCard />
+    <RecipeCard />
+    <RecipeCard />
+  </div>
+</div>
+`;

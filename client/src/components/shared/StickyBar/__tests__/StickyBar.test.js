@@ -2,14 +2,14 @@ import React from 'react';
 import StickyBar from '../index';
 
 describe('StickyBar', () => {
-  const toggleMock = jest.fn();
+  const dispatchMock = jest.fn();
 
   afterAll(() => {
     jest.clearAllMocks();
   });
 
   it("renders oven icon when type 'user-profile' is passed", () => {
-    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="user-profile" />);
+    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="user-profile" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.flaticon-oven-kitchen-tool-for-cooking-foods')).toBeTruthy();
@@ -21,7 +21,7 @@ describe('StickyBar', () => {
   });
 
   it("renders no sticky bar when type 'login' is passed", () => {
-    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="login" />);
+    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="auth" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
 
@@ -31,7 +31,7 @@ describe('StickyBar', () => {
   });
 
   it("renders no sticky bar when type 'signup' is passed", () => {
-    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="signup" />);
+    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="auth" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
 
@@ -41,7 +41,7 @@ describe('StickyBar', () => {
   });
 
   it("renders share icon when type 'home' is passed", () => {
-    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="home" />);
+    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="home" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.fa-share-alt')).toBeTruthy();
@@ -53,7 +53,7 @@ describe('StickyBar', () => {
   });
 
   it("renders heart-o, thumbs-up-o, thumbs-down-o icons and does not render heart icon when type 'view-recipe' is passed", () => {
-    const wrapper = mount(<StickyBar toggleModal={toggleMock} type="view-recipe" />);
+    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="view-recipe" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.fa-share-alt')).toBeTruthy();

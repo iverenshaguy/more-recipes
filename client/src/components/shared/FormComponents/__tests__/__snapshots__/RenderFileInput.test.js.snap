@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Components: RenderFileInput renders correctly 1`] = `
+<RenderFileInput
+  input={
+    Object {
+      "name": "pic",
+    }
+  }
+  meta={
+    Object {
+      "error": null,
+      "touched": false,
+    }
+  }
+  type="file"
+>
+  <Input
+    name="pic"
+    onBlur={[Function]}
+    onChange={[Function]}
+    tag="p"
+    type="file"
+  >
+    <input
+      className="form-control-file"
+      name="pic"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="file"
+    />
+  </Input>
+</RenderFileInput>
+`;
+
+exports[`Form Components: RenderFileInput renders correctly with image preview 1`] = `
+<RenderFileInput
+  input={
+    Object {
+      "name": "pic",
+    }
+  }
+  meta={
+    Object {
+      "error": null,
+      "touched": true,
+    }
+  }
+  type="file"
+>
+  <div
+    className="preview-img-div"
+  >
+    <img
+      alt="preview"
+      className="photo-preview"
+      src=""
+    />
+  </div>
+  <Input
+    name="pic"
+    onBlur={[Function]}
+    onChange={[Function]}
+    tag="p"
+    type="file"
+  >
+    <input
+      className="form-control-file"
+      name="pic"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="file"
+    />
+  </Input>
+</RenderFileInput>
+`;

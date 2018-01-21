@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreLoader renders correctly 1`] = `
+<PreLoader>
+  <Loader
+    active={true}
+    style={
+      Object {
+        "transform": "scale(0.5)",
+      }
+    }
+    type="semi-circle-spin"
+  >
+    <div
+      className="loader loader-undefined loader-active"
+      style={
+        Object {
+          "transform": "scale(0.5)",
+        }
+      }
+    >
+      <div
+        className="loader-inner semi-circle-spin"
+      >
+        <div
+          key="0"
+          style={Object {}}
+        />
+      </div>
+    </div>
+  </Loader>
+</PreLoader>
+`;

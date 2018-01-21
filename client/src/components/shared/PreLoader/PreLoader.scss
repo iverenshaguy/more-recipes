@@ -1,0 +1,10 @@
+$primary-color: $green;
+@import '../../../assets/scss/modules';
+@import 'loaders.css/src/animations/semi-circle-spin';
+.loader-hidden {
+  display: none;
+}
+
+.loader-active {
+  display: block;
+}

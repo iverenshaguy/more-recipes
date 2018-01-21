@@ -10,26 +10,26 @@ import { Modal, ModalHeader, ModalBody, Button, Form, FormGroup, Label, Input } 
  * @returns {component} AddRecipeModal
  */
 class AddRecipeModal extends Component {
-//   /**
-//  * @returns {component} AddRecipeModal
-//  */
-//   constructor() {
-//     super();
-//     this.state = {
-//       imageSrc: ''
-//     };
+  //   /**
+  //  * @returns {component} AddRecipeModal
+  //  */
+  //   constructor() {
+  //     super();
+  //     this.state = {
+  //       imageSrc: ''
+  //     };
 
-//     this.handleFileSelect = this.handleFileSelect.bind(this);
-//   }
+  //     this.handleFileSelect = this.handleFileSelect.bind(this);
+  //   }
 
-//   /**
-//  * @override
-//  */
-//   handleFileSelect(e) {
-//     this.this.setState({
-//       imageSrc: e.target.result
-//     });
-//   }
+  //   /**
+  //  * @override
+  //  */
+  //   handleFileSelect(e) {
+  //     this.this.setState({
+  //       imageSrc: e.target.result
+  //     });
+  //   }
 
   /**
  * @returns {component} AddRecipeModal
@@ -87,7 +87,7 @@ class AddRecipeModal extends Component {
                         type="file"
                         id="recipe-image"
                         className="recipe-image"
-                        // onChange={this.handleFileSelect}
+                      // onChange={this.handleFileSelect}
                       />
                       <span className="custom-file-control" />
                     </Label>
@@ -212,13 +212,9 @@ class AddRecipeModal extends Component {
   }
 }
 
-AddRecipeModal.defaultProps = {
-  isOpen: false,
-};
-
 AddRecipeModal.propTypes = {
   toggle: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 export default AddRecipeModal;

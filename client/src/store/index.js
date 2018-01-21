@@ -1,15 +1,15 @@
-import { applyMiddleware, combineReducers, compose } from 'redux';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { applyMiddleware, compose } from 'redux';
+// import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
+import rootReducer from './rootReducer';
 
-export const history = createHistory();
-
-export const reducers = {};
+// export const history = createHistory();
 
 const enhancers = [];
-const middlewares = [thunk, routerMiddleware(history)];
+// const middlewares = [thunk, routerMiddleware(history)];
+const middlewares = [thunk];
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
@@ -21,19 +21,6 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-const composedEnhancers = compose(
-  applyMiddleware(...middlewares),
-  ...enhancers
-);
+export const composedEnhancers = compose(applyMiddleware(...middlewares), ...enhancers);
 
-const configureStore = () => {
-  return (
-    combineReducers({
-      ...reducers,
-      router: routerReducer
-    }),
-    composedEnhancers
-  );
-};
-
-export default configureStore;
+export default rootReducer;

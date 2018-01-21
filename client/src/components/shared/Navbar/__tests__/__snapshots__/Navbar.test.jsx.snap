@@ -1,6 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home renders correctly when authenticated 1`] = `
+exports[`Navbar renders correctly when app is not authenticated 1`] = `
+<div>
+  <Navbar
+    color="faded"
+    expand="md"
+    id="more-recipes-navbar"
+    light={true}
+    tag="nav"
+  >
+    <NavLink
+      activeClassName="active"
+      ariaCurrent="true"
+      className="navbar-brand"
+      to="/"
+    >
+      MORE RECIPES
+    </NavLink>
+  </Navbar>
+</div>
+`;
+
+exports[`Navbar renders correctly when type = home 1`] = `
 <Navbar
   className="navbar-expand"
   color="faded"
@@ -149,6 +170,8 @@ exports[`Home renders correctly when authenticated 1`] = `
             />
             <a
               className="dropdown-item"
+              href="/login"
+              onClick={[Function]}
             >
               Log out
             </a>
@@ -205,25 +228,4 @@ exports[`Home renders correctly when authenticated 1`] = `
     </Nav>
   </div>
 </Navbar>
-`;
-
-exports[`Home renders correctly when not authenticated 1`] = `
-<div>
-  <Navbar
-    color="faded"
-    expand="md"
-    id="more-recipes-navbar"
-    light={true}
-    tag="nav"
-  >
-    <NavLink
-      activeClassName="active"
-      ariaCurrent="true"
-      className="navbar-brand"
-      to="/"
-    >
-      MORE RECIPES
-    </NavLink>
-  </Navbar>
-</div>
 `;

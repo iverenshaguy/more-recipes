@@ -2,8 +2,8 @@
 
 exports[`StickyBar renders heart-o, thumbs-up-o, thumbs-down-o icons and does not render heart icon when type 'view-recipe' is passed 1`] = `
 <StickyBar
-  toggleModal={[Function]}
-  type="view-recipe"
+  currentLocation="view-recipe"
+  dispatch={[Function]}
 >
   <div
     className="view-recipe"
@@ -214,22 +214,22 @@ exports[`StickyBar renders heart-o, thumbs-up-o, thumbs-down-o icons and does no
 
 exports[`StickyBar renders no sticky bar when type 'login' is passed 1`] = `
 <StickyBar
-  toggleModal={[Function]}
-  type="login"
+  currentLocation="auth"
+  dispatch={[Function]}
 />
 `;
 
 exports[`StickyBar renders no sticky bar when type 'signup' is passed 1`] = `
 <StickyBar
-  toggleModal={[Function]}
-  type="signup"
+  currentLocation="auth"
+  dispatch={[Function]}
 />
 `;
 
 exports[`StickyBar renders oven icon when type 'user-profile' is passed 1`] = `
 <StickyBar
-  toggleModal={[Function]}
-  type="user-profile"
+  currentLocation="user-profile"
+  dispatch={[Function]}
 >
   <div
     className="user-profile"
@@ -387,8 +387,8 @@ exports[`StickyBar renders oven icon when type 'user-profile' is passed 1`] = `
 
 exports[`StickyBar renders share icon when type 'home' is passed 1`] = `
 <StickyBar
-  toggleModal={[Function]}
-  type="home"
+  currentLocation="home"
+  dispatch={[Function]}
 >
   <div
     className="home"

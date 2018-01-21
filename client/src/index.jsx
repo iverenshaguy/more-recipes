@@ -2,19 +2,34 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import configureStore, { history } from './store';
+import jwt from 'jsonwebtoken';
+import rootReducer, { composedEnhancers } from './store';
+import { authOperations } from './store/auth';
 import App from './components/App';
 
-const store = createStore(configureStore());
+const store = createStore(rootReducer, composedEnhancers);
+const { resetUser, authenticateUser } = authOperations;
+
+if (localStorage.token) {
+  const token = localStorage.getItem('token');
+  const { exp } = jwt.decode(token);
+
+  // if token is expired or unavailable
+  if (token === '' || exp < Math.floor(Date.now() / 1000)) {
+    // remove empty token and log user out
+    localStorage.removeItem('jwtToken');
+    store.dispatch(resetUser());
+  } else {
+    // fetch user from token if valid
+    store.dispatch(authenticateUser(token));
+  }
+} else {
+  store.dispatch(resetUser());
+}
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
-    </ConnectedRouter>
+    <App />
   </Provider>,
   document.getElementById('root')
 );

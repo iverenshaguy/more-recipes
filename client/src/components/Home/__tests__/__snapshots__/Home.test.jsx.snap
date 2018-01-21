@@ -5,7 +5,7 @@ exports[`Home renders correctly 1`] = `
   className="home"
 >
   <Hero
-    toggle={[Function]}
+    dispatch={[Function]}
   />
   <RecipeItems />
 </div>
@@ -13,14 +13,13 @@ exports[`Home renders correctly 1`] = `
 
 exports[`Home renders correctly when fully mounted 1`] = `
 <Home
-  toggleModal={[Function]}
-  updateLocationState={[Function]}
+  dispatch={[Function]}
 >
   <div
     className="home"
   >
     <Hero
-      toggle={[Function]}
+      dispatch={[Function]}
     >
       <div
         className="container-fluid"

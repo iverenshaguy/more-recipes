@@ -1,30 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AddRecipeModal from './AddRecipeModal';
 import SocialModal from './SocialModal';
+import { componentActions } from '../../../store/components';
 
-const Modals = (props) => {
-  if (props.addRecipeModal) {
-    return <AddRecipeModal isOpen toggle={() => props.toggle('addRecipeModal')} />;
+const { toggleModal } = componentActions;
+
+const Modal = ({
+  addRecipeModal, socialModal, isOpen, dispatch
+}) => {
+  if (addRecipeModal) {
+    return <AddRecipeModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
   }
 
-  if (props.socialModal) {
-    return <SocialModal isOpen toggle={() => props.toggle('socialModal')} />;
+  if (socialModal) {
+    return <SocialModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
   }
 
-  return '';
+  return null;
 };
 
-Modals.defaultProps = {
+Modal.propTypes = {
+  addRecipeModal: PropTypes.bool,
+  socialModal: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
+
+Modal.defaultProps = {
   addRecipeModal: false,
   socialModal: false,
 };
 
-Modals.propTypes = {
-  addRecipeModal: PropTypes.bool,
-  socialModal: PropTypes.bool,
-  toggle: PropTypes.func.isRequired,
-};
+const mapStateToProps = state => ({
+  addRecipeModal: state.components.modals.addRecipe,
+  socialModal: state.components.modals.social,
+  isOpen: Object.keys(state.components.modals) !== 0,
+});
 
-export { AddRecipeModal, SocialModal };
-export default Modals;
+export { AddRecipeModal, SocialModal, Modal as ModalComponent };
+
+export default connect(mapStateToProps)(Modal);

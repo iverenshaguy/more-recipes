@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Components: RenderInput renders correctly 1`] = `
+<RenderInput
+  input={
+    Object {
+      "name": "email",
+    }
+  }
+  meta={
+    Object {
+      "asyncValidating": false,
+      "error": null,
+      "touched": false,
+    }
+  }
+  placeholder="jane"
+  type="email"
+>
+  <Input
+    className=""
+    name="email"
+    placeholder="jane"
+    tag="p"
+    type="email"
+  >
+    <input
+      className="form-control"
+      name="email"
+      placeholder="jane"
+      type="email"
+    />
+  </Input>
+</RenderInput>
+`;
+
+exports[`Form Components: RenderInput shows 'Checking' when async validating 1`] = `
+<RenderInput
+  input={
+    Object {
+      "name": "email",
+    }
+  }
+  meta={
+    Object {
+      "asyncValidating": true,
+      "touched": true,
+    }
+  }
+  placeholder="jane"
+  type="email"
+>
+  <Input
+    className="is-valid"
+    name="email"
+    placeholder="jane"
+    tag="p"
+    type="email"
+  >
+    <input
+      className="is-valid form-control"
+      name="email"
+      placeholder="jane"
+      type="email"
+    />
+  </Input>
+  <small
+    className="form-text"
+  >
+    Checking...
+  </small>
+</RenderInput>
+`;
+
+exports[`Form Components: RenderInput shows error when found 1`] = `
+<RenderInput
+  input={
+    Object {
+      "name": "email",
+    }
+  }
+  meta={
+    Object {
+      "asyncValidating": false,
+      "error": "This is an error",
+      "touched": true,
+    }
+  }
+  placeholder="jane"
+  type="email"
+>
+  <Input
+    className="is-invalid"
+    name="email"
+    placeholder="jane"
+    tag="p"
+    type="email"
+  >
+    <input
+      className="is-invalid form-control"
+      name="email"
+      placeholder="jane"
+      type="email"
+    />
+  </Input>
+  <div
+    className="invalid-feedback"
+  >
+    This is an error
+  </div>
+</RenderInput>
+`;

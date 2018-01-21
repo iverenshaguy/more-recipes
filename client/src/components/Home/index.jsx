@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { locationActions } from '../../store/location';
 import Hero from './Hero';
 import RecipeItems from '../shared/RecipeItems';
 import './Home.scss';
+
+const { setHomeLocation } = locationActions;
 
 /**
  * @exports
@@ -12,16 +16,15 @@ import './Home.scss';
  */
 class Home extends Component {
   static propTypes = {
-    toggleModal: PropTypes.func.isRequired,
-    updateLocationState: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   /**
    * @memberof Home
-   * @returns {function} updateLocationState
+   * @return {state} New currentLocation State
    */
   componentWillMount() {
-    this.props.updateLocationState('home');
+    this.props.dispatch(setHomeLocation());
   }
 
   /**
@@ -31,11 +34,13 @@ class Home extends Component {
   render() {
     return (
       <div className="home">
-        <Hero toggle={this.props.toggleModal} />
+        <Hero dispatch={this.props.dispatch} />
         <RecipeItems />
       </div>
     );
   }
 }
 
-export default Home;
+export { Home as HomeComponent };
+
+export default connect()(Home);
