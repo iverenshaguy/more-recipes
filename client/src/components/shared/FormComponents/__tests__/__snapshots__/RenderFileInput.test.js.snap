@@ -33,7 +33,7 @@ exports[`Form Components: RenderFileInput renders correctly 1`] = `
 </RenderFileInput>
 `;
 
-exports[`Form Components: RenderFileInput renders correctly with image preview 1`] = `
+exports[`Form Components: RenderFileInput renders correctly when touched 1`] = `
 <RenderFileInput
   input={
     Object {
@@ -72,5 +72,43 @@ exports[`Form Components: RenderFileInput renders correctly with image preview 1
       type="file"
     />
   </Input>
+</RenderFileInput>
+`;
+
+exports[`Form Components: RenderFileInput renders correctly with errors 1`] = `
+<RenderFileInput
+  input={
+    Object {
+      "name": "pic",
+    }
+  }
+  meta={
+    Object {
+      "error": "This is an error",
+      "touched": true,
+    }
+  }
+  type="file"
+>
+  <Input
+    name="pic"
+    onBlur={[Function]}
+    onChange={[Function]}
+    tag="p"
+    type="file"
+  >
+    <input
+      className="form-control-file"
+      name="pic"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="file"
+    />
+  </Input>
+  <small
+    className="file-feedback"
+  >
+    This is an error
+  </small>
 </RenderFileInput>
 `;

@@ -46,28 +46,24 @@ export const isPhoneNumber = value =>
     : undefined);
 
 export const isValidImage = (value) => {
-  if (value) {
-    const fileType = value.type;
-    const match = ['image/jpg', 'image/png', 'image/jpeg', 'image/gif'];
-    const invalidType = type => type === fileType;
-    if (match.find(invalidType) === undefined) {
-      return 'Picture must be a valid image';
-    }
-
-    return undefined;
+  const fileType = value.type;
+  const match = ['image/jpg', 'image/png', 'image/jpeg', 'image/gif'];
+  const invalidType = type => type === fileType;
+  if (match.find(invalidType) === undefined) {
+    return 'Picture must be a valid image';
   }
+
+  return undefined;
 };
 
 export const isValidSize = (size, strSize) => (value) => {
-  if (value) {
-    const fileSize = value.size;
+  const fileSize = value.size;
 
-    if (fileSize > size) {
-      return `Picture must less than ${strSize}MB`;
-    }
-
-    return undefined;
+  if (fileSize > size) {
+    return `Picture must less than ${strSize}MB`;
   }
+
+  return undefined;
 };
 
 export const isValidPasswordConfirm = (value, allValues) => {
@@ -77,5 +73,5 @@ export const isValidPasswordConfirm = (value, allValues) => {
   return undefined;
 };
 
-export const isValidProfileImageSize = isValidSize(profilePicFileSize, 2);
-export const isValidRecipeImageSize = isValidSize(recipeImageFileSize, 6);
+export const isValidProfileImageSize = isValidSize(profilePicFileSize, '2');
+export const isValidRecipeImageSize = isValidSize(recipeImageFileSize, '6');

@@ -10,8 +10,8 @@ import App from './components/App';
 const store = createStore(rootReducer, composedEnhancers);
 const { resetUser, authenticateUser } = authOperations;
 
-if (localStorage.token) {
-  const token = localStorage.getItem('token');
+if (localStorage.jwtToken) {
+  const token = localStorage.getItem('jwtToken');
   const { exp } = jwt.decode(token);
 
   // if token is expired or unavailable

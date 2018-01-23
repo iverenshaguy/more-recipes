@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Label, FormGroup, Button } from 'reactstrap';
 import { RenderInput } from '../shared/FormComponents';
@@ -23,22 +23,7 @@ class SignupForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     authenticating: PropTypes.bool.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
     submitError: PropTypes.string,
-    location: PropTypes.shape({
-      hash: PropTypes.string,
-      key: PropTypes.string,
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      state: PropTypes.shape({
-        from: PropTypes.shape({
-          hash: PropTypes.string,
-          key: PropTypes.string,
-          pathname: PropTypes.string,
-          search: PropTypes.string
-        })
-      })
-    }).isRequired,
   };
 
   static defaultProps = {
@@ -145,24 +130,22 @@ class SignupForm extends Component {
 
     setTimeout(() => {
       if ((name === 'email' || name === 'username') && this.state.error[name] === null) {
-        this.setState((prevState) => {
-          if (!prevState.error[name]) {
-            return { asyncValidating: true };
-          }
+        this.setState({
+          asyncValidating: true
+        }, () => {
+          asyncValidate('signup')(name, value)
+            .then(() => {
+              this.setState({
+                asyncValidating: false
+              });
+            })
+            .catch((error) => {
+              this.setState({
+                error: { ...this.state.error, [name]: error[name] },
+                asyncValidating: false
+              });
+            });
         });
-
-        asyncValidate('signup')(name, value)
-          .then(() => {
-            this.setState({
-              asyncValidating: false
-            });
-          })
-          .catch((error) => {
-            this.setState({
-              error: { ...this.state.error, [name]: error[name] },
-              asyncValidating: false
-            });
-          });
       }
     }, 500);
   }
@@ -230,12 +213,6 @@ class SignupForm extends Component {
    * @returns {component} SignupForm
    */
   render() {
-    const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
-
-    if (this.props.isAuthenticated) {
-      return <Redirect to={from} />;
-    }
-
     return (
       <div id="register-form-div">
         <h4 className="text-center">Register for a New Account</h4>
@@ -429,6 +406,6 @@ class SignupForm extends Component {
   }
 }
 
-export { SignupForm };
+export { SignupForm as SignupComponent };
 
 export default connect()(SignupForm);

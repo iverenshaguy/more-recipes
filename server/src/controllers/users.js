@@ -50,7 +50,7 @@ export default {
           if (!verify) {
             return res
               .status(401)
-              .send({ success: false, error: 'Username/Password do not match' });
+              .send({ success: false, error: 'Email/Password do not match' });
           }
 
           const token = generateToken(user);

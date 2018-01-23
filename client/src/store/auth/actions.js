@@ -16,10 +16,7 @@ const authenticating = () => ({
 
 const authenticationSuccess = data => ({
   type: AUTHENTICATED,
-  payload: {
-    token: data.token,
-    user: data.user
-  }
+  payload: data
 });
 
 const authenticationFailure = error => ({
@@ -29,10 +26,7 @@ const authenticationFailure = error => ({
 
 const loginSuccess = data => ({
   type: LOGIN_SUCCESS,
-  payload: {
-    token: data.token,
-    user: data.user
-  }
+  payload: data
 });
 
 const loginFailure = error => ({
@@ -42,10 +36,7 @@ const loginFailure = error => ({
 
 const signupSuccess = data => ({
   type: SIGNUP_SUCCESS,
-  payload: {
-    token: data.token,
-    user: data.user
-  }
+  payload: data
 });
 
 const signupFailure = error => ({

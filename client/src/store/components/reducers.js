@@ -1,31 +1,19 @@
+import { TOGGLE_MODAL } from './types';
+
 const initialState = {
   modals: {
-    social: false,
-    addRecipe: false
+    isOpen: false,
+    type: null
   }
 };
 
 export default (state = initialState, action) => {
-  switch (action.payload) {
-    case 'social':
+  switch (action.type) {
+    case TOGGLE_MODAL:
       return Object.assign({}, state, {
         modals: {
-          social: true,
-          addRecipe: false
-        }
-      });
-    case 'addRecipe':
-      return Object.assign({}, state, {
-        modals: {
-          social: false,
-          addRecipe: true
-        }
-      });
-    case '':
-      return Object.assign({}, state, {
-        modals: {
-          social: false,
-          addRecipe: false
+          isOpen: !state.modals.isOpen,
+          type: action.payload || null
         }
       });
     default:

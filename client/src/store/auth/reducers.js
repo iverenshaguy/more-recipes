@@ -11,7 +11,7 @@ import {
 } from './types';
 
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('token'),
+  isAuthenticated: !!localStorage.getItem('jwtToken'),
   error: null,
   user: null,
   loading: false
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return Object.assign({}, state, {
         isAuthenticated: true,
-        user: action.payload.user,
+        user: action.payload,
         error: null,
         loading: false
       });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StickyBar renders heart-o, thumbs-up-o, thumbs-down-o icons and does not render heart icon when type 'view-recipe' is passed 1`] = `
+exports[`StickyBarComponent renders heart-o, thumbs-up-o, thumbs-down-o icons and does not render heart icon when type 'view-recipe' is passed 1`] = `
 <StickyBar
   currentLocation="view-recipe"
   dispatch={[Function]}
@@ -212,21 +212,21 @@ exports[`StickyBar renders heart-o, thumbs-up-o, thumbs-down-o icons and does no
 </StickyBar>
 `;
 
-exports[`StickyBar renders no sticky bar when type 'login' is passed 1`] = `
+exports[`StickyBarComponent renders no sticky bar when type 'login' is passed 1`] = `
 <StickyBar
   currentLocation="auth"
   dispatch={[Function]}
 />
 `;
 
-exports[`StickyBar renders no sticky bar when type 'signup' is passed 1`] = `
+exports[`StickyBarComponent renders no sticky bar when type 'signup' is passed 1`] = `
 <StickyBar
   currentLocation="auth"
   dispatch={[Function]}
 />
 `;
 
-exports[`StickyBar renders oven icon when type 'user-profile' is passed 1`] = `
+exports[`StickyBarComponent renders oven icon when type 'user-profile' is passed 1`] = `
 <StickyBar
   currentLocation="user-profile"
   dispatch={[Function]}
@@ -385,7 +385,7 @@ exports[`StickyBar renders oven icon when type 'user-profile' is passed 1`] = `
 </StickyBar>
 `;
 
-exports[`StickyBar renders share icon when type 'home' is passed 1`] = `
+exports[`StickyBarComponent renders share icon when type 'home' is passed 1`] = `
 <StickyBar
   currentLocation="home"
   dispatch={[Function]}

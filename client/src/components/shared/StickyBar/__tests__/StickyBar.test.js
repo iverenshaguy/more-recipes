@@ -1,7 +1,7 @@
 import React from 'react';
-import StickyBar from '../index';
+import { StickyBarComponent } from '../index';
 
-describe('StickyBar', () => {
+describe('StickyBarComponent', () => {
   const dispatchMock = jest.fn();
 
   afterAll(() => {
@@ -9,7 +9,7 @@ describe('StickyBar', () => {
   });
 
   it("renders oven icon when type 'user-profile' is passed", () => {
-    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="user-profile" />);
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="user-profile" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.flaticon-oven-kitchen-tool-for-cooking-foods')).toBeTruthy();
@@ -21,7 +21,7 @@ describe('StickyBar', () => {
   });
 
   it("renders no sticky bar when type 'login' is passed", () => {
-    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="auth" />);
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="auth" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
 
@@ -31,7 +31,7 @@ describe('StickyBar', () => {
   });
 
   it("renders no sticky bar when type 'signup' is passed", () => {
-    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="auth" />);
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="auth" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
 
@@ -41,7 +41,7 @@ describe('StickyBar', () => {
   });
 
   it("renders share icon when type 'home' is passed", () => {
-    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="home" />);
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="home" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.fa-share-alt')).toBeTruthy();
@@ -53,7 +53,7 @@ describe('StickyBar', () => {
   });
 
   it("renders heart-o, thumbs-up-o, thumbs-down-o icons and does not render heart icon when type 'view-recipe' is passed", () => {
-    const wrapper = mount(<StickyBar dispatch={dispatchMock} currentLocation="view-recipe" />);
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="view-recipe" />);
 
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('.fa-share-alt')).toBeTruthy();
@@ -62,6 +62,24 @@ describe('StickyBar', () => {
     expect(wrapper.find('.fa-thumbs-up-o')).toBeTruthy();
     expect(wrapper.find('.fa-thumbs-down-o')).toBeTruthy();
     expect(wrapper.find('.fa-search')).toBeTruthy();
+
+    wrapper.unmount();
+  });
+
+  it('calls modal when share button is clicked', () => {
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="view-recipe" />);
+
+    wrapper.find('span#social-modal-icon').simulate('click');
+    expect(dispatchMock).toHaveBeenCalled();
+
+    wrapper.unmount();
+  });
+
+  it('calls modal when add recipe button is clicked', () => {
+    const wrapper = mount(<StickyBarComponent dispatch={dispatchMock} currentLocation="view-recipe" />);
+
+    wrapper.find('span#add-edit-modal-icon').simulate('click');
+    expect(dispatchMock).toHaveBeenCalled();
 
     wrapper.unmount();
   });

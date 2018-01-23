@@ -424,7 +424,7 @@ describe('Routes: User API Tests', () => {
           .set('Accept', 'application/json')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
-            expect(res.body.error).to.equal('Username/Password do not match');
+            expect(res.body.error).to.equal('Email/Password do not match');
             if (err) return done(err);
             done();
           });

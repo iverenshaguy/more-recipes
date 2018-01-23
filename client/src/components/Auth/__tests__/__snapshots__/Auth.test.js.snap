@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth login: renders correctly 1`] = `
+<div
+  className="login-signup-body"
+>
+  <div
+    className="container"
+    id="login-signup-container"
+  >
+    <Row
+      className="my-5"
+      id="login-signup-wrapper"
+      tag="div"
+    >
+      <Col
+        className="p-xs-2 p-lg-4"
+        id="login-signup-div"
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <Connect(LoginForm)
+          authenticating={false}
+          isAuthenticated={false}
+          location={
+            Object {
+              "pathname": "/login",
+              "state": Object {
+                "from": Object {
+                  "pathname": "/",
+                },
+              },
+            }
+          }
+          submitError={null}
+          type="login"
+        />
+      </Col>
+    </Row>
+  </div>
+</div>
+`;
+
+exports[`Auth redirects when authenticated 1`] = `
+<Redirect
+  push={false}
+  to={
+    Object {
+      "pathname": "/",
+    }
+  }
+/>
+`;
+
+exports[`Auth redirects when authenticated: stateless location 1`] = `
+<Redirect
+  push={false}
+  to={
+    Object {
+      "pathname": "/",
+    }
+  }
+/>
+`;
+
+exports[`Auth signup: renders correctly 1`] = `
+<div
+  className="login-signup-body"
+>
+  <div
+    className="container"
+    id="login-signup-container"
+  >
+    <Row
+      className="my-5"
+      id="login-signup-wrapper"
+      tag="div"
+    >
+      <Col
+        className="p-xs-2 p-lg-4"
+        id="login-signup-div"
+        tag="div"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <Connect(SignupForm)
+          authenticating={false}
+          isAuthenticated={false}
+          location={
+            Object {
+              "pathname": "/signup",
+              "state": Object {
+                "from": Object {
+                  "pathname": "/",
+                },
+              },
+            }
+          }
+          submitError={null}
+          type="signup"
+        />
+      </Col>
+    </Row>
+  </div>
+</div>
+`;

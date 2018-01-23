@@ -1,4 +1,4 @@
 import auth from './auth';
-import asyncValidate, { loginAsyncValidate, signupAsyncValidate } from './asyncValidate';
+import asyncValidate from './asyncValidate';
 
-export { asyncValidate, auth, loginAsyncValidate, signupAsyncValidate };
+export { asyncValidate, auth };

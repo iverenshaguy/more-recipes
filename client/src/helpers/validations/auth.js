@@ -20,7 +20,7 @@ import {
  * @param {string} values - all field values
  * @returns {string} field Error
  */
-export const syncValidate = (field, value, values) => {
+const syncValidate = (field, value, values) => {
   if (field === 'email') {
     const validate = [isRequired(value), isEmail(value)];
 

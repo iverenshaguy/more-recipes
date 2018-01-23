@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Label, FormGroup, Button } from 'reactstrap';
 import { RenderInput } from '../shared/FormComponents';
 import { asyncValidate, auth as syncValidate } from '../../helpers/validations';
@@ -23,22 +23,7 @@ class LoginForm extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     authenticating: PropTypes.bool.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
     submitError: PropTypes.string,
-    location: PropTypes.shape({
-      hash: PropTypes.string,
-      key: PropTypes.string,
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      state: PropTypes.shape({
-        from: PropTypes.shape({
-          hash: PropTypes.string,
-          key: PropTypes.string,
-          pathname: PropTypes.string,
-          search: PropTypes.string
-        })
-      })
-    }).isRequired,
   };
 
   static defaultProps = {
@@ -120,25 +105,23 @@ class LoginForm extends Component {
     }, () => { this.validateField(name, value); });
 
     setTimeout(() => {
-      if (name === 'email' && this.state.error.email === null) {
-        this.setState((prevState) => {
-          if (!prevState.error.email) {
-            return { asyncValidating: true };
-          }
+      if (name === 'email' && !this.state.error.email) {
+        this.setState({
+          asyncValidating: true
+        }, () => {
+          asyncValidate('login')(name, value)
+            .then(() => {
+              this.setState({
+                asyncValidating: false
+              });
+            })
+            .catch((error) => {
+              this.setState({
+                error: { ...this.state.error, email: error.email },
+                asyncValidating: false
+              });
+            });
         });
-
-        asyncValidate('login')(name, value)
-          .then(() => {
-            this.setState({
-              asyncValidating: false
-            });
-          })
-          .catch((error) => {
-            this.setState({
-              error: { ...this.state.error, email: error.email },
-              asyncValidating: false
-            });
-          });
       }
     }, 500);
   }
@@ -206,12 +189,6 @@ class LoginForm extends Component {
    * @returns {component} LoginForm
    */
   render() {
-    const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
-
-    if (this.props.isAuthenticated) {
-      return <Redirect to={from} />;
-    }
-
     return (
       <div id="signin-form-div">
         <h4 className="text-center">Sign In to Your Account</h4>
@@ -273,6 +250,6 @@ class LoginForm extends Component {
 }
 
 
-export { LoginForm };
+export { LoginForm as LoginComponent };
 
 export default connect()(LoginForm);

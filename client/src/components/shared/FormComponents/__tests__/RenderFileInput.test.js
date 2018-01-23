@@ -20,14 +20,14 @@ describe('Form Components: RenderFileInput', () => {
     }
   };
 
-  // const dirtyProps = {
-  //   input: { name: 'pic' },
-  //   type: 'file',
-  //   meta: {
-  //     touched: true,
-  //     error: 'This is an error'
-  //   }
-  // };
+  const dirtyProps = {
+    input: { name: 'pic' },
+    type: 'file',
+    meta: {
+      touched: true,
+      error: 'This is an error'
+    }
+  };
 
   it('renders correctly', () => {
     const mountedWrapper = mount(<RenderFileInput {...cleanProps} />);
@@ -35,9 +35,17 @@ describe('Form Components: RenderFileInput', () => {
     mountedWrapper.unmount();
   });
 
-  it('renders correctly with image preview', () => {
+  it('renders correctly when touched', () => {
     const mountedWrapper = mount(<RenderFileInput {...touchedProps} />);
     expect(toJson(mountedWrapper)).toMatchSnapshot();
+    mountedWrapper.unmount();
+  });
+
+  it('renders correctly with errors', () => {
+    const mountedWrapper = mount(<RenderFileInput {...dirtyProps} />);
+
+    expect(toJson(mountedWrapper)).toMatchSnapshot();
+    expect(mountedWrapper.find('.file-feedback')).toBeTruthy();
     mountedWrapper.unmount();
   });
 

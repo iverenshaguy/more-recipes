@@ -3,25 +3,33 @@ import { RenderInput } from '../index';
 
 describe('Form Components: RenderInput', () => {
   const cleanProps = {
-    input: { name: 'email' },
+    name: 'email',
     placeholder: 'jane',
     type: 'email',
     meta: {
       touched: false,
       error: null,
       asyncValidating: false
-    }
+    },
+    handleChange: jest.fn(),
+    handleBlur: jest.fn(),
+    handleFocus: jest.fn(),
+    value: ''
   };
 
   const dirtyProps = {
-    input: { name: 'email' },
+    name: 'email',
     placeholder: 'jane',
     type: 'email',
     meta: {
       touched: true,
       error: 'This is an error',
       asyncValidating: false
-    }
+    },
+    handleChange: jest.fn(),
+    handleBlur: jest.fn(),
+    handleFocus: jest.fn(),
+    value: 'jane@smith.me'
   };
 
   it('renders correctly', () => {

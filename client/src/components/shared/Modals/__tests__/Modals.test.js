@@ -1,73 +1,40 @@
 import React from 'react';
-import Modals, { AddRecipeModal, SocialModal } from '../index';
+import { ModalComponent } from '../index';
 
-describe('Modals', () => {
-  let isOpen = false;
-  const toggleMock = () => {
-    isOpen = !isOpen;
-    return dispatchMock(toggleModal());
-  };
+describe('ModalComponent', () => {
+  const isOpen = false;
   const dispatchMock = jest.fn();
-  toggle = {() => dispatch(toggleModal())
 
   it("renders correctly when neither 'addRecipeModal' nor 'socialModal' props is passed", () => {
-    const wrapper = shallow(<Modals isOpen={isOpen} dispatch={dispatchMock} />);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const wrapper = shallow(<ModalComponent isOpen={isOpen} dispatch={dispatchMock} />);
+    expect(wrapper.find('modal').length).toBeFalsy();
   });
 
   it("renders correctly when 'addRecipeModal' props is passed", () => {
-    const wrapper = shallow(<Modals addRecipeModal isOpen dispatch={dispatchMock} />);
+    const wrapper = mount(<ModalComponent type="addRecipe" isOpen dispatch={dispatchMock} />);
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('AddRecipeModal')).toBeTruthy();
+    wrapper.unmount();
   });
 
   it("renders correctly when 'socialModal' props is passed", () => {
-    const wrapper = shallow(<Modals socialModal isOpen dispatch={dispatchMock} />);
+    const wrapper = mount(<ModalComponent type="social" isOpen dispatch={dispatchMock} />);
     expect(toJson(wrapper)).toMatchSnapshot();
     expect(wrapper.find('SocialModal')).toBeTruthy();
-  });
-
-  it('AddRecipeModal: should toggle modal', () => {
-    const component = (
-      <AddRecipeModal isOpen toggle={toggleMock}>
-        {' '}
-        My Modal
-      </AddRecipeModal>
-    );
-    const wrapper = mount(component); // eslint-disable-next-line
-
-    expect(toJson(wrapper)).toMatchSnapshot();
-    expect(isOpen).toBe(true);
-
-    toggleMock();
-    wrapper.setProps({
-      isOpen,
-    });
-
-    expect(toJson(wrapper)).toMatchSnapshot();
-    expect(isOpen).toBe(false);
     wrapper.unmount();
   });
 
-  it('SocialModal: should toggle modal', () => {
-    const component = (
-      <SocialModal isOpen toggle={toggleMock}>
-        {' '}
-        My Modal
-      </SocialModal>
-    );
-    const wrapper = mount(component); // eslint-disable-next-line
+  it('toggles modal when toggled', () => {
+    const wrapper = mount(<ModalComponent type="social" isOpen dispatch={dispatchMock} />);
 
-    expect(toJson(wrapper)).toMatchSnapshot();
-    expect(isOpen).toBe(true);
+    wrapper.find('SocialModal').prop('toggle')();
+    expect(dispatchMock).toHaveBeenCalled();
+  });
 
-    toggleMock();
-    wrapper.setProps({
-      isOpen,
-    });
+  it('toggles modal when close button is clicked', () => {
+    const wrapper = mount(<ModalComponent type="addRecipe" isOpen dispatch={dispatchMock} />);
 
-    expect(toJson(wrapper)).toMatchSnapshot();
-    expect(isOpen).toBe(false);
-    wrapper.unmount();
+    wrapper.find('AddRecipeModal').prop('toggle')();
+    expect(dispatchMock).toHaveBeenCalled();
   });
 });

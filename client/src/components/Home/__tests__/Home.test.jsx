@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeComponent from '../index';
+import { HomeComponent } from '../index';
 import { locationActions } from '../../../store/location';
 
 const { setHomeLocation } = locationActions;

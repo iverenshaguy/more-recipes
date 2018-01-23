@@ -8,35 +8,31 @@ import { componentActions } from '../../../store/components';
 const { toggleModal } = componentActions;
 
 const Modal = ({
-  addRecipeModal, socialModal, isOpen, dispatch
+  type, isOpen, dispatch
 }) => {
-  if (addRecipeModal) {
-    return <AddRecipeModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
+  switch (type) {
+    case 'addRecipe':
+      return <AddRecipeModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
+    case 'social':
+      return <SocialModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
+    default:
+      return null;
   }
-
-  if (socialModal) {
-    return <SocialModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
-  }
-
-  return null;
 };
 
 Modal.propTypes = {
-  addRecipeModal: PropTypes.bool,
-  socialModal: PropTypes.bool,
   isOpen: PropTypes.bool.isRequired,
+  type: PropTypes.string,
   dispatch: PropTypes.func.isRequired
 };
 
 Modal.defaultProps = {
-  addRecipeModal: false,
-  socialModal: false,
+  type: null
 };
 
 const mapStateToProps = state => ({
-  addRecipeModal: state.components.modals.addRecipe,
-  socialModal: state.components.modals.social,
-  isOpen: Object.keys(state.components.modals) !== 0,
+  type: state.components.modals.type,
+  isOpen: state.components.modals.isOpen,
 });
 
 export { AddRecipeModal, SocialModal, Modal as ModalComponent };

@@ -1,7 +1,5 @@
-import api from '../../services/api';
+import userApi from '../../services/api/users';
 import { errorHandler } from '../../utils';
-
-const { userApi } = api;
 
 /**
  * Async Validate supplied field
@@ -13,20 +11,17 @@ const { userApi } = api;
  */
 const asyncValidate = operation => (field, value) =>
   new Promise((resolve, reject) => {
-    userApi[operation]({ [field]: value }).catch((error) => {
-      if (error) {
+    userApi[operation]({ [field]: value })
+      .catch((error) => {
         const errorResponse = errorHandler(error);
 
         if (errorResponse.response && errorResponse.response[field]) {
           const errorMessage = { [field]: errorResponse.response[field].msg };
           reject(errorMessage);
+        } else {
+          resolve();
         }
-
-        resolve();
-      }
-
-      resolve();
-    });
+      });
   });
 
 export default asyncValidate;

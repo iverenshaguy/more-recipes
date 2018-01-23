@@ -1,115 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modals AddRecipeModal: should toggle modal 1`] = `
-<AddRecipeModal
+exports[`ModalComponent renders correctly when 'addRecipeModal' props is passed 1`] = `
+<Modal
+  dispatch={[Function]}
   isOpen={true}
-  toggle={[Function]}
+  type="addRecipe"
 >
-  <Modal
-    autoFocus={true}
-    backdrop={false}
-    backdropTransition={
-      Object {
-        "mountOnEnter": true,
-        "timeout": 150,
-      }
-    }
-    fade={true}
-    id="add-edit-modal"
+  <AddRecipeModal
     isOpen={true}
-    keyboard={true}
-    modalTransition={
-      Object {
-        "timeout": 300,
-      }
-    }
-    onClosed={[Function]}
-    onOpened={[Function]}
-    role="dialog"
-    size="lg"
     toggle={[Function]}
-    zIndex={1050}
-  />
-</AddRecipeModal>
+  >
+    <Modal
+      autoFocus={true}
+      backdrop={false}
+      backdropTransition={
+        Object {
+          "mountOnEnter": true,
+          "timeout": 150,
+        }
+      }
+      fade={true}
+      id="add-edit-modal"
+      isOpen={true}
+      keyboard={true}
+      modalTransition={
+        Object {
+          "timeout": 300,
+        }
+      }
+      onClosed={[Function]}
+      onOpened={[Function]}
+      role="dialog"
+      size="lg"
+      toggle={[Function]}
+      zIndex={1050}
+    />
+  </AddRecipeModal>
+</Modal>
 `;
 
-exports[`Modals AddRecipeModal: should toggle modal 2`] = `
-<AddRecipeModal
+exports[`ModalComponent renders correctly when 'socialModal' props is passed 1`] = `
+<Modal
+  dispatch={[Function]}
   isOpen={true}
-  toggle={[Function]}
+  type="social"
 >
-  <Modal
-    autoFocus={true}
-    backdrop={false}
-    backdropTransition={
-      Object {
-        "mountOnEnter": true,
-        "timeout": 150,
-      }
-    }
-    fade={true}
-    id="add-edit-modal"
+  <SocialModal
     isOpen={true}
-    keyboard={true}
-    modalTransition={
-      Object {
-        "timeout": 300,
-      }
-    }
-    onClosed={[Function]}
-    onOpened={[Function]}
-    role="dialog"
-    size="lg"
     toggle={[Function]}
-    zIndex={1050}
-  />
-</AddRecipeModal>
-`;
-
-exports[`Modals SocialModal: should toggle modal 1`] = `
-<SocialModal
-  isOpen={true}
-  toggle={[Function]}
->
-  <Modal
-    autoFocus={true}
-    backdrop={true}
-    backdropTransition={
-      Object {
-        "mountOnEnter": true,
-        "timeout": 150,
+  >
+    <Modal
+      autoFocus={true}
+      backdrop={true}
+      backdropTransition={
+        Object {
+          "mountOnEnter": true,
+          "timeout": 150,
+        }
       }
-    }
-    fade={true}
-    id="social-modal"
-    isOpen={true}
-    keyboard={true}
-    modalTransition={
-      Object {
-        "timeout": 300,
+      fade={true}
+      id="social-modal"
+      isOpen={true}
+      keyboard={true}
+      modalTransition={
+        Object {
+          "timeout": 300,
+        }
       }
-    }
-    onClosed={[Function]}
-    onOpened={[Function]}
-    role="dialog"
-    toggle={[Function]}
-    zIndex={1050}
-  />
-</SocialModal>
+      onClosed={[Function]}
+      onOpened={[Function]}
+      role="dialog"
+      toggle={[Function]}
+      zIndex={1050}
+    />
+  </SocialModal>
+</Modal>
 `;
-
-exports[`Modals renders correctly when 'addRecipeModal' props is passed 1`] = `
-<AddRecipeModal
-  isOpen={true}
-  toggle={[Function]}
-/>
-`;
-
-exports[`Modals renders correctly when 'socialModal' props is passed 1`] = `
-<SocialModal
-  isOpen={true}
-  toggle={[Function]}
-/>
-`;
-
-exports[`Modals renders correctly when neither 'addRecipeModal' nor 'socialModal' props is passed 1`] = `""`;

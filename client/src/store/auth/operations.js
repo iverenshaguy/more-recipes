@@ -22,7 +22,7 @@ const login = user => async (dispatch) => {
 
     localStorage.setItem('jwtToken', response.data.token);
 
-    dispatch(loginSuccess(response.data));
+    dispatch(loginSuccess(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
@@ -32,11 +32,13 @@ const login = user => async (dispatch) => {
 
 const signup = user => async (dispatch) => {
   try {
+    dispatch(authenticating());
+
     const response = await userApi.signup(user);
 
     localStorage.setItem('jwtToken', response.data.token);
 
-    dispatch(signupSuccess(response.data));
+    dispatch(signupSuccess(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
@@ -45,16 +47,20 @@ const signup = user => async (dispatch) => {
 };
 
 const authenticateUser = token => async (dispatch) => {
-  dispatch(authenticating());
-
   try {
+    dispatch(authenticating());
+
     const res = await userApi.refreshToken(token);
 
     localStorage.setItem('jwtToken', res.data.token);
-    dispatch(authenticationSuccess(res.data));
+
+    dispatch(authenticationSuccess(res.data.user));
   } catch (error) {
+    const errorResponse = errorHandler(error);
+
     localStorage.removeItem('jwtToken');
-    dispatch(resetUser());
+
+    dispatch(authenticationFailure(errorResponse.response));
   }
 };
 

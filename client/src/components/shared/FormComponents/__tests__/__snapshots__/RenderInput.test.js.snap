@@ -2,11 +2,9 @@
 
 exports[`Form Components: RenderInput renders correctly 1`] = `
 <RenderInput
-  input={
-    Object {
-      "name": "email",
-    }
-  }
+  handleBlur={[Function]}
+  handleChange={[Function]}
+  handleFocus={[Function]}
   meta={
     Object {
       "asyncValidating": false,
@@ -14,21 +12,31 @@ exports[`Form Components: RenderInput renders correctly 1`] = `
       "touched": false,
     }
   }
+  name="email"
   placeholder="jane"
   type="email"
+  value=""
 >
   <Input
     className=""
     name="email"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
     placeholder="jane"
     tag="p"
     type="email"
+    value=""
   >
     <input
       className="form-control"
       name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       placeholder="jane"
       type="email"
+      value=""
     />
   </Input>
 </RenderInput>
@@ -36,32 +44,40 @@ exports[`Form Components: RenderInput renders correctly 1`] = `
 
 exports[`Form Components: RenderInput shows 'Checking' when async validating 1`] = `
 <RenderInput
-  input={
-    Object {
-      "name": "email",
-    }
-  }
+  handleBlur={[Function]}
+  handleChange={[Function]}
+  handleFocus={[Function]}
   meta={
     Object {
       "asyncValidating": true,
       "touched": true,
     }
   }
+  name="email"
   placeholder="jane"
   type="email"
+  value=""
 >
   <Input
     className="is-valid"
     name="email"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
     placeholder="jane"
     tag="p"
     type="email"
+    value=""
   >
     <input
       className="is-valid form-control"
       name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       placeholder="jane"
       type="email"
+      value=""
     />
   </Input>
   <small
@@ -74,11 +90,9 @@ exports[`Form Components: RenderInput shows 'Checking' when async validating 1`]
 
 exports[`Form Components: RenderInput shows error when found 1`] = `
 <RenderInput
-  input={
-    Object {
-      "name": "email",
-    }
-  }
+  handleBlur={[Function]}
+  handleChange={[Function]}
+  handleFocus={[Function]}
   meta={
     Object {
       "asyncValidating": false,
@@ -86,21 +100,31 @@ exports[`Form Components: RenderInput shows error when found 1`] = `
       "touched": true,
     }
   }
+  name="email"
   placeholder="jane"
   type="email"
+  value="jane@smith.me"
 >
   <Input
     className="is-invalid"
     name="email"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
     placeholder="jane"
     tag="p"
     type="email"
+    value="jane@smith.me"
   >
     <input
       className="is-invalid form-control"
       name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
       placeholder="jane"
       type="email"
+      value="jane@smith.me"
     />
   </Input>
   <div
