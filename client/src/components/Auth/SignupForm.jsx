@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Form, Label, FormGroup, Button } from 'reactstrap';
 import { RenderInput } from '../shared/FormComponents';
-import { asyncValidate, auth as syncValidate } from '../../helpers/validations';
+import { asyncValidate, syncValidate } from '../../helpers/validations';
 import { NormalAlert } from '../shared/Alert';
-import { locationActions } from '../../store/location';
+import setCurrentLocation from '../../store/location/actions';
 import { authOperations } from '../../store/auth';
 
-const { setAuthLocation } = locationActions;
 const { signup, clearAuthError } = authOperations;
 const placeholder = '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
 
@@ -87,7 +86,7 @@ class SignupForm extends Component {
    * @returns {noting} Return nothing
    */
   componentWillMount() {
-    this.props.dispatch(setAuthLocation());
+    this.props.dispatch(setCurrentLocation('auth'));
     this.props.dispatch(clearAuthError());
   }
 
@@ -126,7 +125,7 @@ class SignupForm extends Component {
 
     this.setState({
       touched: { ...this.state.touched, [name]: true },
-    }, () => { this.validateField(name, value); });
+    }, () => { this.validateField(name); });
 
     setTimeout(() => {
       if ((name === 'email' || name === 'username') && this.state.error[name] === null) {
@@ -153,11 +152,10 @@ class SignupForm extends Component {
   /**
    * @memberof SignupForm
    * @param {string} field
-   * @param {string} value
    * @returns {nothing} Returns nothing
    */
-  validateField(field, value) {
-    const error = syncValidate(field, value, this.state.values);
+  validateField(field) {
+    const error = syncValidate('signup')(field, this.state.values);
 
     if (error) {
       this.setState({

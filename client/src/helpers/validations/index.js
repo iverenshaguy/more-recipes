@@ -1,4 +1,5 @@
-import auth from './auth';
+import syncValidate from './syncValidate';
 import asyncValidate from './asyncValidate';
+import validation from './validation';
 
-export { asyncValidate, auth };
+export { asyncValidate, syncValidate, validation };

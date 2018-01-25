@@ -1,2 +1,3 @@
-export const HOME = 'HOME';
-export const AUTH = 'AUTH';
+const SET_CURRENT_LOCATION = 'SET_CURRENT_LOCATION';
+
+export default SET_CURRENT_LOCATION;

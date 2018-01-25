@@ -1,10 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import { Redirect, MemoryRouter } from 'react-router-dom';
 import requireAuthentication from '../authentication';
 import PreLoader from '../../shared/PreLoader';
-import rootReducer, { composedEnhancers } from '../../../store';
+import rootReducer from '../../../store/rootReducer';
 
 const initialValues = {
   auth: {
@@ -29,9 +30,9 @@ const loadingInitialValues = {
   auth: { ...initialValues.auth, loading: true }
 };
 
-const authStore = createStore(rootReducer, initialValues, composedEnhancers);
-const loadingStore = createStore(rootReducer, loadingInitialValues, composedEnhancers);
-const store = createStore(rootReducer, composedEnhancers);
+const authStore = createStore(rootReducer, initialValues, applyMiddleware(thunk));
+const loadingStore = createStore(rootReducer, loadingInitialValues, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const setup = () => {
   const dispatch = jest.fn();

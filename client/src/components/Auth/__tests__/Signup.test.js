@@ -1,19 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
+import axios from 'axios';
+import thunk from 'redux-thunk';
+import MockAdapter from 'axios-mock-adapter';
+import configureStore from 'redux-mock-store';
 import Auth from '../index';
 import Home from '../../Home';
 import App from '../../App';
 import { SignupComponent } from '../SignupForm';
-import { locationActions } from '../../../store/location';
+import setCurrentLocation from '../../../store/location/actions';
 import { authOperations } from '../../../store/auth';
-import userApi from '../../../services/api/users';
-import rootReducer, { composedEnhancers } from '../../../store';
-import { signup as signupMock } from '../../../__mocks__/api/users.mock';
 
-userApi.signup = jest.fn(signupMock); // eslint-disable-line
-
+const mock = new MockAdapter(axios, { delayResponse: 500 });
+const url = '/api/v1';
 
 const initialValues = {
   auth: {
@@ -33,18 +33,14 @@ const initialValues = {
   }
 };
 
-const { setAuthLocation } = locationActions;
 const { clearAuthError } = authOperations;
 
-const authStore = createStore(rootReducer, initialValues, composedEnhancers);
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const authStore = mockStore(initialValues);
 
 const dispatchMock = jest.fn();
 const loadUserFromTokenMock = jest.fn();
-
-const props = {
-  authenticating: false,
-  submitError: null,
-};
 
 const state = {
   values: {
@@ -82,21 +78,39 @@ const state = {
   asyncValidating: false
 };
 
+const setup = () => {
+  const props = {
+    authenticating: false,
+    submitError: null,
+  };
+
+  const mountRoot = mount( //eslint-disable-line
+    <MemoryRouter>
+      <SignupComponent {...props} dispatch={dispatchMock} />
+    </MemoryRouter>);
+
+  return { props, mountRoot };
+};
+
 describe('Signup', () => {
   afterAll(() => {
     jest.clearAllMocks();
+    mock.reset();
+    mock.restore();
   });
 
   it('renders correctly', () => {
+    const { props } = setup();
     const shallowComponent = shallow(<SignupComponent {...props} dispatch={dispatchMock} />);
 
     expect(toJson(shallowComponent)).toMatchSnapshot();
     expect(dispatchMock).toHaveBeenCalled();
-    expect(dispatchMock.mock.calls[0]).toEqual([setAuthLocation()]);
+    expect(dispatchMock.mock.calls[0]).toEqual([setCurrentLocation('auth')]);
     expect(dispatchMock.mock.calls[1]).toEqual([clearAuthError()]);
   });
 
   it('redirects when authenticated', () => {
+    const { props } = setup();
     const shallowComponent = shallow(<SignupComponent
       {...props}
       isAuthenticated
@@ -107,6 +121,7 @@ describe('Signup', () => {
   });
 
   it('shows error alert and disables submit button when there\'s a submit error', () => {
+    const { props } = setup();
     const shallowComponent = shallow(<SignupComponent
       {...props}
       submitError="Username/Password do not match"
@@ -119,12 +134,14 @@ describe('Signup', () => {
   });
 
   it('disables submit button when form is clean', () => {
+    const { props } = setup();
     const shallowComponent = shallow(<SignupComponent {...props} dispatch={dispatchMock} />);
 
     expect(shallowComponent.find('Button[disabled=true]')).toBeTruthy();
   });
 
   it('disables submit button when submitting form', () => {
+    const { props } = setup();
     const shallowComponent = shallow(<SignupComponent
       {...props}
       authenticating
@@ -147,16 +164,23 @@ describe('Signup', () => {
 
     expect(wrapper.find(Home)).toHaveLength(1);
     expect(wrapper.find(Auth)).toHaveLength(0);
+
+    wrapper.unmount();
   });
 
   describe('test for right input', () => {
     it('calls handleChange and handleBlur on input change and blur', (done) => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
+
+      mock.onPost(`${url}/users/signup`, { email: 'damishaguy@gmail.com' }).reply(422, {
+        errors: {
+          firstname: { msg: 'Firstname is required' },
+          username: { msg: 'Username is required' },
+          password: { msg: 'Password is required' },
+          passwordConfirm: { msg: 'Passwords do not match' },
+        }
+      });
 
       const changeState = {
         ...state,
@@ -203,11 +227,7 @@ describe('Signup', () => {
     });
 
     it('doesn\'t async validate field that is not email or username', (done) => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
       const changeState = {
@@ -238,12 +258,17 @@ describe('Signup', () => {
     });
 
     it('sets asyncValidating to false if asyncValidate test passes', (done) => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
+
+      mock.onPost(`${url}/users/signup`, { email: 'damishaguy@gmail.com' }).reply(422, {
+        errors: {
+          firstname: { msg: 'Firstname is required' },
+          username: { msg: 'Username is required' },
+          password: { msg: 'Password is required' },
+          passwordConfirm: { msg: 'Passwords do not match' },
+        }
+      });
 
       const changeState = {
         ...state,
@@ -281,11 +306,7 @@ describe('Signup', () => {
     });
 
     it('submits valid form', () => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
       const newState = {
@@ -324,6 +345,21 @@ describe('Signup', () => {
         formValid: true
       };
 
+      mock.onPost(`${url}/users/signup`, newState.values).reply(201, {
+        user: {
+          id: '1',
+          firstname: 'Jane',
+          lastname: 'Smith',
+          username: 'janesmith',
+          email: 'janesmith@gmail.com',
+          aboutMe: 'Food lover',
+          occupation: 'Chef',
+          updatedAt: '2017-10-30T00:47:03.687Z',
+          createdAt: '2017-10-30T00:47:03.687Z'
+        },
+        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+      });
+
       const firstnameEvent = { target: { name: 'firstname', value: 'Jane' } };
       const lastnameEvent = { target: { name: 'lastname', value: 'Smithy' } };
       const emailEvent = { target: { name: 'email', value: 'janesmithy@gmail.com' } };
@@ -346,26 +382,23 @@ describe('Signup', () => {
 
       wrapper.find('form').simulate('submit', { preventDefault() { } });
       expect(dispatchMock).toHaveBeenCalled();
-
-      // setTimeout(() => {
-      //   try {
-      //     expect(dispatchMock).toHaveBeenCalledWith(signup(newState.values));
-      //     done();
-      //   } catch (e) {
-      //     done.fail(e);
-      //   }
-      // }, 500);
     });
   });
 
   describe('test for wrong input', () => {
     it('async validates email field and form on input change and blur', (done) => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
+
+      mock.onPost(`${url}/users/signup`, { email: 'iverenshaguy@gmail.com' }).reply(422, {
+        errors: {
+          email: { msg: 'This email is already registered' },
+          firstname: { msg: 'Firstname is required' },
+          username: { msg: 'Username is required' },
+          password: { msg: 'Password is required' },
+          passwordConfirm: { msg: 'Passwords do not match' },
+        }
+      });
 
       const changeState = {
         ...state,
@@ -397,12 +430,18 @@ describe('Signup', () => {
     });
 
     it('async validates username field and form on input change and blur', (done) => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
+
+      mock.onPost(`${url}/users/signup`, { username: 'iverenshaguy' }).reply(422, {
+        errors: {
+          username: { msg: 'This username is already registered' },
+          firstname: { msg: 'Firstname is required' },
+          email: { msg: 'Email is required' },
+          password: { msg: 'Password is required' },
+          passwordConfirm: { msg: 'Passwords do not match' },
+        }
+      });
 
       const changeState = {
         ...state,
@@ -434,11 +473,7 @@ describe('Signup', () => {
     });
 
     it('sync validates field and form on input change and blur', () => {
-      const mountRoot = mount( //eslint-disable-line
-        <MemoryRouter>
-          <SignupComponent {...props} dispatch={dispatchMock} />
-        </MemoryRouter>
-      ); //eslint-disable-line
+      const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
       const changeState = {
@@ -468,6 +503,8 @@ describe('Signup', () => {
         touched: { ...state.touched, email: true, password: true },
         values: { ...state.values, email: 'emilysanders', password: '' }
       }));
+
+      mountRoot.unmount();
     });
   });
 });

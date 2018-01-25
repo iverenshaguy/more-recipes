@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { locationActions } from '../../store/location';
+import setCurrentLocation from '../../store/location/actions';
 import Hero from './Hero';
 import RecipeItems from '../shared/RecipeItems';
 import './Home.scss';
-
-const { setHomeLocation } = locationActions;
 
 /**
  * @exports
@@ -24,7 +22,7 @@ class Home extends Component {
    * @return {state} New currentLocation State
    */
   componentWillMount() {
-    this.props.dispatch(setHomeLocation());
+    this.props.dispatch(setCurrentLocation('home'));
   }
 
   /**

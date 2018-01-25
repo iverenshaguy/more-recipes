@@ -2,19 +2,19 @@ import React from 'react';
 import Hero from '../Hero';
 import { toggleModal } from '../../../store/components/actions';
 
-describe('Home: Hero', () => {
-  const setup = () => {
-    const dispatch = jest.fn();
-    const shallowWrapper = shallow(<Hero dispatch={dispatch} />);
-    const mountedWrapper = mount(<Hero dispatch={dispatch} />);
+const setup = () => {
+  const dispatch = jest.fn();
+  const shallowWrapper = shallow(<Hero dispatch={dispatch} />);
+  const mountedWrapper = mount(<Hero dispatch={dispatch} />);
 
-    return {
-      shallowWrapper,
-      mountedWrapper,
-      dispatch,
-    };
+  return {
+    shallowWrapper,
+    mountedWrapper,
+    dispatch,
   };
+};
 
+describe('Home: Hero', () => {
   afterAll(() => {
     jest.clearAllMocks();
   });

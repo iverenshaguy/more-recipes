@@ -12,3 +12,4 @@ global.render = render;
 global.toJson = toJson;
 
 window.localStorage = localStorageMock;
+

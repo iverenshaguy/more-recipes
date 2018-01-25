@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Form, Label, FormGroup, Button } from 'reactstrap';
 import { RenderInput } from '../shared/FormComponents';
-import { asyncValidate, auth as syncValidate } from '../../helpers/validations';
+import { asyncValidate, syncValidate } from '../../helpers/validations';
 import { NormalAlert } from '../shared/Alert';
-import { locationActions } from '../../store/location';
+import setCurrentLocation from '../../store/location/actions';
 import { authOperations } from '../../store/auth';
 
-const { setAuthLocation } = locationActions;
 const { login, clearAuthError } = authOperations;
 const placeholder = '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022';
 
@@ -63,7 +62,7 @@ class LoginForm extends Component {
    * @returns {nothing} Returns nothing
    */
   componentWillMount() {
-    this.props.dispatch(setAuthLocation());
+    this.props.dispatch(setCurrentLocation('auth'));
     this.props.dispatch(clearAuthError());
   }
 
@@ -102,7 +101,7 @@ class LoginForm extends Component {
 
     this.setState({
       touched: { ...this.state.touched, [name]: true },
-    }, () => { this.validateField(name, value); });
+    }, () => { this.validateField(name); });
 
     setTimeout(() => {
       if (name === 'email' && !this.state.error.email) {
@@ -129,11 +128,11 @@ class LoginForm extends Component {
   /**
    * @memberof LoginForm
    * @param {string} field
-   * @param {string} value
+   * @param {string} values
    * @returns {nothing} Returns nothing
    */
-  validateField(field, value) {
-    const error = syncValidate(field, value, this.state.values);
+  validateField(field) {
+    const error = syncValidate('login')(field, this.state.values);
 
     if (error) {
       this.setState({

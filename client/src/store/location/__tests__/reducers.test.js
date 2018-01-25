@@ -8,13 +8,13 @@ describe('Location Reducers', () => {
   });
 
   it('should handle HOME action with payload', () => {
-    const newState = reducer({ current: 'auth' }, { type: 'HOME' });
+    const newState = reducer({ current: 'auth' }, { type: 'SET_CURRENT_LOCATION', payload: 'home' });
 
     expect(newState).toEqual({ current: 'home' });
   });
 
   it('should handle AUTH action without payload', () => {
-    const newState = reducer({ current: 'home' }, { type: 'AUTH' });
+    const newState = reducer({ current: 'home' }, { type: 'SET_CURRENT_LOCATION', payload: 'auth' });
 
     expect(newState).toEqual({ current: 'auth' });
   });

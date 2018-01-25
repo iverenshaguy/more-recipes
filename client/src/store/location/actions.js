@@ -1,14 +1,8 @@
-import { HOME, AUTH } from './types';
+import SET_CURRENT_LOCATION from './types';
 
-const setHomeLocation = () => ({
-  type: HOME
+const setCurrentLocation = location => ({
+  type: SET_CURRENT_LOCATION,
+  payload: location
 });
 
-const setAuthLocation = () => ({
-  type: AUTH
-});
-
-export default {
-  setHomeLocation,
-  setAuthLocation
-};
+export default setCurrentLocation;

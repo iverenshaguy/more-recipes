@@ -7,13 +7,6 @@ import { asyncValidate } from '../index';
 const mock = new MockAdapter(axios);
 const url = '/api/v1';
 
-mock.onPost(`${url}/users/signin`).reply(422, {
-  errors: {
-    email: { msg: 'This email is not registered, please signup instead' },
-    password: { msg: 'Password must be specified' }
-  }
-});
-
 const loginAsyncValidate = asyncValidate('login');
 
 const error = {
@@ -23,6 +16,8 @@ const error = {
 describe('Async Validation', () => {
   afterAll(() => {
     jest.clearAllMocks();
+    mock.reset();
+    mock.restore();
   });
 
   test('it rejects with wrong email', async () => {

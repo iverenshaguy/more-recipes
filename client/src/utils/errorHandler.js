@@ -1,5 +1,11 @@
 let error = {};
 
+/**
+ * Handle HTTP errors
+ * @function errorHandler
+ * @param {object} err - error response
+ * @returns {object} New Error Object
+ */
 const errorHandler = (err) => {
   if (err.response) {
     // The request was made and the server responded with a status code
@@ -8,7 +14,7 @@ const errorHandler = (err) => {
 
     if (err.response.status === 422) {
       error.response = err.response.data.errors;
-    } else if (err.response.status === 401) {
+    } else if (err.response.status === 401 || err.response.status === 403) {
       error.response = err.response.data.error;
     } else if (err.response.status === 500) {
       error.response = 'Something happened, please check your connection and try again';
@@ -23,10 +29,6 @@ const errorHandler = (err) => {
   } else {
     // Something happened in setting up the request that triggered an Error
     error = err.message;
-  }
-
-  if (process.env.NODE_ENV === 'development') {
-    console.log(error); // eslint-disable-line no-console
   }
 
   return error;

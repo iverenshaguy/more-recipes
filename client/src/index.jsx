@@ -1,31 +1,31 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
-import jwt from 'jsonwebtoken';
-import rootReducer, { composedEnhancers } from './store';
-import { authOperations } from './store/auth';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import rootReducer from './store';
+import refreshPage from './utils/refreshPage';
 import App from './components/App';
 
-const store = createStore(rootReducer, composedEnhancers);
-const { resetUser, authenticateUser } = authOperations;
+const enhancers = [];
+const middlewares = [thunk];
 
-if (localStorage.jwtToken) {
-  const token = localStorage.getItem('jwtToken');
-  const { exp } = jwt.decode(token);
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
 
-  // if token is expired or unavailable
-  if (token === '' || exp < Math.floor(Date.now() / 1000)) {
-    // remove empty token and log user out
-    localStorage.removeItem('jwtToken');
-    store.dispatch(resetUser());
-  } else {
-    // fetch user from token if valid
-    store.dispatch(authenticateUser(token));
+  const { devToolsExtension } = window;
+
+  if (typeof devToolsExtension === 'function') {
+    enhancers.push(devToolsExtension());
   }
-} else {
-  store.dispatch(resetUser());
 }
+
+const composedEnhancers = compose(applyMiddleware(...middlewares), ...enhancers);
+
+const store = createStore(rootReducer, composedEnhancers);
+
+refreshPage(store);
 
 render(
   <Provider store={store}>

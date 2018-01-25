@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Input } from 'reactstrap';
 import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
 
+const preview = document.querySelector('.photo-preview');
+
 const RenderFileInput = ({
   input: {
     value: omitValue, onChange, onBlur, ...inputProps
@@ -19,8 +21,8 @@ const RenderFileInput = ({
           </div>
         )}
       <Input
-        onChange={adaptFileEventToValue(onChange)}
-        onBlur={adaptFileEventToValue(onBlur)}
+        onChange={adaptFileEventToValue(onChange, preview)}
+        onBlur={adaptFileEventToValue(onBlur, preview)}
         type="file"
         {...inputProps}
         {...props}

@@ -1,17 +1,21 @@
-const adaptFileEventToValue = delegate => (e) => {
-  if (e.target.files[0]) {
-    const preview = document.querySelector('.photo-preview');
-    const reader = new FileReader();
+/**
+ * Adapt File Event to Value
+ * @function adaptFileEventToValue
+ * @param {string} delegate - event adapter
+ * @param {object} preview - file preview
+ * @param {object} event - event
+ * @returns {function} delegate event function
+ */
+const adaptFileEventToValue = (delegate, preview) => (event) => {
+  const reader = new FileReader();
 
-    reader.onload = () => {
-      if (preview) {
-        preview.src = reader.result;
-      }
-    };
+  reader.addEventListener('load', () => {
+    preview.src = reader.result;
+  });
 
-    reader.readAsDataURL(e.target.files[0]);
-  }
-  return delegate(e.target.files[0]);
+  reader.readAsDataURL(event.target.files[0]);
+
+  return delegate(event.target.files[0]);
 };
 
 export default adaptFileEventToValue;

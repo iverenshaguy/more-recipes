@@ -6,7 +6,6 @@ module.exports = {
     '<rootDir>/nightwatch.conf.js',
     '<rootDir>/gulpfile.babel.js',
     '<rootDir>/node_modules/',
-    '<rootDir>/client/src/index.js',
     '<rootDir>/client/scripts/',
     '<rootDir>/server/',
     '<rootDir>/client/config/',

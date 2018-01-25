@@ -1,8 +1,6 @@
 import React from 'react';
 import { HomeComponent } from '../index';
-import { locationActions } from '../../../store/location';
-
-const { setHomeLocation } = locationActions;
+import setCurrentLocation from '../../../store/location/actions';
 
 const setup = () => {
   const dispatch = jest.fn();
@@ -37,7 +35,7 @@ describe('Home', () => {
 
   it('calls component will mount when mounted', () => {
     const { mountedWrapper, props } = setup();
-    expect(props.dispatch).toHaveBeenCalledWith(setHomeLocation());
+    expect(props.dispatch).toHaveBeenCalledWith(setCurrentLocation('home'));
     mountedWrapper.unmount();
   });
 });
