@@ -1,25 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Alert } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 /**
  * @exports
- * @class Alert
+ * @function NormalAlert
  * @extends Component
  * @returns {component} Alert
  */
-class NormalAlert extends Component {
-  static propTypes = {
-    color: PropTypes.string.isRequired
-  };
+const NormalAlert = ({ color, children }) => // eslint-disable-line
+  (<Alert color={color}>{children}</Alert>);
 
-  /**
-   * @memberof Alert
-   * @return {Component} New Alert Component
-   */
-  render() {
-    return <Alert color={this.props.color}>{this.props.children}</Alert>; //eslint-disable-line
-  }
-}
+NormalAlert.propTypes = {
+  color: PropTypes.string.isRequired
+};
 
 export default NormalAlert;

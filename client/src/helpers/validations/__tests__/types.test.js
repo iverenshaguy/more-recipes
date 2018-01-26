@@ -14,20 +14,6 @@ import {
   isValidPasswordConfirm,
 } from '../types';
 
-const wrongValues = {
-  email: 'emily',
-  firstname: '',
-  lastname: '****',
-  username: 'emaily sanders',
-  password: 'emil',
-  passwordConfirm: 'emily',
-  aboutMe: `wertyuiopiutrefklbnmjkdjkjkdkjkdljkldfmnm,hiojklwehoiywiyuoieupljggjwefnksdfpkopowegbkdjijkweioguisdnklsdpopkwe[ihrjkrfjiouirfdfjklrfjk
-    djkdfjkhdfdkljkldfjolklklfdjkldfkljklkdjkllkdfkl;klsdfiojkkluwpjorojdfklndjklsdhisdfklklsiioowejnklsdjksdjklsdfjsdjljklsdjkldfjfjfjksdfjklsdfjd
-    sdjhksduhjksdjkjklsdjklsdfjkjkljkllllllllllllllllllllllllllllllllllllllllllllllllllllllllbndjheuiewfffffffffffffffffffffffffffffffffff`,
-  occupation: `wertyuiopiutrefklbnmjkdjkjkdkjkdljkldfmnm,hiojklwehoiywiyuoieupljggjwefnksdfpkopowegbkdjijkweioguisdnklsdpopkwe[ihrjkrfjiouirfdfjklrfjk
-    djkdfjkhdfdkljkldfjolklklfdjkldfkljklkdjkllkdfkl;klsdfiojkkluwpjorojdfklndjklsdhisdfklklsiioowejnklsdjksdjklsdfjsdjljklsdjkldfjfjfjksdfjklsdfjd`
-};
-
 describe('Validation Types', () => {
   afterAll(() => {
     jest.clearAllMocks();
