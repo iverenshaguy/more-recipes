@@ -155,7 +155,7 @@ App is hosted on heroku at
 ### Development
 
 You can run `yarn start:dev` or `npm run start:dev` in devlopment to use [nodemon](https://nodemon.io/) 
-for the back-end and [Webpack Development Server](https://github.com/webpack/webpack-dev-server). 
+and [Webpack Development Server](https://github.com/webpack/webpack-dev-server). 
 
 [Nodemon](https://nodemon.io/) watches for file changes and restarts your code. 
 [Webpack Development Server](https://github.com/webpack/webpack-dev-server) serves a webpack app and 
