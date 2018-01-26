@@ -1,0 +1,22 @@
+@import '../../../assets/scss/modules';
+$primary-color: $green;
+
+.loader {
+  margin: 30vh 0 25vh 46vw;
+  &-hidden {
+    display: none;
+  }
+  
+  &-active {
+    display: block;
+  }
+
+  .ball-scale-multiple {
+    height: 11vh;
+    width: 11vh;
+
+    & > div {
+      left: 0;
+    }
+  }
+}

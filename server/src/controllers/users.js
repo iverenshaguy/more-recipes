@@ -1,9 +1,7 @@
-import path from 'path';
-import del from 'del';
-import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import { User, Recipe } from '../models';
 import { verifyPassword } from '../helpers/passwordHash';
+import { generateToken, getCleanUser } from '../helpers';
 
 config();
 
@@ -19,32 +17,10 @@ export default {
       occupation: userData.occupation
     })
       .then((user) => {
-        const token = jwt.sign(
-          {
-            id: user.id
-          },
-          process.env.SECRET,
-          {
-            expiresIn: 86400 // expires in 24 hours
-          }
-        );
-        res.status(201).send({ success: true, token });
-      })
-      .catch(next);
-  },
+        const token = generateToken(user);
+        user = getCleanUser(user);
 
-  upload(req, userData, res, next) {
-    return User.findOne({ where: { id: req.id } })
-      .then((user) => {
-        const uploadPath = path.resolve(__dirname, '../../../client/public/images/profile');
-        const savedImage = `${uploadPath}/${user.profilePic}`;
-
-        del.sync([savedImage]);
-
-        return user
-          .update({ profilePic: req.file.filename })
-          .then(() => res.status(201).send(user))
-          .catch(next);
+        res.status(201).send({ user, token });
       })
       .catch(next);
   },
@@ -56,19 +32,13 @@ export default {
           if (!verify) {
             return res
               .status(401)
-              .send({ success: false, error: 'Username/Password do not match' });
+              .send({ success: false, error: 'Email/Password do not match' });
           }
 
-          const token = jwt.sign(
-            {
-              id: user.id
-            },
-            process.env.SECRET,
-            {
-              expiresIn: 86400 // expires in 24 hours
-            }
-          );
-          res.status(200).send({ success: true, token });
+          const token = generateToken(user);
+          user = getCleanUser(user);
+
+          res.status(200).send({ user, token });
         });
       })
       .catch(next);
@@ -86,5 +56,25 @@ export default {
     })
       .then(user => res.status(200).send(user))
       .catch(next);
+  },
+
+  refreshToken(req, res) {
+    let user = {
+      id: req.id,
+      firstname: req.firstname,
+      lastname: req.lastname,
+      username: req.username,
+      email: req.email.toLowerCase(),
+      image: req.profilePic,
+      aboutMe: req.aboutMe,
+      occupation: req.occupation,
+      createdAt: req.createdAt,
+      updatedAt: req.updatedAt
+    };
+
+    const token = generateToken(user);
+    user = getCleanUser(user);
+
+    res.status(200).send({ user, token });
   }
 };

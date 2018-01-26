@@ -90,7 +90,7 @@ exports[`Home: Hero renders correctly 1`] = `
 
 exports[`Home: Hero renders correctly when mouted fully 1`] = `
 <Hero
-  toggle={[Function]}
+  dispatch={[Function]}
 >
   <div
     className="container-fluid"

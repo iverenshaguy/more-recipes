@@ -300,7 +300,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'ascending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -321,7 +321,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'descending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -344,7 +344,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'likes', order: 'ascending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(6);
@@ -392,7 +392,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
               expect(res.body.message).to.equal('Your vote has been recorded');
@@ -410,7 +410,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/5/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
               expect(res.body.message).to.equal('Your vote has been recorded');
@@ -428,7 +428,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/3/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body.message).to.equal('Your vote has been removed');
@@ -446,7 +446,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/2/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.message).to.equal('You can\'t upvote your own recipe');
@@ -464,7 +464,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/123/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -477,7 +477,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/abc/upvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -512,7 +512,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
               expect(res.body.message).to.equal('Your vote has been recorded');
@@ -530,7 +530,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/1/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(201);
               expect(res.body.message).to.equal('Your vote has been recorded');
@@ -548,7 +548,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/6/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
               expect(res.body.message).to.equal('Your vote has been removed');
@@ -566,7 +566,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/2/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(400);
               expect(res.body.message).to.equal('You can\'t downvote your own recipe');
@@ -584,7 +584,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/123/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');
@@ -597,7 +597,7 @@ describe('Routes: Recipe API Tests, Upvotes', () => {
           agent
             .post('/api/v1/recipes/abc/downvotes')
             .set('Accept', 'application/json')
-            .set('token', userToken)
+            .set('authorization', userToken)
             .end((err, res) => {
               expect(res.statusCode).to.equal(422);
               expect(res.body.errors.recipeId.msg).to.equal('Recipe Not Found');

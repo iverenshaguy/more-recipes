@@ -1,31 +1,41 @@
 import React from 'react';
-import Home from '../index';
+import { HomeComponent } from '../index';
+import setCurrentLocation from '../../../store/location/actions';
+
+const setup = () => {
+  const dispatch = jest.fn();
+
+  const props = {
+    dispatch
+  };
+
+  const mountedWrapper = mount(<HomeComponent dispatch={dispatch} />);
+  const shallowWrapper = shallow(<HomeComponent dispatch={dispatch} />);
+
+  return {
+    props, mountedWrapper, shallowWrapper
+  };
+};
 
 describe('Home', () => {
-  const toggleModalMock = jest.fn();
-  const updateLocationStateMock = jest.fn();
-  const wrapper = (
-    <Home toggleModal={toggleModalMock} updateLocationState={updateLocationStateMock} />
-  );
-
   afterAll(() => {
     jest.clearAllMocks();
   });
 
   it('renders correctly', () => {
-    const shallowWrapper = shallow(wrapper);
+    const { shallowWrapper } = setup();
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('renders correctly when fully mounted', () => {
-    const mountedWrapper = mount(wrapper);
+    const { mountedWrapper } = setup();
     expect(toJson(mountedWrapper)).toMatchSnapshot();
     mountedWrapper.unmount();
   });
 
   it('calls component will mount when mounted', () => {
-    const mountedWrapper = mount(wrapper);
-    expect(updateLocationStateMock).toHaveBeenCalledWith('home');
+    const { mountedWrapper, props } = setup();
+    expect(props.dispatch).toHaveBeenCalledWith(setCurrentLocation('home'));
     mountedWrapper.unmount();
   });
 });

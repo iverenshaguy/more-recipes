@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalComponent renders correctly when 'addRecipeModal' props is passed 1`] = `
+<Modal
+  dispatch={[Function]}
+  isOpen={true}
+  type="addRecipe"
+>
+  <AddRecipeModal
+    isOpen={true}
+    toggle={[Function]}
+  >
+    <Modal
+      autoFocus={true}
+      backdrop={false}
+      backdropTransition={
+        Object {
+          "mountOnEnter": true,
+          "timeout": 150,
+        }
+      }
+      fade={true}
+      id="add-edit-modal"
+      isOpen={true}
+      keyboard={true}
+      modalTransition={
+        Object {
+          "timeout": 300,
+        }
+      }
+      onClosed={[Function]}
+      onOpened={[Function]}
+      role="dialog"
+      size="lg"
+      toggle={[Function]}
+      zIndex={1050}
+    />
+  </AddRecipeModal>
+</Modal>
+`;
+
+exports[`ModalComponent renders correctly when 'socialModal' props is passed 1`] = `
+<Modal
+  dispatch={[Function]}
+  isOpen={true}
+  type="social"
+>
+  <SocialModal
+    isOpen={true}
+    toggle={[Function]}
+  >
+    <Modal
+      autoFocus={true}
+      backdrop={true}
+      backdropTransition={
+        Object {
+          "mountOnEnter": true,
+          "timeout": 150,
+        }
+      }
+      fade={true}
+      id="social-modal"
+      isOpen={true}
+      keyboard={true}
+      modalTransition={
+        Object {
+          "timeout": 300,
+        }
+      }
+      onClosed={[Function]}
+      onOpened={[Function]}
+      role="dialog"
+      toggle={[Function]}
+      zIndex={1050}
+    />
+  </SocialModal>
+</Modal>
+`;

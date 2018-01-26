@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert renders correctly 1`] = `
+<Alert
+  closeAriaLabel="Close"
+  color="danger"
+  isOpen={true}
+  tag="div"
+  transition={
+    Object {
+      "appear": true,
+      "baseClass": "fade",
+      "baseClassActive": "show",
+      "enter": true,
+      "exit": true,
+      "in": true,
+      "mountOnEnter": false,
+      "onEnter": [Function],
+      "onEntered": [Function],
+      "onEntering": [Function],
+      "onExit": [Function],
+      "onExited": [Function],
+      "onExiting": [Function],
+      "tag": "div",
+      "timeout": 150,
+      "unmountOnExit": true,
+    }
+  }
+>
+  My Alert
+</Alert>
+`;
+
+exports[`Alert renders correctly when fully mounted 1`] = `
+<NormalAlert
+  color="danger"
+>
+  <Alert
+    closeAriaLabel="Close"
+    color="danger"
+    isOpen={true}
+    tag="div"
+    transition={
+      Object {
+        "appear": true,
+        "baseClass": "fade",
+        "baseClassActive": "show",
+        "enter": true,
+        "exit": true,
+        "in": true,
+        "mountOnEnter": false,
+        "onEnter": [Function],
+        "onEntered": [Function],
+        "onEntering": [Function],
+        "onExit": [Function],
+        "onExited": [Function],
+        "onExiting": [Function],
+        "tag": "div",
+        "timeout": 150,
+        "unmountOnExit": true,
+      }
+    }
+  >
+    <Fade
+      appear={true}
+      baseClass="fade"
+      baseClassActive="show"
+      className="alert alert-danger"
+      enter={true}
+      exit={true}
+      in={true}
+      mountOnEnter={false}
+      onEnter={[Function]}
+      onEntered={[Function]}
+      onEntering={[Function]}
+      onExit={[Function]}
+      onExited={[Function]}
+      onExiting={[Function]}
+      role="alert"
+      tag="div"
+      timeout={150}
+      unmountOnExit={true}
+    >
+      <Transition
+        appear={true}
+        enter={true}
+        exit={true}
+        in={true}
+        mountOnEnter={false}
+        onEnter={[Function]}
+        onEntered={[Function]}
+        onEntering={[Function]}
+        onExit={[Function]}
+        onExited={[Function]}
+        onExiting={[Function]}
+        timeout={150}
+        unmountOnExit={true}
+      >
+        <div
+          className="alert alert-danger fade"
+          role="alert"
+        >
+          My Alert
+        </div>
+      </Transition>
+    </Fade>
+  </Alert>
+</NormalAlert>
+`;

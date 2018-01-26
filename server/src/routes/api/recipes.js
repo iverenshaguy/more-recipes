@@ -2,13 +2,10 @@ import express from 'express';
 import { recipes as recipeValidation } from '../../validations';
 import { validationHandler, authorization, searchHandler } from '../../middlewares';
 import { recipes, reviews, votes, favorites } from '../../controllers';
-import { recipeImageUpload } from '../../helpers/imageUpload';
 
 const recipeRoutes = express.Router();
 
 recipeRoutes.post('/', authorization.authorize, recipeValidation.addRecipe, (req, res, next) => validationHandler(req, res, recipes.create, next));
-
-recipeRoutes.post('/:recipeId/uploads', authorization.authorize, recipeValidation.getSingleRecipe, recipeImageUpload, (req, res, next) => validationHandler(req, res, recipes.upload, next));
 
 recipeRoutes.get('/:recipeId', authorization.authorize, recipeValidation.getSingleRecipe, (req, res, next) => validationHandler(req, res, recipes.viewRecipe, next));
 

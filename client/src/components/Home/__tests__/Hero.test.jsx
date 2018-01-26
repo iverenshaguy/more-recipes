@@ -1,19 +1,20 @@
 import React from 'react';
 import Hero from '../Hero';
+import { toggleModal } from '../../../store/components/actions';
+
+const setup = () => {
+  const dispatch = jest.fn();
+  const shallowWrapper = shallow(<Hero dispatch={dispatch} />);
+  const mountedWrapper = mount(<Hero dispatch={dispatch} />);
+
+  return {
+    shallowWrapper,
+    mountedWrapper,
+    dispatch,
+  };
+};
 
 describe('Home: Hero', () => {
-  const setup = () => {
-    const toggleModalMock = jest.fn();
-    const shallowWrapper = shallow(<Hero toggle={toggleModalMock} />);
-    const mountedWrapper = mount(<Hero toggle={toggleModalMock} />);
-
-    return {
-      shallowWrapper,
-      mountedWrapper,
-      toggleModalMock,
-    };
-  };
-
   afterAll(() => {
     jest.clearAllMocks();
   });
@@ -31,9 +32,10 @@ describe('Home: Hero', () => {
   });
 
   it('calls toggleModal method on add recipe button click', () => {
-    const { shallowWrapper, toggleModalMock } = setup();
+    const { shallowWrapper, dispatch } = setup();
 
     shallowWrapper.find('#home-add-recipe-btn').simulate('click');
-    expect(toggleModalMock).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(dispatch).toHaveBeenCalledWith(toggleModal('addRecipe'));
   });
 });

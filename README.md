@@ -5,7 +5,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/maintainability)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/test_coverage)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/test_coverage)
 
-A Recipe Management Application written in Javscript (ES6).
+A Recipe Management Application written in JavaScript (ES6).
 
 ## Built With
 
@@ -25,14 +25,16 @@ A Recipe Management Application written in Javscript (ES6).
 
 #### Compiler
 
-* [Babel](https://eslint.org/) - Compiler for Next Generation Javacsript
+* [Babel](https://eslint.org/) - Compiler for Next Generation JavaScript
 
 #### Test Tools
 
-* [Mocha](https://mochajs.org/) - Test Framework
+* [Mocha](https://mochajs.org/) - JavaScript Test Framework for API Tests
 * [Chai](http://chaijs.com/) - TDD/BDD Assertion Library for Node
 * [Supertest](https://github.com/visionmedia/supertest) - Super-agent driven
   library for testing node.js HTTP servers
+* [Jest](https://facebook.github.io/jest/) - JavaScript Testing Library
+* [Enzyme](http://airbnb.io/enzyme/) - JavaScript Testing utility for React
 * [Istanbul(nyc)](https://istanbul.js.org/) - Code Coverage Generator
 
 ## Features
@@ -63,6 +65,8 @@ Navigate to
   [http://localhost:8000/api/v1/users/signin](http://localhost:8000/api/v1/users/signin)
 * Fetch User - GET
   [http://localhost:8000/api/v1/users/profile](http://localhost:8000/api/v1/users/profile)
+* Refresh User Token - GET
+  [http://localhost:8000/api/v1/users/token](http://localhost:8000/api/v1/users/token)
 * Upload User Profile Pic - POST
   [http://localhost:8000/api/v1/users/uploads](http://localhost:8000/api/v1/users/uploads)
 * Fetch User's Favorite Recipes - GET

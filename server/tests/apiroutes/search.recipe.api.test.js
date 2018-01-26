@@ -77,7 +77,7 @@ describe('Routes: Recipe API Tests, Search', () => {
         .get('/api/v1/recipes')
         .query({ sort: 'upvotes', order: 'ascending' })
         .set('Accept', 'application/json')
-        .set('token', userToken)
+        .set('authorization', userToken)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body.message).to.equal('There are no upvoted recipes');
@@ -221,7 +221,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'ascending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -242,7 +242,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'upvotes', order: 'descending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(5);
@@ -265,7 +265,7 @@ describe('Routes: Recipe API Tests, Search', () => {
             sort: 'upvotes', order: 'descending', page: '2', limit: '2'
           })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(2);
@@ -290,7 +290,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ sort: 'likes', order: 'ascending' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.lengthOf(6);
@@ -328,7 +328,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ search: 'rice' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(3);
@@ -354,7 +354,7 @@ describe('Routes: Recipe API Tests, Search', () => {
             search: 'rice', page: '2', limit: '2'
           })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(1);
@@ -378,7 +378,7 @@ describe('Routes: Recipe API Tests, Search', () => {
             search: 'rice', page: '4', limit: '2'
           })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(1);
@@ -402,7 +402,7 @@ describe('Routes: Recipe API Tests, Search', () => {
             search: 'rice', page: '0.2', limit: '2'
           })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.recipes).to.have.lengthOf(2);
@@ -425,7 +425,7 @@ describe('Routes: Recipe API Tests, Search', () => {
           .get('/api/v1/recipes')
           .query({ search: 'puffpuff', limit: '2', page: '2' })
           .set('Accept', 'application/json')
-          .set('token', userToken)
+          .set('authorization', userToken)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.message).to.equal('Your search returned no results');

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-const SocialModal = props => (
-  <Modal isOpen={props.isOpen} toggle={props.toggle} id="social-modal">
-    <ModalHeader toggle={props.toggle} tag="div">
+const SocialModal = ({ isOpen, toggle }) => (
+  <Modal isOpen={isOpen} toggle={toggle} id="social-modal">
+    <ModalHeader toggle={toggle} tag="div">
       <h3 className="modal-title text-center" id="social-modal">
         Share this Recipe
       </h3>
@@ -39,7 +39,7 @@ const SocialModal = props => (
 
 SocialModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  toggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func.isRequired
 };
 
 export default SocialModal;
