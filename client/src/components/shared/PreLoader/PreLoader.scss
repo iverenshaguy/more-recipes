@@ -1,10 +1,22 @@
-$primary-color: $green;
 @import '../../../assets/scss/modules';
-@import 'loaders.css/src/animations/semi-circle-spin';
-.loader-hidden {
-  display: none;
-}
+$primary-color: $green;
 
-.loader-active {
-  display: block;
+.loader {
+  margin: 30vh 0 25vh 46vw;
+  &-hidden {
+    display: none;
+  }
+  
+  &-active {
+    display: block;
+  }
+
+  .ball-scale-multiple {
+    height: 11vh;
+    width: 11vh;
+
+    & > div {
+      left: 0;
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from 'react-loaders';
+import './PreLoader.scss';
 
-const PreLoader = () => (<Loader type="semi-circle-spin" style={{ transform: 'scale(0.5)' }} />);
+const PreLoader = () => (<Loader type="ball-scale-multiple" />);
 
 export default PreLoader;

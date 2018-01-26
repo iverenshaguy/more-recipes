@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-// import { ConnectedRouter } from 'react-router-redux';
-// import { history } from '../store';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'loaders.css/src/animations/ball-scale-multiple.scss';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import StickyBar from '../shared/StickyBar';

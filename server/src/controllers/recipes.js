@@ -1,9 +1,5 @@
-import del from 'del';
-import path from 'path';
 import Pagination from '../helpers/pagination';
 import { sequelize, Recipe, User, Review } from '../models';
-
-const uploadPath = path.resolve(__dirname, '../../../client/public/images/recipes');
 
 export default {
   create(req, recipeData, res, next) {
@@ -26,26 +22,6 @@ export default {
         ]
       })
       .then(recipe => res.status(201).send(recipe))
-      .catch(next);
-  },
-
-  upload(req, recipeData, res, next) {
-    return Recipe
-      .findOne({ where: { id: +recipeData.recipeId, userId: req.id } })
-      .then((recipe) => {
-        if (!recipe) {
-          return res.status(404).send({ message: 'Recipe Not Found' });
-        }
-
-        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
-
-        del.sync([savedImage]);
-
-        return recipe
-          .update({ recipeImage: req.file.filename })
-          .then(() => res.status(201).send(recipe))
-          .catch(next);
-      })
       .catch(next);
   },
 
@@ -94,10 +70,6 @@ export default {
         if (!recipe) {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
-
-        const savedImage = `${uploadPath}/${recipe.recipeImage}`;
-
-        del.sync([savedImage]);
 
         return recipe
           .destroy()

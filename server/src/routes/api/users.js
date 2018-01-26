@@ -2,7 +2,6 @@ import express from 'express';
 import { users as userValidation, recipes as recipeValidation } from '../../validations';
 import { validationHandler, authorization } from '../../middlewares';
 import { users, favorites } from '../../controllers';
-import { profilePicUpload } from '../../helpers/imageUpload';
 
 const userRoutes = express.Router();
 
@@ -24,8 +23,5 @@ userRoutes.get(
   recipeValidation.favoriteRecipes,
   (req, res, next) => validationHandler(req, res, favorites.getFavorites, next)
 );
-
-userRoutes.post('/uploads', authorization.authorize, profilePicUpload, (req, res, next) =>
-  validationHandler(req, res, users.upload, next));
 
 export default userRoutes;

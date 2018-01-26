@@ -1,5 +1,3 @@
-import path from 'path';
-import del from 'del';
 import { config } from 'dotenv';
 import { User, Recipe } from '../models';
 import { verifyPassword } from '../helpers/passwordHash';
@@ -23,22 +21,6 @@ export default {
         user = getCleanUser(user);
 
         res.status(201).send({ user, token });
-      })
-      .catch(next);
-  },
-
-  upload(req, userData, res, next) {
-    return User.findOne({ where: { id: req.id } })
-      .then((user) => {
-        const uploadPath = path.resolve(__dirname, '../../../client/public/images/profile');
-        const savedImage = `${uploadPath}/${user.profilePic}`;
-
-        del.sync([savedImage]);
-
-        return user
-          .update({ profilePic: req.file.filename })
-          .then(() => res.status(201).send(user))
-          .catch(next);
       })
       .catch(next);
   },
