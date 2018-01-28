@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { authOperations } from '../../../store/auth';
+import { logout } from '../../../actions/auth';
 import Navbar from '../Navbar';
-
-const { logout } = authOperations;
 
 /**
  * @exports Header

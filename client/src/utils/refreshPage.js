@@ -1,7 +1,5 @@
 import decodeToken from './decodeToken';
-import { authOperations } from '../store/auth';
-
-const { resetUser, authenticateUser } = authOperations;
+import { resetUser, authenticateUser } from '../actions/auth';
 
 /**
  * Refreshes page with token in local storage
@@ -11,7 +9,7 @@ const { resetUser, authenticateUser } = authOperations;
  */
 const refreshPage = (store) => {
   if (localStorage.jwtToken) {
-    const { exp, token } = decodeToken();
+    const { exp } = decodeToken();
     // if token is expired
     if (exp < Math.floor(Date.now() / 1000)) {
       // remove empty token and log user out
@@ -19,7 +17,7 @@ const refreshPage = (store) => {
       store.dispatch(resetUser());
     } else {
       // fetch user from token if valid
-      store.dispatch(authenticateUser(token));
+      store.dispatch(authenticateUser());
     }
   } else {
     store.dispatch(resetUser());

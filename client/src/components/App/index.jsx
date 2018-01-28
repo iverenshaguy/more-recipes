@@ -1,13 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'loaders.css/src/animations/ball-scale-multiple.scss';
+import { history } from '../../reducers';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import StickyBar from '../shared/StickyBar';
 import Modal from '../shared/Modals';
-import Home from '../Home';
-import Auth from '../Auth';
+import Home from '../pages/Home';
+import Auth from '../pages/Auth';
 import { requireAuthentication } from '../hoc';
 import '../../assets/font-awesome/css/font-awesome.css';
 import '../../assets/kitchen-font/flaticon.css';
@@ -18,7 +20,7 @@ import './App.scss';
  * @returns {component} App
  */
 const App = () => (
-  <BrowserRouter>
+  <ConnectedRouter history={history}>
     <div className="app">
       <Header />
       <div className="content">
@@ -32,7 +34,7 @@ const App = () => (
       <StickyBar />
       <Modal />
     </div>
-  </BrowserRouter>
+  </ConnectedRouter>
 );
 
 export default App;

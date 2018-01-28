@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AddRecipeModal from './AddRecipeModal';
 import SocialModal from './SocialModal';
-import { componentActions } from '../../../store/components';
-
-const { toggleModal } = componentActions;
+import { toggleModal } from '../../../actions/ui';
 
 const Modal = ({
   type, isOpen, dispatch
@@ -31,8 +29,8 @@ Modal.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  type: state.components.modals.type,
-  isOpen: state.components.modals.isOpen,
+  type: state.ui.modals.type,
+  isOpen: state.ui.modals.isOpen,
 });
 
 export { AddRecipeModal, SocialModal, Modal as ModalComponent };

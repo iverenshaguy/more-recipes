@@ -24,16 +24,16 @@ export const signup = user =>
     validateStatus: status => status >= 200 && status < 300
   });
 
-export const refreshToken = token =>
-  axios(`${url}/users/token`, {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      'Content-type': 'application/json; charset=UTF-8',
-      authorization: token
-    },
-    validateStatus: status => status >= 200 && status < 300
-  });
+// export const refreshToken = token =>
+//   instance.get(`${url}/users/token`, {
+//     method: 'GET',
+//     headers: {
+//       accept: 'application/json',
+//       'Content-type': 'application/json; charset=UTF-8',
+//       authorization: token
+//     },
+//     validateStatus: status => status >= 200 && status < 300
+//   });
 
 // export const getTodoItem = id => {
 //   return fetch(`${proxyurl}${url}/${id}`, {
@@ -79,4 +79,4 @@ export const refreshToken = token =>
 //   }).then(checkStatus);
 // };
 
-export default { login, signup, refreshToken };
+export default { login, signup };
