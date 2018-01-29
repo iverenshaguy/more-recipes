@@ -14,13 +14,14 @@ You may create a new account using this action. It takes a JSON object containin
 
 + Attributes
 
-    + firstname (string, required) - The user's firstname.
-    + lastname (string, required) - The user's lastname.
-    + username (string, required) - The user's chosen username.
-    + email (string, required) - The user's email address.
-    + password (string, required) - The user's chosen password.
-    + aboutMe (string, optional) - Information about User.
-    + occupation (string, optional) - The user's occupation.
+    + firstname (string, required) - The user's firstname
+    + lastname (string, optional) - The user's lastname
+    + username (string, required) - The user's chosen username
+    + email (string, required) - The user's email address
+    + password (string, required) - The user's chosen password
+    + aboutMe (string, optional) - Information about User
+    + occupation (string, optional) - The user's occupation
+    + profilePic (string, optional) - User Image URL
 
 + Request (application/json)
 
@@ -33,6 +34,7 @@ You may create a new account using this action. It takes a JSON object containin
             "passwordConfirm": "iverenshaguy",
             "aboutMe": "Food lover. Bookworm",
             "occupation": "Software Developer",
+            "profilePic": "www.pic.profile"
         }
 
 + Response 201 (application/json)
@@ -45,13 +47,14 @@ You may create a new account using this action. It takes a JSON object containin
 
             {
                 "user": {
-                    "id": "1"
+                    "id": "1",
                     "firstname": "Iveren",
                     "lastname": "Shaguy",
                     "username": "iverenshaguy",
                     "email": "iverenshaguy@gmail.com",
                     "aboutMe": "Food lover. Bookworm",
                     "occupation": "Software Developer",
+                    "profilePic": "www.pic.profile",
                     "updatedAt": '2017-10-30T00:47:03.687Z',
                     "createdAt": '2017-10-30T00:47:03.687Z'
                 },
@@ -83,13 +86,14 @@ You may signin to your account using this action. It takes a JSON object contain
 
             {
                 "user": {
-                    "id": "1"
+                    "id": "1",
                     "firstname": "Iveren",
                     "lastname": "Shaguy",
                     "username": "iverenshaguy",
                     "email": "iverenshaguy@gmail.com",
                     "aboutMe": "Food lover. Bookworm",
                     "occupation": "Software Developer",
+                    "profilePic": "www.pic.profile",
                     "updatedAt": '2017-10-30T00:47:03.687Z',
                     "createdAt": '2017-10-30T00:47:03.687Z'
                 },
@@ -137,13 +141,14 @@ This allows you to refresh user token
 
         {
             "user": {
-                "id": "1"
+                "id": "1",
                 "firstname": "Iveren",
                 "lastname": "Shaguy",
                 "username": "iverenshaguy",
                 "email": "iverenshaguy@gmail.com",
                 "aboutMe": "Food lover. Bookworm",
                 "occupation": "Software Developer",
+                "profilePic": "www.pic.profile",
                 "updatedAt": '2017-10-30T00:47:03.687Z',
                 "createdAt": '2017-10-30T00:47:03.687Z'
             },
@@ -258,6 +263,7 @@ A Recipe Object has the following attributes:
 
     + id (number) - Recipe id
     + recipeName (string) - Recipe Name
+    + recipeImage (string) - Recipe Image URL
     + prepTime (string) - Recipe Preparation Time
     + cookTime (string) - Recipe Cook Time
     + totalTime (string) - Total Time
@@ -518,6 +524,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
 + Attributes
 
     + recipeName (string, required) - Recipe Name
+    + recipeImage (string, optional) - Recipe Image URL
     + prepTime (string, optional) - Recipe Preparation Time
     + cookTime (string, optional) - Recipe Cook Time
     + totalTime (string, required) - Total Time
@@ -1069,6 +1076,7 @@ This action allows you to modify an existing recipe added by you.
 + Attributes
 
     + recipeName (string, required) - Recipe Name
+    + recipeImage (string, optional) - Recipe Image URL
     + prepTime (string, optional) - Recipe Preparation Time
     + cookTime (string, optional) - Recipe Cook Time
     + totalTime (string, required) - Total Time
