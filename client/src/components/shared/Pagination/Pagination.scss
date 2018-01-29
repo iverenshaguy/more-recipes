@@ -1,0 +1,14 @@
+@import '../../../assets/scss/modules';
+
+.pagination {
+  .page-item {
+    &.active {
+      .page-link {
+        background-color: $green;
+        border-color: $green;
+        color: $white;
+        z-index: 2;
+      }
+    }
+  }
+}

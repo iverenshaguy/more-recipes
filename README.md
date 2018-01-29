@@ -1,6 +1,6 @@
 # More Recipes
 
-[![Build Status](https://travis-ci.org/iverenshaguy/more-recipes-personal.svg?branch=master)](https://travis-ci.org/iverenshaguy/more-recipes-personal)
+[![Build Status](https://travis-ci.org/iverenshaguy/more-recipes-personal.svg?branch=develop)](https://travis-ci.org/iverenshaguy/more-recipes-personal)
 [![Coverage Status](https://coveralls.io/repos/github/iverenshaguy/more-recipes-personal/badge.svg?branch=develop)](https://coveralls.io/github/iverenshaguy/more-recipes-personal?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/maintainability)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/test_coverage)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/test_coverage)
@@ -67,8 +67,6 @@ Navigate to
   [http://localhost:8000/api/v1/users/profile](http://localhost:8000/api/v1/users/profile)
 * Refresh User Token - GET
   [http://localhost:8000/api/v1/users/token](http://localhost:8000/api/v1/users/token)
-* Upload User Profile Pic - POST
-  [http://localhost:8000/api/v1/users/uploads](http://localhost:8000/api/v1/users/uploads)
 * Fetch User's Favorite Recipes - GET
   [http://localhost:8000/api/v1/users//:userId/recipes](http://localhost:8000/api/v1/users//:userId/recipes)
 
@@ -76,8 +74,6 @@ Navigate to
 
 * Create Recipe - POST
   [http://localhost:8000/api/v1/recipes](http://localhost:8000/api/v1/recipes)
-* User Recipe Image - POST
-  [http://localhost:8000/api/v1/recipes/uploads](http://localhost:8000/api/v1/recipes/uploads)
 * Modify Recipe - PUT
   [http://localhost:8000/api/v1/recipes/:recipeId](http://localhost:8000/api/v1/recipes/:recipeId)
 * Delete Recipe - DELETE
@@ -112,6 +108,10 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 DB_DATABASE=your_database
 DB_HOST=your_host
+FIREBASE_API_KEY=your_api_keey
+FIREBASE_AUTH_DOMAIN=your_auth_domain
+FIREBASE_DB_URL=your_db_url
+FIREBASE_STORAGE_BUCKET=your_storage_bucket
 SECRET=yourjwtsecret
 ```
 
@@ -154,6 +154,9 @@ App is hosted on heroku at
 
 ### Development
 
-You can run `npm run start:dev` in devlopment to use
-[nodemon](https://nodemon.io/). [Nodemon](https://nodemon.io/) watches for file
-changes and restarts your code
+You can run `yarn start:dev` or `npm run start:dev` in development to use [Nodemon](https://nodemon.io/) 
+and [Webpack Development Server](https://github.com/webpack/webpack-dev-server). 
+
+[Nodemon](https://nodemon.io/) watches for file changes and restarts your code. 
+[Webpack Development Server](https://github.com/webpack/webpack-dev-server) serves a webpack app and 
+updates the browser on changes.

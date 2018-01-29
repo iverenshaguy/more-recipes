@@ -2,14 +2,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import rootReducer from './store';
+import rootReducer, { history } from './reducers';
 import refreshPage from './utils/refreshPage';
 import App from './components/App';
 
 const enhancers = [];
-const middlewares = [thunk];
+const middlewares = [thunk, routerMiddleware(history)];
+
 
 if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);

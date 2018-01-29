@@ -1,0 +1,51 @@
+@import '../../../assets/scss/modules';
+
+.home {
+  .navbar {
+    position: relative;
+  }
+
+  #hero-image {
+    height: 45vh;
+    max-width: 100%;
+    position: relative;
+
+    button {
+      background-color: $light-green;
+      border: 1px solid $light-green;
+      color: $white;
+      padding: 0.75rem 1.5rem;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: $green;
+        border: 1px solid $green;
+        color: $white;
+      }
+    }
+  }
+
+  #hero-image-text {
+    color: $white;
+    padding-top: 5vh;
+    text-align: center;
+    width: 100%;
+  }
+
+  #hero-search-form {
+    margin-top: 2rem;
+  }
+}
+
+#home-add-recipe-btn {
+  border-radius: 0;
+  box-shadow: 0;
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,234 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeItems renders correctly 1`] = `
+<div
+  className="container-fluid pb-5 background-grey page-margin"
+  id="search-result-wrapper"
+>
+  <div
+    className="heading pt-4 text-center"
+    id="search-result-heading"
+  >
+    <div
+      className="col-xs-12 col-md-12 pt-3"
+      id="title"
+    >
+      <h5>
+        TOP RECIPES
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <div
+    className="row pt-2 px-5"
+    id="search-result"
+  >
+    <RecipeCard
+      key="8"
+      recipe={
+        Object {
+          "difficulty": "Easy",
+          "id": 8,
+          "rating": "4.760",
+          "recipeImage": "sjkks",
+          "recipeName": "Chicken Pie",
+          "totalTime": "1hr 30 minutes",
+          "upvotes": 150,
+          "views": 290,
+        }
+      }
+    />
+    <RecipeCard
+      key="3"
+      recipe={
+        Object {
+          "difficulty": "Normal",
+          "id": 3,
+          "rating": "3.3600",
+          "recipeImage": "jsksk",
+          "recipeName": "Jollof Rice",
+          "totalTime": "30 Minutes",
+          "upvotes": 10,
+          "views": 100,
+        }
+      }
+    />
+  </div>
+  <Pagination
+    items={
+      Array [
+        Object {
+          "difficulty": "Easy",
+          "id": 8,
+          "rating": "4.760",
+          "recipeImage": "sjkks",
+          "recipeName": "Chicken Pie",
+          "totalTime": "1hr 30 minutes",
+          "upvotes": 150,
+          "views": 290,
+        },
+        Object {
+          "difficulty": "Normal",
+          "id": 3,
+          "rating": "3.3600",
+          "recipeImage": "jsksk",
+          "recipeName": "Jollof Rice",
+          "totalTime": "30 Minutes",
+          "upvotes": 10,
+          "views": 100,
+        },
+      ]
+    }
+    metaData={
+      Object {
+        "firstPage": 1,
+        "lastPage": 1,
+        "page": 1,
+        "pageRecipeCount": 2,
+        "pages": Array [
+          1,
+        ],
+        "totalRecipeCount": 2,
+      }
+    }
+    onPageChange={[Function]}
+  />
+</div>
+`;
+
+exports[`RecipeItems renders correctly when no recipes are passed 1`] = `
+<div
+  className="container-fluid pb-5 background-grey page-margin"
+  id="search-result-wrapper"
+>
+  <div
+    className="heading pt-4 text-center"
+    id="search-result-heading"
+  >
+    <div
+      className="col-xs-12 col-md-12 pt-3"
+      id="title"
+    >
+      <h5>
+        SEARCH RESULTS
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <div
+    className="row pt-2 px-5"
+    id="search-result"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className="text-center pt-4"
+      >
+        Your search returned no results
+      </div>
+    </div>
+  </div>
+  <Pagination
+    items={Array []}
+    metaData={Object {}}
+    onPageChange={[Function]}
+  />
+</div>
+`;
+
+exports[`RecipeItems renders correctly when title is SEARCH RESULTS 1`] = `
+<div
+  className="container-fluid pb-5 background-grey page-margin"
+  id="search-result-wrapper"
+>
+  <div
+    className="heading pt-4 text-center"
+    id="search-result-heading"
+  >
+    <div
+      className="col-xs-12 col-md-12 pt-3"
+      id="title"
+    >
+      <h5>
+        SEARCH RESULTS
+      </h5>
+    </div>
+  </div>
+  <hr />
+  <div
+    className="row pt-2 px-5"
+    id="search-result"
+  >
+    <RecipeCard
+      key="8"
+      recipe={
+        Object {
+          "difficulty": "Easy",
+          "id": 8,
+          "rating": "4.760",
+          "recipeImage": "sjkks",
+          "recipeName": "Chicken Pie",
+          "totalTime": "1hr 30 minutes",
+          "upvotes": 150,
+          "views": 290,
+        }
+      }
+    />
+    <RecipeCard
+      key="3"
+      recipe={
+        Object {
+          "difficulty": "Normal",
+          "id": 3,
+          "rating": "3.3600",
+          "recipeImage": "jsksk",
+          "recipeName": "Jollof Rice",
+          "totalTime": "30 Minutes",
+          "upvotes": 10,
+          "views": 100,
+        }
+      }
+    />
+  </div>
+  <Pagination
+    items={
+      Array [
+        Object {
+          "difficulty": "Easy",
+          "id": 8,
+          "rating": "4.760",
+          "recipeImage": "sjkks",
+          "recipeName": "Chicken Pie",
+          "totalTime": "1hr 30 minutes",
+          "upvotes": 150,
+          "views": 290,
+        },
+        Object {
+          "difficulty": "Normal",
+          "id": 3,
+          "rating": "3.3600",
+          "recipeImage": "jsksk",
+          "recipeName": "Jollof Rice",
+          "totalTime": "30 Minutes",
+          "upvotes": 10,
+          "views": 100,
+        },
+      ]
+    }
+    metaData={
+      Object {
+        "firstPage": 1,
+        "lastPage": 1,
+        "page": 1,
+        "pageRecipeCount": 2,
+        "pages": Array [
+          1,
+        ],
+        "totalRecipeCount": 2,
+      }
+    }
+    onPageChange={[Function]}
+  />
+</div>
+`;

@@ -1,5 +1,3 @@
-let error = {};
-
 /**
  * Handle HTTP errors
  * @function errorHandler
@@ -7,6 +5,8 @@ let error = {};
  * @returns {object} New Error Object
  */
 const errorHandler = (err) => {
+  let error = {};
+
   if (err.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx

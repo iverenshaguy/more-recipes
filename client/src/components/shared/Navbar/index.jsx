@@ -89,7 +89,7 @@ class NavbarWrapper extends Component {
             <UncontrolledDropdown nav>
               <div className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline">
                 <DropdownToggle nav>
-                  <img src="images/profile/user1.jpg" className="rounded-cirle" alt="User" /> Jane
+                  <img src="images/profile/user1.jpg" className="rounded-cirle" alt="User" /> {this.props.user && this.props.user.firstname}
                 </DropdownToggle>
                 <DropdownMenu right>
                   <a className="dropdown-item" href="user-profile.html">
@@ -143,7 +143,8 @@ class NavbarWrapper extends Component {
 NavbarWrapper.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.any //eslint-disable-line
 };
 
 export default NavbarWrapper;

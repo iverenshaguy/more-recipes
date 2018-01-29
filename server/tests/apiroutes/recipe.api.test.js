@@ -1,5 +1,4 @@
 import request from 'supertest';
-import path from 'path';
 import { expect } from 'chai';
 import app from '../../src/bin/www';
 import { sequelize, User, Recipe } from '../../src/models';

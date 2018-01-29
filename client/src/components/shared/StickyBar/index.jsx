@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
 import { Form, InputGroup, Label, Input, InputGroupButton, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { componentActions } from '../../../store/components';
+import { toggleModal } from '../../../actions/ui';
 import './StickyBar.scss';
-
-const { toggleModal } = componentActions;
 
 const StickyBar = ({ currentLocation, dispatch }) => {
   if (currentLocation === 'auth') {

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeCard renders correctly 1`] = `
+<div
+  className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+>
+  <Card
+    tag="div"
+  >
+    <a
+      href="view-recipe.html"
+    >
+      <CardImg
+        alt="recipe"
+        className="img-fluid"
+        src="images/jollof-rice-img.jpg"
+        tag="img"
+        top={true}
+        width="100%"
+      />
+      <CardBody
+        className="card-block text-center pb-3"
+        tag="div"
+      >
+        <h5
+          className="mb-1"
+        >
+          Chicken Pie
+        </h5>
+      </CardBody>
+      <CardBody
+        className="card-block text-center recipe-details"
+        tag="div"
+      >
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+          <FontAwesome
+            name="clock-o"
+          />
+           
+          1hr 30 minutes
+        </CardText>
+        <CardText
+          className="text-muted mr-0 d-inline"
+          tag="p"
+        >
+           | 
+        </CardText>
+        <CardText
+          className="text-muted d-inline"
+          tag="p"
+        >
+          <i
+            className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+          />
+          Easy
+        </CardText>
+      </CardBody>
+      <CardBody
+        className="text-center text-muted px-2 recipe-rating"
+        tag="div"
+      >
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+          <FontAwesome
+            name="star"
+          />
+           
+          4.8
+        </CardText>
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+           | 
+        </CardText>
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+          <FontAwesome
+            name="heart"
+          />
+           
+          150
+        </CardText>
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+           | 
+        </CardText>
+        <CardText
+          className="text-muted mr-2 d-inline"
+          tag="p"
+        >
+          <FontAwesome
+            className="text-success"
+            name="eye"
+          />
+           
+          290
+        </CardText>
+      </CardBody>
+    </a>
+  </Card>
+</div>
+`;
