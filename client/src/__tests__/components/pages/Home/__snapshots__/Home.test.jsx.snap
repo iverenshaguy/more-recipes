@@ -6,20 +6,82 @@ exports[`Home renders correctly 1`] = `
 >
   <Hero
     dispatch={[Function]}
+    handleSearch={[Function]}
+    handleSearchInput={[Function]}
+    searchValue=""
   />
-  <RecipeItems />
+  <RecipeItems
+    handlePageChange={[Function]}
+    metaData={
+      Object {
+        "firstPage": 1,
+        "lastPage": 3,
+        "page": 2,
+        "pageRecipeCount": 5,
+        "pages": Array [
+          1,
+          2,
+          3,
+        ],
+        "totalRecipeCount": 13,
+      }
+    }
+    recipes={
+      Array [
+        Object {
+          "id": 1,
+          "recipeName": "Rice",
+        },
+        Object {
+          "id": 5,
+          "recipeName": "Beans",
+        },
+      ]
+    }
+    title="TOP RECIPES"
+  />
 </div>
 `;
 
 exports[`Home renders correctly when fully mounted 1`] = `
 <Home
   dispatch={[Function]}
+  isFetching={false}
+  metaData={
+    Object {
+      "firstPage": 1,
+      "lastPage": 3,
+      "page": 2,
+      "pageRecipeCount": 5,
+      "pages": Array [
+        1,
+        2,
+        3,
+      ],
+      "totalRecipeCount": 13,
+    }
+  }
+  recipes={
+    Array [
+      Object {
+        "id": 1,
+        "recipeName": "Rice",
+      },
+      Object {
+        "id": 5,
+        "recipeName": "Beans",
+      },
+    ]
+  }
 >
   <div
     className="home"
   >
     <Hero
       dispatch={[Function]}
+      handleSearch={[Function]}
+      handleSearchInput={[Function]}
+      searchValue=""
     >
       <div
         className="container-fluid"
@@ -47,11 +109,13 @@ exports[`Home renders correctly when fully mounted 1`] = `
               >
                 <Form
                   id="search-form"
+                  onSubmit={[Function]}
                   tag="form"
                 >
                   <form
                     className=""
                     id="search-form"
+                    onSubmit={[Function]}
                   >
                     <InputGroup
                       size="lg"
@@ -83,15 +147,19 @@ exports[`Home renders correctly when fully mounted 1`] = `
                         </Label>
                         <Input
                           id="search"
+                          onChange={[Function]}
                           placeholder="Curried Chicken Gravy..."
                           tag="p"
                           type="text"
+                          value=""
                         >
                           <input
                             className="form-control"
                             id="search"
+                            onChange={[Function]}
                             placeholder="Curried Chicken Gravy..."
                             type="text"
+                            value=""
                           />
                         </Input>
                         <InputGroupButton
@@ -151,7 +219,36 @@ exports[`Home renders correctly when fully mounted 1`] = `
         </div>
       </div>
     </Hero>
-    <RecipeItems>
+    <RecipeItems
+      handlePageChange={[Function]}
+      metaData={
+        Object {
+          "firstPage": 1,
+          "lastPage": 3,
+          "page": 2,
+          "pageRecipeCount": 5,
+          "pages": Array [
+            1,
+            2,
+            3,
+          ],
+          "totalRecipeCount": 13,
+        }
+      }
+      recipes={
+        Array [
+          Object {
+            "id": 1,
+            "recipeName": "Rice",
+          },
+          Object {
+            "id": 5,
+            "recipeName": "Beans",
+          },
+        ]
+      }
+      title="TOP RECIPES"
+    >
       <div
         className="container-fluid pb-5 background-grey page-margin"
         id="search-result-wrapper"
@@ -174,7 +271,15 @@ exports[`Home renders correctly when fully mounted 1`] = `
           className="row pt-2 px-5"
           id="search-result"
         >
-          <RecipeCard>
+          <RecipeCard
+            key="1"
+            recipe={
+              Object {
+                "id": 1,
+                "recipeName": "Rice",
+              }
+            }
+          >
             <div
               className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
             >
@@ -203,32 +308,17 @@ exports[`Home renders correctly when fully mounted 1`] = `
                       />
                     </CardImg>
                     <CardBody
-                      className="card-block text-center pb-0"
+                      className="card-block text-center pb-3"
                       tag="div"
                     >
                       <div
-                        className="card-block text-center pb-0 card-body"
+                        className="card-block text-center pb-3 card-body"
                       >
                         <h5
                           className="mb-1"
                         >
-                          Jollof Rice and Chicken
+                          Rice
                         </h5>
-                        <CardText
-                          className="mb-2"
-                          tag="p"
-                        >
-                          <p
-                            className="mb-2 card-text"
-                          >
-                            <span
-                              className="text-muted"
-                            >
-                              Posted by 
-                            </span>
-                            @janesmith
-                          </p>
-                        </CardText>
                       </div>
                     </CardBody>
                     <CardBody
@@ -253,7 +343,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-clock-o"
                               />
                             </FontAwesome>
-                             45 minutes
+                             
                           </p>
                         </CardText>
                         <CardText
@@ -276,7 +366,6 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             <i
                               className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
                             />
-                            A Bit Difficult
                           </p>
                         </CardText>
                       </div>
@@ -303,7 +392,8 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-star"
                               />
                             </FontAwesome>
-                             4.5
+                             
+                            NaN
                           </p>
                         </CardText>
                         <CardText
@@ -331,7 +421,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-heart"
                               />
                             </FontAwesome>
-                             200
+                             
                           </p>
                         </CardText>
                         <CardText
@@ -360,7 +450,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-eye text-success"
                               />
                             </FontAwesome>
-                             350
+                             
                           </p>
                         </CardText>
                       </div>
@@ -370,7 +460,15 @@ exports[`Home renders correctly when fully mounted 1`] = `
               </Card>
             </div>
           </RecipeCard>
-          <RecipeCard>
+          <RecipeCard
+            key="5"
+            recipe={
+              Object {
+                "id": 5,
+                "recipeName": "Beans",
+              }
+            }
+          >
             <div
               className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
             >
@@ -399,32 +497,17 @@ exports[`Home renders correctly when fully mounted 1`] = `
                       />
                     </CardImg>
                     <CardBody
-                      className="card-block text-center pb-0"
+                      className="card-block text-center pb-3"
                       tag="div"
                     >
                       <div
-                        className="card-block text-center pb-0 card-body"
+                        className="card-block text-center pb-3 card-body"
                       >
                         <h5
                           className="mb-1"
                         >
-                          Jollof Rice and Chicken
+                          Beans
                         </h5>
-                        <CardText
-                          className="mb-2"
-                          tag="p"
-                        >
-                          <p
-                            className="mb-2 card-text"
-                          >
-                            <span
-                              className="text-muted"
-                            >
-                              Posted by 
-                            </span>
-                            @janesmith
-                          </p>
-                        </CardText>
                       </div>
                     </CardBody>
                     <CardBody
@@ -449,7 +532,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-clock-o"
                               />
                             </FontAwesome>
-                             45 minutes
+                             
                           </p>
                         </CardText>
                         <CardText
@@ -472,7 +555,6 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             <i
                               className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
                             />
-                            A Bit Difficult
                           </p>
                         </CardText>
                       </div>
@@ -499,7 +581,8 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-star"
                               />
                             </FontAwesome>
-                             4.5
+                             
+                            NaN
                           </p>
                         </CardText>
                         <CardText
@@ -527,7 +610,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-heart"
                               />
                             </FontAwesome>
-                             200
+                             
                           </p>
                         </CardText>
                         <CardText
@@ -556,399 +639,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
                                 className="fa fa-eye text-success"
                               />
                             </FontAwesome>
-                             350
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                  </a>
-                </div>
-              </Card>
-            </div>
-          </RecipeCard>
-          <RecipeCard>
-            <div
-              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
-            >
-              <Card
-                tag="div"
-              >
-                <div
-                  className="card"
-                >
-                  <a
-                    href="view-recipe.html"
-                  >
-                    <CardImg
-                      alt="recipe"
-                      className="img-fluid"
-                      src="images/jollof-rice-img.jpg"
-                      tag="img"
-                      top={true}
-                      width="100%"
-                    >
-                      <img
-                        alt="recipe"
-                        className="img-fluid card-img-top"
-                        src="images/jollof-rice-img.jpg"
-                        width="100%"
-                      />
-                    </CardImg>
-                    <CardBody
-                      className="card-block text-center pb-0"
-                      tag="div"
-                    >
-                      <div
-                        className="card-block text-center pb-0 card-body"
-                      >
-                        <h5
-                          className="mb-1"
-                        >
-                          Jollof Rice and Chicken
-                        </h5>
-                        <CardText
-                          className="mb-2"
-                          tag="p"
-                        >
-                          <p
-                            className="mb-2 card-text"
-                          >
-                            <span
-                              className="text-muted"
-                            >
-                              Posted by 
-                            </span>
-                            @janesmith
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                    <CardBody
-                      className="card-block text-center recipe-details"
-                      tag="div"
-                    >
-                      <div
-                        className="card-block text-center recipe-details card-body"
-                      >
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="clock-o"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-clock-o"
-                              />
-                            </FontAwesome>
-                             45 minutes
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-0 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-0 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted d-inline card-text"
-                          >
-                            <i
-                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
-                            />
-                            A Bit Difficult
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                    <CardBody
-                      className="text-center text-muted px-2 recipe-rating"
-                      tag="div"
-                    >
-                      <div
-                        className="text-center text-muted px-2 recipe-rating card-body"
-                      >
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="star"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-star"
-                              />
-                            </FontAwesome>
-                             4.5
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="heart"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-heart"
-                              />
-                            </FontAwesome>
-                             200
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              className="text-success"
-                              name="eye"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-eye text-success"
-                              />
-                            </FontAwesome>
-                             350
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                  </a>
-                </div>
-              </Card>
-            </div>
-          </RecipeCard>
-          <RecipeCard>
-            <div
-              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
-            >
-              <Card
-                tag="div"
-              >
-                <div
-                  className="card"
-                >
-                  <a
-                    href="view-recipe.html"
-                  >
-                    <CardImg
-                      alt="recipe"
-                      className="img-fluid"
-                      src="images/jollof-rice-img.jpg"
-                      tag="img"
-                      top={true}
-                      width="100%"
-                    >
-                      <img
-                        alt="recipe"
-                        className="img-fluid card-img-top"
-                        src="images/jollof-rice-img.jpg"
-                        width="100%"
-                      />
-                    </CardImg>
-                    <CardBody
-                      className="card-block text-center pb-0"
-                      tag="div"
-                    >
-                      <div
-                        className="card-block text-center pb-0 card-body"
-                      >
-                        <h5
-                          className="mb-1"
-                        >
-                          Jollof Rice and Chicken
-                        </h5>
-                        <CardText
-                          className="mb-2"
-                          tag="p"
-                        >
-                          <p
-                            className="mb-2 card-text"
-                          >
-                            <span
-                              className="text-muted"
-                            >
-                              Posted by 
-                            </span>
-                            @janesmith
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                    <CardBody
-                      className="card-block text-center recipe-details"
-                      tag="div"
-                    >
-                      <div
-                        className="card-block text-center recipe-details card-body"
-                      >
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="clock-o"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-clock-o"
-                              />
-                            </FontAwesome>
-                             45 minutes
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-0 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-0 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted d-inline card-text"
-                          >
-                            <i
-                              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
-                            />
-                            A Bit Difficult
-                          </p>
-                        </CardText>
-                      </div>
-                    </CardBody>
-                    <CardBody
-                      className="text-center text-muted px-2 recipe-rating"
-                      tag="div"
-                    >
-                      <div
-                        className="text-center text-muted px-2 recipe-rating card-body"
-                      >
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="star"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-star"
-                              />
-                            </FontAwesome>
-                             4.5
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              name="heart"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-heart"
-                              />
-                            </FontAwesome>
-                             200
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                             | 
-                          </p>
-                        </CardText>
-                        <CardText
-                          className="text-muted mr-2 d-inline"
-                          tag="p"
-                        >
-                          <p
-                            className="text-muted mr-2 d-inline card-text"
-                          >
-                            <FontAwesome
-                              className="text-success"
-                              name="eye"
-                            >
-                              <span
-                                aria-hidden={true}
-                                className="fa fa-eye text-success"
-                              />
-                            </FontAwesome>
-                             350
+                             
                           </p>
                         </CardText>
                       </div>
@@ -959,6 +650,214 @@ exports[`Home renders correctly when fully mounted 1`] = `
             </div>
           </RecipeCard>
         </div>
+        <Pagination
+          items={
+            Array [
+              Object {
+                "id": 1,
+                "recipeName": "Rice",
+              },
+              Object {
+                "id": 5,
+                "recipeName": "Beans",
+              },
+            ]
+          }
+          metaData={
+            Object {
+              "firstPage": 1,
+              "lastPage": 3,
+              "page": 2,
+              "pageRecipeCount": 5,
+              "pages": Array [
+                1,
+                2,
+                3,
+              ],
+              "totalRecipeCount": 13,
+            }
+          }
+          onPageChange={[Function]}
+        >
+          <div
+            className="mt-5"
+          >
+            <nav
+              aria-label="Page navigation"
+            >
+              <Pagination
+                className="justify-content-center"
+                tag="ul"
+              >
+                <ul
+                  className="justify-content-center pagination"
+                >
+                  <PaginationItem
+                    className=""
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          First
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className=""
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          <span
+                            aria-hidden="true"
+                          >
+                            «
+                          </span>
+                          <span
+                            className="sr-only"
+                          >
+                            Previous
+                          </span>
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className=""
+                    key="1"
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          1
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className="active"
+                    key="2"
+                    tag="li"
+                  >
+                    <li
+                      className="active page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          2
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className=""
+                    key="3"
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          3
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className=""
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          <span
+                            aria-hidden="true"
+                          >
+                            »
+                          </span>
+                          <span
+                            className="sr-only"
+                          >
+                            Next
+                          </span>
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                  <PaginationItem
+                    className=""
+                    tag="li"
+                  >
+                    <li
+                      className="page-item"
+                    >
+                      <PaginationLink
+                        onClick={[Function]}
+                        tag="a"
+                      >
+                        <a
+                          className="page-link"
+                          onClick={[Function]}
+                        >
+                          Last
+                        </a>
+                      </PaginationLink>
+                    </li>
+                  </PaginationItem>
+                </ul>
+              </Pagination>
+            </nav>
+          </div>
+        </Pagination>
       </div>
     </RecipeItems>
   </div>

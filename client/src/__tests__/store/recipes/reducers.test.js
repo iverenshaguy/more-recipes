@@ -1,134 +1,66 @@
-// import reducer from '../reducers';
+import reducer from '../../../reducers/recipes';
 
-// const state = {
-//   isAuthenticated: false,
-//   error: null,
-//   user: null,
-//   loading: false
-// };
+const state = {
+  recipes: [],
+  error: null,
+  metaData: {}
+};
 
-// describe('Auth Reducers', () => {
-//   it('should return initial State', () => {
-//     const newState = reducer(undefined, {});
+const recipesPayload = {
+  recipes: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
+  metaData: {
+    page: 1
+  }
+};
 
-//     expect(newState).toEqual(state);
-//   });
+describe('Recipe Reducers', () => {
+  it('should return initial State', () => {
+    const newState = reducer(undefined, {});
 
-//   it('should handle AUTHENTICATING action', () => {
-//     const newState = reducer(state, {
-//       type: 'AUTHENTICATING'
-//     });
+    expect(newState).toEqual(state);
+  });
 
-//     expect(newState).toEqual({ ...state, loading: true });
-//   });
+  it('should handle RECEIVE_TOP_RECIPES_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_TOP_RECIPES_SUCCESS',
+      payload: recipesPayload
+    });
 
-//   it('should handle AUTHENTICATED action', () => {
-//     const newState = reducer(state, {
-//       type: 'AUTHENTICATED',
-//       payload: { name: 'Emily' },
-//     });
+    expect(newState).toEqual({
+      recipes: recipesPayload.recipes,
+      metaData: recipesPayload.metaData,
+      error: null
+    });
+  });
 
-//     expect(newState).toEqual({
-//       isAuthenticated: true,
-//       user: { name: 'Emily' },
-//       error: null,
-//       loading: false
-//     });
-//   });
+  it('should handle RECEIVE_SEARCH_RESULTS_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_SEARCH_RESULTS_SUCCESS',
+      payload: recipesPayload
+    });
 
-//   it('should handle LOGIN_SUCCESS action', () => {
-//     const newState = reducer(state, {
-//       type: 'LOGIN_SUCCESS',
-//       payload: { name: 'Emily' },
-//     });
+    expect(newState).toEqual({
+      recipes: recipesPayload.recipes,
+      metaData: recipesPayload.metaData,
+      error: null
+    });
+  });
 
-//     expect(newState).toEqual({
-//       isAuthenticated: true,
-//       user: { name: 'Emily' },
-//       error: null,
-//       loading: false
-//     });
-//   });
+  it('should handle RECEIVE_TOP_RECIPES_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_TOP_RECIPES_FAILURE',
+      payload: 'Error'
+    });
 
-//   it('should handle SIGNUP_SUCCESS action', () => {
-//     const newState = reducer(state, {
-//       type: 'SIGNUP_SUCCESS',
-//       payload: { name: 'Emily' },
-//     });
+    expect(newState).toEqual({ ...state, error: 'Error' });
+  });
 
-//     expect(newState).toEqual({
-//       isAuthenticated: true,
-//       user: { name: 'Emily' },
-//       error: null,
-//       loading: false
-//     });
-//   });
+  it('should handle RECEIVE_SEARCH_RESULTS_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_SEARCH_RESULTS_FAILURE',
+      payload: 'Error'
+    });
 
-//   it('should handle AUTHENTICATION_ERROR action', () => {
-//     const newState = reducer(state, {
-//       type: 'AUTHENTICATION_ERROR',
-//       payload: 'Error',
-//     });
-
-//     expect(newState).toEqual({
-//       isAuthenticated: false,
-//       user: null,
-//       error: 'Error',
-//       loading: false
-//     });
-//   });
-
-//   it('should handle LOGIN_ERROR action', () => {
-//     const newState = reducer(state, {
-//       type: 'LOGIN_ERROR',
-//       payload: 'Error',
-//     });
-
-//     expect(newState).toEqual({
-//       isAuthenticated: false,
-//       user: null,
-//       error: 'Error',
-//       loading: false
-//     });
-//   });
-
-//   it('should handle SIGNUP_ERROR action', () => {
-//     const newState = reducer(state, {
-//       type: 'SIGNUP_ERROR',
-//       payload: 'Error',
-//     });
-
-//     expect(newState).toEqual({
-//       isAuthenticated: false,
-//       user: null,
-//       error: 'Error',
-//       loading: false
-//     });
-//   });
-
-//   it('should handle UNAUTHENTICATED action', () => {
-//     const newState = reducer(state, {
-//       type: 'UNAUTHENTICATED'
-//     });
-
-//     expect(newState).toEqual({
-//       isAuthenticated: false,
-//       user: null,
-//       error: null,
-//       loading: false
-//     });
-//   });
-
-//   it('should handle CLEAR_AUTH_ERROR action', () => {
-//     const newState = reducer(state, {
-//       type: 'CLEAR_AUTH_ERROR'
-//     });
-
-//     expect(newState).toEqual({
-//       isAuthenticated: false,
-//       user: null,
-//       error: null,
-//       loading: false
-//     });
-//   });
-// });
+    expect(newState).toEqual({ ...state, error: 'Error' });
+  });
+});

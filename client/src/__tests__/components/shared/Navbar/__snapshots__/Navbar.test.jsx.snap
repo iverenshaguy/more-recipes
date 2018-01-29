@@ -109,7 +109,7 @@ exports[`Navbar logs user out on logout click 1`] = `
               className="rounded-cirle"
               src="images/profile/user1.jpg"
             />
-             Jane
+             
           </DropdownToggle>
           <DropdownMenu
             flip={true}
@@ -339,7 +339,7 @@ exports[`Navbar renders correctly when type = home 1`] = `
               className="rounded-cirle"
               src="images/profile/user1.jpg"
             />
-             Jane
+             
           </DropdownToggle>
           <DropdownMenu
             flip={true}

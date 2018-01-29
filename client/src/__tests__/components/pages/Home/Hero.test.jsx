@@ -4,8 +4,16 @@ import { toggleModal } from '../../../../actions/ui';
 
 const setup = () => {
   const dispatch = jest.fn();
-  const shallowWrapper = shallow(<Hero dispatch={dispatch} />);
-  const mountedWrapper = mount(<Hero dispatch={dispatch} />);
+
+  const props = {
+    handleSearchInput: jest.fn(),
+    handleSearch: jest.fn(),
+    searchValue: '',
+    dispatch,
+  };
+
+  const shallowWrapper = shallow(<Hero {...props} />);
+  const mountedWrapper = mount(<Hero {...props} />);
 
   return {
     shallowWrapper,

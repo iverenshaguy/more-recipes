@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import thunk from 'redux-thunk';
-import MockAdapter from 'axios-mock-adapter';
+import moxios from 'moxios';
 import configureStore from 'redux-mock-store';
 import Auth from '../../../../components/pages/Auth';
 import Home from '../../../../components/pages/Home';
@@ -12,7 +12,6 @@ import { SignupComponent } from '../../../../components/pages/Auth/SignupForm';
 import setCurrentLocation from '../../../../actions/location';
 import { clearAuthError } from '../../../../actions/auth';
 
-const mock = new MockAdapter(axios, { delayResponse: 500 });
 const url = '/api/v1';
 
 const initialValues = {
@@ -25,20 +24,31 @@ const initialValues = {
   location: {
     current: 'auth'
   },
-  components: {
+  ui: {
     modals: {
       isOpen: false,
       type: null
     }
+  },
+  isFetching: false,
+  recipes: {
+    recipes: [],
+    errorMessage: '',
+    metaData: {}
   }
 };
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const authStore = mockStore(initialValues);
+const unAuthStore = mockStore({
+  ...initialValues,
+  auth: {
+    ...initialValues.auth, isAuthenticated: false
+  }
+});
 
 const dispatchMock = jest.fn();
-const loadUserFromTokenMock = jest.fn();
 
 const state = {
   values: {
@@ -91,10 +101,16 @@ const setup = () => {
 };
 
 describe('Signup', () => {
+  beforeEach(() => {
+    moxios.install(axios);
+  });
+
+  afterEach(() => {
+    moxios.uninstall(axios);
+  });
+
   afterAll(() => {
     jest.clearAllMocks();
-    mock.reset();
-    mock.restore();
   });
 
   it('renders correctly', () => {
@@ -156,7 +172,7 @@ describe('Signup', () => {
         initialEntries={['/signup']}
       >
         <Provider store={authStore}>
-          <App loadUserFromToken={loadUserFromTokenMock} />
+          <App />
         </Provider>
       </MemoryRouter>);
 
@@ -170,15 +186,6 @@ describe('Signup', () => {
     it('calls handleChange and handleBlur on input change and blur', (done) => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
-
-      mock.onPost(`${url}/users/signup`, { email: 'damishaguy@gmail.com' }).reply(422, {
-        errors: {
-          firstname: { msg: 'Firstname is required' },
-          username: { msg: 'Username is required' },
-          password: { msg: 'Password is required' },
-          passwordConfirm: { msg: 'Passwords do not match' },
-        }
-      });
 
       const changeState = {
         ...state,
@@ -221,7 +228,7 @@ describe('Signup', () => {
         } catch (e) {
           done.fail(e);
         }
-      }, 500);
+      }, 700);
     });
 
     it('doesn\'t async validate field that is not email or username', (done) => {
@@ -259,14 +266,17 @@ describe('Signup', () => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
-      mock.onPost(`${url}/users/signup`, { email: 'damishaguy@gmail.com' }).reply(422, {
-        errors: {
-          firstname: { msg: 'Firstname is required' },
-          username: { msg: 'Username is required' },
-          password: { msg: 'Password is required' },
-          passwordConfirm: { msg: 'Passwords do not match' },
-        }
-      });
+      moxios.stubRequest(`${url}/users/signup`, {
+        status: 422,
+        response: {
+          errors: {
+            firstname: { msg: 'Firstname is required' },
+            username: { msg: 'Username is required' },
+            password: { msg: 'Password is required' },
+            passwordConfirm: { msg: 'Passwords do not match' },
+          }
+        },
+      }, 5);
 
       const changeState = {
         ...state,
@@ -343,20 +353,23 @@ describe('Signup', () => {
         formValid: true
       };
 
-      mock.onPost(`${url}/users/signup`, newState.values).reply(201, {
-        user: {
-          id: '1',
-          firstname: 'Jane',
-          lastname: 'Smith',
-          username: 'janesmith',
-          email: 'janesmith@gmail.com',
-          aboutMe: 'Food lover',
-          occupation: 'Chef',
-          updatedAt: '2017-10-30T00:47:03.687Z',
-          createdAt: '2017-10-30T00:47:03.687Z'
+      moxios.stubRequest(`${url}/users/signup`, {
+        status: 201,
+        response: {
+          user: {
+            id: '1',
+            firstname: 'Jane',
+            lastname: 'Smith',
+            username: 'janesmith',
+            email: 'janesmith@gmail.com',
+            aboutMe: 'Food lover',
+            occupation: 'Chef',
+            updatedAt: '2017-10-30T00:47:03.687Z',
+            createdAt: '2017-10-30T00:47:03.687Z'
+          },
+          token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
         },
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
-      });
+      }, 5);
 
       const firstnameEvent = { target: { name: 'firstname', value: 'Jane' } };
       const lastnameEvent = { target: { name: 'lastname', value: 'Smithy' } };
@@ -388,15 +401,18 @@ describe('Signup', () => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
-      mock.onPost(`${url}/users/signup`, { email: 'iverenshaguy@gmail.com' }).reply(422, {
-        errors: {
-          email: { msg: 'This email is already registered' },
-          firstname: { msg: 'Firstname is required' },
-          username: { msg: 'Username is required' },
-          password: { msg: 'Password is required' },
-          passwordConfirm: { msg: 'Passwords do not match' },
-        }
-      });
+      moxios.stubRequest(`${url}/users/signup`, {
+        status: 422,
+        response: {
+          errors: {
+            email: { msg: 'This email is already registered' },
+            firstname: { msg: 'Firstname is required' },
+            username: { msg: 'Username is required' },
+            password: { msg: 'Password is required' },
+            passwordConfirm: { msg: 'Passwords do not match' },
+          }
+        },
+      }, 5);
 
       const changeState = {
         ...state,
@@ -424,22 +440,25 @@ describe('Signup', () => {
         } catch (e) {
           done.fail(e);
         }
-      }, 1000);
+      }, 500);
     });
 
     it('async validates username field and form on input change and blur', (done) => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(SignupComponent);
 
-      mock.onPost(`${url}/users/signup`, { username: 'iverenshaguy' }).reply(422, {
-        errors: {
-          username: { msg: 'This username is already registered' },
-          firstname: { msg: 'Firstname is required' },
-          email: { msg: 'Email is required' },
-          password: { msg: 'Password is required' },
-          passwordConfirm: { msg: 'Passwords do not match' },
-        }
-      });
+      moxios.stubRequest(`${url}/users/signup`, {
+        status: 422,
+        response: {
+          errors: {
+            username: { msg: 'This username is already registered' },
+            firstname: { msg: 'Firstname is required' },
+            email: { msg: 'Email is required' },
+            password: { msg: 'Password is required' },
+            passwordConfirm: { msg: 'Passwords do not match' },
+          }
+        },
+      }, 5);
 
       const changeState = {
         ...state,
@@ -467,7 +486,7 @@ describe('Signup', () => {
         } catch (e) {
           done.fail(e);
         }
-      }, 1000);
+      }, 600);
     });
 
     it('sync validates field and form on input change and blur', () => {

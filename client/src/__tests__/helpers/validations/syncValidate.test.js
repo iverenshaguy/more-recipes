@@ -1,4 +1,4 @@
-import syncValidate from '../syncValidate';
+import syncValidate from '../../../helpers/validations/syncValidate';
 
 const rightSignupValues = {
   email: 'emilysanders@gmail.com',

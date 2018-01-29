@@ -20,9 +20,9 @@ instance.interceptors.response.use(
   response => response,
   (error) => {
     const { response: { status, data } } = error;
+
     if (status === 403 &&
-      data.error === 'User authorization token is expired'
-    ) {
+      data.error === 'User authorization token is expired') {
       window.location.reload();
     }
 

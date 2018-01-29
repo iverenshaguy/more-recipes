@@ -1,4 +1,4 @@
-import errorHandler from '../errorHandler';
+import errorHandler from '../../utils/errorHandler';
 
 describe('Utils: errorHandler', () => {
   describe('response error', () => {

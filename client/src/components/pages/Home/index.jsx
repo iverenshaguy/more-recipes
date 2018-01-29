@@ -17,7 +17,36 @@ import './Home.scss';
 class Home extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired
+    isFetching: PropTypes.bool.isRequired,
+    recipes: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      recipeName: PropTypes.string,
+      recipeImage: PropTypes.string,
+      prepTime: PropTypes.string,
+      cookTime: PropTypes.string,
+      totalTime: PropTypes.string,
+      difficulty: PropTypes.string,
+      extraInfo: PropTypes.string,
+      vegetarian: PropTypes.bool,
+      ingredients: PropTypes.array,
+      preparations: PropTypes.array,
+      directions: PropTypes.array,
+      upvotes: PropTypes.number,
+      downvotes: PropTypes.number,
+      views: PropTypes.number,
+      createdAt: PropTypes.string,
+      updatedAt: PropTypes.string,
+      userId: PropTypes.number,
+      rating: PropTypes.string
+    })).isRequired,
+    metaData: PropTypes.shape({
+      firstPage: PropTypes.number,
+      lastPage: PropTypes.number,
+      page: PropTypes.number,
+      pageRecipeCount: PropTypes.number,
+      pages: PropTypes.arrayOf(PropTypes.number),
+      totalRecipeCount: PropTypes.number,
+    }).isRequired,
   };
 
   /**
@@ -30,8 +59,6 @@ class Home extends Component {
 
     this.state = {
       title: 'TOP RECIPES',
-      recipes: [],
-      metaData: {},
       currentPage: 1,
       limit: 5,
       searchValue: ''
@@ -49,31 +76,6 @@ class Home extends Component {
   componentWillMount() {
     this.props.dispatch(setCurrentLocation('home'));
     this.props.dispatch(fetchTopRecipes(this.state.currentPage, this.state.limit));
-  }
-
-  /**
-   * @memberof Home
-   * @param {object} newProps
-   * @return {nothing} Returns nothing
-   */
-  componentWillReceiveProps(newProps) {
-    if (newProps.recipes) {
-      const {
-        recipes
-      } = newProps;
-      this.setState({
-        recipes
-      });
-    }
-
-    if (newProps.metaData) {
-      const {
-        metaData
-      } = newProps;
-      this.setState({
-        metaData
-      });
-    }
   }
 
   /**
@@ -126,8 +128,8 @@ class Home extends Component {
    * @returns {fragment} Recipe items
    */
   renderBody() {
-    const { isFetching } = this.props;
-    const { recipes, metaData, title } = this.state;
+    const { isFetching, recipes, metaData } = this.props;
+    const { title } = this.state;
 
     if (isFetching) {
       return <PreLoader />;

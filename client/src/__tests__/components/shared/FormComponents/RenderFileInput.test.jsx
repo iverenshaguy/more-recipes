@@ -1,5 +1,5 @@
 import React from 'react';
-import { RenderFileInput } from '../../../../components/shared/FormComponents/RenderFileInput';
+import RenderFileInput from '../../../../components/shared/FormComponents/RenderFileInput';
 
 describe('Form Components: RenderFileInput', () => {
   const cleanProps = {

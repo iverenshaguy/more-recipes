@@ -1,4 +1,4 @@
-import fileEventAdapter from '../fileEventAdapter';
+import fileEventAdapter from '../../utils/fileEventAdapter';
 
 const delegate = jest.fn();
 const readAsDataURL = jest.fn();

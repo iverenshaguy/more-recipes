@@ -12,7 +12,7 @@ import {
   isValidImage,
   isValidSize,
   isValidPasswordConfirm,
-} from '../types';
+} from '../../../helpers/validations/types';
 
 describe('Validation Types', () => {
   afterAll(() => {

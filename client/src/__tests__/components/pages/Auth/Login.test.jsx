@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import thunk from 'redux-thunk';
-import MockAdapter from 'axios-mock-adapter';
+import moxios from 'moxios';
 import configureStore from 'redux-mock-store';
 import Auth from '../../../../components/pages/Auth';
 import Home from '../../../../components/pages/Home';
@@ -11,9 +11,6 @@ import App from '../../../../components/App';
 import { LoginComponent } from '../../../../components/pages/Auth/LoginForm';
 import setCurrentLocation from '../../../../actions/location';
 import { clearAuthError } from '../../../../actions/auth';
-
-const mock = new MockAdapter(axios, { delayResponse: 300 });
-const url = '/api/v1';
 
 const initialValues = {
   auth: {
@@ -25,20 +22,31 @@ const initialValues = {
   location: {
     current: 'auth'
   },
-  components: {
+  ui: {
     modals: {
       isOpen: false,
       type: null
     }
+  },
+  isFetching: false,
+  recipes: {
+    recipes: [],
+    errorMessage: '',
+    metaData: {}
   }
 };
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
+const unAuthStore = mockStore({
+  ...initialValues,
+  auth: {
+    ...initialValues.auth, isAuthenticated: false
+  }
+});
 const authStore = mockStore(initialValues);
 
 const dispatchMock = jest.fn();
-const loadUserFromTokenMock = jest.fn();
 
 const state = {
   values: {
@@ -66,11 +74,19 @@ const setup = () => {
   return { props, mountRoot };
 };
 
+const url = '/api/v1';
+
 describe('Login', () => {
+  beforeEach(() => {
+    moxios.install(axios);
+  });
+
+  afterEach(() => {
+    moxios.uninstall(axios);
+  });
+
   afterAll(() => {
     jest.clearAllMocks();
-    mock.reset();
-    mock.restore();
   });
 
   it('renders correctly', () => {
@@ -115,13 +131,29 @@ describe('Login', () => {
     expect(shallowComponent.find('Button[disabled=true]')).toBeTruthy();
   });
 
+  it('renders login page when unauthenticated', () => {
+    const wrapper = mount( //eslint-disable-line
+      <MemoryRouter
+        initialEntries={['/login']}
+      >
+        <Provider store={unAuthStore}>
+          <App />
+        </Provider>
+      </MemoryRouter>);
+
+    expect(wrapper.find(Auth)).toHaveLength(1);
+    expect(wrapper.find(Home)).toHaveLength(0);
+
+    wrapper.unmount();
+  });
+
   it('redirects to another location when authenticated', () => {
     const wrapper = mount( //eslint-disable-line
       <MemoryRouter
         initialEntries={['/login']}
       >
         <Provider store={authStore}>
-          <App loadUserFromToken={loadUserFromTokenMock} />
+          <App />
         </Provider>
       </MemoryRouter>);
 
@@ -135,12 +167,6 @@ describe('Login', () => {
     it('calls handleChange and handleBlur on input change and blur for email field', (done) => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(LoginComponent);
-
-      mock.onPost(`${url}/users/signin`, { email: 'iverenshaguy@gmail.com' }).reply(422, {
-        errors: {
-          password: { msg: 'Password must be specified' }
-        }
-      });
 
       const changeState = {
         ...state,
@@ -174,7 +200,7 @@ describe('Login', () => {
         } catch (e) {
           done.fail(e);
         }
-      }, 500);
+      }, 600);
     });
 
     it('doesn\'t async validate password field', (done) => {
@@ -213,11 +239,14 @@ describe('Login', () => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(LoginComponent);
 
-      mock.onPost(`${url}/users/signin`, { email: 'iverenshaguy@gmail.com' }).reply(422, {
-        errors: {
-          password: { msg: 'Password must be specified' }
-        }
-      });
+      moxios.stubRequest(`${url}/users/signin`, {
+        status: 422,
+        response: {
+          errors: {
+            password: { msg: 'Password must be specified' }
+          }
+        },
+      }, 5);
 
       const changeState = {
         ...state,
@@ -289,13 +318,6 @@ describe('Login', () => {
       const { mountRoot } = setup();
       const wrapper = mountRoot.find(LoginComponent);
 
-      mock.onPost(`${url}/users/signin`, { email: 'emilysanders@gmail.com' }).reply(422, {
-        errors: {
-          email: { msg: 'This email is not registered, please signup instead' },
-          password: { msg: 'Password must be specified' }
-        }
-      });
-
       const changeState = {
         ...state,
         values: { ...state.values, email: 'emilysanders@gmail.com' },
@@ -316,6 +338,17 @@ describe('Login', () => {
       expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="email"]').simulate('blur', event);
+
+      moxios.stubRequest(`${url}/users/signin`, {
+        status: 422,
+        response: {
+          errors: {
+            email: { msg: 'This email is not registered, please signup instead' },
+            password: { msg: 'Password must be specified' }
+          }
+        },
+      }, 5);
+
       setTimeout(() => {
         try {
           expect(wrapper.instance().state).toEqual(blurState);
@@ -323,7 +356,7 @@ describe('Login', () => {
         } catch (e) {
           done.fail(e);
         }
-      }, 2000);
+      }, 800);
     });
 
     it('sync validates field and form on input change and blur', () => {

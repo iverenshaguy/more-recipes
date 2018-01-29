@@ -6,14 +6,31 @@ const setup = () => {
   const dispatch = jest.fn();
 
   const props = {
-    dispatch
+    dispatch,
+    isFetching: false,
+    recipes: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
+    metaData: {
+      firstPage: 1,
+      lastPage: 3,
+      page: 2,
+      pageRecipeCount: 5,
+      pages: [1, 2, 3],
+      totalRecipeCount: 13,
+    }
   };
 
-  const mountedWrapper = mount(<HomeComponent dispatch={dispatch} />);
-  const shallowWrapper = shallow(<HomeComponent dispatch={dispatch} />);
+  const state = {
+    title: 'TOP RECIPES',
+    currentPage: 2,
+    limit: 5,
+    searchValue: ''
+  };
+
+  const mountedWrapper = mount(<HomeComponent {...props} />);
+  const shallowWrapper = shallow(<HomeComponent {...props} />);
 
   return {
-    props, mountedWrapper, shallowWrapper
+    state, props, mountedWrapper, shallowWrapper
   };
 };
 
@@ -33,9 +50,76 @@ describe('Home', () => {
     mountedWrapper.unmount();
   });
 
+  it('renders preloader if fetching', () => {
+    const { props } = setup();
+    const mountedWrapper = mount(<HomeComponent {...props} isFetching />);
+
+    expect(mountedWrapper.find('PreLoader').length).toEqual(1);
+    mountedWrapper.unmount();
+  });
+
   it('calls component will mount when mounted', () => {
     const { mountedWrapper, props } = setup();
     expect(props.dispatch).toHaveBeenCalledWith(setCurrentLocation('home'));
+    mountedWrapper.unmount();
+  });
+
+  it('handles page change for TOP RECIPES', () => {
+    const { mountedWrapper, state } = setup();
+
+    const handlePageChangeSpy = jest.spyOn(mountedWrapper.instance(), 'handlePageChange');
+
+    mountedWrapper.setState(state);
+
+    mountedWrapper.find('a.page-link').at(4).simulate('click');
+
+    expect(handlePageChangeSpy).toHaveBeenCalled();
+    expect(mountedWrapper.instance().state.currentPage).toEqual(3);
+
+    mountedWrapper.unmount();
+  });
+
+  it('handles page change for SEARCH RECIPES', () => {
+    const { mountedWrapper, state } = setup();
+
+    const handlePageChangeSpy = jest.spyOn(mountedWrapper.instance(), 'handlePageChange');
+
+    mountedWrapper.setState({ ...state, title: 'SEARCH RESULTS' });
+
+    mountedWrapper.find('a.page-link').at(3).simulate('click');
+
+    expect(handlePageChangeSpy).toHaveBeenCalled();
+    expect(mountedWrapper.instance().state.currentPage).toEqual(2);
+
+    mountedWrapper.unmount();
+  });
+
+  it('handles search input', () => {
+    const { mountedWrapper, props, state } = setup();
+
+    const event = { target: { value: 'Chicken' } };
+
+    mountedWrapper.setState(state);
+    mountedWrapper.find('input#search').simulate('change', event);
+
+    expect(props.dispatch).toHaveBeenCalled();
+    expect(mountedWrapper.instance().state.searchValue).toEqual('Chicken');
+
+    mountedWrapper.unmount();
+  });
+
+  it('handles search', () => {
+    const { mountedWrapper, props, state } = setup();
+
+    const event = { target: { value: 'Chicken' } };
+
+    mountedWrapper.setState(state);
+    mountedWrapper.find('input#search').simulate('change', event);
+    mountedWrapper.find('form').simulate('submit', { preventDefault() { } });
+
+    expect(props.dispatch).toHaveBeenCalled();
+    expect(mountedWrapper.instance().state.title).toEqual('SEARCH RESULTS');
+
     mountedWrapper.unmount();
   });
 });

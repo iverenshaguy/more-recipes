@@ -254,7 +254,7 @@ exports[`Header logs user out on logout click 1`] = `
                                   className="rounded-cirle"
                                   src="images/profile/user1.jpg"
                                 />
-                                 Jane
+                                 
                               </a>
                             </Target>
                           </DropdownToggle>

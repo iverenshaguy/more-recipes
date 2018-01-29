@@ -68,12 +68,6 @@ class Pagination extends Component {
    * @return {nothing} Returns nothing
    */
   setPage(page) {
-    const { pager } = this.state;
-    const { lastPage } = pager;
-    if (page < 1 || page > lastPage) {
-      return;
-    }
-
     // call change page function in parent component
     this.props.onPageChange(page);
   }

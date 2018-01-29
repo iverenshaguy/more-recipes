@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   recipes: [],
-  errorMessage: '',
+  error: null,
   metaData: {}
 };
 
@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       });
     case RECEIVE_TOP_RECIPES_FAILURE:
     case RECEIVE_SEARCH_RESULTS_FAILURE:
-      return Object.assign({}, state, { errorMessage: action.payload });
+      return Object.assign({}, state, { error: action.payload });
     default:
       return state;
   }

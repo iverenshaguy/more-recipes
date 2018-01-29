@@ -17,11 +17,17 @@ const initialValues = {
   location: {
     current: 'auth'
   },
-  components: {
+  ui: {
     modals: {
       social: false,
       addRecipe: false
     }
+  },
+  isFetching: false,
+  recipes: {
+    recipes: [],
+    errorMessage: '',
+    metaData: {}
   }
 };
 

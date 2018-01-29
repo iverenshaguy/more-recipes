@@ -27,6 +27,7 @@ exports[`Home: Hero renders correctly 1`] = `
         >
           <Form
             id="search-form"
+            onSubmit={[Function]}
             tag="form"
           >
             <InputGroup
@@ -51,9 +52,11 @@ exports[`Home: Hero renders correctly 1`] = `
               </Label>
               <Input
                 id="search"
+                onChange={[Function]}
                 placeholder="Curried Chicken Gravy..."
                 tag="p"
                 type="text"
+                value=""
               />
               <InputGroupButton
                 tag="div"
@@ -91,6 +94,9 @@ exports[`Home: Hero renders correctly 1`] = `
 exports[`Home: Hero renders correctly when mouted fully 1`] = `
 <Hero
   dispatch={[Function]}
+  handleSearch={[Function]}
+  handleSearchInput={[Function]}
+  searchValue=""
 >
   <div
     className="container-fluid"
@@ -118,11 +124,13 @@ exports[`Home: Hero renders correctly when mouted fully 1`] = `
           >
             <Form
               id="search-form"
+              onSubmit={[Function]}
               tag="form"
             >
               <form
                 className=""
                 id="search-form"
+                onSubmit={[Function]}
               >
                 <InputGroup
                   size="lg"
@@ -154,15 +162,19 @@ exports[`Home: Hero renders correctly when mouted fully 1`] = `
                     </Label>
                     <Input
                       id="search"
+                      onChange={[Function]}
                       placeholder="Curried Chicken Gravy..."
                       tag="p"
                       type="text"
+                      value=""
                     >
                       <input
                         className="form-control"
                         id="search"
+                        onChange={[Function]}
                         placeholder="Curried Chicken Gravy..."
                         type="text"
+                        value=""
                       />
                     </Input>
                     <InputGroupButton

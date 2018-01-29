@@ -39,6 +39,7 @@ class Header extends Component {
           isAuthenticated={this.props.isAuthenticated}
           type={this.props.currentLocation}
           logout={this.logout}
+          user={this.props.user}
         />
       </header>
     );
@@ -48,12 +49,14 @@ class Header extends Component {
 Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   currentLocation: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  user: PropTypes.any //eslint-disable-line
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   currentLocation: state.location.current,
+  user: state.auth.user
 });
 
 export { Header as HeaderComponent };
