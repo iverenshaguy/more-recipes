@@ -41,12 +41,6 @@ const initialValues = {
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const authStore = mockStore(initialValues);
-const unAuthStore = mockStore({
-  ...initialValues,
-  auth: {
-    ...initialValues.auth, isAuthenticated: false
-  }
-});
 
 const dispatchMock = jest.fn();
 
