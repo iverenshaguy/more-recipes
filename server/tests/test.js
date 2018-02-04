@@ -1,4 +1,4 @@
 import './home.test';
-import './apiroutes/api.test';
-import './helpers/helpers.test';
-import './middlewares/middlewares.test';
+import './controllers';
+import './helpers';
+import './middlewares';

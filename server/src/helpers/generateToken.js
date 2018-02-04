@@ -10,9 +10,7 @@ const generateToken = (user) => {
       email: user.email.toLowerCase(),
       image: user.profilePic,
       aboutMe: user.aboutMe,
-      occupation: user.occupation,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      occupation: user.occupation
     },
     process.env.SECRET,
     {

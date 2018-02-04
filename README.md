@@ -10,7 +10,7 @@ A Recipe Management Application written in JavaScript (ES6).
 ## Built With
 
 * [NodeJS](https://nodejs.org/) - Runtime Environment
-* [ExpressJs](https://expressjs.com/) - Web Applicatipn Framework
+* [ExpressJs](https://expressjs.com/) - Web Application Framework
 * [Sequelize](http://docs.sequelizejs.com/) - Promise Based ORM
 * [Postgres](https://www.postgresql.org/) - Database
 * [Yarn](https://www.yarnpkg.com/) - Dependency Manager
