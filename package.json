@@ -37,7 +37,7 @@
     "lint": "eslint **/*.js --fix",
     "docs": "aglio -i docs.apib --theme-variables flatly --theme-template triple -o docs/index.html",
     "merge:lcov": "lcov-result-merger ./*/coverage/lcov.info ./coverage/lcov.info",
-    "coverage": "cat ./client/coverage/lcovtotal.info | coveralls",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "analyze": "source-map-explorer client/build/static/js/main.*"
   },
   "dependencies": {
