@@ -29,7 +29,6 @@
     "pretest:server": "npm-run-all migrate:test seed:test",
     "pretest:server:watch": "npm-run-all migrate:test seed:test",
     "pretest:client": "npm run lint",
-    "posttest": "lcov-result-merger ./*/coverage/lcov.info",
     "prebuild:init": "cd server && mkdir build",
     "prebuild": "npm-run-all clean prebuild:init",
     "clean": "npm-run-all clean:server clean:client",
@@ -37,7 +36,7 @@
     "clean:client": "cd client && rm -rf build",
     "lint": "eslint **/*.js --fix",
     "docs": "aglio -i docs.apib --theme-variables flatly --theme-template triple -o docs/index.html",
-    "coverage": "lcov-result-merger ./*/coverage/lcov.info | coveralls",
+    "coverage": "cat lcov-result-merger ./*/coverage/lcov.info | coveralls",
     "analyze": "source-map-explorer client/build/static/js/main.*"
   },
   "dependencies": {
