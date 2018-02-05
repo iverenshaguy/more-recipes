@@ -15,7 +15,6 @@ script:
   - npm run test:client
   - ./cc-test-reporter format-coverage -t lcov ./client/coverage/lcov.info  --output ./coverage/codeclimate.client.json
   - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
-  - npm run merge:lcov
   - ./cc-test-reporter upload-coverage
 
 cache:
