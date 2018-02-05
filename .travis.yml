@@ -11,10 +11,10 @@ env:
 
 script:
   - npm run test:server
-  - ./cc-test-reporter format-coverage -t lcov --output coverage/codeclimate.server.json
+  - ./cc-test-reporter format-coverage -t lcov --output ./server/coverage/codeclimate.json
   - npm run test:client
-  - ./cc-test-reporter format-coverage -t lcov --output coverage/codeclimate.client.json
-  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
+  - ./cc-test-reporter format-coverage -t lcov --output ./client/coverage/codeclimate.json
+  - ./cc-test-reporter sum-coverage ./*/coverage/codeclimate.json
   - ./cc-test-reporter upload-coverage
 
 cache:
