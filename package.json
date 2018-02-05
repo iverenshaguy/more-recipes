@@ -36,7 +36,8 @@
     "clean:client": "cd client && rm -rf build",
     "lint": "eslint **/*.js --fix",
     "docs": "aglio -i docs.apib --theme-variables flatly --theme-template triple -o docs/index.html",
-    "coverage": "cat lcov-result-merger ./*/coverage/lcov.info | coveralls",
+    "merge:lcov": "lcov-result-merger ./*/coverage/lcov.info ./client/coverage/lcovtotal.info",
+    "coverage": "npm run merge:lcov && cat ./client/coverage/lcovtotal.info | coveralls",
     "analyze": "source-map-explorer client/build/static/js/main.*"
   },
   "dependencies": {
