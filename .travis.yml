@@ -9,7 +9,13 @@ env:
     - secure: "BLok1wLvNZqBczLXpklP6/XcVPtjFZph6Kw9DCVWbnb8i1t9CxWOTT8Goz6kBThqn74CNaZUBFdothW/cUtRYX2hKLG9JsyA9YScVTRRr1bZ1Mp6Q0CTcPL18fA8iZfJ5kvB2rE+muivgFTx99YkAQ41lQ3AF6st/Zby6BG/whKKJzV50h/w7IUXaRae8siml55CSI0fp5tGt5F4S9C7nB4RR+S4cFsZVspy688Hqeq0xW5mBe7pvvcmztMdihpjeEiozKiMyK5Pb/neT1HwVJoxhtHXe4TYRXlfrwFjVrHT8OM7rqt+B0+DgmC/UQkVzIeh0nx5jExFv08Y1nmo9/POcZ/QhNn+lHJpj1oPsD2/Esgwl99gOqZY/3oSvtcS8bwlP5aMHXkvLTCItrLn3gwTz8q9zROCuWofnS2yaOkGO8e1n2Fsfe3MwBApxuNbP23ouHg0dJPnvWr3u+fQEPGuPsIjTL1Vx8In8svW/yC8bOC3M5KuhDbh4k4EOvyXO0YKdsA7fjDDTi4jkT5DvmVQIFZEi42Sfv3fEDbos+2FVZreq1is651ifMagGd5O+led7Ghx43JSxgGYreqSp0abQV+hSOYKJLxYrvgsrZpskUWOsBXRgmq4bzfoMXmjUo+fxzhVaYh0L980H7P/2dnrAteLCsEwpuKTv6RXzH0="
     - secure: "b2sAzOnEcgpzzCqJET6rajUg9dPlNSN2md/HGH0jmR2V+Kp0bIookNhpy5QqdxSTfQs24RXoQLumfCBU51kjfs4J0vngRGg9o3NW1Y8JVa4dKHfCPATwkbUE8K/bgeEAnchGvnN9ntZjPABjevhhWpQ+COqxWY227qkVuZTTCzuzWMIm8DMJCObbydbNXOV9hLxwU3BFJSgNkAsNd+EZj/wkx6mh9L3s8PWetmCLRp7wAlslVeUSRNWdAAA9JYvyhEY6iJew1YLa7nYPcwSa/JQLLtglNCTTR1wRPngpVIgk+qc7GOwOIfdDoczI5bKPv8H4Gj8dFwTHhTIC3hph4C1JCGcMjthZ6VYH9pAiNeKsTYGCvacB3LSETPkVGmceiDeEjy05TQnzvqGcbmybNCqunXDReSHDLB4ipOM1M1oZyFwjAyy9BND+Nc5KCegiZ919Z5R32UH+7zeOZudkFI27p//sOXmIOUpQoSvBHVvXaYNz1mUmypQn7dg6UKRWvmuHy6HCUG+u0V5iA9dFOEtBJlOLB6YoRbLgj/V1K36USy5NdscUuN6XyoW9G3Hy2e4/fC0dZ2v4k0JNV7HxjmrIn7VBwoUEd+IvQwBzKmq7crvP6P5Y5bQE8HJFpv8SdUgoilSH/gLbhjHNo0D+Q6/yVhJfS9vFUuk7SMWx1pU="
 
-script: 'npm run test'
+script:
+  - npm run test:server
+  - ./cc-test-reporter format-coverage -t lcov --output coverage/codeclimate.server.json
+  - npm run test:client
+  - ./cc-test-reporter format-coverage -t lcov --output coverage/codeclimate.client.json
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
+  - ./cc-test-reporter upload-coverage
 
 cache:
   directories:
