@@ -4,10 +4,14 @@ engines:
     checks:
       import/no-unresolved:
         enabled: false
+  fixme:
+    enabled: true
     
 ratings:
    paths:
    - "server/src/**.js"
+   - "client/**/*.js"
+   - "client/**/*.jsx"
 
 exclude_paths:
 - ".nyc_output/"
