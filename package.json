@@ -32,7 +32,7 @@
     "clean": "npm-run-all clean:server clean:client",
     "clean:server": "cd server && rm -rf build",
     "clean:client": "cd client && rm -rf build",
-    "coverage": "cat lcov-result-merger ./*/coverage/lcov.info | coveralls",
+    "coverage": "lcov-result-merger ./*/coverage/lcov.info | coveralls",
     "docs": "aglio -i docs.apib --theme-variables flatly --theme-template triple -o docs/index.html",
     "e2e:setup": "selenium-standalone install --config=./selenium.config.js",
     "lint": "eslint **/*.js --fix",
