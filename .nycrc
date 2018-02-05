@@ -19,7 +19,7 @@
     "server/tests/**",
     "server/test{,-*}.js"
   ],
-  "reporter": ["lcov", "text"],
+  "reporter": ["lcov", "json", "text"],
   "sourceMap": false,
   "instrument": false,
   "cache": true,
