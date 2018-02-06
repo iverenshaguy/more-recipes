@@ -1,3 +1,7 @@
+import formHelpers from './formHelpers';
 import validations from './validations';
 
-export default { validations };
+export default {
+  formHelpers,
+  validations,
+};

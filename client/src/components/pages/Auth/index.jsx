@@ -1,60 +1,78 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
-import Signup from './SignupForm';
-import Login from './LoginForm';
-import './LoginSignup.scss';
+import Form from '../../shared/Forms';
+import setCurrentLocation from '../../../actions/location';
+import './Auth.scss';
 
 /**
  * @exports
- * @param {object} props
+ * @class Auth
+ * @extends Component
  * @returns {component} Auth
  */
-const Auth = (props) => {
-  const { from } = props.location.state ? props.location.state : { from: { pathname: '/' } };
+class Auth extends Component {
+  static propTypes = {
+    type: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      hash: PropTypes.string,
+      key: PropTypes.string,
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+      state: PropTypes.shape({
+        from: PropTypes.shape({
+          hash: PropTypes.string,
+          key: PropTypes.string,
+          pathname: PropTypes.string,
+          search: PropTypes.string
+        })
+      })
+    }).isRequired,
+  };
 
-  if (props.isAuthenticated) {
-    return <Redirect to={from} />;
+  /**
+   * @memberof LoginForm
+   * @returns {nothing} Returns nothing
+   */
+  componentWillMount() {
+    this.props.dispatch(setCurrentLocation('auth'));
   }
 
-  return (
-    <div className="login-signup-body">
-      <div className="container" id="login-signup-container">
-        <Row className="my-5" id="login-signup-wrapper">
-          <Col className="p-xs-2 p-lg-4" id="login-signup-div">
-            {props.type === 'signup' ? <Signup {...props} /> : <Login {...props} />}
-          </Col>
-        </Row>
-      </div>
-    </div>
-  );
-};
+  /**
+   * @memberof Auth
+   * @returns {component} Auth
+   */
+  render() {
+    const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
 
-Auth.propTypes = {
-  type: PropTypes.string.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({
-    hash: PropTypes.string,
-    key: PropTypes.string,
-    pathname: PropTypes.string,
-    search: PropTypes.string,
-    state: PropTypes.shape({
-      from: PropTypes.shape({
-        hash: PropTypes.string,
-        key: PropTypes.string,
-        pathname: PropTypes.string,
-        search: PropTypes.string
-      })
-    })
-  }).isRequired,
-};
+    if (this.props.isAuthenticated) {
+      return <Redirect to={from} />;
+    }
+
+    return (
+      <div className="login-signup-body">
+        <div className="container" id="login-signup-container">
+          <Row className="my-5" id="login-signup-wrapper">
+            <Col className="p-xs-2 p-lg-4" id="login-signup-div">
+              {this.props.type === 'signup' ?
+                <Form {...this.props} type="signup" /> :
+                <Form {...this.props} type="login" />}
+            </Col>
+          </Row>
+        </div>
+      </div>
+    );
+  }
+}
 
 export { Auth as AuthComponent };
 
 const mapStateToProps = state => ({
-  authenticating: state.auth.loading,
+  submitting: state.auth.loading,
   isAuthenticated: state.auth.isAuthenticated,
   submitError: state.auth.error
 });

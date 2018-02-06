@@ -27,8 +27,8 @@ exports[`Auth login: renders correctly 1`] = `
           ]
         }
       >
-        <Connect(LoginForm)
-          authenticating={false}
+        <Connect(Form)
+          dispatch={[Function]}
           isAuthenticated={false}
           location={
             Object {
@@ -41,6 +41,7 @@ exports[`Auth login: renders correctly 1`] = `
             }
           }
           submitError={null}
+          submitting={false}
           type="login"
         />
       </Col>
@@ -98,8 +99,8 @@ exports[`Auth signup: renders correctly 1`] = `
           ]
         }
       >
-        <Connect(SignupForm)
-          authenticating={false}
+        <Connect(Form)
+          dispatch={[Function]}
           isAuthenticated={false}
           location={
             Object {
@@ -112,6 +113,7 @@ exports[`Auth signup: renders correctly 1`] = `
             }
           }
           submitError={null}
+          submitting={false}
           type="signup"
         />
       </Col>
