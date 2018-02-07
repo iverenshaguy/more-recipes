@@ -4,6 +4,9 @@ import pagination from './pagination';
 import handleVote from './handleVote';
 import generateToken from './generateToken';
 import getCleanUser from './getCleanUser';
+import getUserObject from './getUserObject';
+import getRecipes from './getRecipes';
+import paginateRecipes from './paginateRecipes';
 
 export default {
   arrayCheck,
@@ -11,5 +14,8 @@ export default {
   pagination,
   handleVote,
   generateToken,
-  getCleanUser
+  getCleanUser,
+  getUserObject,
+  getRecipes,
+  paginateRecipes
 };

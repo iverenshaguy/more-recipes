@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { User, Recipe } from '../models';
 import { verifyPassword } from '../helpers/passwordHash';
-import { generateToken, getCleanUser } from '../helpers';
+import { generateToken, getCleanUser, getUserObject } from '../helpers';
 
 config();
 
@@ -59,18 +59,7 @@ export default {
   },
 
   refreshToken(req, res) {
-    let user = {
-      id: req.id,
-      firstname: req.firstname,
-      lastname: req.lastname,
-      username: req.username,
-      email: req.email.toLowerCase(),
-      image: req.profilePic,
-      aboutMe: req.aboutMe,
-      occupation: req.occupation,
-      createdAt: req.createdAt,
-      updatedAt: req.updatedAt
-    };
+    let user = getUserObject(req);
 
     const token = generateToken(user);
     user = getCleanUser(user);

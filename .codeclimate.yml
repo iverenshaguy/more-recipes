@@ -34,4 +34,4 @@ exclude_paths:
 - "server/src/validations/"
 - "nightwatch.conf.js"
 - "gulpfile.babel.js"
-- "webpack.confid.*.js"
+- "webpack.config.*.js"

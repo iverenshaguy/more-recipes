@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 import Form from '../../shared/Forms';
 import setCurrentLocation from '../../../actions/location';
+import { authPropTypes } from '../../../helpers/proptypes';
 import './Auth.scss';
 
 /**
@@ -15,23 +16,9 @@ import './Auth.scss';
  */
 class Auth extends Component {
   static propTypes = {
+    ...authPropTypes,
     type: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-    location: PropTypes.shape({
-      hash: PropTypes.string,
-      key: PropTypes.string,
-      pathname: PropTypes.string,
-      search: PropTypes.string,
-      state: PropTypes.shape({
-        from: PropTypes.shape({
-          hash: PropTypes.string,
-          key: PropTypes.string,
-          pathname: PropTypes.string,
-          search: PropTypes.string
-        })
-      })
-    }).isRequired,
   };
 
   /**

@@ -1,5 +1,5 @@
 import { Sequelize, sequelize, Recipe, Review } from '../models';
-import Pagination from '../helpers/pagination';
+import getRecipes from '../helpers/getRecipes';
 
 const { Op } = Sequelize;
 
@@ -7,7 +7,7 @@ export default {
   getUpvoted: (req, res, next) => {
     let orderBy = 'DESC';
 
-    const { order, limit, page } = req.query;
+    const { order } = req.query;
 
     if (order === 'descending') {
       orderBy = 'ASC';
@@ -33,21 +33,13 @@ export default {
           return res.status(200).send({ message: 'There are no upvoted recipes' });
         }
 
-        if (limit && page) {
-          const paginate = new Pagination(recipes, parseInt(limit, 10));
-
-          const { recipesByPage, metaData } = paginate.getRecipesForPage(parseInt(page, 10));
-
-          return res.status(200).send({ recipes: recipesByPage, metaData });
-        }
-
-        return res.status(200).send(recipes);
+        return getRecipes(req, res, recipes);
       })
       .catch(next);
   },
 
   search: (req, res, next) => {
-    const { search, limit, page } = req.query;
+    const { search } = req.query;
 
     return Recipe.findAll({
       where: {
@@ -73,19 +65,7 @@ export default {
           return res.status(200).send({ message: 'Your search returned no results' });
         }
 
-        if (limit && page) {
-          const paginate = new Pagination(recipes, parseInt(limit, 10));
-
-          const { recipesByPage, metaData } = paginate.getRecipesForPage(parseInt(page, 10));
-
-          return res.status(200).send({ recipes: recipesByPage, metaData });
-        }
-
-        const paginate = new Pagination(recipes);
-
-        const { recipesByPage, metaData } = paginate.getRecipesForPage();
-
-        return res.status(200).send({ recipes: recipesByPage, metaData });
+        return getRecipes(req, res, recipes);
       })
       .catch(next);
   }

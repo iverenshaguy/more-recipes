@@ -1,5 +1,5 @@
-import Pagination from '../helpers/pagination';
 import { sequelize, Recipe, User, Review } from '../models';
+import getRecipes from '../helpers/getRecipes';
 
 export default {
   create(req, recipeData, res, next) {
@@ -96,19 +96,7 @@ export default {
         ],
         group: ['Recipe.id']
       })
-      .then((recipes) => {
-        const { limit, page } = req.query;
-
-        if (limit && page) {
-          const paginate = new Pagination(recipes, parseInt(limit, 10));
-
-          const { recipesByPage, metaData } = paginate.getRecipesForPage(parseInt(page, 10));
-
-          return res.status(200).send({ recipes: recipesByPage, metaData });
-        }
-
-        return res.status(200).send(recipes);
-      })
+      .then(recipes => getRecipes(req, res, recipes))
       .catch(next);
   }
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../RecipeCard';
 import Pagination from '../Pagination';
+import getNoResultTitle from '../../../helpers/getNoResultTitle';
 import './RecipeItems.scss';
 
 /**
@@ -21,10 +22,7 @@ const RecipeItems = props => (
     <div className="row pt-2 px-5" id="search-result">
       {props.recipes.length === 0 &&
         <div className="col">
-          {props.recipes.length === 0 && props.title === 'TOP RECIPES' &&
-            <div className="text-center pt-4">There are no top recipes at the moment.</div>}
-          {props.recipes.length === 0 && props.title === 'SEARCH RESULTS' &&
-            <div className="text-center pt-4">Your search returned no results</div>}
+          {props.recipes.length === 0 && <div className="text-center pt-4">{getNoResultTitle(props.title)}</div>}
         </div>}
       {props.recipes.length !== 0 &&
         props.recipes.map(recipe => (<RecipeCard key={recipe.id} recipe={recipe} />))}
