@@ -11,9 +11,13 @@ env:
 
 script:
   - npm run test:server
+  - cd ./server/coverage && dir && cd ../..
   - ./cc-test-reporter format-coverage -t lcov ./server/coverage/lcov.info --output ./coverage/codeclimate.server.json
+  - cd ./server/coverage && dir && cd ../..
   - npm run test:client
+  - cd ./client/coverage && dir && cd ../..
   - ./cc-test-reporter format-coverage -t lcov ./client/coverage/lcov.info  --output ./coverage/codeclimate.client.json
+  - cd ./client/coverage && dir && cd ../..
   - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
   - ./cc-test-reporter upload-coverage
 
