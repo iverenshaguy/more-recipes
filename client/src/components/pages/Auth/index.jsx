@@ -43,13 +43,13 @@ class Auth extends Component {
     const signupMeta = {
       title: 'Register for a New Account',
       btnText: 'SIGN UP',
-      extra: <p className="text-center">Already have an account, <Link to="/login" target="_self">Log in here</Link>.</p>
+      extra: <p className="text-center">Already have an account, <Link to="/login">Log in here</Link>.</p>
     };
 
     const loginMeta = {
       title: 'Sign In to Your Account',
       btnText: 'SIGN IN',
-      extra: <p className="text-center">Dont have an account, <Link to="/signup" target="_self">Sign up here</Link>.</p>
+      extra: <p className="text-center">Dont have an account, <Link to="/signup">Sign up here</Link>.</p>
     };
 
     return (

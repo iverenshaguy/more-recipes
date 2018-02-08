@@ -1,6 +1,6 @@
 import instance from '../axios';
 import { errorHandler } from '../utils';
-import { api } from '../services';
+import { auth as authAPI } from '../services/api/users';
 import {
   AUTHENTICATED,
   UNAUTHENTICATED,
@@ -12,8 +12,6 @@ import {
   SIGNUP_ERROR,
   CLEAR_AUTH_ERROR
 } from './actionTypes';
-
-const { userApi } = api;
 
 const authenticating = () => ({
   type: AUTHENTICATING
@@ -61,17 +59,19 @@ const auth = type => user => async (dispatch) => {
   try {
     dispatch(authenticating());
 
-    const response = await userApi[type](user);
+    const response = await authAPI(type)(user);
 
     localStorage.setItem('jwtToken', response.data.token);
 
     // if type is login dispatch loginSuccess else dispatch signupSuccess
-    dispatch(type === 'login' ? loginSuccess(response.data.user) : signupSuccess(response.data.user));
+    const dispatchType = type === 'login' ? loginSuccess : signupSuccess;
+    dispatch(dispatchType(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
     // if type is login dispatch loginFailure else dispatch signupFailure
-    dispatch(type === 'login' ? loginFailure(errorResponse.response) : signupFailure(errorResponse.response));
+    const dispatchType = type === 'login' ? loginFailure : signupFailure;
+    dispatch(dispatchType(errorResponse.response));
   }
 };
 
