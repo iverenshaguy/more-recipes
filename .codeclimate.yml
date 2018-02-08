@@ -4,6 +4,8 @@ engines:
     checks:
       import/no-unresolved:
         enabled: false
+      jsx-a11y/anchor-is-valid:
+        enabled: false
   fixme:
     enabled: true
     
