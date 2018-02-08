@@ -57,35 +57,19 @@ const resetUser = () => ({
   type: UNAUTHENTICATED
 });
 
-const login = user => async (dispatch) => {
+const auth = type => user => async (dispatch) => {
   try {
     dispatch(authenticating());
 
-    const response = await userApi.login(user);
+    const response = await userApi[type](user);
 
     localStorage.setItem('jwtToken', response.data.token);
 
-    dispatch(loginSuccess(response.data.user));
+    dispatch(type === 'login' ? loginSuccess(response.data.user) : signupSuccess(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
-    dispatch(loginFailure(errorResponse.response));
-  }
-};
-
-const signup = user => async (dispatch) => {
-  try {
-    dispatch(authenticating());
-
-    const response = await userApi.signup(user);
-
-    localStorage.setItem('jwtToken', response.data.token);
-
-    dispatch(signupSuccess(response.data.user));
-  } catch (error) {
-    const errorResponse = errorHandler(error);
-
-    dispatch(signupFailure(errorResponse.response));
+    dispatch(type === 'login' ? loginFailure(errorResponse.response) : signupFailure(errorResponse.response));
   }
 };
 
@@ -113,10 +97,9 @@ const logout = () => (dispatch) => {
 };
 
 export default {
-  login,
+  auth,
   loginSuccess,
   loginFailure,
-  signup,
   signupSuccess,
   signupFailure,
   authenticating,
