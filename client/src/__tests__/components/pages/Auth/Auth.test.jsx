@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { Link, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import Auth, { AuthComponent } from '../../../../components/pages/Auth';
 import Home from '../../../../components/pages/Home';
