@@ -40,6 +40,25 @@ exports[`Auth login: renders correctly 1`] = `
               },
             }
           }
+          meta={
+            Object {
+              "btnText": "SIGN IN",
+              "extra": <p
+                className="text-center"
+              >
+                Dont have an account, 
+                <Link
+                  replace={false}
+                  target="_self"
+                  to="/signup"
+                >
+                  Sign up here
+                </Link>
+                .
+              </p>,
+              "title": "Sign In to Your Account",
+            }
+          }
           submitError={null}
           submitting={false}
           type="login"
@@ -110,6 +129,25 @@ exports[`Auth signup: renders correctly 1`] = `
                   "pathname": "/",
                 },
               },
+            }
+          }
+          meta={
+            Object {
+              "btnText": "SIGN UP",
+              "extra": <p
+                className="text-center"
+              >
+                Already have an account, 
+                <Link
+                  replace={false}
+                  target="_self"
+                  to="/login"
+                >
+                  Log in here
+                </Link>
+                .
+              </p>,
+              "title": "Register for a New Account",
             }
           }
           submitError={null}

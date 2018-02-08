@@ -3,8 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import axios from 'axios';
 import moxios from 'moxios';
 import { FormComponent } from '../../../../components/shared/Forms';
-import LoginForm from '../../../../components/shared/Forms/LoginForm';
-import SignupForm from '../../../../components/shared/Forms/SignupForm';
 import { clearAuthError } from '../../../../actions/auth';
 
 const dispatchMock = jest.fn();
@@ -26,7 +24,12 @@ const setup = () => {
   const props = {
     submitting: false,
     submitError: null,
-    type: 'login'
+    type: 'login',
+    meta: {
+      title: 'Sign In to Your Account',
+      btnText: 'SIGN IN',
+      extra: <p>something</p>
+    }
   };
 
   const mountRoot = mount( //eslint-disable-line
@@ -35,6 +38,12 @@ const setup = () => {
     </MemoryRouter>);
 
   return { props, mountRoot };
+};
+
+const signupMeta = {
+  title: 'Register for a New Account',
+  btnText: 'SIGN UP',
+  extra: <p>something</p>
 };
 
 const url = '/api/v1';
@@ -61,31 +70,57 @@ describe('Form', () => {
     expect(dispatchMock.mock.calls[0]).toEqual([clearAuthError()]);
   });
 
-  it('renders login form when login is passed', () => {
-    const { props } = setup();
-    const shallowComponent = shallow(<FormComponent {...props} dispatch={dispatchMock} />);
-
-    expect(shallowComponent.find(LoginForm)).toHaveLength(1);
-  });
-
   it('renders signup form when signup is passed', () => {
     const { props } = setup();
     const shallowComponent = shallow(<FormComponent
       {...props}
       type="signup"
+      meta={signupMeta}
       dispatch={dispatchMock}
     />);
 
     expect(toJson(shallowComponent)).toMatchSnapshot();
-    expect(shallowComponent.find(SignupForm)).toHaveLength(1);
+  });
+
+
+  it('disables submit button when form is clean', () => {
+    const { props } = setup();
+    const shallowComponent = shallow(<FormComponent {...props} dispatch={dispatchMock} />);
+
+    expect(shallowComponent.find('Button[disabled=true]')).toBeTruthy();
+  });
+
+  it('disables submit button when submitting form', () => {
+    const { props } = setup();
+    const newProps = {
+      ...props,
+      submitting: true
+    };
+    const shallowComponent = shallow(<FormComponent {...newProps} dispatch={dispatchMock} />);
+
+    expect(toJson(shallowComponent)).toMatchSnapshot();
+    expect(shallowComponent.find('Button[disabled=true]')).toBeTruthy();
+  });
+
+  it('shows error alert and disables submit button when there\'s a submit error', () => {
+    const { props } = setup();
+    const newProps = {
+      ...props,
+      submitError: 'Username/Password do not match'
+    };
+
+    const shallowComponent = shallow(<FormComponent {...newProps} dispatch={dispatchMock} />);
+
+    expect(toJson(shallowComponent)).toMatchSnapshot();
+    expect(shallowComponent.find('NormalAlert')).toBeTruthy();
+    expect(shallowComponent.find('Button[disabled=true]')).toBeTruthy();
   });
 
 
   describe('test for right input', () => {
     it('calls handleChange and handleBlur on input change and blur for email field', (done) => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const wrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
 
       const changeState = {
         ...state,
@@ -108,13 +143,13 @@ describe('Form', () => {
       expect(dispatchMock).toHaveBeenCalledWith(clearAuthError());
 
       wrapper.find('input[name="email"]').simulate('change', event);
-      expect(formRoot.instance().state).toEqual(changeState);
+      expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="email"]').simulate('blur', event);
 
       setTimeout(() => {
         try {
-          expect(formRoot.instance().state).toEqual(blurState);
+          expect(wrapper.instance().state).toEqual(blurState);
           done();
         } catch (e) {
           done.fail(e);
@@ -124,8 +159,8 @@ describe('Form', () => {
 
     it('doesn\'t async validate password field', (done) => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const wrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
+
 
       const changeState = {
         ...state,
@@ -141,13 +176,13 @@ describe('Form', () => {
       expect(dispatchMock).toHaveBeenCalledWith(clearAuthError());
 
       wrapper.find('input[name="password"]').simulate('change', event);
-      expect(formRoot.instance().state).toEqual(changeState);
+      expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="password"]').simulate('blur', event);
 
       setTimeout(() => {
         try {
-          expect(formRoot.instance().state).toEqual(changeState);
+          expect(wrapper.instance().state).toEqual(changeState);
           done();
         } catch (e) {
           done.fail(e);
@@ -157,8 +192,8 @@ describe('Form', () => {
 
     it('sets asyncValidating to false if asyncValidate test passes', (done) => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const wrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
+
 
       moxios.stubRequest(`${url}/users/signin`, {
         status: 422,
@@ -190,13 +225,13 @@ describe('Form', () => {
       expect(dispatchMock).toHaveBeenCalledWith(clearAuthError());
 
       wrapper.find('input[name="email"]').simulate('change', event);
-      expect(formRoot.instance().state).toEqual(changeState);
+      expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="email"]').simulate('blur', event);
 
       setTimeout(() => {
         try {
-          expect(formRoot.instance().state).toEqual(blurState);
+          expect(wrapper.instance().state).toEqual(blurState);
           done();
         } catch (e) {
           done.fail(e);
@@ -206,8 +241,7 @@ describe('Form', () => {
 
     it('submits valid form', () => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const mountedAuthWrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
 
       const newState = {
         ...state,
@@ -221,14 +255,14 @@ describe('Form', () => {
       const emailEvent = { target: { name: 'email', value: 'iverenshaguy@gmail.com' } };
       const passwordEvent = { target: { name: 'password', value: 'iverenshaguy' } };
 
-      mountedAuthWrapper.find('input[name="email"]').simulate('focus');
-      mountedAuthWrapper.find('input[name="email"]').simulate('change', emailEvent);
-      mountedAuthWrapper.find('input[name="password"]').simulate('focus');
-      mountedAuthWrapper.find('input[name="password"]').simulate('change', passwordEvent);
+      wrapper.find('input[name="email"]').simulate('focus');
+      wrapper.find('input[name="email"]').simulate('change', emailEvent);
+      wrapper.find('input[name="password"]').simulate('focus');
+      wrapper.find('input[name="password"]').simulate('change', passwordEvent);
 
-      expect(formRoot.instance().state).toEqual(newState);
+      expect(wrapper.instance().state).toEqual(newState);
 
-      mountedAuthWrapper.find('form').simulate('submit', { preventDefault() { } });
+      wrapper.find('form').simulate('submit', { preventDefault() { } });
       expect(dispatchMock).toHaveBeenCalled();
 
       mountRoot.unmount();
@@ -238,8 +272,8 @@ describe('Form', () => {
   describe('test for wrong input', () => {
     it('async validates field and form on input change and blur', (done) => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const wrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
+
 
       const changeState = {
         ...state,
@@ -258,7 +292,7 @@ describe('Form', () => {
       const event = { target: { name: 'email', value: 'emilysanders@gmail.com' } };
 
       wrapper.find('input[name="email"]').simulate('change', event);
-      expect(formRoot.instance().state).toEqual(changeState);
+      expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="email"]').simulate('blur', event);
 
@@ -274,7 +308,7 @@ describe('Form', () => {
 
       setTimeout(() => {
         try {
-          expect(formRoot.instance().state).toEqual(blurState);
+          expect(wrapper.instance().state).toEqual(blurState);
           done();
         } catch (e) {
           done.fail(e);
@@ -284,8 +318,8 @@ describe('Form', () => {
 
     it('sync validates field and form on input change and blur', () => {
       const { mountRoot } = setup();
-      const formRoot = mountRoot.find(FormComponent);
-      const wrapper = formRoot.find(LoginForm);
+      const wrapper = mountRoot.find(FormComponent);
+
 
       const changeState = {
         ...state,
@@ -304,19 +338,19 @@ describe('Form', () => {
 
       wrapper.find('input[name="email"]').simulate('focus');
       wrapper.find('input[name="email"]').simulate('blur');
-      expect(formRoot.instance().state).toEqual(({
+      expect(wrapper.instance().state).toEqual(({
         ...changeState, error: { email: 'Required!', password: null }, pristine: true, values: { ...state.values }
       }));
 
       wrapper.find('input[name="email"]').simulate('change', event);
-      expect(formRoot.instance().state).toEqual(changeState);
+      expect(wrapper.instance().state).toEqual(changeState);
 
       wrapper.find('input[name="email"]').simulate('blur', event);
-      expect(formRoot.instance().state).toEqual(blurState);
+      expect(wrapper.instance().state).toEqual(blurState);
 
       wrapper.find('input[name="password"]').simulate('focus');
       wrapper.find('input[name="password"]').simulate('blur');
-      expect(formRoot.instance().state).toEqual(({
+      expect(wrapper.instance().state).toEqual(({
         ...changeState,
         error: { ...changeState.error, password: 'Required!' },
         touched: { email: true, password: true },

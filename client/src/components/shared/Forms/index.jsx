@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Form as BootstrapForm, Button } from 'reactstrap';
 import { asyncValidate, syncValidate } from '../../../helpers/validations';
-import LoginForm from './LoginForm';
-import SignupForm from './SignupForm';
+import AuthForm from './AuthForm';
+import { NormalAlert } from '../Alert';
 import { arrayToObject } from '../../../utils';
 import { formHelpers } from '../../../helpers';
 
@@ -18,7 +19,12 @@ class Form extends Component {
     dispatch: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
     submitError: PropTypes.string,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    meta: PropTypes.shape({
+      title: PropTypes.string,
+      btnText: PropTypes.string,
+      extra: PropTypes.element
+    }).isRequired
   };
 
   static defaultProps = {
@@ -60,11 +66,20 @@ class Form extends Component {
    * @returns {nothing} Returns nothing
    */
   componentWillMount() {
-    const { type } = this.props;
+    this.clearFormErrors();
+  }
+
+  /**
+   * @memberof Form
+   * @returns {nothing} Returns nothing
+   */
+  clearFormErrors() {
+    const { type } = this.state;
     const { clearFormError } = formHelpers;
 
     this.props.dispatch(clearFormError[type]);
   }
+
 
   /**
    * @memberof Form
@@ -87,10 +102,7 @@ class Form extends Component {
    * @returns {nothing} Returns nothing
    */
   handleFocus() {
-    const { type } = this.state;
-    const { clearFormError } = formHelpers;
-
-    this.props.dispatch(clearFormError[type]);
+    this.clearFormErrors();
   }
 
   /**
@@ -109,15 +121,10 @@ class Form extends Component {
 
     setTimeout(() => {
       if ((name === 'email' || name === 'username') && this.state.error[name] === null) {
-        this.setState({
-          asyncValidating: true
-        }, () => {
+        // only set asyncvalidating when sync validation is completed
+        this.setState({ asyncValidating: true }, () => {
           asyncValidate(type)(name, value)
-            .then(() => {
-              this.setState({
-                asyncValidating: false
-              });
-            })
+            .then(() => { this.setState({ asyncValidating: false }); })
             .catch((error) => {
               this.setState({
                 error: { ...this.state.error, [name]: error[name] },
@@ -200,7 +207,11 @@ class Form extends Component {
       values, touched, error, pristine, formValid, asyncValidating
     } = this.state;
 
-    const { submitting, submitError } = this.props;
+    const {
+      submitting, submitError, type, meta
+    } = this.props;
+
+    const { title, btnText, extra } = meta;
 
     const formState = {
       values,
@@ -208,9 +219,7 @@ class Form extends Component {
       error,
       pristine,
       formValid,
-      asyncValidating,
-      submitting,
-      submitError
+      asyncValidating
     };
 
     const handlers = {
@@ -220,11 +229,28 @@ class Form extends Component {
       handleSubmit: this.handleSubmit
     };
 
-    if (this.props.type === 'signup') {
-      return <SignupForm state={formState} handlers={handlers} />;
-    }
-
-    return <LoginForm state={formState} handlers={handlers} />;
+    return (
+      <div>
+        <h4 className="text-center">{title}</h4>
+        <hr />
+        {type !== 'login' &&
+          <p className="text-muted mx-auto text-center">
+            Fields marked
+            <span className="text-danger">*</span> are important
+          </p>}
+        <BootstrapForm className="mt-4 mb-3 px-5" onSubmit={handlers.handleSubmit}>
+          {submitError && (
+            <NormalAlert color="danger">
+              <p className="text-center mb-0">{submitError}</p>
+            </NormalAlert>
+          )}
+          {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
+          <Button className="btn-block mt-0" disabled={!formValid || pristine || submitting}>
+            {btnText}
+          </Button>
+        </BootstrapForm>
+        {extra && extra}
+      </div>);
   }
 }
 

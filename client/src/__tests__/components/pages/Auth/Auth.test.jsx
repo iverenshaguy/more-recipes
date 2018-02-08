@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { MemoryRouter } from 'react-router-dom';
+import { Link, MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import Auth, { AuthComponent } from '../../../../components/pages/Auth';
 import Home from '../../../../components/pages/Home';
@@ -61,13 +61,25 @@ const signupLocation = {
   state: { from: { pathname: '/' } }
 };
 
+const signupMeta = {
+  title: 'Register for a New Account',
+  btnText: 'SIGN UP',
+  extra: <p>something</p>
+};
+
+const loginMeta = {
+  title: 'Sign In to Your Account',
+  btnText: 'SIGN IN',
+  extra: <p>something</p>
+};
+
 const statelessLocation = {
   pathname: '/signup'
 };
 
 describe('Auth', () => {
   it('login: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
     expect(dispatchMock).toHaveBeenCalled();
@@ -75,7 +87,7 @@ describe('Auth', () => {
   });
 
   it('signup: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" meta={signupMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
@@ -113,13 +125,13 @@ describe('Auth', () => {
   });
 
   it('redirects when authenticated', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('redirects when authenticated: stateless location', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });

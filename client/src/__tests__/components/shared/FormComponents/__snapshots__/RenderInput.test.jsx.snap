@@ -5,6 +5,8 @@ exports[`Form Components: RenderInput renders correctly 1`] = `
   handleBlur={[Function]}
   handleChange={[Function]}
   handleFocus={[Function]}
+  id="email"
+  label="Email"
   meta={
     Object {
       "asyncValidating": false,
@@ -14,31 +16,68 @@ exports[`Form Components: RenderInput renders correctly 1`] = `
   }
   name="email"
   placeholder="jane"
+  required={true}
   type="email"
   value=""
 >
-  <Input
-    className=""
-    name="email"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    placeholder="jane"
-    tag="p"
-    type="email"
-    value=""
+  <FormGroup
+    tag="div"
   >
-    <input
-      className="form-control"
-      name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="jane"
-      type="email"
-      value=""
-    />
-  </Input>
+    <div
+      className="form-group"
+    >
+      <Label
+        className="col-form-label"
+        for="email"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className="col-form-label  form-control-label"
+          htmlFor="email"
+        >
+          Email
+          <span
+            className="text-danger"
+          >
+            *
+          </span>
+        </label>
+      </Label>
+      <Input
+        className=""
+        id="email"
+        name="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="jane"
+        tag="p"
+        type="email"
+        value=""
+      >
+        <input
+          className="form-control"
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="jane"
+          type="email"
+          value=""
+        />
+      </Input>
+    </div>
+  </FormGroup>
 </RenderInput>
 `;
 
@@ -47,6 +86,8 @@ exports[`Form Components: RenderInput shows 'Checking' when async validating 1`]
   handleBlur={[Function]}
   handleChange={[Function]}
   handleFocus={[Function]}
+  id="email"
+  label="Email"
   meta={
     Object {
       "asyncValidating": true,
@@ -55,36 +96,73 @@ exports[`Form Components: RenderInput shows 'Checking' when async validating 1`]
   }
   name="email"
   placeholder="jane"
+  required={true}
   type="email"
   value=""
 >
-  <Input
-    className="is-valid"
-    name="email"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    placeholder="jane"
-    tag="p"
-    type="email"
-    value=""
+  <FormGroup
+    tag="div"
   >
-    <input
-      className="is-valid form-control"
-      name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="jane"
-      type="email"
-      value=""
-    />
-  </Input>
-  <small
-    className="form-text"
-  >
-    Checking...
-  </small>
+    <div
+      className="form-group"
+    >
+      <Label
+        className="col-form-label"
+        for="email"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className="col-form-label  form-control-label"
+          htmlFor="email"
+        >
+          Email
+          <span
+            className="text-danger"
+          >
+            *
+          </span>
+        </label>
+      </Label>
+      <Input
+        className="is-valid"
+        id="email"
+        name="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="jane"
+        tag="p"
+        type="email"
+        value=""
+      >
+        <input
+          className="is-valid form-control"
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="jane"
+          type="email"
+          value=""
+        />
+      </Input>
+      <small
+        className="form-text"
+      >
+        Checking...
+      </small>
+    </div>
+  </FormGroup>
 </RenderInput>
 `;
 
@@ -93,6 +171,8 @@ exports[`Form Components: RenderInput shows error when found 1`] = `
   handleBlur={[Function]}
   handleChange={[Function]}
   handleFocus={[Function]}
+  id="email"
+  label="Email"
   meta={
     Object {
       "asyncValidating": false,
@@ -102,35 +182,72 @@ exports[`Form Components: RenderInput shows error when found 1`] = `
   }
   name="email"
   placeholder="jane"
+  required={true}
   type="email"
   value="jane@smith.me"
 >
-  <Input
-    className="is-invalid"
-    name="email"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onFocus={[Function]}
-    placeholder="jane"
-    tag="p"
-    type="email"
-    value="jane@smith.me"
+  <FormGroup
+    tag="div"
   >
-    <input
-      className="is-invalid form-control"
-      name="email"
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="jane"
-      type="email"
-      value="jane@smith.me"
-    />
-  </Input>
-  <div
-    className="invalid-feedback"
-  >
-    This is an error
-  </div>
+    <div
+      className="form-group"
+    >
+      <Label
+        className="col-form-label"
+        for="email"
+        tag="label"
+        widths={
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ]
+        }
+      >
+        <label
+          className="col-form-label  form-control-label"
+          htmlFor="email"
+        >
+          Email
+          <span
+            className="text-danger"
+          >
+            *
+          </span>
+        </label>
+      </Label>
+      <Input
+        className="is-invalid"
+        id="email"
+        name="email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="jane"
+        tag="p"
+        type="email"
+        value="jane@smith.me"
+      >
+        <input
+          className="is-invalid form-control"
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="jane"
+          type="email"
+          value="jane@smith.me"
+        />
+      </Input>
+      <div
+        className="invalid-feedback"
+      >
+        This is an error
+      </div>
+    </div>
+  </FormGroup>
 </RenderInput>
 `;

@@ -1,0 +1,833 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthForm renders correctly when type is login 1`] = `
+<AuthForm
+  handlers={
+    Object {
+      "handleBlur": [Function],
+      "handleChange": [Function],
+      "handleFocus": [Function],
+      "handleSubmit": [Function],
+    }
+  }
+  state={
+    Object {
+      "asyncValidating": false,
+      "error": Object {
+        "email": null,
+        "password": null,
+      },
+      "formValid": false,
+      "pristine": true,
+      "touched": Object {
+        "email": false,
+        "password": false,
+      },
+      "values": Object {
+        "email": "",
+        "password": "",
+      },
+    }
+  }
+  type="login"
+>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="email"
+    label="Email Address"
+    meta={
+      Object {
+        "asyncValidating": false,
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="email"
+    placeholder="janesmith@me.com"
+    required={false}
+    type="email"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="email"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="email"
+          >
+            Email Address
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="janesmith@me.com"
+          tag="p"
+          type="email"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="email"
+            name="email"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="janesmith@me.com"
+            type="email"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    className="mb-4"
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="password"
+    label="Password"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="password"
+    placeholder="••••••••••"
+    required={false}
+    type="password"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="password"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="password"
+          >
+            Password
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="password"
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="••••••••••"
+          tag="p"
+          type="password"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="password"
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="••••••••••"
+            type="password"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+</AuthForm>
+`;
+
+exports[`AuthForm renders correctly when type is signup 1`] = `
+<AuthForm
+  handlers={
+    Object {
+      "handleBlur": [Function],
+      "handleChange": [Function],
+      "handleFocus": [Function],
+      "handleSubmit": [Function],
+    }
+  }
+  state={
+    Object {
+      "asyncValidating": false,
+      "error": Object {
+        "aboutMe": null,
+        "email": null,
+        "firstname": null,
+        "lastname": null,
+        "occupation": null,
+        "password": null,
+        "passwordConfirm": null,
+        "username": null,
+      },
+      "formValid": false,
+      "pristine": true,
+      "touched": Object {
+        "aboutMe": false,
+        "email": false,
+        "firstname": false,
+        "lastname": false,
+        "occupation": false,
+        "password": false,
+        "passwordConfirm": false,
+        "username": false,
+      },
+      "values": Object {
+        "aboutMe": "",
+        "email": "",
+        "firstname": "",
+        "lastname": "",
+        "occupation": "",
+        "password": "",
+        "passwordConfirm": "",
+        "username": "",
+      },
+    }
+  }
+  type="signup"
+>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="firstname"
+    label="First Name"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="firstname"
+    placeholder="Jane"
+    required={true}
+    type="text"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="firstname"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="firstname"
+          >
+            First Name
+            <span
+              className="text-danger"
+            >
+              *
+            </span>
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="firstname"
+          name="firstname"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Jane"
+          tag="p"
+          type="text"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="firstname"
+            name="firstname"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Jane"
+            type="text"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="lastname"
+    label="Last Name"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="lastname"
+    placeholder="Smith"
+    required={false}
+    type="text"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="lastname"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="lastname"
+          >
+            Last Name
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="lastname"
+          name="lastname"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Smith"
+          tag="p"
+          type="text"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="lastname"
+            name="lastname"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Smith"
+            type="text"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="email"
+    label="Email Address"
+    meta={
+      Object {
+        "asyncValidating": false,
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="email"
+    placeholder="janesmith@me.com"
+    required={true}
+    type="email"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="email"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="email"
+          >
+            Email Address
+            <span
+              className="text-danger"
+            >
+              *
+            </span>
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="email"
+          name="email"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="janesmith@me.com"
+          tag="p"
+          type="email"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="email"
+            name="email"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="janesmith@me.com"
+            type="email"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="username"
+    label="Username"
+    meta={
+      Object {
+        "asyncValidating": false,
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="username"
+    placeholder="janesmith"
+    required={true}
+    type="text"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="username"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="username"
+          >
+            Username
+            <span
+              className="text-danger"
+            >
+              *
+            </span>
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="username"
+          name="username"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="janesmith"
+          tag="p"
+          type="text"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="username"
+            name="username"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="janesmith"
+            type="text"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    className="mb-4"
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="password"
+    label="Password"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="password"
+    placeholder="••••••••••"
+    required={true}
+    type="password"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="password"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="password"
+          >
+            Password
+            <span
+              className="text-danger"
+            >
+              *
+            </span>
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="password"
+          name="password"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="••••••••••"
+          tag="p"
+          type="password"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="password"
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="••••••••••"
+            type="password"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="passwordconfirm"
+    label="Password Confirmation"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="passwordConfirm"
+    required={true}
+    type="password"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="passwordconfirm"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="passwordconfirm"
+          >
+            Password Confirmation
+            <span
+              className="text-danger"
+            >
+              *
+            </span>
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="passwordconfirm"
+          name="passwordConfirm"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          tag="p"
+          type="password"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="passwordconfirm"
+            name="passwordConfirm"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            type="password"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="user-info"
+    label="Tell Us Something About Yourself"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="aboutMe"
+    placeholder="I love to cook"
+    required={false}
+    type="textarea"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="user-info"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="user-info"
+          >
+            Tell Us Something About Yourself
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="user-info"
+          name="aboutMe"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="I love to cook"
+          tag="p"
+          type="textarea"
+          value=""
+        >
+          <textarea
+            className="form-control"
+            id="user-info"
+            name="aboutMe"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="I love to cook"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+  <RenderInput
+    handleBlur={[Function]}
+    handleChange={[Function]}
+    handleFocus={[Function]}
+    id="occupation"
+    label="Occupation"
+    meta={
+      Object {
+        "error": null,
+        "touched": false,
+      }
+    }
+    name="occupation"
+    placeholder="Chef"
+    required={false}
+    type="text"
+    value=""
+  >
+    <FormGroup
+      tag="div"
+    >
+      <div
+        className="form-group"
+      >
+        <Label
+          className="col-form-label"
+          for="occupation"
+          tag="label"
+          widths={
+            Array [
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+            ]
+          }
+        >
+          <label
+            className="col-form-label  form-control-label"
+            htmlFor="occupation"
+          >
+            Occupation
+          </label>
+        </Label>
+        <Input
+          className=""
+          id="occupation"
+          name="occupation"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Chef"
+          tag="p"
+          type="text"
+          value=""
+        >
+          <input
+            className="form-control"
+            id="occupation"
+            name="occupation"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Chef"
+            type="text"
+            value=""
+          />
+        </Input>
+      </div>
+    </FormGroup>
+  </RenderInput>
+</AuthForm>
+`;

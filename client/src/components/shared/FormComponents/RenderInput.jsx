@@ -1,12 +1,15 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Input } from 'reactstrap';
+import { Input, FormGroup, Label } from 'reactstrap';
+import { renderFormFieldPropTypes } from '../../../helpers/proptypes';
 
 const RenderInput = ({
+  id,
   name,
-  placeholder,
   type,
+  label,
+  required,
+  placeholder,
   meta: {
     error,
     touched,
@@ -29,40 +32,32 @@ const RenderInput = ({
 
   return (
     <Fragment>
-      <Input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        className={validInput}
-        value={value}
-        onChange={e => handleChange(e)}
-        onBlur={e => handleBlur(e)}
-        onFocus={e => handleFocus(e)}
-      />
-      {touched && error && <div className={validFeedBack}>{error}</div>}
-      {touched && (name === 'email' || name === 'username') &&
-        asyncValidating && <small className="form-text">Checking...</small>}
+      <FormGroup>
+        <Label for={id} className="col-form-label">
+          {label}
+          {required && <span className="text-danger">*</span>}
+        </Label>
+        <Input
+          id={id}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          className={validInput}
+          value={value}
+          onChange={e => handleChange(e)}
+          onBlur={e => handleBlur(e)}
+          onFocus={e => handleFocus(e)}
+        />
+        {touched && error && <div className={validFeedBack}>{error}</div>}
+        {touched && (name === 'email' || name === 'username') &&
+          asyncValidating && <small className="form-text">Checking...</small>}
+      </FormGroup>
     </Fragment>
   );
 };
 
 RenderInput.propTypes = {
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  meta: PropTypes.shape({
-    touched: PropTypes.bool,
-    error: PropTypes.any,
-    asyncValidating: PropTypes.any
-  }).isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  handleFocus: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired
-};
-
-RenderInput.defaultProps = {
-  placeholder: null
+  ...renderFormFieldPropTypes
 };
 
 export default RenderInput;
