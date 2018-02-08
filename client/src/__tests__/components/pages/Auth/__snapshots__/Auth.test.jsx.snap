@@ -49,7 +49,6 @@ exports[`Auth login: renders correctly 1`] = `
                 Dont have an account, 
                 <Link
                   replace={false}
-                  target="_self"
                   to="/signup"
                 >
                   Sign up here
@@ -140,7 +139,6 @@ exports[`Auth signup: renders correctly 1`] = `
                 Already have an account, 
                 <Link
                   replace={false}
-                  target="_self"
                   to="/login"
                 >
                   Log in here

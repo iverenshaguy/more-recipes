@@ -13,8 +13,7 @@ import {
   signupFailure,
   clearAuthError,
   resetUser,
-  login,
-  signup,
+  auth as authAction,
   authenticateUser,
   logout
 } from '../../../actions/auth';
@@ -125,7 +124,7 @@ describe('Auth Actions', () => {
           response: { user, token }
         }, 5);
 
-        return store.dispatch(login({ email: 'iverenshaguy@gmail.com', password: 'iverenshaguy' })).then(() => {
+        return store.dispatch(authAction('login')({ email: 'iverenshaguy@gmail.com', password: 'iverenshaguy' })).then(() => {
           const dispatchedActions = store.getActions();
 
           const actionTypes = dispatchedActions.map(action => action.type);
@@ -146,7 +145,7 @@ describe('Auth Actions', () => {
           },
         }, 5);
 
-        return store.dispatch(login({ email: 'iverenshaguy@gmail.com', password: 'iverenshaguytt' })).catch(() => {
+        return store.dispatch(authAction('login')({ email: 'iverenshaguy@gmail.com', password: 'iverenshaguytt' })).catch(() => {
           const dispatchedActions = store.getActions();
 
           const actionTypes = dispatchedActions.map(action => action.type);
@@ -165,7 +164,7 @@ describe('Auth Actions', () => {
           response: { user, token }
         }, 5);
 
-        return store.dispatch(signup(user)).then(() => {
+        return store.dispatch(authAction('signup')(user)).then(() => {
           const dispatchedActions = store.getActions();
 
           const actionTypes = dispatchedActions.map(action => action.type);
@@ -188,7 +187,7 @@ describe('Auth Actions', () => {
           }
         }, 5);
 
-        return store.dispatch(signup({ ...user, email: 'iverenshaguy@gmail.com' })).catch(() => {
+        return store.dispatch(authAction('signup')({ ...user, email: 'iverenshaguy@gmail.com' })).catch(() => {
           const dispatchedActions = store.getActions();
 
           const actionTypes = dispatchedActions.map(action => action.type);

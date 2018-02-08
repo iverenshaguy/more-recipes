@@ -1,4 +1,4 @@
-import { login, signup, clearAuthError } from '../actions/auth';
+import { auth, clearAuthError } from '../actions/auth';
 
 const clearFormError = {
   login: clearAuthError(),
@@ -20,8 +20,8 @@ const formFields = {
 };
 
 const formSubmitMapper = {
-  login,
-  signup
+  login: auth('login'),
+  signup: auth('signup')
 };
 
 export default {

@@ -1,6 +1,6 @@
 import instance from '../axios';
 import { errorHandler } from '../utils';
-import { api } from '../services';
+import { auth as authAPI } from '../services/api/users';
 import {
   AUTHENTICATED,
   UNAUTHENTICATED,
@@ -12,8 +12,6 @@ import {
   SIGNUP_ERROR,
   CLEAR_AUTH_ERROR
 } from './actionTypes';
-
-const { userApi } = api;
 
 const authenticating = () => ({
   type: AUTHENTICATING
@@ -57,35 +55,23 @@ const resetUser = () => ({
   type: UNAUTHENTICATED
 });
 
-const login = user => async (dispatch) => {
+const auth = type => user => async (dispatch) => {
   try {
     dispatch(authenticating());
 
-    const response = await userApi.login(user);
+    const response = await authAPI(type)(user);
 
     localStorage.setItem('jwtToken', response.data.token);
 
-    dispatch(loginSuccess(response.data.user));
+    // if type is login dispatch loginSuccess else dispatch signupSuccess
+    const dispatchType = type === 'login' ? loginSuccess : signupSuccess;
+    dispatch(dispatchType(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
-    dispatch(loginFailure(errorResponse.response));
-  }
-};
-
-const signup = user => async (dispatch) => {
-  try {
-    dispatch(authenticating());
-
-    const response = await userApi.signup(user);
-
-    localStorage.setItem('jwtToken', response.data.token);
-
-    dispatch(signupSuccess(response.data.user));
-  } catch (error) {
-    const errorResponse = errorHandler(error);
-
-    dispatch(signupFailure(errorResponse.response));
+    // if type is login dispatch loginFailure else dispatch signupFailure
+    const dispatchType = type === 'login' ? loginFailure : signupFailure;
+    dispatch(dispatchType(errorResponse.response));
   }
 };
 
@@ -113,10 +99,9 @@ const logout = () => (dispatch) => {
 };
 
 export default {
-  login,
+  auth,
   loginSuccess,
   loginFailure,
-  signup,
   signupSuccess,
   signupFailure,
   authenticating,

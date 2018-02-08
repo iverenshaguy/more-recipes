@@ -1,4 +1,4 @@
-import userApi from '../../services/api/users';
+import { auth as authAPI } from '../../services/api/users';
 import { errorHandler } from '../../utils';
 
 /**
@@ -11,7 +11,7 @@ import { errorHandler } from '../../utils';
  */
 const asyncValidate = operation => (field, value) =>
   new Promise((resolve, reject) => {
-    userApi[operation]({ [field]: value })
+    authAPI(operation)({ [field]: value })
       .catch((error) => {
         const errorResponse = errorHandler(error);
 
