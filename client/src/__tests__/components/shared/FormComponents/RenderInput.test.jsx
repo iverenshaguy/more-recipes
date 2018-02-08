@@ -6,6 +6,9 @@ describe('Form Components: RenderInput', () => {
     name: 'email',
     placeholder: 'jane',
     type: 'email',
+    id: 'email',
+    label: 'Email',
+    required: true,
     meta: {
       touched: false,
       error: null,
@@ -21,6 +24,9 @@ describe('Form Components: RenderInput', () => {
     name: 'email',
     placeholder: 'jane',
     type: 'email',
+    id: 'email',
+    label: 'Email',
+    required: true,
     meta: {
       touched: true,
       error: 'This is an error',

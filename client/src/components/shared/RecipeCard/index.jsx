@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardText } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
-import PropTypes from 'prop-types';
+import { singleRecipePropTypes } from '../../../helpers/proptypes';
 import './RecipeCard.scss';
 
 const RecipeCard = ({ recipe }) => (
@@ -47,27 +47,7 @@ const RecipeCard = ({ recipe }) => (
 );
 
 RecipeCard.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number,
-    recipeName: PropTypes.string,
-    recipeImage: PropTypes.string,
-    prepTime: PropTypes.string,
-    cookTime: PropTypes.string,
-    totalTime: PropTypes.string,
-    difficulty: PropTypes.string,
-    extraInfo: PropTypes.string,
-    vegetarian: PropTypes.bool,
-    ingredients: PropTypes.array,
-    preparations: PropTypes.array,
-    directions: PropTypes.array,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-    views: PropTypes.number,
-    createdAt: PropTypes.string,
-    updatedAt: PropTypes.string,
-    userId: PropTypes.number,
-    rating: PropTypes.string
-  }).isRequired,
+  ...singleRecipePropTypes
 };
 
 export default RecipeCard;

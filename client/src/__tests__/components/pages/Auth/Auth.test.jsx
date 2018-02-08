@@ -1,10 +1,54 @@
 import React from 'react';
-import { AuthComponent } from '../../../../components/pages/Auth';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { MemoryRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
+import Auth, { AuthComponent } from '../../../../components/pages/Auth';
+import Home from '../../../../components/pages/Home';
+import App from '../../../../components/App';
+import setCurrentLocation from '../../../../actions/location';
+
+const initialValues = {
+  auth: {
+    isAuthenticated: true,
+    error: null,
+    user: { firstname: 'Dave', lastname: 'Smith' },
+    loading: false
+  },
+  location: {
+    current: 'auth'
+  },
+  ui: {
+    modals: {
+      isOpen: false,
+      type: null
+    }
+  },
+  isFetching: false,
+  recipes: {
+    recipes: [],
+    errorMessage: '',
+    metaData: {}
+  }
+};
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const unAuthStore = mockStore({
+  ...initialValues,
+  auth: {
+    ...initialValues.auth, isAuthenticated: false
+  }
+});
+const authStore = mockStore(initialValues);
+
+const dispatchMock = jest.fn();
 
 const props = {
-  authenticating: false,
+  submitting: false,
   isAuthenticated: false,
-  submitError: null
+  submitError: null,
+  dispatch: dispatchMock
 };
 
 const loginLocation = {
@@ -17,31 +61,77 @@ const signupLocation = {
   state: { from: { pathname: '/' } }
 };
 
+const signupMeta = {
+  title: 'Register for a New Account',
+  btnText: 'SIGN UP',
+  extra: <p>something</p>
+};
+
+const loginMeta = {
+  title: 'Sign In to Your Account',
+  btnText: 'SIGN IN',
+  extra: <p>something</p>
+};
+
 const statelessLocation = {
   pathname: '/signup'
 };
 
 describe('Auth', () => {
   it('login: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
+    expect(dispatchMock).toHaveBeenCalled();
+    expect(dispatchMock.mock.calls[0]).toEqual([setCurrentLocation('auth')]);
   });
 
   it('signup: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" meta={signupMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
+  it('renders login page when unauthenticated', () => {
+    const wrapper = mount( //eslint-disable-line
+      <MemoryRouter
+        initialEntries={['/login']}
+      >
+        <Provider store={unAuthStore}>
+          <App />
+        </Provider>
+      </MemoryRouter>);
+
+    expect(wrapper.find(Auth)).toHaveLength(1);
+    expect(wrapper.find(Home)).toHaveLength(0);
+
+    wrapper.unmount();
+  });
+
+  it('redirects to another location when authenticated', () => {
+    const wrapper = mount( //eslint-disable-line
+      <MemoryRouter
+        initialEntries={['/login']}
+      >
+        <Provider store={authStore}>
+          <App />
+        </Provider>
+      </MemoryRouter>);
+
+    expect(wrapper.find(Home)).toHaveLength(1);
+    expect(wrapper.find(Auth)).toHaveLength(0);
+
+    wrapper.unmount();
+  });
+
   it('redirects when authenticated', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('redirects when authenticated: stateless location', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" meta={loginMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });

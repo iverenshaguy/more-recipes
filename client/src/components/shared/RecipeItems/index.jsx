@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../RecipeCard';
 import Pagination from '../Pagination';
+import getNoResultTitle from '../../../helpers/getNoResultTitle';
+import { multiRecipePropTypes } from '../../../helpers/proptypes';
 import './RecipeItems.scss';
 
 /**
@@ -21,10 +23,7 @@ const RecipeItems = props => (
     <div className="row pt-2 px-5" id="search-result">
       {props.recipes.length === 0 &&
         <div className="col">
-          {props.recipes.length === 0 && props.title === 'TOP RECIPES' &&
-            <div className="text-center pt-4">There are no top recipes at the moment.</div>}
-          {props.recipes.length === 0 && props.title === 'SEARCH RESULTS' &&
-            <div className="text-center pt-4">Your search returned no results</div>}
+          {props.recipes.length === 0 && <div className="text-center pt-4">{getNoResultTitle(props.title)}</div>}
         </div>}
       {props.recipes.length !== 0 &&
         props.recipes.map(recipe => (<RecipeCard key={recipe.id} recipe={recipe} />))}
@@ -38,35 +37,7 @@ const RecipeItems = props => (
 
 RecipeItems.propTypes = {
   title: PropTypes.string.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    recipeName: PropTypes.string,
-    recipeImage: PropTypes.string,
-    prepTime: PropTypes.string,
-    cookTime: PropTypes.string,
-    totalTime: PropTypes.string,
-    difficulty: PropTypes.string,
-    extraInfo: PropTypes.string,
-    vegetarian: PropTypes.bool,
-    ingredients: PropTypes.array,
-    preparations: PropTypes.array,
-    directions: PropTypes.array,
-    upvotes: PropTypes.number,
-    downvotes: PropTypes.number,
-    views: PropTypes.number,
-    createdAt: PropTypes.string,
-    updatedAt: PropTypes.string,
-    userId: PropTypes.number,
-    rating: PropTypes.string
-  })).isRequired,
-  metaData: PropTypes.shape({
-    firstPage: PropTypes.number,
-    lastPage: PropTypes.number,
-    page: PropTypes.number,
-    pageRecipeCount: PropTypes.number,
-    pages: PropTypes.arrayOf(PropTypes.number),
-    totalRecipeCount: PropTypes.number,
-  }).isRequired,
+  ...multiRecipePropTypes,
   handlePageChange: PropTypes.func.isRequired
 };
 

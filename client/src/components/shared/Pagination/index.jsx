@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Pagination as PaginationWrapper, PaginationItem, PaginationLink } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { multiRecipePropTypes } from '../../../helpers/proptypes';
 import './Pagination.scss';
 
 /**
@@ -13,14 +14,7 @@ class Pagination extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.any).isRequired,
     onPageChange: PropTypes.func.isRequired,
-    metaData: PropTypes.shape({
-      firstPage: PropTypes.number,
-      lastPage: PropTypes.number,
-      page: PropTypes.number,
-      pageRecipeCount: PropTypes.number,
-      pages: PropTypes.arrayOf(PropTypes.number),
-      totalRecipeCount: PropTypes.number,
-    }).isRequired
+    ...multiRecipePropTypes.metaData
   };
 
   /**

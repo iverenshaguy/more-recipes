@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import PreLoader from '../shared/PreLoader';
+import { authPropTypes } from '../../helpers/proptypes';
 
 /**
  * @function AuthenticatedComponent
@@ -36,21 +37,7 @@ const AuthenticatedComponent = (props) => {
 };
 
 AuthenticatedComponent.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  location: PropTypes.shape({
-    hash: PropTypes.string,
-    key: PropTypes.string,
-    pathname: PropTypes.string,
-    search: PropTypes.string,
-    state: PropTypes.shape({
-      from: PropTypes.shape({
-        hash: PropTypes.string,
-        key: PropTypes.string,
-        pathname: PropTypes.string,
-        search: PropTypes.string
-      })
-    })
-  }).isRequired,
+  ...authPropTypes,
   authLoading: PropTypes.bool.isRequired,
   MyComponent: PropTypes.func.isRequired
 };

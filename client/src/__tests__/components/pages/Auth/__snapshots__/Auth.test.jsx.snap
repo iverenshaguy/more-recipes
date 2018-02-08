@@ -27,8 +27,8 @@ exports[`Auth login: renders correctly 1`] = `
           ]
         }
       >
-        <Connect(LoginForm)
-          authenticating={false}
+        <Connect(Form)
+          dispatch={[Function]}
           isAuthenticated={false}
           location={
             Object {
@@ -40,7 +40,27 @@ exports[`Auth login: renders correctly 1`] = `
               },
             }
           }
+          meta={
+            Object {
+              "btnText": "SIGN IN",
+              "extra": <p
+                className="text-center"
+              >
+                Dont have an account, 
+                <Link
+                  replace={false}
+                  target="_self"
+                  to="/signup"
+                >
+                  Sign up here
+                </Link>
+                .
+              </p>,
+              "title": "Sign In to Your Account",
+            }
+          }
           submitError={null}
+          submitting={false}
           type="login"
         />
       </Col>
@@ -98,8 +118,8 @@ exports[`Auth signup: renders correctly 1`] = `
           ]
         }
       >
-        <Connect(SignupForm)
-          authenticating={false}
+        <Connect(Form)
+          dispatch={[Function]}
           isAuthenticated={false}
           location={
             Object {
@@ -111,7 +131,27 @@ exports[`Auth signup: renders correctly 1`] = `
               },
             }
           }
+          meta={
+            Object {
+              "btnText": "SIGN UP",
+              "extra": <p
+                className="text-center"
+              >
+                Already have an account, 
+                <Link
+                  replace={false}
+                  target="_self"
+                  to="/login"
+                >
+                  Log in here
+                </Link>
+                .
+              </p>,
+              "title": "Register for a New Account",
+            }
+          }
           submitError={null}
+          submitting={false}
           type="signup"
         />
       </Col>
