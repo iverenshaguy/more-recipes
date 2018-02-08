@@ -65,10 +65,12 @@ const auth = type => user => async (dispatch) => {
 
     localStorage.setItem('jwtToken', response.data.token);
 
+    // if type is login dispatch loginSuccess else dispatch signupSuccess
     dispatch(type === 'login' ? loginSuccess(response.data.user) : signupSuccess(response.data.user));
   } catch (error) {
     const errorResponse = errorHandler(error);
 
+    // if type is login dispatch loginFailure else dispatch signupFailure
     dispatch(type === 'login' ? loginFailure(errorResponse.response) : signupFailure(errorResponse.response));
   }
 };
