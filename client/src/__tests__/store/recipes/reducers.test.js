@@ -3,12 +3,12 @@ import reducer from '../../../reducers/recipes';
 const state = {
   recipes: [],
   error: null,
-  metaData: {}
+  metadata: {}
 };
 
 const recipesPayload = {
   recipes: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
-  metaData: {
+  metadata: {
     page: 1
   }
 };
@@ -28,7 +28,7 @@ describe('Recipe Reducers', () => {
 
     expect(newState).toEqual({
       recipes: recipesPayload.recipes,
-      metaData: recipesPayload.metaData,
+      metadata: recipesPayload.metadata,
       error: null
     });
   });
@@ -41,7 +41,7 @@ describe('Recipe Reducers', () => {
 
     expect(newState).toEqual({
       recipes: recipesPayload.recipes,
-      metaData: recipesPayload.metaData,
+      metadata: recipesPayload.metadata,
       error: null
     });
   });

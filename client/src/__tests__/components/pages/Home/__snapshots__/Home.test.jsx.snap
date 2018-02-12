@@ -12,18 +12,18 @@ exports[`Home renders correctly 1`] = `
   />
   <RecipeItems
     handlePageChange={[Function]}
-    metaData={
+    metadata={
       Object {
         "firstPage": 1,
+        "itemsPerPage": 5,
         "lastPage": 3,
         "page": 2,
-        "pageRecipeCount": 5,
         "pages": Array [
           1,
           2,
           3,
         ],
-        "totalRecipeCount": 13,
+        "totalCount": 13,
       }
     }
     recipes={
@@ -47,18 +47,18 @@ exports[`Home renders correctly when fully mounted 1`] = `
 <Home
   dispatch={[Function]}
   isFetching={false}
-  metaData={
+  metadata={
     Object {
       "firstPage": 1,
+      "itemsPerPage": 5,
       "lastPage": 3,
       "page": 2,
-      "pageRecipeCount": 5,
       "pages": Array [
         1,
         2,
         3,
       ],
-      "totalRecipeCount": 13,
+      "totalCount": 13,
     }
   }
   recipes={
@@ -221,18 +221,18 @@ exports[`Home renders correctly when fully mounted 1`] = `
     </Hero>
     <RecipeItems
       handlePageChange={[Function]}
-      metaData={
+      metadata={
         Object {
           "firstPage": 1,
+          "itemsPerPage": 5,
           "lastPage": 3,
           "page": 2,
-          "pageRecipeCount": 5,
           "pages": Array [
             1,
             2,
             3,
           ],
-          "totalRecipeCount": 13,
+          "totalCount": 13,
         }
       }
       recipes={
@@ -663,18 +663,18 @@ exports[`Home renders correctly when fully mounted 1`] = `
               },
             ]
           }
-          metaData={
+          metadata={
             Object {
               "firstPage": 1,
+              "itemsPerPage": 5,
               "lastPage": 3,
               "page": 2,
-              "pageRecipeCount": 5,
               "pages": Array [
                 1,
                 2,
                 3,
               ],
-              "totalRecipeCount": 13,
+              "totalCount": 13,
             }
           }
           onPageChange={[Function]}

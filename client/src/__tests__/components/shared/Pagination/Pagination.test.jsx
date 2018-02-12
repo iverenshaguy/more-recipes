@@ -4,49 +4,49 @@ import Pagination from '../../../../components/shared/Pagination';
 const props = {
   items: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
   onPageChange: jest.fn(),
-  metaData: {
+  metadata: {
     firstPage: 1,
     lastPage: 3,
     page: 2,
-    pageRecipeCount: 5,
+    itemsPerPage: 5,
     pages: [1, 2, 3],
-    totalRecipeCount: 13,
+    totalCount: 13,
   }
 };
 
 const currentPageProps = {
   items: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
   onPageChange: jest.fn(),
-  metaData: {
+  metadata: {
     firstPage: 1,
     lastPage: 3,
     page: 1,
-    pageRecipeCount: 5,
+    itemsPerPage: 5,
     pages: [1, 2, 3],
-    totalRecipeCount: 13,
+    totalCount: 13,
   }
 };
 
 const lastPageProps = {
   items: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
   onPageChange: jest.fn(),
-  metaData: {
+  metadata: {
     firstPage: 1,
     lastPage: 3,
     page: 3,
-    pageRecipeCount: 5,
+    itemsPerPage: 5,
     pages: [1, 2, 3],
-    totalRecipeCount: 13,
+    totalCount: 13,
   }
 };
 
-const metaData = {
+const metadata = {
   firstPage: 1,
   lastPage: 1,
   page: 1,
-  pageRecipeCount: 2,
+  itemsPerPage: 2,
   pages: [1],
-  totalRecipeCount: 2,
+  totalCount: 2,
 };
 
 describe('Pagination', () => {
@@ -57,7 +57,7 @@ describe('Pagination', () => {
   });
 
   it('renders correctly when there is only one page', () => {
-    const mountedWrapper = mount(<Pagination {...props} metaData={metaData} />);
+    const mountedWrapper = mount(<Pagination {...props} metadata={metadata} />);
     expect(toJson(mountedWrapper)).toMatchSnapshot();
     mountedWrapper.unmount();
   });

@@ -1,4 +1,5 @@
-import { Recipe, Favorite } from '../models';
+import { Recipe, Favorite, User } from '../models';
+import getItems from '../helpers/getItems';
 
 export default {
   addFavoriteRecipe: (req, favoriteData, res, next) => Favorite.findOne({
@@ -64,15 +65,15 @@ export default {
         where: {
           userId: +favoriteRecipeData.userId,
         }
+      },
+      {
+        model: User,
+        as: 'User',
+        attributes: ['id', 'username']
       }],
+      group: ['Recipe.id', 'User.id']
     })
-      .then((recipes) => {
-        if (recipes.length === 0) {
-          return res.status(200).send({ message: 'You have no favorite recipes' });
-        }
-
-        return res.status(200).send(recipes);
-      })
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   }
 };

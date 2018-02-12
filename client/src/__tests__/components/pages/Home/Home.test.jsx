@@ -9,13 +9,13 @@ const setup = () => {
     dispatch,
     isFetching: false,
     recipes: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
-    metaData: {
+    metadata: {
       firstPage: 1,
       lastPage: 3,
       page: 2,
-      pageRecipeCount: 5,
+      itemsPerPage: 5,
       pages: [1, 2, 3],
-      totalRecipeCount: 13,
+      totalCount: 13,
     }
   };
 

@@ -11,9 +11,15 @@ describe('Get Favorites Recipes', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.lengthOf(12);
-        expect(res.body[0].recipeName).to.equal('Egusi Soup');
-        expect(res.body[1].recipeName).to.equal('Mixed Okro Soup (Obe Ila Asepo)');
+        expect(res.body.recipes).to.have.lengthOf(10);
+        expect(res.body.metadata.totalCount).to.equal(12);
+        expect(res.body.metadata.itemsPerPage).to.equal(10);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(2);
+        expect(res.body.recipes[0].recipeName).to.equal('Fried Rice');
+        expect(res.body.recipes[1].recipeName).to.equal('Rice and Beans');
+        expect(res.body.recipes[0]).to.have.property('User');
+        expect(res.body.recipes[0].User).to.be.an('object');
 
         if (err) {
           return done(err);
@@ -77,7 +83,7 @@ describe('Get Favorites Recipes', () => {
         .set('authorization', userToken)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('You have no favorite recipes');
+          expect(res.body.recipes).to.have.lengthOf(0);
           if (err) return done(err);
           done();
         });

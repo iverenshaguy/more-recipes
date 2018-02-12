@@ -79,16 +79,16 @@ exports[`RecipeItems renders correctly 1`] = `
         },
       ]
     }
-    metaData={
+    metadata={
       Object {
         "firstPage": 1,
+        "itemsPerPage": 2,
         "lastPage": 1,
         "page": 1,
-        "pageRecipeCount": 2,
         "pages": Array [
           1,
         ],
-        "totalRecipeCount": 2,
+        "totalCount": 2,
       }
     }
     onPageChange={[Function]}
@@ -131,7 +131,7 @@ exports[`RecipeItems renders correctly when no recipes are passed 1`] = `
   </div>
   <Pagination
     items={Array []}
-    metaData={Object {}}
+    metadata={Object {}}
     onPageChange={[Function]}
   />
 </div>
@@ -216,16 +216,16 @@ exports[`RecipeItems renders correctly when title is SEARCH RESULTS 1`] = `
         },
       ]
     }
-    metaData={
+    metadata={
       Object {
         "firstPage": 1,
+        "itemsPerPage": 2,
         "lastPage": 1,
         "page": 1,
-        "pageRecipeCount": 2,
         "pages": Array [
           1,
         ],
-        "totalRecipeCount": 2,
+        "totalCount": 2,
       }
     }
     onPageChange={[Function]}

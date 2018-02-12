@@ -1,5 +1,5 @@
-import { sequelize, Recipe, User, Review } from '../models';
-import getRecipes from '../helpers/getRecipes';
+import { sequelize, Recipe, User, Review, Favorite, Like } from '../models';
+import getItems from '../helpers/getItems';
 
 export default {
   create(req, recipeData, res, next) {
@@ -40,8 +40,25 @@ export default {
             as: 'reviews',
             attributes: ['rating', 'comment', 'userId']
           },
+          {
+            model: User,
+            as: 'User',
+            attributes: ['id', 'username']
+          },
+          // add favorite, like and unlike models to know recipe status as regards user
+          // i.e. if user has liked, unliked or favorited recipe
+          {
+            model: Favorite,
+            as: 'favorites',
+            attributes: ['favorite', 'userId']
+          },
+          {
+            model: Like,
+            as: 'likes',
+            attributes: ['upvote', 'userId']
+          },
         ],
-        group: ['Recipe.id', 'reviews.id']
+        group: ['Recipe.id', 'reviews.id', 'User.id', 'favorites.id', 'likes.id']
       })
       .then(recipe => recipe.increment('views').then(() => res.status(200).send(recipe)))
       .catch(next);
@@ -91,12 +108,17 @@ export default {
           {
             model: Review,
             as: 'reviews',
-            attributes: []
+            attributes: [],
           },
+          {
+            model: User,
+            as: 'User',
+            attributes: ['id', 'username']
+          }
         ],
-        group: ['Recipe.id']
+        group: ['Recipe.id', 'User.id']
       })
-      .then(recipes => getRecipes(req, res, recipes))
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   }
 };

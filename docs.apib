@@ -2,9 +2,77 @@ FORMAT: 1A
 
 # More Recipes [api/v1]
 
-More-Recipes is an API provides a platform for users to share the awesome and exciting recipes idea they have invented or learnt.  This is version 1 of the API.
+# Group Overview
+Welcome to the More-Recipes API documentation.
 
-# Group User
+More-Recipes provides a platform for users to share the awesome and exciting recipes idea they have invented or learnt.
+
+This is the API used for the More-Recipes site. It provides a means for you to interact with More-Recipes via API.
+
+This is version 1 of the API.
+
+## Making Requests
+An authorization token is required to access all endpoints except the login and signup endpoints.
+
+The login/signup endpoint generate a new token for the user.
+
+A token expires 24 hours after it is generated.
+
+The token can be placed in `req.headers` as Authorization.
+
++ Headers
+
+        Authorization: `Bearer averylong.jsonwebtoken.requiredforauthetication`
+
+## Returning a List of Items
+Api endpoints that return a list are pagination by default with a default number of 10 items per page.
+
+The response body include pagination metadata as shown below.
+
++ Parameters
+
+
+    + page: 3 (number, optional) - Page number to show.
+
+    + limit: 10 (number, optional) - Number of items per page.
+
+
++ Metadata
+
+
+    + pages: [1,2,3] (array) - Array of Pages.
+
+    + totalCount: 7 (number) - Total Items In Storage,
+
+    + itemsPerPage: 2 (number) - Items Per Page,
+
+    + page: 2 (number) - Current Page,
+
+    + lastPage: 3 (number) - Last Page,
+
+    + firstPage: 1 (number) - First Page,
+
+## Errors
+
+More-Recipes API uses the following error codes
+
++ Error Codes
+
+
+    + 401 - Unauthorized
+
+    + 403 - Token Failure
+
+    + 404 - Not Found
+
+    + 409 - Page Not Found
+
+    + 422 - Validation Error
+
+    + 500 - Internal Server Error
+
+
+# Group Users
 
 Resources related to users in the API.
 
@@ -34,7 +102,7 @@ You may create a new account using this action. It takes a JSON object containin
             "passwordConfirm": "iverenshaguy",
             "aboutMe": "Food lover. Bookworm",
             "occupation": "Software Developer",
-            "profilePic": "www.pic.profile"
+            "profilePic": "www.pic.profile/profilepic.jpg"
         }
 
 + Response 201 (application/json)
@@ -54,7 +122,7 @@ You may create a new account using this action. It takes a JSON object containin
                     "email": "iverenshaguy@gmail.com",
                     "aboutMe": "Food lover. Bookworm",
                     "occupation": "Software Developer",
-                    "profilePic": "www.pic.profile",
+                    "profilePic": "www.pic.profile/profilepic.jpg",
                     "updatedAt": '2017-10-30T00:47:03.687Z',
                     "createdAt": '2017-10-30T00:47:03.687Z'
                 },
@@ -108,7 +176,7 @@ This allows you to view your user details
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
@@ -135,7 +203,7 @@ This allows you to refresh user token
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
@@ -155,7 +223,7 @@ This allows you to refresh user token
             "token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
         }
 
-### View Favorite Recipes [GET /users/{userId}/recipes]
+## View Favorite Recipes [GET /users/{userId}/recipes]
 
 + Parameters
     + userId: `1` (required, number) - ID of the User in form of an integer.
@@ -164,98 +232,66 @@ This allows you to refresh user token
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 2,
-                "recipeName": "Fried Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Kilo of Chicken"
+        {   
+            recipes: [
+                {
+                    "id": 2,
+                    "recipeName": "Fried Rice",
+                    "recipeImage": null,
+                    "prepTime": "30 Minutes",
+                    "cookTime": "20 Minutes",
+                    "totalTime": "1 Hour",
+                    "difficulty": "Normal",
+                    "extraInfo": "Nigerian Party Staple",
+                    "vegetarian": false,
+                    "ingredients": [
+                        "2 Cups of Rice",
+                        "1 Kilo of Chicken"
+                    ],
+                    "preparations": [
+                        "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                        "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                        "Cut ingredients into small pieces"
+                    ],
+                    "directions": [
+                        "Parboil Rice till half done",
+                        "Steam ingredients in oil till almost soft"
+                    ],
+                    "upvotes": 3,
+                    "downvotes": 4,
+                    "views": 13,
+                    "createdAt": "2017-10-30T00:47:03.687Z",
+                    "updatedAt": "2018-02-12T10:49:51.707Z",
+                    "userId": 2,
+                    "User": {
+                        "id": 2,
+                        "username": "praiseshaguy"
+                    }
+                },
+                ...
+            ],
+            metadata: {
+                "pages": [
+                    1,
+                    2
                 ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Cut ingredients into small pieces"
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Steam ingredients in oil till almost soft"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 2
-            },
-            {
-                "id": 3,
-                "recipeName": "Rice and Beans",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1.5 Cups of Beans",
-                    "1 kilo of chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Cook beans with onions till almost done"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 3
-            },
-            {
-                "id": 4,
-                "recipeName": "Beans and Plantain",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": true,
-                "ingredients": [
-                    "2 Cups of Beans",
-                    "3 Plantains"
-                ],
-                "preparations": [
-                    "Soak beans for 1 hour before cooking to reduce bloating"
-                ],
-                "directions": [
-                    "Cook beans with Onions till soft",
-                    "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 5
-            },
-            ...
-        ]      
+                "totalCount": 12,
+                "itemsPerPage": 10,
+                "page": 1,
+                "lastPage": 2,
+                "firstPage": 1
+            }
+        }    
 
-# Group Recipe
+# Group Recipes
 
 Resources related to recipes in the API.
 
-## Recipes [/recipes]
+## Multiple Recipes [/recipes]
 
 A Recipe Object has the following attributes:
 
@@ -289,235 +325,62 @@ A Recipe Object has the following attributes:
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 1,
-                "recipeName": "Coconut Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Coconut"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Grate coconut and strain milk from it by boiling for a few minutes"
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Put already fried tomato stew on fire, add water and seasoning to taste"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 1,
-                "rating": "3.5000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
+        {   
+            recipes: [
+                {
+                    "id": 2,
+                    "recipeName": "Fried Rice",
+                    "recipeImage": null,
+                    "prepTime": "30 Minutes",
+                    "cookTime": "20 Minutes",
+                    "totalTime": "1 Hour",
+                    "difficulty": "Normal",
+                    "extraInfo": "Nigerian Party Staple",
+                    "vegetarian": false,
+                    "ingredients": [
+                        "2 Cups of Rice",
+                        "1 Kilo of Chicken"
+                    ],
+                    "preparations": [
+                        "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                        "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                        "Cut ingredients into small pieces"
+                    ],
+                    "directions": [
+                        "Parboil Rice till half done",
+                        "Steam ingredients in oil till almost soft"
+                    ],
+                    "upvotes": 3,
+                    "downvotes": 4,
+                    "views": 13,
+                    "createdAt": "2017-10-30T00:47:03.687Z",
+                    "updatedAt": "2018-02-12T10:49:51.707Z",
+                    "userId": 2,
+                    "User": {
+                        "id": 2,
+                        "username": "praiseshaguy"
                     }
-                ]
-            },
-            {
-                "id": 2,
-                "recipeName": "Fried Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Kilo of Chicken"
+                },
+                ...
+            ],
+            metadata: {
+                "pages": [
+                    1,
+                    2
                 ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Cut ingredients into small pieces"
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Steam ingredients in oil till almost soft"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 2,
-                "rating": "4.5000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "recipeName": "Rice and Beans",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1.5 Cups of Beans",
-                    "1 kilo of chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Cook beans with onions till almost done"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 3,
-                "rating": "5.0000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            {
-                "id": 4,
-                "recipeName": "Beans and Plantain",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": true,
-                "ingredients": [
-                    "2 Cups of Beans",
-                    "3 Plantains"
-                ],
-                "preparations": [
-                    "Soak beans for 1 hour before cooking to reduce bloating"
-                ],
-                "directions": [
-                    "Cook beans with Onions till soft",
-                    "Add sliced plantains and ingredients and cook on low heat for another 5 minutes"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 5,
-                "rating": "4.5000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            ...
-        ]
+                "totalCount": 12,
+                "itemsPerPage": 10,
+                "page": 1,
+                "lastPage": 2,
+                "firstPage": 1
+            }
+        }
 
-### Create a New Recipe [POST]
+### Create a New Recipe [POST /recipes]
 
 You may add you own recipe using this action. It takes a JSON object containing a recipe.
 
@@ -543,16 +406,17 @@ You may add you own recipe using this action. It takes a JSON object containing 
         + `Very Difficult'
 
 
-+ Request (apllication/json)
++ Request (application/json)
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
     + Body
 
             {
                 "recipeName": "Pounded Yam",
+                "recipeImage: "www.addressofmyimage/myimage.jpg",
                 "prepTime": "30 Minutes",
                 "cookTime": "20 Minutes",
                 "totalTime": "1 Hour",
@@ -589,7 +453,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "difficulty": "A Bit Difficult",
                 "extraInfo": "Can be eaten with any of the soups in my other recipes",
                 "vegetarian": false,
-                "recipeImage": null,
+                "recipeImage": "www.addressofmyimage/myimage.jpg",
                 "userId": 1,
                 "ingredients": [
                     "1 tuber of yam"
@@ -608,7 +472,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "createdAt": "2017-11-02T11:18:48.820Z"
             }
 
-## Get Recipes with the Most Upvotes [GET /recipes{?sort,order,page,limit}]
+### Get Recipes with the Most Upvotes [GET /recipes{?sort,order,page,limit}]
 
 + Parameters
     + sort: upvotes (string, required) - String to be sorted by.
@@ -620,164 +484,62 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
-        [
-            {
-                "id": 10,
-                "recipeName": "Peppered Chicken",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "1 Cup of Tomato Stew",
-                    "1 Kilo of Chicken"
+        {   
+            recipes: [
+                {
+                    "id": 2,
+                    "recipeName": "Fried Rice",
+                    "recipeImage": null,
+                    "prepTime": "30 Minutes",
+                    "cookTime": "20 Minutes",
+                    "totalTime": "1 Hour",
+                    "difficulty": "Normal",
+                    "extraInfo": "Nigerian Party Staple",
+                    "vegetarian": false,
+                    "ingredients": [
+                        "2 Cups of Rice",
+                        "1 Kilo of Chicken"
+                    ],
+                    "preparations": [
+                        "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                        "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                        "Cut ingredients into small pieces"
+                    ],
+                    "directions": [
+                        "Parboil Rice till half done",
+                        "Steam ingredients in oil till almost soft"
+                    ],
+                    "upvotes": 3,
+                    "downvotes": 4,
+                    "views": 13,
+                    "createdAt": "2017-10-30T00:47:03.687Z",
+                    "updatedAt": "2018-02-12T10:49:51.707Z",
+                    "userId": 2,
+                    "User": {
+                        "id": 2,
+                        "username": "praiseshaguy"
+                    }
+                },
+                ...
+            ],
+            metadata: {
+                "pages": [
+                    1,
+                    2
                 ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Put already fried tomato stew on fire, add little water and seasoning to taste",
-                    "Add chicken and stir",
-                    "Simmer on low heat for 3 minutes"
-                ],
-                "upvotes": 10,
-                "downvotes": 0,
-                "views": 50,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 2,
-                "rating": "4.0000000000000000"
-            },
-            {
-                "id": 5,
-                "recipeName": "Egusi Soup",
-                "recipeImage": null,
-                "prepTime": "10 Minutes",
-                "cookTime": "30 Minutes",
-                "totalTime": "40 Minutes",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Ground Egusi",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Fry Onions in Palm Oil till transluscent",
-                    "Add Egusi and fry till oil separates from egusi"
-                ],
-                "upvotes": 9,
-                "downvotes": 0,
-                "views": 30,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 6,
-                "rating": "4.5000000000000000"
-            },
-            {
-                "id": 15,
-                "recipeName": "White Soup",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "I don't even know how to cook white soup"
-                ],
-                "upvotes": 7,
-                "downvotes": 2,
-                "views": 49,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 8,
-                "rating": "5.0000000000000000"
-            },
-            {
-                "id": 11,
-                "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
-                "recipeImage": null,
-                "prepTime": "10 Minutes",
-                "cookTime": "30 Minutes",
-                "totalTime": "40 Minutes",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "Okro",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Add Okro to little boiling water and beat until it draws",
-                    "Add ingredients"
-                ],
-                "upvotes": 6,
-                "downvotes": 3,
-                "views": 27,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 6,
-                "rating": "5.0000000000000000"
-            },
-            {
-                "id": 7,
-                "recipeName": "Chicken Stew",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "30 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "Stew Base",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Fry already boiled stew base till done",
-                    "Add chicken stock and ingredients to taste"
-                ],
-                "upvotes": 5,
-                "downvotes": 4,
-                "views": 20,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 9,
-                "rating": "3.0000000000000000"
-            },
-            ...
-        ]       
+                "totalCount": 12,
+                "itemsPerPage": 10,
+                "page": 1,
+                "lastPage": 2,
+                "firstPage": 1
+            }
+        } 
 
-## Search Recipes by Name or Ingredients [GET /recipes{?search,page,limit}]
+### Search Recipes by Name or Ingredients [GET /recipes{?search,page,limit}]
 
 + Parameters
     + search: rice (string, required) - String to search for.
@@ -788,11 +550,78 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 200 (application/json)
 
-        [
+        {   
+            recipes: [
+                {
+                    "id": 2,
+                    "recipeName": "Fried Rice",
+                    "recipeImage": null,
+                    "prepTime": "30 Minutes",
+                    "cookTime": "20 Minutes",
+                    "totalTime": "1 Hour",
+                    "difficulty": "Normal",
+                    "extraInfo": "Nigerian Party Staple",
+                    "vegetarian": false,
+                    "ingredients": [
+                        "2 Cups of Rice",
+                        "1 Kilo of Chicken"
+                    ],
+                    "preparations": [
+                        "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                        "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                        "Cut ingredients into small pieces"
+                    ],
+                    "directions": [
+                        "Parboil Rice till half done",
+                        "Steam ingredients in oil till almost soft"
+                    ],
+                    "upvotes": 3,
+                    "downvotes": 4,
+                    "views": 13,
+                    "createdAt": "2017-10-30T00:47:03.687Z",
+                    "updatedAt": "2018-02-12T10:49:51.707Z",
+                    "userId": 2,
+                    "User": {
+                        "id": 2,
+                        "username": "praiseshaguy"
+                    }
+                },
+                ...
+            ],
+            metadata: {
+                "pages": [
+                    1,
+                    2
+                ],
+                "totalCount": 12,
+                "itemsPerPage": 10,
+                "page": 1,
+                "lastPage": 2,
+                "firstPage": 1
+            }
+        }
+
+## Single Recipe [/recipes/{recipeId}]
+
++ Parameters
+    + recipeId: `16` (number, required) - ID of the Recipe in form of an integer
+
+### Get a Recipe [GET]
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+
++ Response 200 (application/json)
+
+    + Body 
+
             {
                 "id": 1,
                 "recipeName": "Coconut Rice",
@@ -816,260 +645,42 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "Parboil Rice till half done",
                     "Put already fried tomato stew on fire, add water and seasoning to taste"
                 ],
+                "upvotes": 2,
+                "downvotes": 7,
+                "views": 61,
                 "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 1,
-                "rating": "3.5000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            {
-                "id": 2,
-                "recipeName": "Fried Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Cut ingredients into small pieces"
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Steam ingredients in oil till almost soft"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 2,
-                "rating": "4.5000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            {
-                "id": 3,
-                "recipeName": "Rice and Beans",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1.5 Cups of Beans",
-                    "1 kilo of chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Cook beans with onions till almost done"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 3,
-                "rating": "5.0000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            },
-            {
-                "id": 9,
-                "recipeName": "Jollof Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Put already fried tomato stew on fire, add water and seasoning to taste"
-                ],
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
+                "updatedAt": "2018-02-12T13:45:41.447Z",
                 "userId": 1,
                 "rating": "3.0000000000000000",
-                "likes": [
-                    {
-                        "upvote": true
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    },
-                    {
-                        "upvote": false
-                    }
-                ]
-            }
-        ]
-
-## Get/Modify/Delete Recipe [/recipes/{recipeId}]
-
-+ Parameters
-    + recipeId: `16` (number, required) - ID of the Recipe in form of an integer
-
-### Get a Recipe [GET]
-
-+ Request (application/json)
-
-    + Headers
-
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
-
-+ Response 200 (application/json)
-
-    + Body 
-
-            {
-                "id": 15,
-                "recipeName": "White Soup",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "Nigerian Party Staple",
-                "vegetarian": false,
-                "ingredients": [
-                    "1 Kilo of Chicken"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                ],
-                "directions": [
-                    "I don't even know how to cook white soup"
-                ],
-                "upvotes": 7,
-                "downvotes": 2,
-                "views": 50,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2017-10-30T00:47:03.687Z",
-                "userId": 8,
-                "rating": "5.0000000000000000",
                 "reviews": [
                     {
-                        "rating": 5,
-                        "comment": "Excellent",
-                        "userId": 6
-                    }
+                        "rating": 3,
+                        "comment": "Good",
+                        "userId": 2
+                    },
+                    ...
+                ],
+                "User": {
+                    "id": 1,
+                    "username": "iverenshaguy"
+                },
+                "favorites": [
+                    {
+                        "favorite": true,
+                        "userId": 5
+                    },
+                    ...
+                ],
+                "likes": [
+                    {
+                        "upvote": true,
+                        "userId": 5
+                    },
+                    ...
                 ]
             }
 
-### Modify Recipe [PUT]
+### Modify a Recipe [PUT]
 
 This action allows you to modify an existing recipe added by you.
 
@@ -1098,7 +709,7 @@ This action allows you to modify an existing recipe added by you.
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
     + Body
 
@@ -1146,7 +757,7 @@ This action allows you to modify an existing recipe added by you.
                 "reviews": []
             }
 
-### Delete Recipe [DELETE]
+### Delete a Recipe [DELETE]
 
 This action allows you to delete an existing recipe added by you.
 
@@ -1154,7 +765,7 @@ This action allows you to delete an existing recipe added by you.
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 204(application/json)
 
@@ -1169,7 +780,7 @@ You may upvote recipes using this action. It takes no input. Sending it again wi
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 201 (application/json)
 
@@ -1196,7 +807,7 @@ You may downvote recipes using this action. It takes no input. Sending it again 
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 201 (application/json)
 
@@ -1212,48 +823,6 @@ You may downvote recipes using this action. It takes no input. Sending it again 
                 downvotes: 2
             }
 
-## Review a Recipe [POST /recipes/{recipeId}/reviews]
-
-You may review a recipe using this action. It takes a JSON object containing a review.
-
-+ Parameters
-    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer.
-
-+ Attributes 
-
-    + rating (number, required)  - A number from 1 - 5 with 1 being the lowest and 5 being the highest rating.
-    + comment (string, optional) - A comment to add to the review.
-
-+ Request (application/json)
-    + Headers
-
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
-
-    + Body
-
-            {
-                "rating": 5,
-                "comment": "Excellent Recipe. Loved it"
-            }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /recipes/8/reviews/22
-    
-    + Body
-
-            {
-                "id": 22,
-                "rating": 5,
-                "comment": "Excellent Recipe. Loved it",
-                "recipeId": 8,
-                "userId": 1,
-                "updatedAt": "2017-11-02T11:55:26.941Z",
-                "createdAt": "2017-11-02T11:55:26.941Z"
-            }
-
 ## Add a Recipe to Favorites [POST /recipes/{recipeId}/favorites]
 
 You may add a recipe to your favorite recipes using this action. It takes no input. Sending it again will unfavorite the recipe.
@@ -1265,7 +834,7 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
 
     + Headers
 
-            authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
 
 + Response 201 (application/json)
 
@@ -1307,65 +876,92 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
                         "updatedAt": "2017-10-30T00:47:03.687Z",
                         "userId": 6
                     },
-                    {
-                        "id": 11,
-                        "recipeName": "Mixed Okro Soup (Obe Ila Asepo)",
-                        "recipeImage": null,
-                        "prepTime": "10 Minutes",
-                        "cookTime": "30 Minutes",
-                        "totalTime": "40 Minutes",
-                        "difficulty": "Normal",
-                        "extraInfo": "",
-                        "vegetarian": false,
-                        "ingredients": [
-                            "Okro",
-                            "1 Kilo of Chicken"
-                        ],
-                        "preparations": [
-                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                        ],
-                        "directions": [
-                            "Add Okro to little boiling water and beat until it draws",
-                            "Add ingredients"
-                        ],
-                        "upvotes": 6,
-                        "downvotes": 3,
-                        "views": 27,
-                        "createdAt": "2017-10-30T00:47:03.687Z",
-                        "updatedAt": "2017-10-30T00:47:03.687Z",
-                        "userId": 6
-                    },
-                    {
-                        "id": 10,
-                        "recipeName": "Peppered Chicken",
-                        "recipeImage": null,
-                        "prepTime": "30 Minutes",
-                        "cookTime": "20 Minutes",
-                        "totalTime": "1 Hour",
-                        "difficulty": "Normal",
-                        "extraInfo": "Nigerian Party Staple",
-                        "vegetarian": false,
-                        "ingredients": [
-                            "1 Cup of Tomato Stew",
-                            "1 Kilo of Chicken"
-                        ],
-                        "preparations": [
-                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
-                        ],
-                        "directions": [
-                            "Put already fried tomato stew on fire, add little water and seasoning to taste",
-                            "Add chicken and stir",
-                            "Simmer on low heat for 3 minutes"
-                        ],
-                        "upvotes": 10,
-                        "downvotes": 0,
-                        "views": 50,
-                        "createdAt": "2017-10-30T00:47:03.687Z",
-                        "updatedAt": "2017-10-30T00:47:03.687Z",
-                        "userId": 2
-                    },
                     ...
                 ]       
+            }
+
+## Post a Review for a Recipe [POST /recipes/{recipeId}/reviews]
+
+You may review a recipe using this action. It takes a JSON object containing a review.
+
++ Parameters
+    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer.
+
++ Attributes 
+
+    + rating (number, required)  - A number from 1 - 5 with 1 being the lowest and 5 being the highest rating.
+    + comment (string, optional) - A comment to add to the review.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+
+    + Body
+
+            {
+                "rating": 5,
+                "comment": "Excellent Recipe. Loved it"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /recipes/8/reviews/22
+    
+    + Body
+
+            {
+                "id": 22,
+                "rating": 5,
+                "comment": "Excellent Recipe. Loved it",
+                "recipeId": 8,
+                "userId": 1,
+                "updatedAt": "2017-11-02T11:55:26.941Z",
+                "createdAt": "2017-11-02T11:55:26.941Z"
+            }
+
+## Get Reviews for a Recipe [GET /recipes/{recipeId}/reviews]
+
++ Parameters
+    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer. 
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE'
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "reviews": [
+                    {
+                        "id": 3,
+                        "rating": 3,
+                        "comment": "Good",
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2017-10-30T00:47:03.687Z",
+                        "recipeId": 1,
+                        "userId": 2,
+                        "User": {
+                            "id": 2,
+                            "username": "praiseshaguy"
+                        }
+                    },
+                    ...
+                ],
+                "metadata": {
+                    "pages": [
+                        1
+                    ],
+                    "totalCount": 2,
+                    "itemsPerPage": 2,
+                    "page": 1,
+                    "lastPage": 1,
+                    "firstPage": 1
+                }
             }

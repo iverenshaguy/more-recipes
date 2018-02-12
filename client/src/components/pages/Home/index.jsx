@@ -101,7 +101,7 @@ class Home extends Component {
    * @returns {fragment} Recipe items
    */
   renderBody() {
-    const { isFetching, recipes, metaData } = this.props;
+    const { isFetching, recipes, metadata } = this.props;
     const { title } = this.state;
 
     if (isFetching) {
@@ -113,7 +113,7 @@ class Home extends Component {
         title={title}
         recipes={recipes}
         handlePageChange={this.handlePageChange}
-        metaData={metaData}
+        metadata={metadata}
       />
     );
   }
@@ -140,7 +140,7 @@ class Home extends Component {
 const mapStateToProps = state => ({
   isFetching: state.isFetching,
   recipes: state.recipes.recipes,
-  metaData: state.recipes.metaData
+  metadata: state.recipes.metadata
 });
 
 export { Home as HomeComponent };

@@ -68,13 +68,13 @@ const singleRecipePropTypes = {
 
 const multiRecipePropTypes = {
   recipes: PropTypes.arrayOf(recipePropTypes).isRequired,
-  metaData: PropTypes.shape({
+  metadata: PropTypes.shape({
     firstPage: PropTypes.number,
     lastPage: PropTypes.number,
     page: PropTypes.number,
-    pageRecipeCount: PropTypes.number,
+    itemsPerPage: PropTypes.number,
     pages: PropTypes.arrayOf(PropTypes.number),
-    totalRecipeCount: PropTypes.number,
+    totalCount: PropTypes.number,
   }).isRequired,
 };
 

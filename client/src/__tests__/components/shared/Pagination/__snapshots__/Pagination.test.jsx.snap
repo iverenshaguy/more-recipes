@@ -14,18 +14,18 @@ exports[`Pagination disables first and previous links when current page == first
       },
     ]
   }
-  metaData={
+  metadata={
     Object {
       "firstPage": 1,
+      "itemsPerPage": 5,
       "lastPage": 3,
       "page": 1,
-      "pageRecipeCount": 5,
       "pages": Array [
         1,
         2,
         3,
       ],
-      "totalRecipeCount": 13,
+      "totalCount": 13,
     }
   }
   onPageChange={[Function]}
@@ -225,18 +225,18 @@ exports[`Pagination disables first and previous links when current page == lastp
       },
     ]
   }
-  metaData={
+  metadata={
     Object {
       "firstPage": 1,
+      "itemsPerPage": 5,
       "lastPage": 3,
       "page": 3,
-      "pageRecipeCount": 5,
       "pages": Array [
         1,
         2,
         3,
       ],
-      "totalRecipeCount": 13,
+      "totalCount": 13,
     }
   }
   onPageChange={[Function]}
@@ -436,18 +436,18 @@ exports[`Pagination renders correctly 1`] = `
       },
     ]
   }
-  metaData={
+  metadata={
     Object {
       "firstPage": 1,
+      "itemsPerPage": 5,
       "lastPage": 3,
       "page": 2,
-      "pageRecipeCount": 5,
       "pages": Array [
         1,
         2,
         3,
       ],
-      "totalRecipeCount": 13,
+      "totalCount": 13,
     }
   }
   onPageChange={[Function]}
@@ -647,16 +647,16 @@ exports[`Pagination renders correctly when there is only one page 1`] = `
       },
     ]
   }
-  metaData={
+  metadata={
     Object {
       "firstPage": 1,
+      "itemsPerPage": 2,
       "lastPage": 1,
       "page": 1,
-      "pageRecipeCount": 2,
       "pages": Array [
         1,
       ],
-      "totalRecipeCount": 2,
+      "totalCount": 2,
     }
   }
   onPageChange={[Function]}

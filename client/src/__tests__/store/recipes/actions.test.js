@@ -14,7 +14,7 @@ const mockStore = configureMockStore(middlewares);
 
 const recipesResponse = {
   recipes: [{ id: 1, recipeName: 'Rice' }, { id: 5, recipeName: 'Beans' }],
-  metaData: {
+  metadata: {
     page: 1
   }
 };
@@ -23,7 +23,7 @@ const recipesResponse = {
 const store = mockStore({
   recipes: [],
   errorMessage: '',
-  metaData: {}
+  metadata: {}
 });
 
 describe('Recipes Actions', () => {
@@ -142,7 +142,7 @@ describe('Recipes Actions', () => {
         expect(actionTypes).toEqual(expectedActions);
         expect(dispatchedActions[1].payload).toEqual({
           recipes: [],
-          metaData: {}
+          metadata: {}
         });
       });
     });

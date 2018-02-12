@@ -13,10 +13,10 @@ describe('Search For Recipes', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.recipes).to.have.lengthOf(3);
-        expect(res.body.metaData.totalRecipeCount).to.equal(3);
-        expect(res.body.metaData.pageRecipeCount).to.equal(3);
-        expect(res.body.metaData.page).to.equal(1);
-        expect(res.body.metaData.lastPage).to.equal(1);
+        expect(res.body.metadata.totalCount).to.equal(3);
+        expect(res.body.metadata.itemsPerPage).to.equal(3);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(1);
         expect(res.body.recipes[0].recipeName).to.equal('Rice and Beans');
         expect(res.body.recipes[1].recipeName).to.equal('Fried Rice');
         expect(res.body.recipes[2].recipeName).to.equal('Jollof Rice');
@@ -39,10 +39,10 @@ describe('Search For Recipes', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.recipes).to.have.lengthOf(1);
-        expect(res.body.metaData.totalRecipeCount).to.equal(3);
-        expect(res.body.metaData.pageRecipeCount).to.equal(1);
-        expect(res.body.metaData.page).to.equal(2);
-        expect(res.body.metaData.lastPage).to.equal(2);
+        expect(res.body.metadata.totalCount).to.equal(3);
+        expect(res.body.metadata.itemsPerPage).to.equal(1);
+        expect(res.body.metadata.page).to.equal(2);
+        expect(res.body.metadata.lastPage).to.equal(2);
         expect(res.body.recipes[0].recipeName).to.equal('Jollof Rice');
 
         if (err) {
@@ -63,10 +63,10 @@ describe('Search For Recipes', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.recipes).to.have.lengthOf(1);
-        expect(res.body.metaData.totalRecipeCount).to.equal(3);
-        expect(res.body.metaData.pageRecipeCount).to.equal(1);
-        expect(res.body.metaData.page).to.equal(2);
-        expect(res.body.metaData.lastPage).to.equal(2);
+        expect(res.body.metadata.totalCount).to.equal(3);
+        expect(res.body.metadata.itemsPerPage).to.equal(1);
+        expect(res.body.metadata.page).to.equal(2);
+        expect(res.body.metadata.lastPage).to.equal(2);
         expect(res.body.recipes[0].recipeName).to.equal('Jollof Rice');
 
         if (err) {
@@ -87,10 +87,10 @@ describe('Search For Recipes', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.recipes).to.have.lengthOf(2);
-        expect(res.body.metaData.totalRecipeCount).to.equal(3);
-        expect(res.body.metaData.pageRecipeCount).to.equal(2);
-        expect(res.body.metaData.page).to.equal(1);
-        expect(res.body.metaData.lastPage).to.equal(2);
+        expect(res.body.metadata.totalCount).to.equal(3);
+        expect(res.body.metadata.itemsPerPage).to.equal(2);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(2);
         expect(res.body.recipes[0].recipeName).to.equal('Rice and Beans');
         expect(res.body.recipes[1].recipeName).to.equal('Fried Rice');
 
@@ -101,7 +101,7 @@ describe('Search For Recipes', () => {
       });
   });
 
-  it('should return \'Your search returned no results\' for unavailable search term', (done) => {
+  it('should return no recipes for unavailable search term', (done) => {
     agent
       .get('/api/v1/recipes')
       .query({ search: 'puffpuff', limit: '2', page: '2' })
@@ -109,7 +109,7 @@ describe('Search For Recipes', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Your search returned no results');
+        expect(res.body.recipes).to.have.lengthOf(0);
 
         if (err) return done(err);
         done();
@@ -123,7 +123,7 @@ describe('Search For Recipes', () => {
       }).then(() => done(), err => done(err));
     });
 
-    it('should get no upvoted recipes with message \'There are no upvoted recipes\'', (done) => {
+    it('should get no upvoted recipes', (done) => {
       agent
         .get('/api/v1/recipes')
         .query({ sort: 'upvotes', order: 'ascending' })
@@ -131,7 +131,7 @@ describe('Search For Recipes', () => {
         .set('authorization', iverenToken)
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.message).to.equal('There are no upvoted recipes');
+          expect(res.body.recipes).to.have.lengthOf(0);
 
           if (err) {
             return done(err);

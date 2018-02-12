@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../RecipeCard';
 import Pagination from '../Pagination';
-import getNoResultTitle from '../../../helpers/getNoResultTitle';
+import getNoResultText from '../../../helpers/getNoResultText';
 import { multiRecipePropTypes } from '../../../helpers/proptypes';
 import './RecipeItems.scss';
 
@@ -23,7 +23,7 @@ const RecipeItems = props => (
     <div className="row pt-2 px-5" id="search-result">
       {props.recipes.length === 0 &&
         <div className="col">
-          {props.recipes.length === 0 && <div className="text-center pt-4">{getNoResultTitle(props.title)}</div>}
+          {props.recipes.length === 0 && <div className="text-center pt-4">{getNoResultText(props.title)}</div>}
         </div>}
       {props.recipes.length !== 0 &&
         props.recipes.map(recipe => (<RecipeCard key={recipe.id} recipe={recipe} />))}
@@ -31,7 +31,7 @@ const RecipeItems = props => (
     <Pagination
       items={props.recipes}
       onPageChange={props.handlePageChange}
-      metaData={props.metaData}
+      metadata={props.metadata}
     />
   </div>);
 

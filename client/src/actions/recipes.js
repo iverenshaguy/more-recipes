@@ -41,7 +41,7 @@ const searchRecipes = (value, page, limit) => async (dispatch) => {
     if (response.data.message && response.data.message === 'Your search returned no results') {
       response.data = {
         recipes: [],
-        metaData: {}
+        metadata: {}
       };
     }
 
