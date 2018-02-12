@@ -17,10 +17,6 @@ describe('Get Upvoted Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(10);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Peppered Chicken');
-        expect(res.body.recipes[1].recipeName).to.equal('Egusi Soup');
-        expect(res.body.recipes[2].recipeName).to.equal('White Soup');
-        expect(res.body.recipes[3].recipeName).to.equal('Mixed Okro Soup (Obe Ila Asepo)');
         expect(res.body.recipes[0]).to.have.property('User');
         expect(res.body.recipes[0].User).to.be.an('object');
 
@@ -44,10 +40,6 @@ describe('Get Upvoted Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(10);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Yam Pottage');
-        expect(res.body.recipes[1].recipeName).to.equal('Jollof Rice');
-        expect(res.body.recipes[2].recipeName).to.equal('Ogbona Soup');
-        expect(res.body.recipes[3].recipeName).to.equal('Beans and Plantain');
         expect(res.body.recipes[0]).to.have.property('User');
         expect(res.body.recipes[0].User).to.be.an('object');
 
@@ -73,7 +65,6 @@ describe('Get Upvoted Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(2);
         expect(res.body.metadata.page).to.equal(2);
         expect(res.body.metadata.lastPage).to.equal(7);
-        expect(res.body.recipes[0].recipeName).to.equal('White Soup');
         expect(res.body.recipes[0]).to.have.property('User');
         expect(res.body.recipes[0].User).to.be.an('object');
 
@@ -97,8 +88,6 @@ describe('Get Upvoted Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(10);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Sweet Potatoe Pottage');
-        expect(res.body.recipes[3].recipeName).to.equal('White Soup');
         expect(res.body.recipes[0]).to.have.property('User');
         expect(res.body.recipes[0].User).to.be.an('object');
 

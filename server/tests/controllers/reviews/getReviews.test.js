@@ -17,8 +17,6 @@ describe('Get Reviews for a Recipe', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(2);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(1);
-        expect(res.body.reviews[0].rating).to.equal(4);
-        expect(res.body.reviews[1].comment).to.equal('Excellent');
         expect(res.body.reviews[0]).to.have.property('User');
         expect(res.body.reviews[0].User).to.be.an('object');
 
@@ -44,8 +42,6 @@ describe('Get Reviews for a Recipe', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(1);
         expect(res.body.metadata.page).to.equal(2);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.reviews[0].rating).to.equal(5);
-        expect(res.body.reviews[0].comment).to.equal('Excellent');
         expect(res.body.reviews[0]).to.have.property('User');
         expect(res.body.reviews[0].User).to.be.an('object');
 

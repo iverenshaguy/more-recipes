@@ -17,9 +17,6 @@ describe('Search For Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(3);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(1);
-        expect(res.body.recipes[0].recipeName).to.equal('Rice and Beans');
-        expect(res.body.recipes[1].recipeName).to.equal('Fried Rice');
-        expect(res.body.recipes[2].recipeName).to.equal('Jollof Rice');
 
         if (err) {
           return done(err);
@@ -43,7 +40,6 @@ describe('Search For Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(1);
         expect(res.body.metadata.page).to.equal(2);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Jollof Rice');
 
         if (err) {
           return done(err);
@@ -67,7 +63,6 @@ describe('Search For Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(1);
         expect(res.body.metadata.page).to.equal(2);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Jollof Rice');
 
         if (err) {
           return done(err);
@@ -91,8 +86,6 @@ describe('Search For Recipes', () => {
         expect(res.body.metadata.itemsPerPage).to.equal(2);
         expect(res.body.metadata.page).to.equal(1);
         expect(res.body.metadata.lastPage).to.equal(2);
-        expect(res.body.recipes[0].recipeName).to.equal('Rice and Beans');
-        expect(res.body.recipes[1].recipeName).to.equal('Fried Rice');
 
         if (err) {
           return done(err);
