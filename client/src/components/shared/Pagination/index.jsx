@@ -14,7 +14,7 @@ class Pagination extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.any).isRequired,
     onPageChange: PropTypes.func.isRequired,
-    ...multiRecipePropTypes.metaData
+    ...multiRecipePropTypes.metadata
   };
 
   /**
@@ -36,10 +36,10 @@ class Pagination extends Component {
    * @return {nothing} Returns nothing
    */
   componentWillMount() {
-    const { metaData } = this.props;
+    const { metadata } = this.props;
     const {
-      totalRecipeCount, page, pageRecipeCount, firstPage, lastPage, pages
-    } = metaData;
+      totalCount, page, itemsPerPage, firstPage, lastPage, pages
+    } = metadata;
 
     if (this.props.items && this.props.items.length) {
       this.setState({
@@ -48,8 +48,8 @@ class Pagination extends Component {
           currentPage: page,
           totalPages: pages.length,
           pages,
-          pageRecipeCount,
-          totalRecipeCount,
+          itemsPerPage,
+          totalCount,
           lastPage
         }
       });

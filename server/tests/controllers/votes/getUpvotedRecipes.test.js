@@ -12,11 +12,13 @@ describe('Get Upvoted Recipes', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.lengthOf(14);
-        expect(res.body[0].recipeName).to.equal('Peppered Chicken');
-        expect(res.body[1].recipeName).to.equal('Egusi Soup');
-        expect(res.body[2].recipeName).to.equal('White Soup');
-        expect(res.body[3].recipeName).to.equal('Mixed Okro Soup (Obe Ila Asepo)');
+        expect(res.body.recipes).to.have.lengthOf(10);
+        expect(res.body.metadata.totalCount).to.equal(14);
+        expect(res.body.metadata.itemsPerPage).to.equal(10);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(2);
+        expect(res.body.recipes[0]).to.have.property('User');
+        expect(res.body.recipes[0].User).to.be.an('object');
 
         if (err) {
           return done(err);
@@ -33,11 +35,13 @@ describe('Get Upvoted Recipes', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.lengthOf(14);
-        expect(res.body[0].recipeName).to.equal('Yam Pottage');
-        expect(res.body[1].recipeName).to.equal('Jollof Rice');
-        expect(res.body[2].recipeName).to.equal('Rice and Beans');
-        expect(res.body[3].recipeName).to.equal('Beans and Plantain');
+        expect(res.body.recipes).to.have.lengthOf(10);
+        expect(res.body.metadata.totalCount).to.equal(14);
+        expect(res.body.metadata.itemsPerPage).to.equal(10);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(2);
+        expect(res.body.recipes[0]).to.have.property('User');
+        expect(res.body.recipes[0].User).to.be.an('object');
 
         if (err) {
           return done(err);
@@ -57,11 +61,12 @@ describe('Get Upvoted Recipes', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.recipes).to.have.lengthOf(2);
-        expect(res.body.metaData.totalRecipeCount).to.equal(14);
-        expect(res.body.metaData.pageRecipeCount).to.equal(2);
-        expect(res.body.metaData.page).to.equal(2);
-        expect(res.body.metaData.lastPage).to.equal(7);
-        expect(res.body.recipes[0].recipeName).to.equal('White Soup');
+        expect(res.body.metadata.totalCount).to.equal(14);
+        expect(res.body.metadata.itemsPerPage).to.equal(2);
+        expect(res.body.metadata.page).to.equal(2);
+        expect(res.body.metadata.lastPage).to.equal(7);
+        expect(res.body.recipes[0]).to.have.property('User');
+        expect(res.body.recipes[0].User).to.be.an('object');
 
         if (err) {
           return done(err);
@@ -78,28 +83,16 @@ describe('Get Upvoted Recipes', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body).to.have.lengthOf(15);
-        expect(res.body[0].recipeName).to.equal('Sweet Potatoe Pottage');
-        expect(res.body[3].recipeName).to.equal('White Soup');
+        expect(res.body.recipes).to.have.lengthOf(10);
+        expect(res.body.metadata.totalCount).to.equal(15);
+        expect(res.body.metadata.itemsPerPage).to.equal(10);
+        expect(res.body.metadata.page).to.equal(1);
+        expect(res.body.metadata.lastPage).to.equal(2);
+        expect(res.body.recipes[0]).to.have.property('User');
+        expect(res.body.recipes[0].User).to.be.an('object');
+
         if (err) return done(err);
         done();
       });
   });
-
-  // it('should not get any recipes', (done) => {
-  //   agent
-  //     .get(recipeURL)
-  //     .query({ sort: 'upvotes', order: 'ascending' })
-  //     .set('Accept', 'application/json')
-  //     .end((err, res) => {
-  //       expect(res.statusCode).to.equal(401);
-  //       expect(res.body.err
-  // or).to.equal('You are not authorized to access this page, please signin');
-
-  //       if (err) {
-  //         return done(err);
-  //       }
-  //       done();
-  //     });
-  // });
 });

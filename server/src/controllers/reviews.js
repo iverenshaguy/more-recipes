@@ -1,4 +1,5 @@
 import { Recipe, User, Review } from '../models';
+import getItems from '../helpers/getItems';
 
 export default {
   reviewRecipe: (req, reviewData, res, next) => Recipe
@@ -33,4 +34,19 @@ export default {
         .catch(next);
     })
     .catch(next),
+
+  getRecipeReviews: (req, reviewData, res, next) => Review
+    .findAll({
+      where: { recipeId: +reviewData.recipeId },
+      include: [
+        {
+          model: User,
+          as: 'User',
+          attributes: ['id', 'username']
+        }
+      ],
+      group: ['Review.id', 'User.id']
+    })
+    .then(reviews => getItems(req, res, reviews, 'reviews'))
+    .catch(next)
 };

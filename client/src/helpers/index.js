@@ -1,9 +1,9 @@
 import formHelpers from './formHelpers';
 import validations from './validations';
-import getNoResultTitle from './getNoResultTitle';
+import getNoResultText from './getNoResultText';
 
 export default {
   formHelpers,
   validations,
-  getNoResultTitle
+  getNoResultText
 };

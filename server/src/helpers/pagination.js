@@ -4,10 +4,11 @@
  */
 class Pagination {
   /**
+   * @constructor
    * @param {array} items
    * @param {number} limit
    */
-  constructor(items, limit = 5) {
+  constructor(items, limit = 10) {
     this.items = items;
     this.totalItems = items.length;
     this.limit = limit;
@@ -32,7 +33,7 @@ class Pagination {
    * @param {number} page
    * @return {object} - an object that contains recipes and metadata for the page
    */
-  getRecipesForPage(page = 1) {
+  getItemsForPage(page = 1) {
     // check that page is within range
     if (page > this.totalPages) {
       page = this.totalPages;
@@ -43,14 +44,14 @@ class Pagination {
     }
 
     const offset = (page - 1) * this.limit;
-    const recipes = this.items.slice(offset, offset + this.limit);
+    const paginatedItems = this.items.slice(offset, offset + this.limit);
 
     return {
-      recipesByPage: recipes,
-      metaData: {
+      itemsByPage: paginatedItems,
+      metadata: {
         pages: this.listPages(),
-        totalRecipeCount: this.totalItems,
-        pageRecipeCount: recipes.length,
+        totalCount: this.totalItems,
+        itemsPerPage: paginatedItems.length,
         page,
         lastPage: this.totalPages,
         firstPage: 1

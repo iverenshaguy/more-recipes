@@ -25,13 +25,13 @@ const props = {
       rating: '3.3600'
     }
   ],
-  metaData: {
+  metadata: {
     firstPage: 1,
     lastPage: 1,
     page: 1,
-    pageRecipeCount: 2,
+    itemsPerPage: 2,
     pages: [1],
-    totalRecipeCount: 2,
+    totalCount: 2,
   },
   handlePageChange: jest.fn()
 };
@@ -39,7 +39,7 @@ const props = {
 const emptyProps = {
   title: 'SEARCH RESULTS',
   recipes: [],
-  metaData: {},
+  metadata: {},
   handlePageChange: jest.fn()
 };
 

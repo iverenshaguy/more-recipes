@@ -6,13 +6,13 @@ import app from '../../src/bin/www';
 const rootURL = '/api/v1';
 const agent = request.agent(app);
 
-const expiredToken = jwt.sign({ id: 1 }, process.env.SECRET, { expiresIn: 1 });
-const invalidToken = jwt.sign({}, process.env.SECRET, { expiresIn: 86400 });
-const wrongSecretToken = jwt.sign({ id: 1 }, 'fakesecret', { expiresIn: 86400 });
+const expiredToken = `Bearer ${jwt.sign({ id: 1 }, process.env.SECRET, { expiresIn: 1 })}`;
+const invalidToken = `Bearer ${jwt.sign({}, process.env.SECRET, { expiresIn: 86400 })}`;
+const wrongSecretToken = `Bearer ${jwt.sign({ id: 1 }, 'fakesecret', { expiresIn: 86400 })}`;
 
 // users already seeded into db
 const tokens = {
-  iverenToken: jwt.sign({
+  iverenToken: `Bearer ${jwt.sign({
     id: 1,
     firstname: 'Iveren',
     lastname: 'Shaguy',
@@ -20,9 +20,9 @@ const tokens = {
     email: 'iverenshaguy@gmail.com',
     aboutMe: 'Smart',
     occupation: 'Software Developer'
-  }, process.env.SECRET, { expiresIn: '1 hour' }),
+  }, process.env.SECRET, { expiresIn: '1 hour' })}`,
 
-  emiolaToken: jwt.sign({
+  emiolaToken: `Bearer ${jwt.sign({
     id: 10,
     firstname: 'Emiola',
     lastname: 'Olasanmi',
@@ -30,7 +30,7 @@ const tokens = {
     email: 'emiolaolasanmi@gmail.com',
     aboutMe: 'Food Lover',
     occupation: 'Fashion Designer',
-  }, process.env.SECRET, { expiresIn: '1 hour' }),
+  }, process.env.SECRET, { expiresIn: '1 hour' })}`,
 };
 
 export default {

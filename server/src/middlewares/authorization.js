@@ -8,13 +8,15 @@ export default {
   // middleware function to check for authorised users
   authorize: (req, res, next) => {
     // token could provided via body, as a query string or in the header
-    const token = req.body.token || req.query.token || req.headers.authorization;
+    const bearerToken = req.headers.authorization;
 
-    if (!token) {
+    if (!bearerToken || bearerToken === undefined) {
       return res.status(401).send({
         error: 'You are not authorized to access this page, please signin'
       });
     }
+
+    const token = bearerToken.replace('Bearer ', '');
 
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       // unauthorized token

@@ -1,5 +1,5 @@
-import { Sequelize, sequelize, Recipe, Review } from '../models';
-import getRecipes from '../helpers/getRecipes';
+import { Sequelize, sequelize, Recipe, Review, User } from '../models';
+import getItems from '../helpers/getItems';
 
 const { Op } = Sequelize;
 
@@ -23,18 +23,17 @@ export default {
           model: Review,
           as: 'reviews',
           attributes: []
+        },
+        {
+          model: User,
+          as: 'User',
+          attributes: ['id', 'username']
         }
       ],
       order: [['upvotes', orderBy]],
-      group: ['Recipe.id']
+      group: ['Recipe.id', 'User.id']
     })
-      .then((recipes) => {
-        if (recipes.length === 0) {
-          return res.status(200).send({ message: 'There are no upvoted recipes' });
-        }
-
-        return getRecipes(req, res, recipes);
-      })
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   },
 
@@ -56,17 +55,16 @@ export default {
           model: Review,
           as: 'reviews',
           attributes: []
+        },
+        {
+          model: User,
+          as: 'User',
+          attributes: ['id', 'username']
         }
       ],
-      group: ['Recipe.id']
+      group: ['Recipe.id', 'User.id']
     })
-      .then((recipes) => {
-        if (recipes.length === 0) {
-          return res.status(200).send({ message: 'Your search returned no results' });
-        }
-
-        return getRecipes(req, res, recipes);
-      })
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   }
 };

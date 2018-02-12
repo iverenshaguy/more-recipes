@@ -2,8 +2,7 @@ import crypto from 'crypto';
 import config from '../../config/hash_config.json';
 
 export default {
-
-// Generate PBKDF2 hash
+  // Generate PBKDF2 hash
   hashPassword(password) {
     const {
       iterations,

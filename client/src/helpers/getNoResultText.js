@@ -1,4 +1,4 @@
-const getNoResultTitle = (title) => {
+const getNoResultText = (title) => {
   switch (title) {
     case 'TOP RECIPES':
       return 'There are no top recipes at the moment';
@@ -9,4 +9,4 @@ const getNoResultTitle = (title) => {
   }
 };
 
-export default getNoResultTitle;
+export default getNoResultText;

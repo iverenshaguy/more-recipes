@@ -13,6 +13,8 @@ recipeRoutes.put('/:recipeId', authorization.authorize, recipeValidation.updateR
 
 recipeRoutes.delete('/:recipeId', authorization.authorize, recipeValidation.getSingleRecipe, (req, res, next) => validationHandler(req, res, recipes.delete, next));
 
+recipeRoutes.get('/:recipeId/reviews', authorization.authorize, recipeValidation.getSingleRecipe, (req, res, next) => validationHandler(req, res, reviews.getRecipeReviews, next));
+
 recipeRoutes.post('/:recipeId/reviews', authorization.authorize, recipeValidation.reviewRecipe, (req, res, next) => validationHandler(req, res, reviews.reviewRecipe, next));
 
 recipeRoutes.post('/:recipeId/upvotes', authorization.authorize, recipeValidation.getSingleRecipe, (req, res, next) => validationHandler(req, res, votes.upvoteRecipe, next));

@@ -27,7 +27,7 @@ const initialValues = {
   recipes: {
     recipes: [],
     errorMessage: '',
-    metaData: {}
+    metadata: {}
   }
 };
 

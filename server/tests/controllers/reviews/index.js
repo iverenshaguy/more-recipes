@@ -1,1 +1,2 @@
-import './reviews.test';
+import './addReview.test';
+import './getReviews.test';
