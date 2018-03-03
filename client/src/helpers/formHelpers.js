@@ -5,7 +5,6 @@ const clearFormError = {
   login: clearAuthError(),
   signup: clearAuthError(),
   review: clearReviewError()
-  // TODO Change to Clear Review Error Action
 };
 
 const formFields = {

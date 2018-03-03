@@ -30,7 +30,7 @@ const SingleRecipeItem = (props) => {
         </div>
       </div>
       <div className="row px-xs-1 px-sm-2 px-md-2 px-lg-4 px-xl-5" id="recipe-details">
-        <div className="col-12 px-5">
+        <div className="col-12 px-xl-5 px-lg-5 px-md-5 px-sm-4 px-xs-3">
           <div className="heading p-5 text-center">
             <h3>{recipe.recipeItem.recipeName}</h3>
           </div>
@@ -47,7 +47,7 @@ const SingleRecipeItem = (props) => {
           </div>
           <RecipeDetailsSection recipe={recipe.recipeItem} />
           {!disableRecipeActions &&
-            <div className="d-none d-xs-none d-sm-none d-md-flex d-lg-flex pt-5 pb-1 row align-items-center" id="call-to-action">
+            <div className="d-flex pt-5 pb-1 align-items-center" id="call-to-action">
               <RenderIcon recipe={recipe} reviewed={reviewed} type="review" icon="star" handleClick={toggleReviewForm} />
               <RenderIcon recipe={recipe} type="favorite" icon="heart" handleClick={addRecipeToFavorites} />
               <RenderVoteIcon recipe={recipe} type="up" boolCheck handleClick={voteRecipe} />
@@ -58,32 +58,8 @@ const SingleRecipeItem = (props) => {
             !reviewed &&
             <AddReview id={recipe.recipeItem.id} />}
           <Reviews recipeId={recipe.recipeItem.id} />
-          {/*
-              TODO: Creating Notif Alert Component
-              <div className="alert alert-success notif hide" id="favorited" role="alert">
-                Added to Favorites!
-              </div>
-              <div className="alert alert-success notif hide" id="upvoted" role="alert">
-                Upvoted!
-              </div>
-              <div className="alert alert-success notif hide" id="downvoted" role="alert">
-                Downvoted!
-              </div>
-              <div className="alert alert-success notif hide" id="reviewed" role="alert">
-                Review Added Succesfully!
-              </div> */}
         </div>
       </div>
-      {/* TODO: Create side rating toolbar component
-          <div className="hidden-sm-down align-self-center" id="side-rating-toolbar">
-            <p><a href="#add-edit-modal" data-toggle="modal"
-            className="add-recipe"><i className="fa fa-lg fa-plus" /></a></p>
-            <p><a href="#" className="favorite"><i className="fa fa-lg fa-heart-o" /></a></p>
-            <p><a href="#" className="upvote"><i className="fa fa-lg fa-thumbs-o-up" /></a></p>
-            <p><a href="#" className="downvote"><i className="fa fa-lg fa-thumbs-o-down" /></a></p>
-            <p><a href="#social-modal" data-toggle="modal"
-            className="share"><i className="fa fa-lg fa-share-alt" /></a></p>
-          </div> */}
     </div>
   );
 };

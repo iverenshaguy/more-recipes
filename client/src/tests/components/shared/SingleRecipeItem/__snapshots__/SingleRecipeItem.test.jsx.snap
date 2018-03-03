@@ -22,7 +22,7 @@ exports[`SingleRecipeItem renders correctly 1`] = `
     id="recipe-details"
   >
     <div
-      className="col-12 px-5"
+      className="col-12 px-xl-5 px-lg-5 px-md-5 px-sm-4 px-xs-3"
     >
       <div
         className="heading p-5 text-center"
@@ -119,7 +119,7 @@ exports[`SingleRecipeItem renders correctly 1`] = `
         }
       />
       <div
-        className="d-none d-xs-none d-sm-none d-md-flex d-lg-flex pt-5 pb-1 row align-items-center"
+        className="d-flex pt-5 pb-1 align-items-center"
         id="call-to-action"
       >
         <RenderIcon
