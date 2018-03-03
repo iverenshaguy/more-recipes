@@ -1,16 +1,21 @@
-/* eslint-disable */
 import React from 'react';
-import { InputGroup, InputGroupButton, Button, Form, Label, Input } from 'reactstrap';
-import FontAwesome from 'react-fontawesome';
+import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
+import SearchForm from '../../shared/Forms/SearchForm';
 import { toggleModal } from '../../../actions/ui';
 
-const Hero = ({
-  dispatch,
-  handleSearch,
-  handleSearchInput,
-  searchValue
-}) => (
+/**
+ * @exports
+ * @function Hero
+ * @param {object} props
+ * @returns {JSX} Hero
+ */
+const Hero = (props) => {
+  const {
+    dispatch, handleSearch, handleSearchInput, searchValue
+  } = props;
+
+  return (
     <div className="container-fluid" id="hero-image">
       <div className="row mx-auto" id="hero-image-text">
         <div className="col align-self-center">
@@ -19,24 +24,12 @@ const Hero = ({
               <h3>Search for a Recipe</h3>
             </div>
             <div className="col-8 py-4">
-              <Form id="search-form" onSubmit={handleSearch}>
-                <InputGroup size="lg">
-                  <Label className="sr-only" for="search">
-                    Search for Recipes
-                  </Label>
-                  <Input
-                    id="search"
-                    placeholder="Curried Chicken Gravy..."
-                    onChange={handleSearchInput}
-                    value={searchValue}
-                  />
-                  <InputGroupButton>
-                    <Button type="submit" className="search-btn">
-                      <FontAwesome name="search" />
-                    </Button>
-                  </InputGroupButton>
-                </InputGroup>
-              </Form>
+              <SearchForm
+                size="lg"
+                handleSearch={handleSearch}
+                handleSearchInput={handleSearchInput}
+                searchValue={searchValue}
+              />
             </div>
           </div>
           <Button
@@ -50,11 +43,12 @@ const Hero = ({
         </div>
       </div>
     </div>);
+};
 
 Hero.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  handleSearchInput: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
+  handleSearchInput: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired
 };
 

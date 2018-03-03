@@ -1,5 +1,6 @@
-import { sequelize, Recipe, User, Review, Favorite, Like } from '../models';
+import { sequelize, Recipe, User, Review } from '../models';
 import getItems from '../helpers/getItems';
+import getRecipe from '../helpers/getRecipe';
 
 export default {
   create(req, recipeData, res, next) {
@@ -16,51 +17,17 @@ export default {
         ingredients: recipeData.ingredients,
         preparations: recipeData.preparations,
         directions: recipeData.directions
-      }, {
-        include: [
-          User
-        ]
-      })
+      }, { include: [User] })
       .then(recipe => res.status(201).send(recipe))
       .catch(next);
   },
 
   viewRecipe(req, recipeData, res, next) {
-    return Recipe
-      .findOne({
-        where: { id: +recipeData.recipeId },
-        attributes: {
-          include: [
-            [sequelize.fn('AVG', sequelize.col('reviews.rating')), 'rating'],
-          ],
-        },
-        include: [
-          {
-            model: Review,
-            as: 'reviews',
-            attributes: ['rating', 'comment', 'userId']
-          },
-          {
-            model: User,
-            as: 'User',
-            attributes: ['id', 'username']
-          },
-          // add favorite, like and unlike models to know recipe status as regards user
-          // i.e. if user has liked, unliked or favorited recipe
-          {
-            model: Favorite,
-            as: 'favorites',
-            attributes: ['favorite', 'userId']
-          },
-          {
-            model: Like,
-            as: 'likes',
-            attributes: ['upvote', 'userId']
-          },
-        ],
-        group: ['Recipe.id', 'reviews.id', 'User.id', 'favorites.id', 'likes.id']
-      })
-      .then(recipe => recipe.increment('views').then(() => res.status(200).send(recipe)))
+    return getRecipe(req.id, +recipeData.recipeId)
+      .then(responseObject => responseObject.recipeItem.increment('views').then((recipe) => {
+        responseObject.recipeItem = recipe;
+        return res.status(200).send(responseObject);
+      }))
       .catch(next);
   },
 
@@ -113,7 +80,7 @@ export default {
           {
             model: User,
             as: 'User',
-            attributes: ['id', 'username']
+            attributes: ['id', 'username', 'profilePic']
           }
         ],
         group: ['Recipe.id', 'User.id']

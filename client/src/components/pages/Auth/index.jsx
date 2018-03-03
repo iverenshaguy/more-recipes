@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 import Form from '../../shared/Forms';
-import setCurrentLocation from '../../../actions/location';
 import { authPropTypes } from '../../../helpers/proptypes';
 import './Auth.scss';
 
@@ -12,26 +11,18 @@ import './Auth.scss';
  * @exports
  * @class Auth
  * @extends Component
- * @returns {component} Auth
+ * @param {object} this.props
+ * @returns {JSX} Auth
  */
 class Auth extends Component {
   static propTypes = {
     ...authPropTypes,
     type: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
   };
 
   /**
-   * @memberof LoginForm
-   * @returns {nothing} Returns nothing
-   */
-  componentWillMount() {
-    this.props.dispatch(setCurrentLocation('auth'));
-  }
-
-  /**
    * @memberof Auth
-   * @returns {component} Auth
+   * @returns {JSX} Auth
    */
   render() {
     const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
@@ -43,13 +34,13 @@ class Auth extends Component {
     const signupMeta = {
       title: 'Register for a New Account',
       btnText: 'SIGN UP',
-      extra: <p className="text-center">Already have an account, <Link to="/login">Log in here</Link>.</p>
+      extra: <p className="text-center">Already have an account, <Link onClick={this.forceUpdate} to="/login">Log in here</Link>.</p>
     };
 
     const loginMeta = {
       title: 'Sign In to Your Account',
       btnText: 'SIGN IN',
-      extra: <p className="text-center">Dont have an account, <Link to="/signup">Sign up here</Link>.</p>
+      extra: <p className="text-center">Dont have an account, <Link onClick={this.forceUpdate} to="/signup">Sign up here</Link>.</p>
     };
 
     return (
@@ -68,12 +59,12 @@ class Auth extends Component {
   }
 }
 
-export { Auth as AuthComponent };
-
 const mapStateToProps = state => ({
   submitting: state.auth.loading,
   isAuthenticated: state.auth.isAuthenticated,
   submitError: state.auth.error
 });
+
+export { Auth as AuthComponent };
 
 export default connect(mapStateToProps)(Auth);

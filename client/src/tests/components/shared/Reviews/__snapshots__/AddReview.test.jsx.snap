@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddReview renders correctly 1`] = `
+<div
+  className="my-3"
+  id="review-wrapper"
+>
+  <div
+    id="review-div"
+  >
+    <div
+      className="card card-block px-md-5 px-sm-3 py-3"
+    >
+      <Connect(Form)
+        id={2}
+        meta={
+          Object {
+            "btnText": "Add Your Review",
+            "title": "Review this Recipe",
+          }
+        }
+        showReviewForm={true}
+        submitError={null}
+        submitting={false}
+        type="review"
+      />
+    </div>
+  </div>
+</div>
+`;

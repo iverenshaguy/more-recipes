@@ -8,7 +8,7 @@ const generateToken = (user) => {
       lastname: user.lastname,
       username: user.username,
       email: user.email.toLowerCase(),
-      image: user.profilePic,
+      profilePic: user.profilePic,
       aboutMe: user.aboutMe,
       occupation: user.occupation
     },

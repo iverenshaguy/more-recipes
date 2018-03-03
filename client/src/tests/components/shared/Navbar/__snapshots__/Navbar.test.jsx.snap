@@ -1,0 +1,375 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar logs user out on logout click 1`] = `
+<Navbar
+  className="navbar-expand"
+  color="faded"
+  expand={false}
+  id="more-recipes-navbar"
+  light={true}
+  tag="nav"
+>
+  <Link
+    className="navbar-brand"
+    replace={false}
+    to="/"
+  >
+    MORE RECIPES
+  </Link>
+  <div
+    className="collapse navbar-collapse justify-content-between"
+    id="navbarNav"
+  >
+    <Nav
+      className="ml-auto"
+      navbar={true}
+      tag="ul"
+      vertical={false}
+    >
+      <UncontrolledDropdown
+        className="justify-content-start notifications-link"
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="bell"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <div
+            className="container-fluid"
+          >
+            <p>
+              You have a new review
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              3 people viewed your recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Review your security details
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Chef Steve just posted a new recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              1 person added your recipe to their favorites
+            </p>
+          </div>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <div
+          className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline"
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            color="secondary"
+            nav={true}
+          >
+            <img
+              alt="User"
+              className="rounded-cirle"
+              src="images/user1.jpg"
+            />
+             
+            Dave
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            right={true}
+            tag="div"
+          >
+            <Link
+              className="dropdown-item"
+              replace={false}
+              to="/user/profile"
+            >
+              Profile
+            </Link>
+            <Link
+              className="dropdown-item"
+              replace={false}
+              to="/user/profile/edit"
+            >
+              Edit Profile
+            </Link>
+            <div
+              className="dropdown-divider"
+            />
+            <a
+              className="dropdown-item"
+              href="/login"
+              onClick={[Function]}
+            >
+              Log out
+            </a>
+          </DropdownMenu>
+        </div>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          className="menu-dropdown"
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="reorder"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <a
+            className="dropdown-item add-recipe"
+            data-toggle="modal"
+            href="#add-edit-modal"
+            title="New Recipe"
+          >
+            Add a Recipe
+          </a>
+          <Link
+            className="dropdown-item"
+            replace={false}
+            to="/recipes"
+          >
+            All Recipes
+          </Link>
+          <Link
+            className="dropdown-item"
+            replace={false}
+            to="/"
+          >
+            Top Recipes
+          </Link>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </Nav>
+  </div>
+</Navbar>
+`;
+
+exports[`Navbar renders correctly when app is not authenticated 1`] = `
+<div>
+  <Navbar
+    color="faded"
+    expand="md"
+    id="more-recipes-navbar"
+    light={true}
+    tag="nav"
+  >
+    <Link
+      className="navbar-brand"
+      replace={false}
+      to="/"
+    >
+      MORE RECIPES
+    </Link>
+  </Navbar>
+</div>
+`;
+
+exports[`Navbar renders correctly when type = home 1`] = `
+<Navbar
+  className="navbar-expand"
+  color="faded"
+  expand={false}
+  id="more-recipes-navbar"
+  light={true}
+  tag="nav"
+>
+  <Link
+    className="navbar-brand"
+    replace={false}
+    to="/"
+  >
+    MORE RECIPES
+  </Link>
+  <div
+    className="collapse navbar-collapse justify-content-between"
+    id="navbarNav"
+  >
+    <Nav
+      className="ml-auto"
+      navbar={true}
+      tag="ul"
+      vertical={false}
+    >
+      <UncontrolledDropdown
+        className="justify-content-start notifications-link"
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="bell"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <div
+            className="container-fluid"
+          >
+            <p>
+              You have a new review
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              3 people viewed your recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Review your security details
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              Chef Steve just posted a new recipe
+            </p>
+            <div
+              className="dropdown-divider"
+            />
+            <p>
+              1 person added your recipe to their favorites
+            </p>
+          </div>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <div
+          className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline"
+        >
+          <DropdownToggle
+            aria-haspopup={true}
+            color="secondary"
+            nav={true}
+          >
+            <img
+              alt="User"
+              className="rounded-cirle"
+              src="images/user1.jpg"
+            />
+             
+            Dave
+          </DropdownToggle>
+          <DropdownMenu
+            flip={true}
+            right={true}
+            tag="div"
+          >
+            <Link
+              className="dropdown-item"
+              replace={false}
+              to="/user/profile"
+            >
+              Profile
+            </Link>
+            <Link
+              className="dropdown-item"
+              replace={false}
+              to="/user/profile/edit"
+            >
+              Edit Profile
+            </Link>
+            <div
+              className="dropdown-divider"
+            />
+            <a
+              className="dropdown-item"
+              href="/login"
+              onClick={[Function]}
+            >
+              Log out
+            </a>
+          </DropdownMenu>
+        </div>
+      </UncontrolledDropdown>
+      <UncontrolledDropdown
+        nav={true}
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          className="menu-dropdown"
+          color="secondary"
+          nav={true}
+        >
+          <FontAwesome
+            name="reorder"
+            size="lg"
+          />
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <a
+            className="dropdown-item add-recipe"
+            data-toggle="modal"
+            href="#add-edit-modal"
+            title="New Recipe"
+          >
+            Add a Recipe
+          </a>
+          <Link
+            className="dropdown-item"
+            replace={false}
+            to="/recipes"
+          >
+            All Recipes
+          </Link>
+          <Link
+            className="dropdown-item"
+            replace={false}
+            to="/"
+          >
+            Top Recipes
+          </Link>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </Nav>
+  </div>
+</Navbar>
+`;

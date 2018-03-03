@@ -27,7 +27,7 @@ export default {
         {
           model: User,
           as: 'User',
-          attributes: ['id', 'username']
+          attributes: ['id', 'username', 'profilePic']
         }
       ],
       order: [['upvotes', orderBy]],
@@ -59,7 +59,7 @@ export default {
         {
           model: User,
           as: 'User',
-          attributes: ['id', 'username']
+          attributes: ['id', 'username', 'profilePic']
         }
       ],
       group: ['Recipe.id', 'User.id']

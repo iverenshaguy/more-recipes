@@ -6,7 +6,7 @@ import {
 } from '../actions/actionTypes';
 
 const initialState = {
-  recipes: [],
+  items: [],
   error: null,
   metadata: {}
 };
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case RECEIVE_TOP_RECIPES_SUCCESS:
     case RECEIVE_SEARCH_RESULTS_SUCCESS:
       return Object.assign({}, state, {
-        recipes: action.payload.recipes,
+        items: action.payload.recipes,
         metadata: action.payload.metadata
       });
     case RECEIVE_TOP_RECIPES_FAILURE:

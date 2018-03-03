@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -18,21 +18,17 @@ const AuthenticatedComponent = (props) => {
     location
   } = props;
 
-  if (authLoading) {
-    return <PreLoader />;
-  }
-
-  if (isAuthenticated) {
-    return <MyComponent {...props} />;
-  }
-
   return (
-    <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: location }
-      }}
-    />
+    <Fragment>
+      {authLoading && <PreLoader />}
+      {!authLoading && isAuthenticated && <MyComponent {...props} />}
+      {!authLoading && !isAuthenticated && <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location }
+        }}
+      />}
+    </Fragment>
   );
 };
 

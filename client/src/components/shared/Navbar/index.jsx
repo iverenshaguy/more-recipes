@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import {
-  Navbar,
   Nav,
-  NavItem,
-  UncontrolledDropdown,
+  Navbar,
+  DropdownMenu,
   DropdownToggle,
-  DropdownMenu
+  UncontrolledDropdown,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import { userPropTypes } from '../../../helpers/proptypes';
 import './Navbar.scss';
 
 /**
@@ -25,7 +25,6 @@ class NavbarWrapper extends Component {
    */
   constructor() {
     super();
-
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -44,13 +43,13 @@ class NavbarWrapper extends Component {
    * @returns {component} NavbarWrapper
    */
   render() {
-    if (!this.props.isAuthenticated || this.props.type === 'login' || this.props.type === 'signup') {
+    if (!this.props.isAuthenticated) {
       return (
         <div>
           <Navbar color="faded" light expand="md" id="more-recipes-navbar">
-            <NavLink to="/" className="navbar-brand">
+            <Link to="/" className="navbar-brand">
               MORE RECIPES
-            </NavLink>
+            </Link>
           </Navbar>
         </div>
       );
@@ -58,16 +57,11 @@ class NavbarWrapper extends Component {
 
     return (
       <Navbar color="faded" light className="navbar-expand" id="more-recipes-navbar">
-        <NavLink to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           MORE RECIPES
-        </NavLink>
+        </Link>
         <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
           <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink to="/" className="nav-link">
-                <FontAwesome name="home" />
-              </NavLink>
-            </NavItem>
             <UncontrolledDropdown nav className="justify-content-start notifications-link">
               <DropdownToggle nav>
                 <FontAwesome name="bell" size="lg" />
@@ -89,19 +83,19 @@ class NavbarWrapper extends Component {
             <UncontrolledDropdown nav>
               <div className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline">
                 <DropdownToggle nav>
-                  <img src="images/profile/user1.jpg" className="rounded-cirle" alt="User" /> {this.props.user && this.props.user.firstname}
+                  <img src="images/user1.jpg" className="rounded-cirle" alt="User" /> {this.props.user && this.props.user.firstname}
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <a className="dropdown-item" href="user-profile.html">
+                  <Link to="/user/profile" className="dropdown-item">
                     Profile
-                  </a>
-                  <a className="dropdown-item">Edit Profile</a>
-                  <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="user-profile.html">
+                  </Link>
+                  <Link to="/user/profile/edit" className="dropdown-item">Edit Profile</Link>
+                  {/* <div className="dropdown-divider" /> */}
+                  {/* <a className="dropdown-item" id="my-recipes" href="user-profile.html">
                     My Recipes
-                  </a>
-                  <div className="dropdown-divider" />
-                  <a className="dropdown-item">Settings</a>
+                  </a> */}
+                  {/* <div className="dropdown-divider" /> */}
+                  {/* <a className="dropdown-item">Settings</a> */}
                   <div className="dropdown-divider" />
                   <a className="dropdown-item" href="/login" onClick={this.handleClick}>
                     Log out
@@ -122,15 +116,15 @@ class NavbarWrapper extends Component {
                 >
                   Add a Recipe
                 </a>
-                <a className="dropdown-item" href="search-recipes-user.html">
+                <Link to="/recipes" className="dropdown-item">
                   All Recipes
-                </a>
-                <a className="dropdown-item get-favorites" href="user-profile.html">
+                </Link>
+                {/* <a className="dropdown-item get-favorites" href="user-profile.html">
                   Favorite Recipes
-                </a>
-                <a className="dropdown-item" href="top-recipes-user.html">
+                </a> */}
+                <Link to="/" className="dropdown-item">
                   Top Recipes
-                </a>
+                </Link>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -142,9 +136,8 @@ class NavbarWrapper extends Component {
 
 NavbarWrapper.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
-  user: PropTypes.any //eslint-disable-line
+  ...userPropTypes
 };
 
 export default NavbarWrapper;

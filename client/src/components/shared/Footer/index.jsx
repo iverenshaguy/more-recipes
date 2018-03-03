@@ -5,12 +5,12 @@ import './Footer.scss';
  * @exports
  * @function Footer
  * @extends Component
- * @returns {component} Footer
+ * @returns {JSX} Footer
  */
 const Footer = () => (
   <footer className="footer">
     <div className="container">
-      <p>© 2017 More Recipes</p>
+      <p>© {(new Date()).getFullYear()} More Recipes</p>
     </div>
   </footer>
 );

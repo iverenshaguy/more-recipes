@@ -8,7 +8,7 @@ export default (sequelize, DataTypes) => {
       },
       validate: {
         isIn: {
-          args: [[1, 2, 3, 4, 5]],
+          args: [[1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]],
           msg: 'Please rate the recipe'
         }
       }

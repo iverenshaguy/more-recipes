@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { logout } from '../../../actions/auth';
 import Navbar from '../Navbar';
+import { logout } from '../../../actions/auth';
+import { userPropTypes } from '../../../helpers/proptypes';
 
 /**
  * @exports Header
@@ -13,7 +14,7 @@ class Header extends Component {
   /**
    * @memberof Header
    * @constructor
-   * @returns {Component} Logged out User
+   * @returns {JSX} Logged out User
    */
   constructor() {
     super();
@@ -22,7 +23,7 @@ class Header extends Component {
 
   /**
    * @memberof Header
-   * @returns {Component} Logged out User
+   * @returns {JSX} Logged out User
    */
   logout() {
     this.props.dispatch(logout());
@@ -30,14 +31,13 @@ class Header extends Component {
 
   /**
    * @memberof Header
-   * @returns {Component} Header
+   * @returns {JSX} Header
    */
   render() {
     return (
       <header>
         <Navbar
           isAuthenticated={this.props.isAuthenticated}
-          type={this.props.currentLocation}
           logout={this.logout}
           user={this.props.user}
         />
@@ -48,14 +48,12 @@ class Header extends Component {
 
 Header.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  currentLocation: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
-  user: PropTypes.any //eslint-disable-line
+  ...userPropTypes
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  currentLocation: state.location.current,
   user: state.auth.user
 });
 

@@ -4,6 +4,23 @@ import formHelpers from './formHelpers';
 
 const { formFields } = formHelpers;
 
+const userPropTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    username: PropTypes.string,
+    email: PropTypes.string,
+    passwordHash: PropTypes.string,
+    aboutMe: PropTypes.string,
+    occupation: PropTypes.string,
+    profilePic: PropTypes.string,
+    coverPhoto: PropTypes.string,
+    createdAt: PropTypes.string,
+    updatedAt: PropTypes.string
+  }).isRequired
+};
+
 const authPropTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   location: PropTypes.shape({
@@ -20,6 +37,15 @@ const authPropTypes = {
       })
     })
   }).isRequired
+};
+
+const urlMatchPropTypes = {
+  match: PropTypes.shape({
+    url: PropTypes.string,
+    path: PropTypes.string,
+    isExact: PropTypes.bool,
+    params: PropTypes.any
+  }).isRequired,
 };
 
 const formPropTypes = type => ({
@@ -40,7 +66,16 @@ const formPropTypes = type => ({
   }).isRequired
 });
 
-const recipePropTypes = PropTypes.shape({
+const metadataPropTypes = PropTypes.shape({
+  firstPage: PropTypes.number,
+  lastPage: PropTypes.number,
+  page: PropTypes.number,
+  itemsPerPage: PropTypes.number,
+  pages: PropTypes.arrayOf(PropTypes.number),
+  totalCount: PropTypes.number,
+});
+
+const recipePropTypes = {
   id: PropTypes.number,
   recipeName: PropTypes.string,
   recipeImage: PropTypes.string,
@@ -60,22 +95,50 @@ const recipePropTypes = PropTypes.shape({
   updatedAt: PropTypes.string,
   userId: PropTypes.number,
   rating: PropTypes.string
-}).isRequired;
+};
 
 const singleRecipePropTypes = {
-  recipe: recipePropTypes
+  recipe: PropTypes.shape(recipePropTypes).isRequired
+};
+
+const recipeObjectPropTypes = {
+  recipe: PropTypes.shape({
+    isReviewed: PropTypes.bool,
+    isFavorited: PropTypes.bool,
+    vote: PropTypes.bool,
+    recipeItem: PropTypes.shape({
+      ...recipePropTypes,
+      User: PropTypes.shape({
+        userId: PropTypes.number,
+        username: PropTypes.string,
+        profilePic: PropTypes.string
+      })
+    })
+  })
 };
 
 const multiRecipePropTypes = {
-  recipes: PropTypes.arrayOf(recipePropTypes).isRequired,
-  metadata: PropTypes.shape({
-    firstPage: PropTypes.number,
-    lastPage: PropTypes.number,
-    page: PropTypes.number,
-    itemsPerPage: PropTypes.number,
-    pages: PropTypes.arrayOf(PropTypes.number),
-    totalCount: PropTypes.number,
-  }).isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.shape(recipePropTypes)).isRequired,
+  metadata: metadataPropTypes
+};
+
+const reviewPropTypes = PropTypes.shape({
+  rating: PropTypes.number.isRequired,
+  comment: PropTypes.string.isRequired,
+  User: PropTypes.shape({
+    userId: PropTypes.number,
+    username: PropTypes.string,
+    profilePic: PropTypes.string
+  })
+});
+
+const singleReviewPropTypes = {
+  review: reviewPropTypes
+};
+
+const multiReviewPropTypes = {
+  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  metadata: metadataPropTypes
 };
 
 const renderFormFieldPropTypes = {
@@ -99,7 +162,13 @@ const renderFormFieldPropTypes = {
 export default {
   authPropTypes,
   formPropTypes,
+  userPropTypes,
+  urlMatchPropTypes,
+  metadataPropTypes,
   multiRecipePropTypes,
+  multiReviewPropTypes,
   singleRecipePropTypes,
+  recipeObjectPropTypes,
+  singleReviewPropTypes,
   renderFormFieldPropTypes
 };

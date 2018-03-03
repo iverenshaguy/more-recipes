@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StickyBarComponent renders correctly 1`] = `
+<StickyBar
+  currentLocation="view-recipe"
+  dispatch={[Function]}
+>
+  <div
+    className="view-recipe"
+  >
+    <div
+      className="sticky-bar-wrapper text-center d-block d-sm-block d-md-none"
+    >
+      <div
+        className="sticky-bar text-center"
+      >
+        <div
+          className="nav-link d-inline"
+        >
+          <FontAwesome
+            className="home-icon"
+            name="home"
+            onClick={[Function]}
+            size="lg"
+            tag="i"
+          >
+            <i
+              aria-hidden={true}
+              className="fa fa-home fa-lg home-icon"
+              onClick={[Function]}
+            />
+          </FontAwesome>
+        </div>
+        <div
+          className="nav-link d-inline"
+        >
+          <FontAwesome
+            className="search-icon"
+            name="search"
+            onClick={[Function]}
+            size="lg"
+            tag="i"
+          >
+            <i
+              aria-hidden={true}
+              className="fa fa-search fa-lg search-icon"
+              onClick={[Function]}
+            />
+          </FontAwesome>
+        </div>
+        <div
+          className="nav-link d-inline"
+        >
+          <FontAwesome
+            id="add-edit-modal-icon"
+            name="plus"
+            onClick={[Function]}
+            size="lg"
+            tag="i"
+          >
+            <i
+              aria-hidden={true}
+              className="fa fa-plus fa-lg"
+              id="add-edit-modal-icon"
+              onClick={[Function]}
+            />
+          </FontAwesome>
+        </div>
+        <div
+          className="nav-link d-inline"
+        >
+          <FontAwesome
+            className="favorite-recipes-icon"
+            name="heart"
+            onClick={[Function]}
+            size="lg"
+            tag="i"
+          >
+            <i
+              aria-hidden={true}
+              className="fa fa-heart fa-lg favorite-recipes-icon"
+              onClick={[Function]}
+            />
+          </FontAwesome>
+        </div>
+        <div
+          className="nav-link d-inline"
+        >
+          <FontAwesome
+            className="user-icon"
+            name="user"
+            onClick={[Function]}
+            size="lg"
+            tag="i"
+          >
+            <i
+              aria-hidden={true}
+              className="fa fa-user fa-lg user-icon"
+              onClick={[Function]}
+            />
+          </FontAwesome>
+        </div>
+      </div>
+    </div>
+  </div>
+</StickyBar>
+`;
+
+exports[`StickyBarComponent renders no sticky bar when current location is '/login' 1`] = `
+<StickyBar
+  currentLocation="/login"
+  dispatch={[Function]}
+/>
+`;
+
+exports[`StickyBarComponent renders no sticky bar when current location is '/signup' 1`] = `
+<StickyBar
+  currentLocation="/signup"
+  dispatch={[Function]}
+/>
+`;

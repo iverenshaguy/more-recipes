@@ -1,11 +1,11 @@
 import { Recipe, Like } from '../models';
+import getRecipe from '../helpers/getRecipe';
 
 const handleVote = (req, res, upvoteData, bool, vote, voteOpp, next) => {
   const warning = `You can't ${vote} your own recipe`;
-  const responseMessage = (status, newRecipe, action) => res.status(status).send({
+  const responseMessage = (status, newRecipeObj, action) => res.status(status).send({
     message: `Your vote has been ${action}`,
-    upvotes: newRecipe.upvotes,
-    downvotes: newRecipe.downvotes
+    recipe: newRecipeObj
   });
 
   return Recipe
@@ -20,19 +20,18 @@ const handleVote = (req, res, upvoteData, bool, vote, voteOpp, next) => {
         .then((alreadyLiked) => {
           if (alreadyLiked !== null) {
             if (alreadyLiked.upvote === bool) {
-              alreadyLiked.destroy().then(() => recipe.decrement(`${vote}s`)
-                .then(newRecipe => responseMessage(200, newRecipe, 'removed')))
+              return alreadyLiked.destroy().then(() => recipe.decrement(`${vote}s`)
+                .then(() => getRecipe(req.id, +upvoteData.recipeId)
+                  .then(responseObject => responseMessage(200, responseObject, 'removed'))))
                 .catch(next);
-              return;
             }
 
-            alreadyLiked.update({ upvote: bool })
+            return alreadyLiked.update({ upvote: bool })
               .then(() => recipe.increment(`${vote}s`)
                 .then(() => recipe.decrement(`${voteOpp}s`)
-                  .then(newRecipe => responseMessage(201, newRecipe, 'recorded')).catch(next))
-                .catch(next))
+                  .then(() => getRecipe(req.id, +upvoteData.recipeId)
+                    .then(responseObject => responseMessage(201, responseObject, 'recorded')))))
               .catch(next);
-            return;
           }
 
           return Like
@@ -42,8 +41,8 @@ const handleVote = (req, res, upvoteData, bool, vote, voteOpp, next) => {
               userId: req.id
             })
             .then(() => recipe.increment(`${vote}s`)
-              .then(newRecipe => res.status(201).send(responseMessage(201, newRecipe, 'recorded')))
-              .catch(next))
+              .then(() => getRecipe(req.id, +upvoteData.recipeId)
+                .then(responseObject => responseMessage(201, responseObject, 'recorded'))))
             .catch(next);
         })
         .catch(next);

@@ -237,7 +237,7 @@ This allows you to refresh user token
 + Response 200 (application/json)
 
         {   
-            recipes: [
+            "recipes": [
                 {
                     "id": 2,
                     "recipeName": "Fried Rice",
@@ -274,7 +274,7 @@ This allows you to refresh user token
                 },
                 ...
             ],
-            metadata: {
+            "metadata": {
                 "pages": [
                     1,
                     2
@@ -330,7 +330,7 @@ A Recipe Object has the following attributes:
 + Response 200 (application/json)
 
         {   
-            recipes: [
+            "recipes": [
                 {
                     "id": 2,
                     "recipeName": "Fried Rice",
@@ -367,7 +367,7 @@ A Recipe Object has the following attributes:
                 },
                 ...
             ],
-            metadata: {
+            "metadata": {
                 "pages": [
                     1,
                     2
@@ -489,7 +489,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
 + Response 200 (application/json)
 
         {   
-            recipes: [
+            "recipes": [
                 {
                     "id": 2,
                     "recipeName": "Fried Rice",
@@ -521,12 +521,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "userId": 2,
                     "User": {
                         "id": 2,
-                        "username": "praiseshaguy"
+                        "username": "praiseshaguy",
+                        "profilePic": "www.profilepic.com/user.jpeg"
                     }
                 },
                 ...
             ],
-            metadata: {
+            "metadata": {
                 "pages": [
                     1,
                     2
@@ -555,7 +556,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
 + Response 200 (application/json)
 
         {   
-            recipes: [
+            "recipes": [
                 {
                     "id": 2,
                     "recipeName": "Fried Rice",
@@ -587,12 +588,13 @@ You may add you own recipe using this action. It takes a JSON object containing 
                     "userId": 2,
                     "User": {
                         "id": 2,
-                        "username": "praiseshaguy"
+                        "username": "praiseshaguy",
+                        "profilePic": "www.profilepic.com/user.jpeg"
                     }
                 },
                 ...
             ],
-            metadata: {
+            "metadata": {
                 "pages": [
                     1,
                     2
@@ -622,62 +624,42 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
     + Body 
 
-            {
-                "id": 1,
-                "recipeName": "Coconut Rice",
-                "recipeImage": null,
-                "prepTime": "30 Minutes",
-                "cookTime": "20 Minutes",
-                "totalTime": "1 Hour",
-                "difficulty": "Normal",
-                "extraInfo": "",
-                "vegetarian": false,
-                "ingredients": [
-                    "2 Cups of Rice",
-                    "1 Coconut"
-                ],
-                "preparations": [
-                    "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                    "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
-                    "Grate coconut and strain milk from it by boiling for a few minutes"
-                ],
-                "directions": [
-                    "Parboil Rice till half done",
-                    "Put already fried tomato stew on fire, add water and seasoning to taste"
-                ],
-                "upvotes": 2,
-                "downvotes": 7,
-                "views": 61,
-                "createdAt": "2017-10-30T00:47:03.687Z",
-                "updatedAt": "2018-02-12T13:45:41.447Z",
-                "userId": 1,
-                "rating": "3.0000000000000000",
-                "reviews": [
-                    {
-                        "rating": 3,
-                        "comment": "Good",
-                        "userId": 2
-                    },
-                    ...
-                ],
-                "User": {
-                    "id": 1,
-                    "username": "iverenshaguy"
-                },
-                "favorites": [
-                    {
-                        "favorite": true,
-                        "userId": 5
-                    },
-                    ...
-                ],
-                "likes": [
-                    {
-                        "upvote": true,
-                        "userId": 5
-                    },
-                    ...
-                ]
+            {   
+                "isReviewed": true,
+                "isFavorited": false,
+                "vote": null,
+                "recipeItem":    {
+                    "id": 16,
+                    "recipeName": "Pounded Yam",
+                    "prepTime": "30 Minutes",
+                    "cookTime": "20 Minutes",
+                    "totalTime": "1 Hour",
+                    "difficulty": "A Bit Difficult",
+                    "extraInfo": "Can be eaten with any of the soups in my other recipes",
+                    "vegetarian": false,
+                    "recipeImage": "www.addressofmyimage/myimage.jpg",
+                    "userId": 1,
+                    "ingredients": [
+                        "1 tuber of yam"
+                    ],
+                    "preparations": [
+                        "Cut Yam into small pieces",
+                        "Make sure every thing that isn't yam is removed from the cut pieces",
+                        "Boil Yam in plain water (without salt) till soft, but not too soft"
+                    ],
+                    "directions": [
+                        "Put about 2 pieces of yam and break till lump free",
+                        "Work up with more pieces",
+                        "When it is all broken pound till soft and soft"
+                    ],
+                    "updatedAt": "2017-11-02T11:18:48.820Z",
+                    "createdAt": "2017-11-02T11:18:48.820Z",
+                    "User": {
+                        "id": 6,
+                        "username": "abosedeshaguy",
+                        "profilePic": "www.profilepic.com/user.jpeg"
+                    }
+                }  
             }
 
 ### Modify a Recipe [PUT]
@@ -750,11 +732,10 @@ This action allows you to modify an existing recipe added by you.
                 "upvotes": 0,
                 "downvotes": 0,
                 "views": 0,
-                "createdAt": "2017-11-02T11:18:48.820Z",
-                "updatedAt": "2017-11-02T11:18:48.820Z",
                 "userId": 1,
                 "rating": "0",
-                "reviews": []
+                "createdAt": "2017-11-02T11:18:48.820Z",
+                "updatedAt": "2017-11-02T11:18:48.820Z",
             }
 
 ### Delete a Recipe [DELETE]
@@ -791,9 +772,48 @@ You may upvote recipes using this action. It takes no input. Sending it again wi
     + Body
 
             {
-                message: 'Your vote has been recored',
-                upvotes: 12,
-                downvotes: 1
+                "message": "Your vote has been recorded",
+                "recipe":  {
+                    "isReviewed": true,
+                    "isFavorited": false,
+                    "vote": "Upvoted",
+                    "recipeItem": {
+                        "id": 4,
+                        "recipeName": "Coconut Rice",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Rice",
+                            "1 Coconut"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                            "Grate coconut and strain milk from it by boiling for a few minutes"
+                        ],
+                        "directions": [
+                            "Parboil Rice till half done",
+                            "Put already fried tomato stew on fire, add water and seasoning to taste"
+                        ],
+                        "upvotes": 3,
+                        "downvotes": 7,
+                        "views": 62,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2018-02-14T15:22:45.945Z",
+                        "userId": 1,
+                        "rating": "3.0000000000000000",
+                        "User": {
+                            "id": 1,
+                            "username": "iverenshaguy",
+                            "profilePic": null
+                        },
+                    }
+                }
             }
 
 ## Downvote a Recipe [POST /recipes/{recipeId}/downvotes]
@@ -818,10 +838,49 @@ You may downvote recipes using this action. It takes no input. Sending it again 
     + Body
 
             {
-                message: 'Your vote has been recored',
-                upvotes: 11,
-                downvotes: 2
-            }
+                "message": "Your vote has been recorded",
+                "recipe":  {
+                    "isReviewed": true,
+                    "isFavorited": false,
+                    "vote": "Downvoted",
+                    "recipeItem": {
+                        "id": 4,
+                        "recipeName": "Coconut Rice",
+                        "recipeImage": null,
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
+                        "difficulty": "Normal",
+                        "extraInfo": "",
+                        "vegetarian": false,
+                        "ingredients": [
+                            "2 Cups of Rice",
+                            "1 Coconut"
+                        ],
+                        "preparations": [
+                            "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                            "Grate coconut and strain milk from it by boiling for a few minutes"
+                        ],
+                        "directions": [
+                            "Parboil Rice till half done",
+                            "Put already fried tomato stew on fire, add water and seasoning to taste"
+                        ],
+                        "upvotes": 3,
+                        "downvotes": 7,
+                        "views": 62,
+                        "createdAt": "2017-10-30T00:47:03.687Z",
+                        "updatedAt": "2018-02-14T15:22:45.945Z",
+                        "userId": 1,
+                        "rating": "3.0000000000000000",
+                        "User": {
+                            "id": 1,
+                            "username": "iverenshaguy",
+                            "profilePic": null
+                        },
+                    }
+                }
+            }           
 
 ## Add a Recipe to Favorites [POST /recipes/{recipeId}/favorites]
 
@@ -846,38 +905,47 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
     
             {
                 "message": "Recipe has been added to favorites",
-                "recipes": [
-                    {
-                        "id": 5,
-                        "recipeName": "Egusi Soup",
+                "recipe":  {
+                    "isReviewed": true,
+                    "isFavorited": true,
+                    "vote": null,
+                    "recipeItem": {
+                        "id": 4,
+                        "recipeName": "Coconut Rice",
                         "recipeImage": null,
-                        "prepTime": "10 Minutes",
-                        "cookTime": "30 Minutes",
-                        "totalTime": "40 Minutes",
+                        "prepTime": "30 Minutes",
+                        "cookTime": "20 Minutes",
+                        "totalTime": "1 Hour",
                         "difficulty": "Normal",
                         "extraInfo": "",
                         "vegetarian": false,
                         "ingredients": [
-                            "2 Cups of Ground Egusi",
-                            "1 Kilo of Chicken"
+                            "2 Cups of Rice",
+                            "1 Coconut"
                         ],
                         "preparations": [
                             "Cut the chicken into small pieces, season and leave to marinate for 1 hour. This can be done in advance to save time",
-                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock."
+                            "Boil on low heat for 25 minutes with little water to cook and preserve the chicken stock.",
+                            "Grate coconut and strain milk from it by boiling for a few minutes"
                         ],
                         "directions": [
-                            "Fry Onions in Palm Oil till transluscent",
-                            "Add Egusi and fry till oil separates from egusi"
+                            "Parboil Rice till half done",
+                            "Put already fried tomato stew on fire, add water and seasoning to taste"
                         ],
-                        "upvotes": 9,
-                        "downvotes": 0,
-                        "views": 30,
+                        "upvotes": 3,
+                        "downvotes": 7,
+                        "views": 62,
                         "createdAt": "2017-10-30T00:47:03.687Z",
-                        "updatedAt": "2017-10-30T00:47:03.687Z",
-                        "userId": 6
-                    },
-                    ...
-                ]       
+                        "updatedAt": "2018-02-14T15:22:45.945Z",
+                        "userId": 1,
+                        "rating": "3.0000000000000000",
+                        "User": {
+                            "id": 1,
+                            "username": "iverenshaguy",
+                            "profilePic": null
+                        },
+                    }
+                }
             }
 
 ## Post a Review for a Recipe [POST /recipes/{recipeId}/reviews]

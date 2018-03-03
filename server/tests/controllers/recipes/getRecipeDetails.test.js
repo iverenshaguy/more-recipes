@@ -14,10 +14,10 @@ describe('Get Recipe Details', () => {
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.recipeName).to.equal('Beans and Plantain');
-        expect(res.body.directions).to.be.an('array');
-        expect(res.body.ingredients[0]).to.equal('2 Cups of Beans');
-        expect(res.body.views).to.equal(20);
+        expect(res.body.recipeItem.recipeName).to.equal('Beans and Plantain');
+        expect(res.body.recipeItem.directions).to.be.an('array');
+        expect(res.body.recipeItem.ingredients[0]).to.equal('2 Cups of Beans');
+        expect(res.body.recipeItem.views).to.equal(20);
 
         if (err) {
           return done(err);

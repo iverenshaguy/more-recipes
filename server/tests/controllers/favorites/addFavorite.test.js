@@ -13,7 +13,7 @@ describe('Add Recipe to Favorites', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.message).to.equal('Recipe has been added to favorites');
-        expect(res.body.recipes).to.have.lengthOf(13);
+        expect(res.body.recipe.recipeItem.id).to.equal(16);
 
         if (err) {
           return done(err);
@@ -30,7 +30,7 @@ describe('Add Recipe to Favorites', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.message).to.equal('Recipe has been removed from favorites');
-        expect(res.body.recipes).to.have.lengthOf(12);
+        expect(res.body.recipe.recipeItem.id).to.equal(11);
 
         if (err) {
           return done(err);

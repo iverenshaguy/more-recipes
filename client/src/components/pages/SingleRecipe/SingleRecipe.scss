@@ -1,0 +1,153 @@
+@import '../../../assets/scss/modules';
+
+// .view-recipe #recipe-rating {
+//   border-bottom: 1px solid #DFDFDF;
+//   background-color: $white;
+// }
+
+#recipe-wrapper {
+  border-radius: 0.5rem;
+  border: 1px solid $white;
+  background-color: $white;
+  height: auto;
+
+  h4 {
+    font-weight: 300;
+  }
+
+  #recipe-rating {
+    background-color: $white;
+    border-bottom: 1px solid #DFDFDF;
+  }
+
+  #recipe-rating-info, #recipe-details-info, #recipe-preparation-info, #recipe-cooking-directions-info {
+    float: right !important;
+    text-align: right !important;
+  }
+
+  #ingredient-list p:before {
+    font-family: Flaticon;
+    content: "\f1d4";
+    font-size: 1.2rem;
+    color: $recipe-details-icon-grey;
+  }
+  
+  #cooking-directions p:before {
+    font-family: Flaticon;
+    content: "\f1d9";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    color: $recipe-details-icon-grey;
+  }
+  
+  #preparation p:before {
+    font-family: Flaticon;
+    content: "\f196";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    color: $recipe-details-icon-grey;
+  }
+  
+  #ingredient-list p, #cooking-directions ol li {
+    font-size: 1.1rem;
+  }
+  
+  #recipe-actions {
+    background-color: #EEEEEE;
+    font-size: 1.3rem;
+  
+    p .fa {
+      color: $recipe-details-icon-grey;
+    }
+  }
+  
+  .recipe-reaction-toolbar {
+    width: 100%;
+  
+    button {
+      width: 25%;
+      padding: .75rem 1rem;
+  
+      &:hover, &:focus, &:active {
+        background-color: $light-green !important;
+        border-color: $light-green !important;
+      }
+    }
+  }
+  
+  #side-rating-toolbar {
+    position: fixed;
+    top: 40%;
+    left: 10%;
+    display: none;
+  
+    .fa-star, .fa-star-o, .fa-heart, .fa-heart-o, .fa-thumbs-up, .fa-thumbs-o-up, .fa-thumbs-down, .fa-thumbs-o-down {
+      color: $light-green;
+    }
+  }
+
+
+  /*REVIEW WRAPPER*/
+  
+  #review-wrapper form p {
+    font-size: 1.25rem;
+  }
+  
+  #reviews img {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #recipe-wrapper {
+    text-align: center;
+
+    #recipe-rating-info, #recipe-details-info, #recipe-preparation-info, #recipe-cooking-directions-info {
+      float: none !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 880px) and (max-width: 992px) {
+  #recipe-wrapper {
+    #side-rating-toolbar {
+      position: fixed;
+      top: 40%;
+      left: 18%;
+    }
+  }
+}
+
+/* CALL TO ACTION */
+#call-to-action {
+  color: $green !important;
+  text-align: center;
+  width: 100%;
+
+  span {
+    color: $green !important;
+    width: 25% !important;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  i {
+    color: $green !important;
+
+    &:hover {
+      font-size: 1.6em;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}

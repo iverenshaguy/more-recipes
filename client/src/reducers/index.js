@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import auth from './auth';
-import location from './location';
 import ui from './ui';
-import isFetching from './isFetching';
+import auth from './auth';
 import recipes from './recipes';
+import isFetching from './isFetching';
+import singleRecipe from './singleRecipe';
 
 export const history = createHistory();
 
@@ -13,7 +13,7 @@ export default combineReducers({
   ui,
   auth,
   recipes,
-  location,
   isFetching,
+  singleRecipe,
   router: routerReducer
 });

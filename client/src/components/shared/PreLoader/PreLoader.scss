@@ -1,8 +1,6 @@
 @import '../../../assets/scss/modules';
-$primary-color: $green;
 
 .loader {
-  margin: 30vh 0 25vh 46vw;
   &-hidden {
     display: none;
   }
@@ -11,7 +9,12 @@ $primary-color: $green;
     display: block;
   }
 
+  .ball-beat > div {
+    background-color: $light-green;
+  }
+
   .ball-scale-multiple {
+    margin: 30vh 0 25vh 46vw;
     height: 11vh;
     width: 11vh;
 
