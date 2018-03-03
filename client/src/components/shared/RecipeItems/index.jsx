@@ -28,11 +28,11 @@ const RecipeItems = props => (
       {props.recipes.length !== 0 &&
         props.recipes.map(recipe => (<RecipeCard key={recipe.id} recipe={recipe} />))}
     </div>
-    <Pagination
+    {props.recipes.length !== 0 && <Pagination
       items={props.recipes}
       onPageChange={props.handlePageChange}
       metadata={props.metadata}
-    />
+    />}
   </div>);
 
 RecipeItems.propTypes = {

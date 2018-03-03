@@ -8,9 +8,9 @@ import jwt from 'jsonwebtoken';
 const decodeToken = () => {
   const token = localStorage.getItem('jwtToken');
 
-  const { user, exp } = jwt.decode(token);
+  const decoded = jwt.decode(token);
 
-  return { user, exp, token };
+  return { decoded, token };
 };
 
 export default decodeToken;

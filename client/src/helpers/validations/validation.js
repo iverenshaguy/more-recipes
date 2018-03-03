@@ -8,8 +8,8 @@ import {
   isName,
   isUsername,
   isEmail,
-  isValidPasswordConfirm,
-  isAlphaNumeric
+  isNumber,
+  isValidPasswordConfirm
 } from './types';
 
 const validation = {
@@ -26,7 +26,12 @@ const validation = {
     password: [isRequired, minLength10],
     passwordConfirm: [isRequired, isValidPasswordConfirm],
     aboutMe: [maxLength255],
-    occupation: [maxLength144, isAlphaNumeric]
+    occupation: [maxLength144]
+  },
+
+  review: {
+    rating: [isNumber, isRequired],
+    comment: [maxLength255, isRequired]
   }
 };
 

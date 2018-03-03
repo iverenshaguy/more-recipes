@@ -12,11 +12,16 @@ module.exports = {
   ],
   setupTestFrameworkScriptFile: '<rootDir>/client/src/setupTests.js',
   testMatch: [
-    '<rootDir>/client/src/**/__tests__/**/*.{js,jsx,mjs}',
+    '<rootDir>/client/src/**/tests/**/*.{js,jsx,mjs}',
     '<rootDir>/client/src/**/?(*.)(spec|test).{js,jsx,mjs}',
   ],
   testEnvironment: 'node',
   testURL: 'http://localhost',
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/client/src/tests/__mocks__/',
+    '<rootDir>/client/src/tests/setup/',
+  ],
   transform: {
     '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.(css|scss)$': '<rootDir>/client/config/jest/cssTransform.js',

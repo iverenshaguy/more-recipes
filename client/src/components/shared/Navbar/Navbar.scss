@@ -35,25 +35,6 @@
   }
 }
 
-#result-search-form-div {
-  background-color: $transparent-light;
-  display: none;
-
-  #search-form {
-    #search {
-      border: 1px solid $light-green !important;
-    }
-
-    .input-group-btn {
-      button {
-        background-color: $light-green;
-        border-color: $light-green;
-        color: $white;
-      }
-    }
-  }
-}
-
 .input-group {
   &.blur {
     z-index: -1 !important;

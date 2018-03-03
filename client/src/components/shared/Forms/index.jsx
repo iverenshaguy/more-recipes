@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Form as BootstrapForm, Button } from 'reactstrap';
-import { asyncValidate, syncValidate } from '../../../helpers/validations';
+import { asyncValidate, syncValidate, validateRequiredFields } from '../../../helpers/validations';
 import AuthForm from './AuthForm';
+import ReviewForm from './ReviewForm';
 import { NormalAlert } from '../Alert';
 import { arrayToObject } from '../../../utils';
 import { formHelpers } from '../../../helpers';
@@ -24,11 +25,13 @@ class Form extends Component {
       title: PropTypes.string,
       btnText: PropTypes.string,
       extra: PropTypes.element
-    }).isRequired
+    }).isRequired,
+    id: PropTypes.number
   };
 
   static defaultProps = {
-    submitError: null
+    submitError: null,
+    id: null
   }
 
   /**
@@ -55,6 +58,7 @@ class Form extends Component {
 
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.validateField = this.validateField.bind(this);
@@ -95,6 +99,19 @@ class Form extends Component {
       touched: { ...this.state.touched, [name]: true },
       pristine: false,
     }, () => { this.validateField(name, value); });
+  }
+
+  /**
+ * @memberof Form
+ * @param {string} value
+ * @returns {nothing} Returns nothing
+ */
+  handleRatingChange(value) {
+    this.setState({
+      values: { ...this.state.values, rating: value },
+      touched: { ...this.state.touched, rating: true },
+      pristine: false,
+    });
   }
 
   /**
@@ -170,15 +187,16 @@ class Form extends Component {
   validateForm() {
     const formErrorArrayLength =
       Object.values(this.state.error).filter(value => value !== null).length;
-    const formTouchedArrayLength =
-      Object.values(this.state.touched).filter(value => value === true).length;
-    const formFieldCount = Object.keys(this.state.values).length;
+    const touchedFields =
+      Object.keys(this.state.touched).filter(key => this.state.touched[key] === true);
+    const { requiredFormFields } = formHelpers;
+    const requiredFields = requiredFormFields[this.props.type];
 
     if (formErrorArrayLength) {
       this.setState({
         formValid: false
       });
-    } else if (!formErrorArrayLength && formTouchedArrayLength === formFieldCount) {
+    } else if (!formErrorArrayLength && validateRequiredFields(touchedFields, requiredFields)) {
       this.setState({
         formValid: true
       });
@@ -195,7 +213,11 @@ class Form extends Component {
     const { type } = this.state;
     const { formSubmitMapper } = formHelpers;
 
-    this.props.dispatch(formSubmitMapper[type](this.state.values));
+    if (type === 'login' || type === 'signup' || type === 'addRecipe') {
+      return this.props.dispatch(formSubmitMapper[type](this.state.values));
+    }
+
+    return this.props.dispatch(formSubmitMapper[type](this.props.id, this.state.values));
   }
 
   /**
@@ -224,6 +246,7 @@ class Form extends Component {
 
     const handlers = {
       handleChange: this.handleChange,
+      handleRatingChange: this.handleRatingChange,
       handleBlur: this.handleBlur,
       handleFocus: this.handleFocus,
       handleSubmit: this.handleSubmit
@@ -233,7 +256,7 @@ class Form extends Component {
       <div>
         <h4 className="text-center">{title}</h4>
         <hr />
-        {type !== 'login' &&
+        {(type !== 'login' && type !== 'review') &&
           <p className="text-muted mx-auto text-center">
             Fields marked
             <span className="text-danger">*</span> are important
@@ -245,6 +268,7 @@ class Form extends Component {
             </NormalAlert>
           )}
           {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
+          {type === 'review' && <ReviewForm type={type} state={formState} handlers={handlers} />}
           <Button className="btn-block mt-0" disabled={!formValid || pristine || submitting}>
             {btnText}
           </Button>

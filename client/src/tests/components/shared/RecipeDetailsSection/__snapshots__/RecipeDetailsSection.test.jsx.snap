@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetailsSection renders correctly 1`] = `
+<RecipeDetailsSection
+  recipe={
+    Object {
+      "User": Object {
+        "id": 1,
+        "username": "name",
+      },
+      "directions": Array [
+        "wash",
+        "cook",
+      ],
+      "id": 2,
+      "ingredients": Array [
+        "rice",
+        "beans",
+      ],
+      "isReviewed": false,
+      "preparations": Array [
+        "wash",
+        "cook",
+      ],
+      "recipeName": "Recipe",
+      "userId": 1,
+    }
+  }
+>
+  <RecipeDetailsItem
+    section={
+      Object {
+        "id": "ingredient-list",
+        "info": <UNDEFINED>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o fa-lg"
+            />
+             
+            <span
+              className="hidden-sm-down"
+            >
+                |
+            </span>
+          </p>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+            />
+             
+          </p>
+        </UNDEFINED>,
+        "items": Array [
+          "rice",
+          "beans",
+        ],
+        "title": "Ingredients",
+      }
+    }
+  >
+    <div
+      className="p-xs-1 px-md-5 pt-3"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-xs-12 col-md-4 col-lg-4"
+        >
+          <h4
+            className="uppercase"
+          >
+            Ingredients
+          </h4>
+        </div>
+        <div
+          className="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1"
+          id="recipe-details-info"
+        >
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o fa-lg"
+            />
+             
+            <span
+              className="hidden-sm-down"
+            >
+                |
+            </span>
+          </p>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
+            />
+             
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div
+        className="text-justify"
+        id="ingredient-list"
+      >
+        <p
+          className="mb-3"
+          key="rice"
+        >
+           
+          rice
+        </p>
+        <p
+          className="mb-3"
+          key="beans"
+        >
+           
+          beans
+        </p>
+      </div>
+    </div>
+  </RecipeDetailsItem>
+  <RecipeDetailsItem
+    section={
+      Object {
+        "id": "preparation",
+        "info": <UNDEFINED>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o fa-lg"
+            />
+             
+          </p>
+        </UNDEFINED>,
+        "items": Array [
+          "wash",
+          "cook",
+        ],
+        "title": "Preparation",
+      }
+    }
+  >
+    <div
+      className="p-xs-1 px-md-5 pt-3"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-xs-12 col-md-4 col-lg-4"
+        >
+          <h4
+            className="uppercase"
+          >
+            Preparation
+          </h4>
+        </div>
+        <div
+          className="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1"
+          id="recipe-details-info"
+        >
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o fa-lg"
+            />
+             
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div
+        className="text-justify"
+        id="preparation"
+      >
+        <p
+          className="mb-3"
+          key="wash"
+        >
+           
+          wash
+        </p>
+        <p
+          className="mb-3"
+          key="cook"
+        >
+           
+          cook
+        </p>
+      </div>
+    </div>
+  </RecipeDetailsItem>
+  <RecipeDetailsItem
+    section={
+      Object {
+        "id": "cooking-directions",
+        "info": <UNDEFINED>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o"
+            />
+             
+             
+            <span
+              className="hidden-sm-down"
+            >
+               | 
+            </span>
+          </p>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o"
+            />
+             Ready - 
+          </p>
+        </UNDEFINED>,
+        "items": Array [
+          "wash",
+          "cook",
+        ],
+        "title": "Cooking Directions",
+      }
+    }
+  >
+    <div
+      className="p-xs-1 px-md-5 pt-3"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-xs-12 col-md-4 col-lg-4"
+        >
+          <h4
+            className="uppercase"
+          >
+            Cooking Directions
+          </h4>
+        </div>
+        <div
+          className="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1"
+          id="recipe-details-info"
+        >
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o"
+            />
+             
+             
+            <span
+              className="hidden-sm-down"
+            >
+               | 
+            </span>
+          </p>
+          <p
+            className="inline-p text-muted"
+          >
+            <i
+              className="aria-hidden fa fa-clock-o"
+            />
+             Ready - 
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div
+        className="text-justify"
+        id="cooking-directions"
+      >
+        <p
+          className="mb-3"
+          key="wash"
+        >
+           
+          wash
+        </p>
+        <p
+          className="mb-3"
+          key="cook"
+        >
+           
+          cook
+        </p>
+      </div>
+    </div>
+  </RecipeDetailsItem>
+</RecipeDetailsSection>
+`;

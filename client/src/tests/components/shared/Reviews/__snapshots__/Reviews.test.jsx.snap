@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reviews renders correctly 1`] = `
+<div
+  className="py-5 p-xs-1 p-md-5"
+  id="reviews"
+>
+  <div
+    className="col-12"
+  >
+    <h4>
+      Reviews
+    </h4>
+    <hr />
+  </div>
+  <div
+    className="px-5 pb-3 review-heading"
+    key="78"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-4 rounded-circle text-left"
+      >
+        <img
+          alt="user"
+          className="review-picture"
+          src={null}
+        />
+      </div>
+      <div
+        className="col-8 mr-0 text-right"
+      >
+        <p
+          className="mb-0"
+        >
+          user6
+        </p>
+      </div>
+    </div>
+    <hr
+      style={
+        Object {
+          "marginBottom": "0.5em",
+          "marginTop": "0.5em",
+        }
+      }
+    />
+    <ReactStars
+      char="★"
+      color1="gray"
+      color2="#f1c40f"
+      count={5}
+      edit={false}
+      half={true}
+      onChange={[Function]}
+      size={30}
+      value={5}
+    />
+    <p
+      className="text-justify"
+    >
+      Excellent
+    </p>
+  </div>
+  <div
+    className="px-5 pb-3 review-heading"
+    key="56"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-4 rounded-circle text-left"
+      >
+        <img
+          alt="user"
+          className="review-picture"
+          src={null}
+        />
+      </div>
+      <div
+        className="col-8 mr-0 text-right"
+      >
+        <p
+          className="mb-0"
+        >
+          user
+        </p>
+      </div>
+    </div>
+    <hr
+      style={
+        Object {
+          "marginBottom": "0.5em",
+          "marginTop": "0.5em",
+        }
+      }
+    />
+    <ReactStars
+      char="★"
+      color1="gray"
+      color2="#f1c40f"
+      count={5}
+      edit={false}
+      half={true}
+      onChange={[Function]}
+      size={30}
+      value={5}
+    />
+    <p
+      className="text-justify"
+    >
+      Very Good
+    </p>
+  </div>
+  <div
+    className="px-5 pb-3 review-heading"
+    key="3"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-4 rounded-circle text-left"
+      >
+        <img
+          alt="user"
+          className="review-picture"
+          src={null}
+        />
+      </div>
+      <div
+        className="col-8 mr-0 text-right"
+      >
+        <p
+          className="mb-0"
+        >
+          user
+        </p>
+      </div>
+    </div>
+    <hr
+      style={
+        Object {
+          "marginBottom": "0.5em",
+          "marginTop": "0.5em",
+        }
+      }
+    />
+    <ReactStars
+      char="★"
+      color1="gray"
+      color2="#f1c40f"
+      count={5}
+      edit={false}
+      half={true}
+      onChange={[Function]}
+      size={30}
+      value={4}
+    />
+    <p
+      className="text-justify"
+    >
+      Great
+    </p>
+  </div>
+  <Pagination
+    items={
+      Array [
+        Object {
+          "User": Object {
+            "id": 6,
+            "profilePic": null,
+            "username": "user6",
+          },
+          "comment": "Excellent",
+          "id": 78,
+          "rating": 5,
+          "recipeId": 5,
+        },
+        Object {
+          "User": Object {
+            "id": 2,
+            "profilePic": null,
+            "username": "user",
+          },
+          "comment": "Very Good",
+          "id": 56,
+          "rating": 5,
+          "recipeId": 5,
+        },
+        Object {
+          "User": Object {
+            "id": 4,
+            "profilePic": null,
+            "username": "user",
+          },
+          "comment": "Great",
+          "id": 3,
+          "rating": 4,
+          "recipeId": 5,
+        },
+      ]
+    }
+    metadata={
+      Object {
+        "firstPage": 1,
+        "itemsPerPage": 2,
+        "lastPage": 2,
+        "page": 1,
+        "pages": Array [
+          1,
+          2,
+        ],
+        "totalCount": 3,
+      }
+    }
+    onPageChange={[Function]}
+  />
+</div>
+`;

@@ -14,8 +14,7 @@ describe('Upvote Recipe', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.message).to.equal('Your vote has been recorded');
-        expect(res.body.upvotes).to.equal(4);
-        expect(res.body.downvotes).to.equal(4);
+        expect(res.body.recipe.recipeItem.id).to.equal(2);
 
         if (err) {
           return done(err);
@@ -32,8 +31,7 @@ describe('Upvote Recipe', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(201);
         expect(res.body.message).to.equal('Your vote has been recorded');
-        expect(res.body.upvotes).to.equal(6);
-        expect(res.body.downvotes).to.equal(3);
+        expect(res.body.recipe.recipeItem.id).to.equal(7);
 
         if (err) {
           return done(err);
@@ -50,8 +48,7 @@ describe('Upvote Recipe', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.message).to.equal('Your vote has been removed');
-        expect(res.body.upvotes).to.equal(3);
-        expect(res.body.downvotes).to.equal(4);
+        expect(res.body.recipe.recipeItem.id).to.equal(2);
 
         if (err) {
           return done(err);

@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeDetailsSection renders correctly 1`] = `
+<RecipeDetailsItem
+  section={
+    Object {
+      "id": "cooking-directions",
+      "info": <p>
+        I love to eat
+      </p>,
+      "items": Array [
+        "good",
+        "nice",
+      ],
+      "title": "Cooking Directions",
+    }
+  }
+>
+  <div
+    className="p-xs-1 px-md-5 pt-3"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-xs-12 col-md-4 col-lg-4"
+      >
+        <h4
+          className="uppercase"
+        >
+          Cooking Directions
+        </h4>
+      </div>
+      <div
+        className="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1"
+        id="recipe-details-info"
+      >
+        <p>
+          I love to eat
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div
+      className="text-justify"
+      id="cooking-directions"
+    >
+      <p
+        className="mb-3"
+        key="good"
+      >
+         
+        good
+      </p>
+      <p
+        className="mb-3"
+        key="nice"
+      >
+         
+        nice
+      </p>
+    </div>
+  </div>
+</RecipeDetailsItem>
+`;
+
+exports[`RecipeDetailsSection renders message when item is empty 1`] = `
+<RecipeDetailsItem
+  section={
+    Object {
+      "id": "cooking-directions",
+      "info": <p>
+        I love to eat
+      </p>,
+      "items": Array [],
+      "title": "Cooking Directions",
+    }
+  }
+>
+  <div
+    className="p-xs-1 px-md-5 pt-3"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-xs-12 col-md-4 col-lg-4"
+      >
+        <h4
+          className="uppercase"
+        >
+          Cooking Directions
+        </h4>
+      </div>
+      <div
+        className="col-xs-12 col-md-8 col-lg-8 mr-0 pb-1"
+        id="recipe-details-info"
+      >
+        <p>
+          I love to eat
+        </p>
+      </div>
+    </div>
+    <hr />
+    <div
+      className="text-justify"
+      id="cooking-directions"
+    >
+      <p
+        className="mb-3"
+      >
+        There are no 
+        cooking directions
+        .
+      </p>
+    </div>
+  </div>
+</RecipeDetailsItem>
+`;

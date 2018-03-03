@@ -13,7 +13,7 @@ import {
 const initialState = {
   isAuthenticated: !!localStorage.getItem('jwtToken'),
   error: null,
-  user: null,
+  user: {},
   loading: false
 };
 
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case CLEAR_AUTH_ERROR:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        user: null,
+        user: {},
         error: null,
         loading: false
       });
@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
     case SIGNUP_ERROR:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        user: null,
+        user: {},
         error: action.payload,
         loading: false
       });

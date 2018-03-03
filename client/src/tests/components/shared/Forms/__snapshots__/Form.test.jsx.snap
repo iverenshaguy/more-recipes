@@ -1,0 +1,743 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form disables submit button when submitting form 1`] = `
+<div>
+  <h4
+    className="text-center"
+  >
+    Sign In to Your Account
+  </h4>
+  <hr />
+  <Form
+    className="mt-4 mb-3 px-5"
+    onSubmit={[Function]}
+    tag="form"
+  >
+    <AuthForm
+      handlers={
+        Object {
+          "handleBlur": [Function],
+          "handleChange": [Function],
+          "handleFocus": [Function],
+          "handleRatingChange": [Function],
+          "handleSubmit": [Function],
+        }
+      }
+      state={
+        Object {
+          "asyncValidating": false,
+          "error": Object {
+            "email": null,
+            "password": null,
+          },
+          "formValid": false,
+          "pristine": true,
+          "touched": Object {
+            "email": false,
+            "password": false,
+          },
+          "values": Object {
+            "email": "",
+            "password": "",
+          },
+        }
+      }
+      type="login"
+    />
+    <Button
+      className="btn-block mt-0"
+      color="secondary"
+      disabled={true}
+      tag="button"
+    >
+      SIGN IN
+    </Button>
+  </Form>
+  <p>
+    something
+  </p>
+</div>
+`;
+
+exports[`Form renders correctly 1`] = `
+<div>
+  <h4
+    className="text-center"
+  >
+    Sign In to Your Account
+  </h4>
+  <hr />
+  <Form
+    className="mt-4 mb-3 px-5"
+    onSubmit={[Function]}
+    tag="form"
+  >
+    <AuthForm
+      handlers={
+        Object {
+          "handleBlur": [Function],
+          "handleChange": [Function],
+          "handleFocus": [Function],
+          "handleRatingChange": [Function],
+          "handleSubmit": [Function],
+        }
+      }
+      state={
+        Object {
+          "asyncValidating": false,
+          "error": Object {
+            "email": null,
+            "password": null,
+          },
+          "formValid": false,
+          "pristine": true,
+          "touched": Object {
+            "email": false,
+            "password": false,
+          },
+          "values": Object {
+            "email": "",
+            "password": "",
+          },
+        }
+      }
+      type="login"
+    />
+    <Button
+      className="btn-block mt-0"
+      color="secondary"
+      disabled={true}
+      tag="button"
+    >
+      SIGN IN
+    </Button>
+  </Form>
+  <p>
+    something
+  </p>
+</div>
+`;
+
+exports[`Form renders signup form when signup is passed 1`] = `
+<div>
+  <h4
+    className="text-center"
+  >
+    Register for a New Account
+  </h4>
+  <hr />
+  <p
+    className="text-muted mx-auto text-center"
+  >
+    Fields marked
+    <span
+      className="text-danger"
+    >
+      *
+    </span>
+     are important
+  </p>
+  <Form
+    className="mt-4 mb-3 px-5"
+    onSubmit={[Function]}
+    tag="form"
+  >
+    <AuthForm
+      handlers={
+        Object {
+          "handleBlur": [Function],
+          "handleChange": [Function],
+          "handleFocus": [Function],
+          "handleRatingChange": [Function],
+          "handleSubmit": [Function],
+        }
+      }
+      state={
+        Object {
+          "asyncValidating": false,
+          "error": Object {
+            "aboutMe": null,
+            "email": null,
+            "firstname": null,
+            "lastname": null,
+            "occupation": null,
+            "password": null,
+            "passwordConfirm": null,
+            "username": null,
+          },
+          "formValid": false,
+          "pristine": true,
+          "touched": Object {
+            "aboutMe": false,
+            "email": false,
+            "firstname": false,
+            "lastname": false,
+            "occupation": false,
+            "password": false,
+            "passwordConfirm": false,
+            "username": false,
+          },
+          "values": Object {
+            "aboutMe": "",
+            "email": "",
+            "firstname": "",
+            "lastname": "",
+            "occupation": "",
+            "password": "",
+            "passwordConfirm": "",
+            "username": "",
+          },
+        }
+      }
+      type="signup"
+    />
+    <Button
+      className="btn-block mt-0"
+      color="secondary"
+      disabled={true}
+      tag="button"
+    >
+      SIGN UP
+    </Button>
+  </Form>
+  <p>
+    something
+  </p>
+</div>
+`;
+
+exports[`Form shows error alert and disables submit button when there's a submit error 1`] = `
+<div>
+  <h4
+    className="text-center"
+  >
+    Sign In to Your Account
+  </h4>
+  <hr />
+  <Form
+    className="mt-4 mb-3 px-5"
+    onSubmit={[Function]}
+    tag="form"
+  >
+    <NormalAlert
+      color="danger"
+    >
+      <p
+        className="text-center mb-0"
+      >
+        Username/Password do not match
+      </p>
+    </NormalAlert>
+    <AuthForm
+      handlers={
+        Object {
+          "handleBlur": [Function],
+          "handleChange": [Function],
+          "handleFocus": [Function],
+          "handleRatingChange": [Function],
+          "handleSubmit": [Function],
+        }
+      }
+      state={
+        Object {
+          "asyncValidating": false,
+          "error": Object {
+            "email": null,
+            "password": null,
+          },
+          "formValid": false,
+          "pristine": true,
+          "touched": Object {
+            "email": false,
+            "password": false,
+          },
+          "values": Object {
+            "email": "",
+            "password": "",
+          },
+        }
+      }
+      type="login"
+    />
+    <Button
+      className="btn-block mt-0"
+      color="secondary"
+      disabled={true}
+      tag="button"
+    >
+      SIGN IN
+    </Button>
+  </Form>
+  <p>
+    something
+  </p>
+</div>
+`;
+
+exports[`Form test for right input calls handleChange and handleBlur on input change and blur for email field 1`] = `
+<Form
+  dispatch={[Function]}
+  id={null}
+  meta={
+    Object {
+      "btnText": "SIGN IN",
+      "extra": <p>
+        something
+      </p>,
+      "title": "Sign In to Your Account",
+    }
+  }
+  submitError={null}
+  submitting={false}
+  type="login"
+>
+  <div>
+    <h4
+      className="text-center"
+    >
+      Sign In to Your Account
+    </h4>
+    <hr />
+    <Form
+      className="mt-4 mb-3 px-5"
+      onSubmit={[Function]}
+      tag="form"
+    >
+      <form
+        className="mt-4 mb-3 px-5"
+        onSubmit={[Function]}
+      >
+        <AuthForm
+          handlers={
+            Object {
+              "handleBlur": [Function],
+              "handleChange": [Function],
+              "handleFocus": [Function],
+              "handleRatingChange": [Function],
+              "handleSubmit": [Function],
+            }
+          }
+          state={
+            Object {
+              "asyncValidating": false,
+              "error": Object {
+                "email": null,
+                "password": null,
+              },
+              "formValid": false,
+              "pristine": true,
+              "touched": Object {
+                "email": false,
+                "password": false,
+              },
+              "values": Object {
+                "email": "",
+                "password": "",
+              },
+            }
+          }
+          type="login"
+        >
+          <RenderInput
+            handleBlur={[Function]}
+            handleChange={[Function]}
+            handleFocus={[Function]}
+            id="email"
+            label="Email Address"
+            meta={
+              Object {
+                "asyncValidating": false,
+                "error": null,
+                "touched": false,
+              }
+            }
+            name="email"
+            placeholder="janesmith@me.com"
+            required={false}
+            type="email"
+            value=""
+          >
+            <FormGroup
+              tag="div"
+            >
+              <div
+                className="form-group"
+              >
+                <Label
+                  className="col-form-label"
+                  for="email"
+                  tag="label"
+                  widths={
+                    Array [
+                      "xs",
+                      "sm",
+                      "md",
+                      "lg",
+                      "xl",
+                    ]
+                  }
+                >
+                  <label
+                    className="col-form-label  form-control-label"
+                    htmlFor="email"
+                  >
+                    Email Address
+                  </label>
+                </Label>
+                <Input
+                  className=""
+                  id="email"
+                  name="email"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder="janesmith@me.com"
+                  tag="p"
+                  type="email"
+                  value=""
+                >
+                  <input
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    placeholder="janesmith@me.com"
+                    type="email"
+                    value=""
+                  />
+                </Input>
+              </div>
+            </FormGroup>
+          </RenderInput>
+          <RenderInput
+            className="mb-4"
+            handleBlur={[Function]}
+            handleChange={[Function]}
+            handleFocus={[Function]}
+            id="password"
+            label="Password"
+            meta={
+              Object {
+                "error": null,
+                "touched": false,
+              }
+            }
+            name="password"
+            placeholder="••••••••••"
+            required={false}
+            type="password"
+            value=""
+          >
+            <FormGroup
+              tag="div"
+            >
+              <div
+                className="form-group"
+              >
+                <Label
+                  className="col-form-label"
+                  for="password"
+                  tag="label"
+                  widths={
+                    Array [
+                      "xs",
+                      "sm",
+                      "md",
+                      "lg",
+                      "xl",
+                    ]
+                  }
+                >
+                  <label
+                    className="col-form-label  form-control-label"
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                </Label>
+                <Input
+                  className=""
+                  id="password"
+                  name="password"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder="••••••••••"
+                  tag="p"
+                  type="password"
+                  value=""
+                >
+                  <input
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    placeholder="••••••••••"
+                    type="password"
+                    value=""
+                  />
+                </Input>
+              </div>
+            </FormGroup>
+          </RenderInput>
+        </AuthForm>
+        <Button
+          className="btn-block mt-0"
+          color="secondary"
+          disabled={true}
+          tag="button"
+        >
+          <button
+            className="btn-block mt-0 btn btn-secondary disabled"
+            disabled={true}
+            onClick={[Function]}
+          >
+            SIGN IN
+          </button>
+        </Button>
+      </form>
+    </Form>
+    <p>
+      something
+    </p>
+  </div>
+</Form>
+`;
+
+exports[`Form test for right input sets asyncValidating to false if asyncValidate test passes 1`] = `
+<Form
+  dispatch={[Function]}
+  id={null}
+  meta={
+    Object {
+      "btnText": "SIGN IN",
+      "extra": <p>
+        something
+      </p>,
+      "title": "Sign In to Your Account",
+    }
+  }
+  submitError={null}
+  submitting={false}
+  type="login"
+>
+  <div>
+    <h4
+      className="text-center"
+    >
+      Sign In to Your Account
+    </h4>
+    <hr />
+    <Form
+      className="mt-4 mb-3 px-5"
+      onSubmit={[Function]}
+      tag="form"
+    >
+      <form
+        className="mt-4 mb-3 px-5"
+        onSubmit={[Function]}
+      >
+        <AuthForm
+          handlers={
+            Object {
+              "handleBlur": [Function],
+              "handleChange": [Function],
+              "handleFocus": [Function],
+              "handleRatingChange": [Function],
+              "handleSubmit": [Function],
+            }
+          }
+          state={
+            Object {
+              "asyncValidating": false,
+              "error": Object {
+                "email": null,
+                "password": null,
+              },
+              "formValid": false,
+              "pristine": true,
+              "touched": Object {
+                "email": false,
+                "password": false,
+              },
+              "values": Object {
+                "email": "",
+                "password": "",
+              },
+            }
+          }
+          type="login"
+        >
+          <RenderInput
+            handleBlur={[Function]}
+            handleChange={[Function]}
+            handleFocus={[Function]}
+            id="email"
+            label="Email Address"
+            meta={
+              Object {
+                "asyncValidating": false,
+                "error": null,
+                "touched": false,
+              }
+            }
+            name="email"
+            placeholder="janesmith@me.com"
+            required={false}
+            type="email"
+            value=""
+          >
+            <FormGroup
+              tag="div"
+            >
+              <div
+                className="form-group"
+              >
+                <Label
+                  className="col-form-label"
+                  for="email"
+                  tag="label"
+                  widths={
+                    Array [
+                      "xs",
+                      "sm",
+                      "md",
+                      "lg",
+                      "xl",
+                    ]
+                  }
+                >
+                  <label
+                    className="col-form-label  form-control-label"
+                    htmlFor="email"
+                  >
+                    Email Address
+                  </label>
+                </Label>
+                <Input
+                  className=""
+                  id="email"
+                  name="email"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder="janesmith@me.com"
+                  tag="p"
+                  type="email"
+                  value=""
+                >
+                  <input
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    placeholder="janesmith@me.com"
+                    type="email"
+                    value=""
+                  />
+                </Input>
+              </div>
+            </FormGroup>
+          </RenderInput>
+          <RenderInput
+            className="mb-4"
+            handleBlur={[Function]}
+            handleChange={[Function]}
+            handleFocus={[Function]}
+            id="password"
+            label="Password"
+            meta={
+              Object {
+                "error": null,
+                "touched": false,
+              }
+            }
+            name="password"
+            placeholder="••••••••••"
+            required={false}
+            type="password"
+            value=""
+          >
+            <FormGroup
+              tag="div"
+            >
+              <div
+                className="form-group"
+              >
+                <Label
+                  className="col-form-label"
+                  for="password"
+                  tag="label"
+                  widths={
+                    Array [
+                      "xs",
+                      "sm",
+                      "md",
+                      "lg",
+                      "xl",
+                    ]
+                  }
+                >
+                  <label
+                    className="col-form-label  form-control-label"
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                </Label>
+                <Input
+                  className=""
+                  id="password"
+                  name="password"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  placeholder="••••••••••"
+                  tag="p"
+                  type="password"
+                  value=""
+                >
+                  <input
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    placeholder="••••••••••"
+                    type="password"
+                    value=""
+                  />
+                </Input>
+              </div>
+            </FormGroup>
+          </RenderInput>
+        </AuthForm>
+        <Button
+          className="btn-block mt-0"
+          color="secondary"
+          disabled={true}
+          tag="button"
+        >
+          <button
+            className="btn-block mt-0 btn btn-secondary disabled"
+            disabled={true}
+            onClick={[Function]}
+          >
+            SIGN IN
+          </button>
+        </Button>
+      </form>
+    </Form>
+    <p>
+      something
+    </p>
+  </div>
+</Form>
+`;

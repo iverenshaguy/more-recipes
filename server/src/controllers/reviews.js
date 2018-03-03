@@ -42,7 +42,7 @@ export default {
         {
           model: User,
           as: 'User',
-          attributes: ['id', 'username']
+          attributes: ['id', 'username', 'profilePic']
         }
       ],
       group: ['Review.id', 'User.id']

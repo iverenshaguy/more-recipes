@@ -1,5 +1,6 @@
 import { Recipe, Favorite, User } from '../models';
 import getItems from '../helpers/getItems';
+import getRecipe from '../helpers/getRecipe';
 
 export default {
   addFavoriteRecipe: (req, favoriteData, res, next) => Favorite.findOne({
@@ -10,22 +11,12 @@ export default {
   })
     .then((favorited) => {
       if (favorited) {
-        favorited.destroy().then(() => Recipe.findAll({
-          include: [{
-            model: Favorite,
-            as: 'favorites',
-            attributes: [],
-            where: {
-              userId: req.id,
-            }
-          }],
-        })
-          .then(recipes => res.status(200).send({
+        return favorited.destroy().then(() => getRecipe(req.id, +favoriteData.recipeId)
+          .then(responseObject => res.status(200).send({
             message: 'Recipe has been removed from favorites',
-            recipes
+            recipe: responseObject
           })))
           .catch(next);
-        return;
       }
 
       return Favorite
@@ -34,19 +25,10 @@ export default {
           recipeId: +favoriteData.recipeId,
           userId: req.id
         })
-        .then(() => Recipe.findAll({
-          include: [{
-            model: Favorite,
-            as: 'favorites',
-            attributes: [],
-            where: {
-              userId: req.id,
-            }
-          }],
-        })
-          .then(recipes => res.status(201).send({
+        .then(() => getRecipe(req.id, +favoriteData.recipeId)
+          .then(responseObject => res.status(201).send({
             message: 'Recipe has been added to favorites',
-            recipes
+            recipe: responseObject
           })))
         .catch(next);
     })
@@ -69,7 +51,7 @@ export default {
       {
         model: User,
         as: 'User',
-        attributes: ['id', 'username']
+        attributes: ['id', 'username', 'profilePic']
       }],
       group: ['Recipe.id', 'User.id']
     })

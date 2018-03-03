@@ -1,96 +1,124 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import FontAwesome from 'react-fontawesome';
-import { Form, InputGroup, Label, Input, InputGroupButton, Button } from 'reactstrap';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import FontAwesome from 'react-fontawesome';
 import { toggleModal } from '../../../actions/ui';
 import './StickyBar.scss';
 
-const StickyBar = ({ currentLocation, dispatch }) => {
-  if (currentLocation === 'auth') {
-    return '';
+/**
+ * @exports
+ * @extends Component
+ * @class StickyBar
+ * @classdesc Returns App Sticky Bar for Medium to Small Devices
+*/
+class StickyBar extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    currentLocation: PropTypes.string.isRequired
   }
 
-  return (
-    <div className={currentLocation}>
-      <div className="sticky-bar-wrapper text-center d-block d-sm-block d-md-none">
-        <div className="container-fluid">
-          <div className="row" id="result-search-form-div">
-            <div className="col-12 w-100 py-3">
-              <Form id="search-form">
-                <InputGroup>
-                  <Label className="sr-only" for="search">
-                    Search for Recipe
-                  </Label>
-                  <Input type="text" id="search" placeholder="Search for More Recipes" />
-                  <InputGroupButton className="input-group-btn">
-                    <Button type="submit">Submit</Button>
-                  </InputGroupButton>
-                </InputGroup>
-              </Form>
+  /**
+   * @constructor
+   * @memberof StickyBar
+   * @returns {nothing} Returns nothing
+   */
+  constructor() {
+    super();
+
+    this.handleHomeIconClick = this.handleHomeIconClick.bind(this);
+    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
+    this.handleFavoritesIconClick = this.handleFavoritesIconClick.bind(this);
+    this.handleUserIconClick = this.handleUserIconClick.bind(this);
+  }
+
+  /**
+   * @memberof StickyBar
+   * @param {object} e
+   * @returns {nothing} Returns nothing
+   */
+  handleHomeIconClick(e) {
+    e.preventDefault();
+    this.props.dispatch(push('/'));
+  }
+
+  /**
+   * @memberof StickyBar
+   * @param {object} e
+   * @returns {nothing} Returns nothing
+   */
+  handleSearchIconClick(e) {
+    e.preventDefault();
+    this.props.dispatch(push('/'));
+  }
+
+  /**
+   * @memberof StickyBar
+   * @param {object} e
+   * @returns {nothing} Returns nothing
+   */
+  handleFavoritesIconClick(e) {
+    e.preventDefault();
+    this.props.dispatch(push('/'));
+  }
+
+  /**
+   * @memberof StickyBar
+   * @param {object} e
+   * @returns {nothing} Returns nothing
+   */
+  handleUserIconClick(e) {
+    e.preventDefault();
+    this.props.dispatch(push('/'));
+  }
+
+  /**
+   * @memberof StickyBar
+   * @returns {JSX} StickyBar
+  */
+  render() {
+    const {
+      currentLocation, dispatch
+    } = this.props;
+
+    if (currentLocation === '/login' || currentLocation === '/signup') {
+      return null;
+    }
+
+    return (
+      <div className="view-recipe">
+        <div className="sticky-bar-wrapper text-center d-block d-sm-block d-md-none">
+          <div className="sticky-bar text-center">
+            <div className="nav-link d-inline">
+              <FontAwesome name="home" tag="i" size="lg" className="home-icon" onClick={this.handleHomeIconClick} />
+            </div>
+            <div className="nav-link d-inline">
+              <FontAwesome name="search" tag="i" size="lg" className="search-icon" onClick={this.handleSearchIconClick} />
+            </div>
+            <div className="nav-link d-inline">
+              <FontAwesome
+                name="plus"
+                tag="i"
+                id="add-edit-modal-icon"
+                size="lg"
+                onClick={() => dispatch(toggleModal('addRecipe'))}
+              />
+            </div>
+            <div className="nav-link d-inline">
+              <FontAwesome name="heart" tag="i" size="lg" className="favorite-recipes-icon" onClick={this.handleFavoritesIconClick} />
+            </div>
+            <div className="nav-link d-inline">
+              <FontAwesome name="user" tag="i" size="lg" className="user-icon" onClick={this.handleUserIconClick} />
             </div>
           </div>
         </div>
-        <div className="sticky-bar text-center">
-          {currentLocation === 'user-profile' && (
-            <a className="nav-link d-inline">
-              <i className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods" />
-            </a>
-          )}
-          {currentLocation !== 'user-profile' && (
-            <a className="nav-link d-inline" data-toggle="modal">
-              <FontAwesome
-                name="share-alt"
-                id="social-modal-icon"
-                size="lg"
-                onClick={() => dispatch(toggleModal('social'))}
-              />
-            </a>
-          )}
-          <a className="nav-link d-inline" title="New Recipe">
-            <FontAwesome
-              name="plus"
-              id="add-edit-modal-icon"
-              size="lg"
-              onClick={() => dispatch(toggleModal('addRecipe'))}
-            />
-          </a>
-          {currentLocation === 'view-recipe' && (
-            <a className="nav-link d-inline favorite" title="Favorite">
-              <FontAwesome name="heart-o" size="lg" />
-            </a>
-          )}
-          {currentLocation === 'view-recipe' && (
-            <a className="nav-link d-inline upvote" title="Upvote">
-              <FontAwesome name="thumbs-o-up" size="lg" />
-            </a>
-          )}
-          {currentLocation === 'view-recipe' && (
-            <a className="nav-link d-inline downvote" title="Downvote">
-              <FontAwesome name="thumbs-o-down" size="lg" />
-            </a>
-          )}
-          <a className="nav-link d-inline">
-            <FontAwesome name="search" size="lg" className="search-icon" />
-          </a>
-          {currentLocation !== 'view-profile' && (
-            <a className="nav-link d-inline">
-              <FontAwesome name="heart" size="lg" />
-            </a>
-          )}
-        </div>
       </div>
-    </div>
-  );
-};
-
-StickyBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  currentLocation: PropTypes.string.isRequired,
-};
+    );
+  }
+}
 
 const mapStateToProps = state => ({
-  currentLocation: state.location.current,
+  currentLocation: state.router.location.pathname
 });
 
 export { StickyBar as StickyBarComponent };

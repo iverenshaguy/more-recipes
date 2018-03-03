@@ -204,7 +204,7 @@ export default {
     check('rating')
       .exists()
       .withMessage('Recipe must be rated')
-      .isIn([1, 2, 3, 4, 5])
+      .isIn([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5])
       .withMessage('Recipe must be rated from 1 - 5')
       .trim()
       .escape(),

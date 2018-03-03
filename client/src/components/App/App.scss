@@ -112,6 +112,15 @@ form {
   font-size: 1.5rem;
 }
 
+#side-rating-toolbar p i {
+  cursor: pointer;
+}
+
+.inline-p, .inline-li {
+  display: inline !important;
+  vertical-align: middle;
+}
+
 .btn {
   &:not(.btn-danger) {
     background-color: $light-green;

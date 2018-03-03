@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import setCurrentLocation from '../../../actions/location';
 import { fetchTopRecipes, searchRecipes } from '../../../actions/recipes';
 import Hero from './Hero';
 import RecipeItems from '../../shared/RecipeItems';
@@ -13,13 +12,13 @@ import './Home.scss';
  * @exports
  * @class Home
  * @extends Component
- * @returns {component} Home
+ * @returns {JSX} Home
  */
 class Home extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
-    ...multiRecipePropTypes
+    ...multiRecipePropTypes,
   };
 
   /**
@@ -33,13 +32,13 @@ class Home extends Component {
     this.state = {
       title: 'TOP RECIPES',
       currentPage: 1,
-      limit: 5,
-      searchValue: ''
+      searchValue: '',
+      limit: 5
     };
 
+    this.handleSearch = this.handleSearch.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
   }
 
   /**
@@ -47,7 +46,6 @@ class Home extends Component {
    * @return {nothing} Returns nothing
    */
   componentWillMount() {
-    this.props.dispatch(setCurrentLocation('home'));
     this.props.dispatch(fetchTopRecipes(this.state.currentPage, this.state.limit));
   }
 
@@ -73,10 +71,12 @@ class Home extends Component {
 
   /**
    * @memberof Home
-   * @param {event} event
+   * @param {object} event
    * @returns {state} home
    */
   handleSearchInput(event) {
+    event.preventDefault();
+
     this.setState({
       searchValue: event.target.value
     });
@@ -90,7 +90,7 @@ class Home extends Component {
   handleSearch(event) {
     event.preventDefault();
 
-    const { searchValue, currentPage, limit } = this.state;
+    const { currentPage, limit, searchValue } = this.state;
     this.setState({
       title: 'SEARCH RESULTS'
     }, () => this.props.dispatch(searchRecipes(searchValue, currentPage, limit)));
@@ -120,15 +120,15 @@ class Home extends Component {
 
   /**
    * @memberof Home
-   * @returns {component} Home
+   * @returns {JSX} Home
    */
   render() {
     return (
       <div className="home">
         <Hero
           dispatch={this.props.dispatch}
-          handleSearchInput={this.handleSearchInput}
           handleSearch={this.handleSearch}
+          handleSearchInput={this.handleSearchInput}
           searchValue={this.state.searchValue}
         />
         {this.renderBody()}
@@ -139,7 +139,7 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
   isFetching: state.isFetching,
-  recipes: state.recipes.recipes,
+  recipes: state.recipes.items,
   metadata: state.recipes.metadata
 });
 

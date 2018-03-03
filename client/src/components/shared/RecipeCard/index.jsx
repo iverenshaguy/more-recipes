@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardText } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import { singleRecipePropTypes } from '../../../helpers/proptypes';
@@ -7,7 +8,7 @@ import './RecipeCard.scss';
 const RecipeCard = ({ recipe }) => (
   <div className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
     <Card>
-      <a href="view-recipe.html">
+      <Link to={`/recipes/${recipe.id}`}>
         <CardImg
           top
           width="100%"
@@ -17,6 +18,7 @@ const RecipeCard = ({ recipe }) => (
         />
         <CardBody className="card-block text-center pb-3">
           <h5 className="mb-1">{recipe.recipeName}</h5>
+          <p className="card-text mb-2"><span className="text-muted">Posted by </span>{recipe.User.username}</p>
         </CardBody>
         <CardBody className="card-block text-center recipe-details">
           <CardText className="text-muted mr-2 d-inline">
@@ -41,7 +43,7 @@ const RecipeCard = ({ recipe }) => (
             <FontAwesome name="eye" className="text-success" /> {recipe.views}
           </CardText>
         </CardBody>
-      </a>
+      </Link>
     </Card>
   </div>
 );

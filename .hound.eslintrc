@@ -14,6 +14,7 @@
     "expect": true,
     "render": true,
     "toJson": true,
+    "rrcMock": true,
     "$": true
   },
   "rules": {
@@ -23,12 +24,29 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
-    "curly": ["error", "multi-line"],
-    "import/no-unresolved": [0],
+    "curly": [
+      "error",
+      "multi-line"
+    ],
+    "import/no-unresolved": [
+      0
+    ],
     "import/extensions": 0,
     "import/named": 0,
-    "linebreak-style": ["error", "unix"],
-    "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-shadow": [
+      "error",
+      {
+        "allow": [
+          "req",
+          "res",
+          "err"
+        ]
+      }
+    ],
     "valid-jsdoc": [
       "error",
       {
@@ -49,7 +67,14 @@
       }
     ],
     "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "aspects": [
+          "invalidHref"
+        ]
+      }
+    ]
   },
   "parser": "babel-eslint"
 }

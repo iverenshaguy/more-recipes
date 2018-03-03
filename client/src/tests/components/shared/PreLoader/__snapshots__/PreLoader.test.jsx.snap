@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PreLoaders renders MiniPreLoader correctly 1`] = `
+<MiniPreLoader>
+  <Loader
+    active={true}
+    type="ball-beat"
+  >
+    <div
+      className="loader loader-undefined loader-active"
+    >
+      <div
+        className="loader-inner ball-beat"
+      >
+        <div
+          key="0"
+          style={Object {}}
+        />
+        <div
+          key="1"
+          style={Object {}}
+        />
+        <div
+          key="2"
+          style={Object {}}
+        />
+      </div>
+    </div>
+  </Loader>
+</MiniPreLoader>
+`;
+
+exports[`PreLoaders renders correctly 1`] = `
+<PreLoader>
+  <Loader
+    active={true}
+    type="ball-scale-multiple"
+  >
+    <div
+      className="loader loader-undefined loader-active"
+    >
+      <div
+        className="loader-inner ball-scale-multiple"
+      >
+        <div
+          key="0"
+          style={Object {}}
+        />
+        <div
+          key="1"
+          style={Object {}}
+        />
+        <div
+          key="2"
+          style={Object {}}
+        />
+      </div>
+    </div>
+  </Loader>
+</PreLoader>
+`;
