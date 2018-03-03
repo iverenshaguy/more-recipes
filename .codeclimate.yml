@@ -21,7 +21,7 @@ exclude_paths:
 - "**.min.css"
 - "node_modules/"
 - "template/"
-- "client/src/__tests__/"
+- "client/src/tests/"
 - "client/config/"
 - "client/coverage/"
 - "client/reports/"
