@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites errors="0"
+<testsuites errors="1"
             failures="0"
-            tests="0">
+            tests="1">
 
   <testsuite name="root"
-    errors="0" failures="0" hostname="" id="" package="root" skipped="0"
-    tests="0" time="0.000" timestamp="Wed, 13 Dec 2017 13:03:48 GMT">
+    errors="1" failures="0" hostname="" id="" package="root" skipped="0"
+    tests="1" time="0.07400" timestamp="Sun, 04 Mar 2018 08:32:57 GMT">
+  
+    <testcase name="Recipe Page:Sticky Bar" classname="root" time="0.07400" assertions="0">
+    </testcase>
   
 
+  
+    <system-err>
+        Error while running [Root / Recipe Page:Sticky Bar]:
+
+  TypeError: client.url(...).waitForElementVisible(...).assert.title(...).setValue(...).setValue(...).click(...).pause(...).url(...).pause(...).windowHandle(...).assert.visible(...).click(...).pause(...).urlEquals is not a function
+    at Object.RecipePageStickyBar [as Recipe Page:Sticky Bar] (C:/repositories/more-recipes-personal/client/src/e2e-tests/root.js:130:8)
+    at Module.call (C:\repositories\more-recipes-personal\node_modules\nightwatch\lib\runner\module.js:62:34)
+    at C:\repositories\more-recipes-personal\node_modules\nightwatch\lib\runner\testcase.js:70:29
+    at _fulfilled (C:\repositories\more-recipes-personal\node_modules\q\q.js:834:54)
+    at self.promiseDispatch.done (C:\repositories\more-recipes-personal\node_modules\q\q.js:863:30)
+    at Promise.promise.promiseDispatch (C:\repositories\more-recipes-personal\node_modules\q\q.js:796:13)
+    at C:\repositories\more-recipes-personal\node_modules\q\q.js:556:49
+    at runSingle (C:\repositories\more-recipes-personal\node_modules\q\q.js:137:13)
+    at flush (C:\repositories\more-recipes-personal\node_modules\q\q.js:125:13)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    </system-err>
   
 
   
