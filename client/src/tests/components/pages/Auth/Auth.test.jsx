@@ -98,8 +98,14 @@ describe('Auth', () => {
     wrapper.unmount();
   });
 
-  it('redirects when authenticated', () => {
+  it('redirects when authenticated: login', () => {
     const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" meta={loginMeta} />);
+
+    expect(toJson(shallowWrapper)).toMatchSnapshot();
+  });
+
+  it('redirects when authenticated: signup', () => {
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={signupLocation} type="signup" meta={signupMeta} />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });

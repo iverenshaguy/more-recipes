@@ -1,6 +1,7 @@
 import { sequelize, Recipe, User, Review } from '../models';
 import getItems from '../helpers/getItems';
 import getRecipe from '../helpers/getRecipe';
+import { checkArrayData } from '../helpers/arrayCheck';
 
 export default {
   create(req, recipeData, res, next) {
@@ -39,17 +40,21 @@ export default {
           return res.status(404).send({ message: 'Recipe Not Found' });
         }
 
+        if (recipeData.ingredients) recipeData.ingredients = checkArrayData(recipeData.ingredients);
+        if (recipeData.preparations) recipeData.preparations = checkArrayData(recipeData.preparations); // eslint-disable-line
+        if (recipeData.directions) recipeData.directions = checkArrayData(recipeData.directions);
+
         return recipe
-          .update(Object.assign(recipe, recipeData))
-          .then(() => res.status(200).send(recipe))
-          .catch(next);
+          .update(Object.assign({}, recipe, recipeData))
+          .then(() => getRecipe(req.id, +recipeData.recipeId)
+            .then(responseObject => res.status(200).send(responseObject)));
       })
       .catch(next);
   },
 
   delete(req, recipeData, res, next) {
     return Recipe
-      .findOne({ where: { id: recipeData.recipeId, userId: req.id } })
+      .findOne({ where: { id: +recipeData.recipeId, userId: req.id } })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({ message: 'Recipe Not Found' });

@@ -7,6 +7,7 @@ import getCleanUser from './getCleanUser';
 import getUserObject from './getUserObject';
 import getItems from './getItems';
 import paginateItems from './paginateItems';
+import updateUser from './updateUser';
 
 export default {
   arrayCheck,
@@ -17,5 +18,6 @@ export default {
   getCleanUser,
   getUserObject,
   getItems,
-  paginateItems
+  paginateItems,
+  updateUser
 };

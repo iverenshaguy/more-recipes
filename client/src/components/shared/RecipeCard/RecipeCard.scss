@@ -5,15 +5,13 @@
     box-shadow: $recipe-card-shadow;
   }
 
-  a {
+  a, p, small:not(.text-muted) {
     color: initial;
     text-decoration: none;
   }
 
   &:hover {
-    .card {
-      transform: scale(1.025);
-    }
+    transform: scale(1.025);
   }
 
   .recipe-details {
@@ -22,16 +20,13 @@
     padding: 0.5rem 1rem;
   }
 
-  .recipe-tags {
-    p {
-      background-color: $recipe-tags-green;
-      border: 1px solid $recipe-tags-green;
-      border-radius: 0.2rem;
-      // color: $navbar-grey
-      color: $white;
-      margin-right: 0.3rem;
-      padding: 0.05rem 0.2rem;
-    }
+  .card-image {
+    border: 0;
+  }
+
+  .card-image-overlay {
+    padding-top: 17%;
+    background-color: $transparent-middle;
   }
 
   img {
@@ -44,15 +39,13 @@
     box-shadow: $recipe-card-shadow;
   }
 
-  a {
+  a, p, small:not(.text-muted) {
     color: initial;
     text-decoration: none;
   }
 
   &:hover {
-    .card {
-      transform: scale(1.025);
-    }
+    transform: scale(1.025);
   }
 }
 

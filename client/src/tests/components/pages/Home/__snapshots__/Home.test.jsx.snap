@@ -271,7 +271,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
         </div>
         <hr />
         <div
-          className="row pt-2 px-5"
+          className="row pt-2 px-2 px-sm-3 px-md-4 px-lg-5 px-xl-5"
           id="search-result"
         >
           <RecipeCard
@@ -285,7 +285,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
             }
           >
             <div
-              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 recipe-card"
             >
               <Card
                 tag="div"
@@ -301,178 +301,87 @@ exports[`Home renders correctly when fully mounted 1`] = `
                       href="/recipes/1"
                       onClick={[Function]}
                     >
-                      <CardImg
-                        alt="recipe"
-                        className="img-fluid"
-                        src="images/jollof-rice-img.jpg"
-                        tag="img"
-                        top={true}
-                        width="100%"
-                      >
-                        <img
-                          alt="recipe"
-                          className="img-fluid card-img-top"
-                          src="images/jollof-rice-img.jpg"
-                          width="100%"
-                        />
-                      </CardImg>
-                      <CardBody
-                        className="card-block text-center pb-3"
+                      <CardHeader
+                        className="py-2"
                         tag="div"
                       >
                         <div
-                          className="card-block text-center pb-3 card-body"
+                          className="py-2 card-header"
                         >
-                          <h5
-                            className="mb-1"
+                          <CardText
+                            className="d-inline"
+                            tag="p"
                           >
-                            Rice
-                          </h5>
-                          <p
-                            className="card-text mb-2"
-                          >
-                            <span
-                              className="text-muted"
+                            <p
+                              className="d-inline card-text"
                             >
-                              Posted by 
-                            </span>
-                          </p>
+                              <small>
+                                @
+                              </small>
+                            </p>
+                          </CardText>
+                          <CardText
+                            className="d-inline float-right"
+                            tag="p"
+                          >
+                            <p
+                              className="d-inline float-right card-text"
+                            >
+                              <small
+                                className="text-muted"
+                              >
+                                <FontAwesome
+                                  name="heart"
+                                >
+                                  <span
+                                    aria-hidden={true}
+                                    className="fa fa-heart"
+                                  />
+                                </FontAwesome>
+                                 
+                              </small>
+                            </p>
+                          </CardText>
                         </div>
-                      </CardBody>
-                      <CardBody
-                        className="card-block text-center recipe-details"
+                      </CardHeader>
+                      <Card
+                        className="m-0 p-0 card-image"
                         tag="div"
                       >
                         <div
-                          className="card-block text-center recipe-details card-body"
+                          className="m-0 p-0 card-image card"
                         >
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
+                          <CardImg
+                            alt="recipe"
+                            bottom={true}
+                            className="img-fluid"
+                            src="images/jollof-rice-img.jpg"
+                            tag="img"
+                            width="100%"
                           >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
+                            <img
+                              alt="recipe"
+                              className="img-fluid card-img-bottom"
+                              src="images/jollof-rice-img.jpg"
+                              width="100%"
+                            />
+                          </CardImg>
+                          <CardImgOverlay
+                            className="text-center card-image-overlay text-white px-2 recipe-rating"
+                            tag="div"
+                          >
+                            <div
+                              className="text-center card-image-overlay text-white px-2 recipe-rating card-img-overlay"
                             >
-                              <FontAwesome
-                                name="clock-o"
+                              <h5
+                                className="mb-1 pt-3"
                               >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-clock-o"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-0 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-0 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted d-inline card-text"
-                            >
-                              <i
-                                className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
-                              />
-                            </p>
-                          </CardText>
+                                Rice
+                              </h5>
+                            </div>
+                          </CardImgOverlay>
                         </div>
-                      </CardBody>
-                      <CardBody
-                        className="text-center text-muted px-2 recipe-rating"
-                        tag="div"
-                      >
-                        <div
-                          className="text-center text-muted px-2 recipe-rating card-body"
-                        >
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                name="star"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-star"
-                                />
-                              </FontAwesome>
-                               
-                              NaN
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                name="heart"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-heart"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                className="text-success"
-                                name="eye"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-eye text-success"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                        </div>
-                      </CardBody>
+                      </Card>
                     </a>
                   </Link>
                 </div>
@@ -490,7 +399,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
             }
           >
             <div
-              className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 recipe-card"
             >
               <Card
                 tag="div"
@@ -506,178 +415,87 @@ exports[`Home renders correctly when fully mounted 1`] = `
                       href="/recipes/5"
                       onClick={[Function]}
                     >
-                      <CardImg
-                        alt="recipe"
-                        className="img-fluid"
-                        src="images/jollof-rice-img.jpg"
-                        tag="img"
-                        top={true}
-                        width="100%"
-                      >
-                        <img
-                          alt="recipe"
-                          className="img-fluid card-img-top"
-                          src="images/jollof-rice-img.jpg"
-                          width="100%"
-                        />
-                      </CardImg>
-                      <CardBody
-                        className="card-block text-center pb-3"
+                      <CardHeader
+                        className="py-2"
                         tag="div"
                       >
                         <div
-                          className="card-block text-center pb-3 card-body"
+                          className="py-2 card-header"
                         >
-                          <h5
-                            className="mb-1"
+                          <CardText
+                            className="d-inline"
+                            tag="p"
                           >
-                            Beans
-                          </h5>
-                          <p
-                            className="card-text mb-2"
-                          >
-                            <span
-                              className="text-muted"
+                            <p
+                              className="d-inline card-text"
                             >
-                              Posted by 
-                            </span>
-                          </p>
+                              <small>
+                                @
+                              </small>
+                            </p>
+                          </CardText>
+                          <CardText
+                            className="d-inline float-right"
+                            tag="p"
+                          >
+                            <p
+                              className="d-inline float-right card-text"
+                            >
+                              <small
+                                className="text-muted"
+                              >
+                                <FontAwesome
+                                  name="heart"
+                                >
+                                  <span
+                                    aria-hidden={true}
+                                    className="fa fa-heart"
+                                  />
+                                </FontAwesome>
+                                 
+                              </small>
+                            </p>
+                          </CardText>
                         </div>
-                      </CardBody>
-                      <CardBody
-                        className="card-block text-center recipe-details"
+                      </CardHeader>
+                      <Card
+                        className="m-0 p-0 card-image"
                         tag="div"
                       >
                         <div
-                          className="card-block text-center recipe-details card-body"
+                          className="m-0 p-0 card-image card"
                         >
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
+                          <CardImg
+                            alt="recipe"
+                            bottom={true}
+                            className="img-fluid"
+                            src="images/jollof-rice-img.jpg"
+                            tag="img"
+                            width="100%"
                           >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
+                            <img
+                              alt="recipe"
+                              className="img-fluid card-img-bottom"
+                              src="images/jollof-rice-img.jpg"
+                              width="100%"
+                            />
+                          </CardImg>
+                          <CardImgOverlay
+                            className="text-center card-image-overlay text-white px-2 recipe-rating"
+                            tag="div"
+                          >
+                            <div
+                              className="text-center card-image-overlay text-white px-2 recipe-rating card-img-overlay"
                             >
-                              <FontAwesome
-                                name="clock-o"
+                              <h5
+                                className="mb-1 pt-3"
                               >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-clock-o"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-0 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-0 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted d-inline card-text"
-                            >
-                              <i
-                                className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
-                              />
-                            </p>
-                          </CardText>
+                                Beans
+                              </h5>
+                            </div>
+                          </CardImgOverlay>
                         </div>
-                      </CardBody>
-                      <CardBody
-                        className="text-center text-muted px-2 recipe-rating"
-                        tag="div"
-                      >
-                        <div
-                          className="text-center text-muted px-2 recipe-rating card-body"
-                        >
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                name="star"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-star"
-                                />
-                              </FontAwesome>
-                               
-                              NaN
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                name="heart"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-heart"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                               | 
-                            </p>
-                          </CardText>
-                          <CardText
-                            className="text-muted mr-2 d-inline"
-                            tag="p"
-                          >
-                            <p
-                              className="text-muted mr-2 d-inline card-text"
-                            >
-                              <FontAwesome
-                                className="text-success"
-                                name="eye"
-                              >
-                                <span
-                                  aria-hidden={true}
-                                  className="fa fa-eye text-success"
-                                />
-                              </FontAwesome>
-                               
-                            </p>
-                          </CardText>
-                        </div>
-                      </CardBody>
+                      </Card>
                     </a>
                   </Link>
                 </div>

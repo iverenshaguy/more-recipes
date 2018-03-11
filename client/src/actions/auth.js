@@ -1,5 +1,6 @@
 import instance from '../axios';
 import { errorHandler } from '../utils';
+import { uploading, uploadSuccess, uploadFailure } from './uploadImage';
 import { auth as authAPI } from '../services/api/users';
 import {
   AUTHENTICATED,
@@ -10,7 +11,9 @@ import {
   LOGIN_ERROR,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
-  CLEAR_AUTH_ERROR
+  CLEAR_AUTH_ERROR,
+  UPDATE_USER_IMAGE_SUCCESS,
+  UPDATE_USER_IMAGE_FAILURE
 } from './actionTypes';
 
 const authenticating = () => ({
@@ -47,6 +50,16 @@ const signupFailure = error => ({
   payload: error
 });
 
+const updateUserImageSuccess = user => ({
+  type: UPDATE_USER_IMAGE_SUCCESS,
+  payload: user
+});
+
+const updateUserImageFailure = error => ({
+  type: UPDATE_USER_IMAGE_FAILURE,
+  payload: error
+});
+
 const clearAuthError = () => ({
   type: CLEAR_AUTH_ERROR
 });
@@ -54,6 +67,19 @@ const clearAuthError = () => ({
 const resetUser = () => ({
   type: UNAUTHENTICATED
 });
+
+const updateUserImage = (id, url) => async (dispatch) => {
+  try {
+    dispatch(uploading());
+    const response = await instance.put(`/users/${id}`, { profilePic: url });
+    dispatch(updateUserImageSuccess(response.data));
+    dispatch(uploadSuccess());
+  } catch (error) {
+    const errorResponse = errorHandler(error);
+    dispatch(updateUserImageFailure(errorResponse.response));
+    dispatch(uploadFailure());
+  }
+};
 
 const auth = type => user => async (dispatch) => {
   try {
@@ -108,6 +134,9 @@ export default {
   authenticateUser,
   authenticationSuccess,
   authenticationFailure,
+  updateUserImage,
+  updateUserImageSuccess,
+  updateUserImageFailure,
   clearAuthError,
   resetUser,
   logout

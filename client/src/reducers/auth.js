@@ -7,7 +7,9 @@ import {
   LOGIN_ERROR,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
-  CLEAR_AUTH_ERROR
+  CLEAR_AUTH_ERROR,
+  UPDATE_USER_IMAGE_SUCCESS,
+  UPDATE_USER_IMAGE_FAILURE
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -24,6 +26,7 @@ export default (state = initialState, action) => {
     case AUTHENTICATED:
     case LOGIN_SUCCESS:
     case SIGNUP_SUCCESS:
+    case UPDATE_USER_IMAGE_SUCCESS:
       return Object.assign({}, state, {
         isAuthenticated: true,
         user: action.payload,
@@ -34,7 +37,6 @@ export default (state = initialState, action) => {
     case CLEAR_AUTH_ERROR:
       return Object.assign({}, state, {
         isAuthenticated: false,
-        user: {},
         error: null,
         loading: false
       });
@@ -44,6 +46,11 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isAuthenticated: false,
         user: {},
+        error: action.payload,
+        loading: false
+      });
+    case UPDATE_USER_IMAGE_FAILURE:
+      return Object.assign({}, state, {
         error: action.payload,
         loading: false
       });

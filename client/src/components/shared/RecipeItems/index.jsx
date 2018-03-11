@@ -20,7 +20,7 @@ const RecipeItems = props => (
       </div>
     </div>
     <hr />
-    <div className="row pt-2 px-5" id="search-result">
+    <div className="row pt-2 px-2 px-sm-3 px-md-4 px-lg-5 px-xl-5" id="search-result">
       {props.recipes.length === 0 &&
         <div className="col">
           {props.recipes.length === 0 && <div className="text-center pt-4">{getNoResultText(props.title)}</div>}

@@ -6,6 +6,7 @@ import auth from './auth';
 import recipes from './recipes';
 import isFetching from './isFetching';
 import singleRecipe from './singleRecipe';
+import uploadImage from './uploadImage';
 
 export const history = createHistory();
 
@@ -15,5 +16,6 @@ export default combineReducers({
   recipes,
   isFetching,
   singleRecipe,
+  uploadImage,
   router: routerReducer
 });

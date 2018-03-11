@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Navbar from '../Navbar';
 import { logout } from '../../../actions/auth';
+import { toggleModal } from '../../../actions/ui';
 import { userPropTypes } from '../../../helpers/proptypes';
 
 /**
@@ -19,14 +20,27 @@ class Header extends Component {
   constructor() {
     super();
     this.logout = this.logout.bind(this);
+    this.showAddRecipeModal = this.showAddRecipeModal.bind(this);
   }
 
   /**
    * @memberof Header
+   * @param {object} e - event object
    * @returns {JSX} Logged out User
    */
-  logout() {
+  logout(e) {
+    e.preventDefault();
     this.props.dispatch(logout());
+  }
+
+  /**
+   * @memberof Header
+   * @param {object} e - event objec
+   * @returns {component} NavbarWrapper
+   */
+  showAddRecipeModal(e) {
+    e.preventDefault();
+    this.props.dispatch(toggleModal('addRecipe'));
   }
 
   /**
@@ -39,6 +53,7 @@ class Header extends Component {
         <Navbar
           isAuthenticated={this.props.isAuthenticated}
           logout={this.logout}
+          showAddRecipeModal={this.showAddRecipeModal}
           user={this.props.user}
         />
       </header>

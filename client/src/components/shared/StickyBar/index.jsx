@@ -26,10 +26,11 @@ class StickyBar extends Component {
   constructor() {
     super();
 
+    this.handleUserIconClick = this.handleUserIconClick.bind(this);
     this.handleHomeIconClick = this.handleHomeIconClick.bind(this);
     this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
     this.handleFavoritesIconClick = this.handleFavoritesIconClick.bind(this);
-    this.handleUserIconClick = this.handleUserIconClick.bind(this);
+    this.handleAddRecipeIconClick = this.handleAddRecipeIconClick.bind(this);
   }
 
   /**
@@ -74,12 +75,20 @@ class StickyBar extends Component {
 
   /**
    * @memberof StickyBar
+   * @param {object} e
+   * @returns {nothing} Returns nothing
+   */
+  handleAddRecipeIconClick(e) {
+    e.preventDefault();
+    this.props.dispatch(toggleModal('addRecipe'));
+  }
+
+  /**
+   * @memberof StickyBar
    * @returns {JSX} StickyBar
   */
   render() {
-    const {
-      currentLocation, dispatch
-    } = this.props;
+    const { currentLocation } = this.props;
 
     if (currentLocation === '/login' || currentLocation === '/signup') {
       return null;
@@ -101,7 +110,7 @@ class StickyBar extends Component {
                 tag="i"
                 id="add-edit-modal-icon"
                 size="lg"
-                onClick={() => dispatch(toggleModal('addRecipe'))}
+                onClick={this.handleAddRecipeIconClick}
               />
             </div>
             <div className="nav-link d-inline">

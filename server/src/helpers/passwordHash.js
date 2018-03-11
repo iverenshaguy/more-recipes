@@ -12,29 +12,25 @@ export default {
       encoding
     } = config;
 
-    return new Promise((resolve, reject) => {
-      if (typeof (password) !== 'string') {
-        reject(TypeError('Password Must Be a String'));
-      }
+    if (typeof (password) !== 'string') {
+      return 'Password Must Be a String';
+    }
 
-      const salt = crypto.randomBytes(saltBytes);
+    const salt = crypto.randomBytes(saltBytes);
+    const hash = crypto.pbkdf2Sync(password, salt, iterations, hashBytes, digest);
+    const combined = Buffer.alloc(hash.length + salt.length + 8);
 
-      const hash = crypto.pbkdf2Sync(password, salt, iterations, hashBytes, digest);
+    // include the size of the salt so that we can, during verification,
+    // figure out how much of the hash is salt and also include the
+    // iteration count
+    combined.writeUInt32BE(salt.length, 0, true);
+    combined.writeUInt32BE(iterations, 4, true);
+    salt.copy(combined, 8);
+    hash.copy(combined, salt.length + 8);
 
-      const combined = Buffer.alloc(hash.length + salt.length + 8);
+    const combinedHashString = combined.toString(encoding);
 
-      // include the size of the salt so that we can, during verification,
-      // figure out how much of the hash is salt and also include the
-      // iteration count
-      combined.writeUInt32BE(salt.length, 0, true);
-      combined.writeUInt32BE(iterations, 4, true);
-      salt.copy(combined, 8);
-      hash.copy(combined, salt.length + 8);
-
-      const combinedHashString = combined.toString(encoding);
-
-      resolve(combinedHashString);
-    });
+    return combinedHashString;
   },
 
   verifyPassword(password, combinedHashString) {

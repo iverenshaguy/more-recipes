@@ -1,25 +1,28 @@
 import { config } from 'dotenv';
-import { User, Recipe } from '../models';
-import { verifyPassword } from '../helpers/passwordHash';
-import { generateToken, getCleanUser, getUserObject } from '../helpers';
+import { sequelize, User, Recipe, Review } from '../models';
+import getItems from '../helpers/getItems';
+import { hashPassword, verifyPassword } from '../helpers/passwordHash';
+import { generateToken, getCleanUser, getUserObject, updateUser } from '../helpers';
 
 config();
 
 export default {
   create(req, userData, res, next) {
+    const hash = hashPassword(userData.password);
+    userData.passwordHash = hash;
+
     return User.create({
       firstname: userData.firstname,
       lastname: userData.lastname,
       username: userData.username,
       email: userData.email.toLowerCase(),
-      password: userData.password,
+      passwordHash: userData.passwordHash,
       aboutMe: userData.aboutMe,
       occupation: userData.occupation
     })
       .then((user) => {
         const token = generateToken(user);
         user = getCleanUser(user);
-
         res.status(201).send({ user, token });
       })
       .catch(next);
@@ -44,17 +47,60 @@ export default {
       .catch(next);
   },
 
-  retrieve(req, res, next) {
+  retrieve(req, data, res, next) {
     return User.findOne({
-      where: { id: req.id },
-      include: [
-        {
-          model: Recipe,
-          as: 'recipes'
-        }
-      ]
+      where: { id: +data.userId }
     })
-      .then(user => res.status(200).send(user))
+      .then(user => res.status(200).send(getCleanUser(user)))
+      .catch(next);
+  },
+
+  update(req, userData, res, next) {
+    if (+req.id !== +userData.userId) {
+      res.status(401).send({ message: 'You are not authorized to access this page' });
+    }
+
+    return User
+      .findOne({ where: { id: +req.id } })
+      .then((user) => {
+        delete userData.email;
+        delete userData.username;
+
+        if (userData.password) {
+          const hash = hashPassword(userData.password);
+          userData.passwordHash = hash;
+        }
+
+        return updateUser(user, userData)
+          .then(updatedUser => res.status(200).send(getCleanUser(updatedUser)));
+      })
+      .catch(next);
+  },
+
+  getUserRecipes(req, data, res, next) {
+    return Recipe
+      .findAll({
+        where: { userId: +data.userId },
+        attributes: {
+          include: [
+            [sequelize.fn('AVG', sequelize.col('reviews.rating')), 'rating'],
+          ],
+        },
+        include: [
+          {
+            model: Review,
+            as: 'reviews',
+            attributes: [],
+          },
+          {
+            model: User,
+            as: 'User',
+            attributes: ['id', 'username', 'profilePic']
+          }
+        ],
+        group: ['Recipe.id', 'User.id']
+      })
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   },
 

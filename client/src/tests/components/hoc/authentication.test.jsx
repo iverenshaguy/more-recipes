@@ -28,7 +28,6 @@ const setup = () => {
   MockComponent.displayName = 'MockComponent';
 
   const HOCComponent = requireAuthentication(MockComponent);
-  // const context = { router: { push: jest.fn() } };
   const location = {
     pathname: '/login',
     state: { from: { pathname: '/' } }

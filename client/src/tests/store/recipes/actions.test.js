@@ -4,6 +4,7 @@ import moxios from 'moxios';
 import instance from '../../../axios';
 import {
   fetchTopRecipes,
+  fetchUserRecipes,
   fetchRecipesSuccess,
   fetchRecipesFailure,
   searchRecipes
@@ -152,6 +153,68 @@ describe('Recipes Actions', () => {
       });
 
       return store.dispatch(searchRecipes('chicken', 1, 5)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_USER_RECIPES_SUCCESS and UNSET_FETCHING succesfully', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_USER_RECIPES_SUCCESS', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: recipesResponse,
+        });
+      });
+
+      return store.dispatch(fetchUserRecipes(1, 1, 5)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_USER_RECIPES_SUCCESS and UNSET_FETCHING succesfully when there are no results', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_USER_RECIPES_SUCCESS', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'Your have addded no recipes'
+          },
+        });
+      });
+
+      return store.dispatch(fetchUserRecipes(1, 1, 5)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_USER_RECIPES_FAILURE and UNSET_FETCHING succesfully', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_USER_RECIPES_FAILURE', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({ status: 500 });
+      });
+
+      return store.dispatch(fetchUserRecipes(1, 1, 5)).then(() => {
         const dispatchedActions = store.getActions();
 
         const actionTypes = dispatchedActions.map(action => action.type);

@@ -8,21 +8,44 @@ describe('Update Recipe', () => {
 
   it('should update recipe', (done) => {
     const preparations = ['Soak the beans for 1 hour to reduce bloating', 'Boil for 10 minutes and drain water'];
+    const directions = ['Put beans on fire', 'Cook it', 'Serve it'];
+    const ingredients = ['Beans', 'Palm Oil'];
 
     agent
       .put(`${recipeURL}/9`)
-      .send({ preparations })
+      .send({ preparations, directions, ingredients })
       .set('Accept', 'application/json')
       .set('authorization', iverenToken)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.preparations).to.have.lengthOf(2);
-        expect(res.body.preparations[0]).to.equal('Soak the beans for 1 hour to reduce bloating');
-        expect(res.body.preparations[1]).to.equal('Boil for 10 minutes and drain water');
+        expect(res.body.recipeItem.preparations).to.have.lengthOf(2);
+        expect(res.body.recipeItem.directions).to.have.lengthOf(3);
+        expect(res.body.recipeItem.ingredients).to.have.lengthOf(2);
+        expect(res.body.recipeItem.preparations[0]).to.equal('Soak the beans for 1 hour to reduce bloating');
+        expect(res.body.recipeItem.directions[1]).to.equal('Cook it');
+        expect(res.body.recipeItem.ingredients[0]).to.equal('Beans');
 
         if (err) {
           return done(err);
         }
+        done();
+      });
+  });
+
+  it('should not update preparations, directions or ingredients when unavailable in update object', (done) => {
+    agent
+      .put(`${recipeURL}/9`)
+      .send({ difficulty: 'Easy' })
+      .set('Accept', 'application/json')
+      .set('authorization', iverenToken)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(200);
+        expect(res.body.recipeItem.difficulty).to.equal('Easy');
+        expect(res.body.recipeItem.preparations[0]).to.equal('Soak the beans for 1 hour to reduce bloating');
+        expect(res.body.recipeItem.directions[1]).to.equal('Cook it');
+        expect(res.body.recipeItem.ingredients[0]).to.equal('Beans');
+
+        if (err) return done(err);
         done();
       });
   });

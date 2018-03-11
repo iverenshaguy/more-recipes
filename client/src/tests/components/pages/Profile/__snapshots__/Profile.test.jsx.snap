@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile renders Redirects to user's profile params is not equal to username 1`] = `
+<div
+  className="user-profile pb-4"
+>
+  <div
+    className="container-fluid user-profile-div"
+  >
+    <div
+      className="row justify-content-start user-info py-4 px-3 px-md-5"
+    >
+      <div
+        className="col-5 col-md-4 profile-picture align-self-center"
+      >
+        <img
+          alt="Profile"
+          className="d-block d-md-inline rounded-circle img-fluid img-thumbnail user-img align-middle"
+          src="images/user-image-placeholder.png"
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        />
+           
+        <div
+          className="d-block d-md-inline-block align-middle"
+        >
+          <a
+            href="#profile-photo"
+            onClick={[Function]}
+          >
+            Change Picture
+          </a>
+        </div>
+        <input
+          accept="image/gif, image/jpeg, image/png"
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </div>
+      <div
+        className="col-7 col-md-8 name-div align-self-center"
+      >
+        <p
+          className="name pt-2"
+        >
+          undefined undefined
+        </p>
+        <small
+          className="text-muted username pt-1"
+        >
+          @username2
+        </small>
+        <p
+          className="about-me pt-2"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1"
+  >
+    <Button
+      className="btn-default btn-lg d-none d-md-inline-block"
+      color="secondary"
+      id="home-add-recipe-btn"
+      onClick={[Function]}
+      tag="button"
+      title="New Recipe"
+    >
+      Add a New Recipe
+    </Button>
+    <div
+      className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
+    >
+      <RecipeItems
+        handlePageChange={[Function]}
+        metadata={
+          Object {
+            "firstPage": 1,
+            "itemsPerPage": 5,
+            "lastPage": 3,
+            "page": 2,
+            "pages": Array [
+              1,
+              2,
+              3,
+            ],
+            "totalCount": 13,
+          }
+        }
+        recipes={
+          Array [
+            Object {
+              "User": "Me",
+              "id": 1,
+              "recipeName": "Rice",
+            },
+            Object {
+              "User": "She",
+              "id": 5,
+              "recipeName": "Beans",
+            },
+          ]
+        }
+        title="MY RECIPES"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Profile renders correctly 1`] = `
+<div
+  className="user-profile pb-4"
+>
+  <div
+    className="container-fluid user-profile-div"
+  >
+    <div
+      className="row justify-content-start user-info py-4 px-3 px-md-5"
+    >
+      <div
+        className="col-5 col-md-4 profile-picture align-self-center"
+      >
+        <img
+          alt="Profile"
+          className="d-block d-md-inline rounded-circle img-fluid img-thumbnail user-img align-middle"
+          src="images/user-image-placeholder.png"
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        />
+           
+        <div
+          className="d-block d-md-inline-block align-middle"
+        >
+          <a
+            href="#profile-photo"
+            onClick={[Function]}
+          >
+            Change Picture
+          </a>
+        </div>
+        <input
+          accept="image/gif, image/jpeg, image/png"
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </div>
+      <div
+        className="col-7 col-md-8 name-div align-self-center"
+      >
+        <p
+          className="name pt-2"
+        >
+          undefined undefined
+        </p>
+        <small
+          className="text-muted username pt-1"
+        >
+          @username
+        </small>
+        <p
+          className="about-me pt-2"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1"
+  >
+    <Button
+      className="btn-default btn-lg d-none d-md-inline-block"
+      color="secondary"
+      id="home-add-recipe-btn"
+      onClick={[Function]}
+      tag="button"
+      title="New Recipe"
+    >
+      Add a New Recipe
+    </Button>
+    <div
+      className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
+    >
+      <RecipeItems
+        handlePageChange={[Function]}
+        metadata={
+          Object {
+            "firstPage": 1,
+            "itemsPerPage": 5,
+            "lastPage": 3,
+            "page": 2,
+            "pages": Array [
+              1,
+              2,
+              3,
+            ],
+            "totalCount": 13,
+          }
+        }
+        recipes={
+          Array [
+            Object {
+              "User": "Me",
+              "id": 1,
+              "recipeName": "Rice",
+            },
+            Object {
+              "User": "She",
+              "id": 5,
+              "recipeName": "Beans",
+            },
+          ]
+        }
+        title="MY RECIPES"
+      />
+    </div>
+  </div>
+</div>
+`;

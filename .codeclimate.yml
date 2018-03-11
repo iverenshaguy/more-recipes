@@ -27,6 +27,7 @@ exclude_paths:
 - "client/reports/"
 - "client/scripts/"
 - "client/src/assets/"
+- "client/src/e2e-tests/"
 - "server/config/"
 - "server/coverage/"
 - "server/src/migrations/"

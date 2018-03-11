@@ -65,11 +65,15 @@ Navigate to
 * Signin - POST
   [http://localhost:8000/api/v1/users/signin](http://localhost:8000/api/v1/users/signin)
 * Fetch User - GET
-  [http://localhost:8000/api/v1/users/profile](http://localhost:8000/api/v1/users/profile)
+  [http://localhost:8000/api/v1/users/:userId](http://localhost:8000/api/v1/users/:userId)
+* Update User - GET
+  [http://localhost:8000/api/v1/users/:userId](http://localhost:8000/api/v1/users/:userId)
 * Refresh User Token - GET
   [http://localhost:8000/api/v1/users/token](http://localhost:8000/api/v1/users/token)
 * Fetch User's Favorite Recipes - GET
-  [http://localhost:8000/api/v1/users//:userId/recipes](http://localhost:8000/api/v1/users//:userId/recipes)
+  [http://localhost:8000/api/v1/users/:userId/recipes](http://localhost:8000/api/v1/users/:userId/recipes)
+* Fetch Recipes Added by User - GET
+  [http://localhost:8000/api/v1/users/:userId/recipes/user](http://localhost:8000/api/v1/users/:userId/recipes/user)
 
 #### Recipes
 

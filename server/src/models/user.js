@@ -1,5 +1,3 @@
-import { hashPassword } from '../helpers/passwordHash';
-
 export default (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
@@ -25,10 +23,6 @@ export default (sequelize, DataTypes) => {
       passwordHash: {
         type: DataTypes.STRING
       },
-      password: {
-        type: DataTypes.VIRTUAL,
-        allowNull: false
-      },
       aboutMe: {
         type: DataTypes.TEXT,
         allowNull: true
@@ -38,26 +32,15 @@ export default (sequelize, DataTypes) => {
         allowNull: true
       },
       profilePic: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          is: {
-            args: /^[a-zA-Z0-9._\s]*$/,
-            msg: 'Input is not valid'
-          },
+          isUrl: true,
           notEmpty: {
             args: true,
             msg: 'Input cannot be empty'
           }
         }
-      }
-    },
-    {
-      hooks: {
-        beforeCreate: user =>
-          hashPassword(user.password).then((hash) => {
-            user.passwordHash = hash;
-          })
       }
     }
   );
