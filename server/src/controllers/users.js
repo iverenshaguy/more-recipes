@@ -8,19 +8,21 @@ config();
 
 export default {
   create(req, userData, res, next) {
+    const hash = hashPassword(userData.password);
+    userData.passwordHash = hash;
+
     return User.create({
       firstname: userData.firstname,
       lastname: userData.lastname,
       username: userData.username,
       email: userData.email.toLowerCase(),
-      password: userData.password,
+      passwordHash: userData.passwordHash,
       aboutMe: userData.aboutMe,
       occupation: userData.occupation
     })
       .then((user) => {
         const token = generateToken(user);
         user = getCleanUser(user);
-
         res.status(201).send({ user, token });
       })
       .catch(next);
@@ -49,13 +51,13 @@ export default {
     return User.findOne({
       where: { id: +data.userId }
     })
-      .then(user => res.status(200).send(user))
+      .then(user => res.status(200).send(getCleanUser(user)))
       .catch(next);
   },
 
   update(req, userData, res, next) {
     if (+req.id !== +userData.userId) {
-      return res.status(401).send({ message: 'You are not authorized to access this page' });
+      res.status(401).send({ message: 'You are not authorized to access this page' });
     }
 
     return User
@@ -65,17 +67,12 @@ export default {
         delete userData.username;
 
         if (userData.password) {
-          hashPassword(userData.password).then((hash) => {
-            userData.passwordHash = hash;
-
-            // can't send headers after they are sent error #73
-            return updateUser(user, userData)
-              .then(updatedUser => res.status(200).send(updatedUser));
-          });
+          const hash = hashPassword(userData.password);
+          userData.passwordHash = hash;
         }
 
         return updateUser(user, userData)
-          .then(updatedUser => res.status(200).send(updatedUser));
+          .then(updatedUser => res.status(200).send(getCleanUser(updatedUser)));
       })
       .catch(next);
   },

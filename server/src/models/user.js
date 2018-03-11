@@ -1,5 +1,3 @@
-import { hashPassword } from '../helpers/passwordHash';
-
 export default (sequelize, DataTypes) => {
   const User = sequelize.define(
     'User',
@@ -25,10 +23,6 @@ export default (sequelize, DataTypes) => {
       passwordHash: {
         type: DataTypes.STRING
       },
-      password: {
-        type: DataTypes.VIRTUAL,
-        allowNull: false
-      },
       aboutMe: {
         type: DataTypes.TEXT,
         allowNull: true
@@ -47,14 +41,6 @@ export default (sequelize, DataTypes) => {
             msg: 'Input cannot be empty'
           }
         }
-      }
-    },
-    {
-      hooks: {
-        beforeCreate: user =>
-          hashPassword(user.password).then((hash) => {
-            user.passwordHash = hash;
-          })
       }
     }
   );

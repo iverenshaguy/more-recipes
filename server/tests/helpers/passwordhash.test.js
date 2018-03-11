@@ -10,19 +10,23 @@ describe('Test for Password Hash', () => {
   const badPassword = ['kdfkdf'];
 
   describe('## Hash the Password', () => {
-    it('should hash the password and return a string', async () => {
-      const result = await hashPassword(password);
+    it('should hash the password and return a string', () => {
+      const result = hashPassword(password);
       expect(result).to.be.a('string');
       expect(result).to.include('000000100007a120');
     });
 
-    it('should hash the password and return a string containing 000000100007a120', async () => {
-      const result = await hashPassword(password);
+    it('should hash the password and return a string containing 000000100007a120', () => {
+      const result = hashPassword(password);
       expect(result).to.be.a('string');
       expect(result).to.include('000000100007a120');
     });
 
-    it('should not hash the password and return a TypeError(Password Must Be a String)', () => hashPassword(badPassword).should.be.rejectedWith(TypeError, 'Password Must Be a String'));
+    it('should not hash the password and return a TypeError(Password Must Be a String)', () => {
+      const result = hashPassword(badPassword);
+
+      expect(result).to.equal('Password Must Be a String');
+    });
   });
 
   describe('## Verify the Password Hash', () => {
