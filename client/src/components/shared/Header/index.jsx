@@ -25,18 +25,21 @@ class Header extends Component {
 
   /**
    * @memberof Header
+   * @param {object} e - event object
    * @returns {JSX} Logged out User
    */
-  logout() {
+  logout(e) {
+    e.preventDefault();
     this.props.dispatch(logout());
   }
 
   /**
    * @memberof Header
-   * @param {object} e
+   * @param {object} e - event objec
    * @returns {component} NavbarWrapper
    */
-  showAddRecipeModal() {
+  showAddRecipeModal(e) {
+    e.preventDefault();
     this.props.dispatch(toggleModal('addRecipe'));
   }
 
@@ -48,7 +51,6 @@ class Header extends Component {
     return (
       <header>
         <Navbar
-
           isAuthenticated={this.props.isAuthenticated}
           logout={this.logout}
           showAddRecipeModal={this.showAddRecipeModal}
