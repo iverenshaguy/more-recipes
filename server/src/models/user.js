@@ -38,13 +38,10 @@ export default (sequelize, DataTypes) => {
         allowNull: true
       },
       profilePic: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          is: {
-            args: /^[a-zA-Z0-9._\s]*$/,
-            msg: 'Input is not valid'
-          },
+          isUrl: true,
           notEmpty: {
             args: true,
             msg: 'Input cannot be empty'

@@ -2,7 +2,7 @@
 
 exports[`RecipeCard renders correctly 1`] = `
 <div
-  className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card"
+  className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 recipe-card"
 >
   <Card
     tag="div"
@@ -11,112 +11,57 @@ exports[`RecipeCard renders correctly 1`] = `
       replace={false}
       to="/recipes/8"
     >
-      <CardImg
-        alt="recipe"
-        className="img-fluid"
-        src="images/jollof-rice-img.jpg"
-        tag="img"
-        top={true}
-        width="100%"
-      />
-      <CardBody
-        className="card-block text-center pb-3"
+      <CardHeader
+        className="py-2"
         tag="div"
       >
-        <h5
-          className="mb-1"
+        <CardText
+          className="d-inline"
+          tag="p"
         >
-          Chicken Pie
-        </h5>
-        <p
-          className="card-text mb-2"
+          <small>
+            @
+            westsouth
+          </small>
+        </CardText>
+        <CardText
+          className="d-inline float-right"
+          tag="p"
         >
-          <span
+          <small
             className="text-muted"
           >
-            Posted by 
-          </span>
-          westsouth
-        </p>
-      </CardBody>
-      <CardBody
-        className="card-block text-center recipe-details"
+            <FontAwesome
+              name="heart"
+            />
+             
+            150
+          </small>
+        </CardText>
+      </CardHeader>
+      <Card
+        className="m-0 p-0 card-image"
         tag="div"
       >
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
+        <CardImg
+          alt="recipe"
+          bottom={true}
+          className="img-fluid"
+          src="images/jollof-rice-img.jpg"
+          tag="img"
+          width="100%"
+        />
+        <CardImgOverlay
+          className="text-center card-image-overlay text-white px-2 recipe-rating"
+          tag="div"
         >
-          <FontAwesome
-            name="clock-o"
-          />
-           
-          1hr 30 minutes
-        </CardText>
-        <CardText
-          className="text-muted mr-0 d-inline"
-          tag="p"
-        >
-           | 
-        </CardText>
-        <CardText
-          className="text-muted d-inline"
-          tag="p"
-        >
-          <i
-            className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods"
-          />
-          Easy
-        </CardText>
-      </CardBody>
-      <CardBody
-        className="text-center text-muted px-2 recipe-rating"
-        tag="div"
-      >
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
-        >
-          <FontAwesome
-            name="star"
-          />
-           
-          4.8
-        </CardText>
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
-        >
-           | 
-        </CardText>
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
-        >
-          <FontAwesome
-            name="heart"
-          />
-           
-          150
-        </CardText>
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
-        >
-           | 
-        </CardText>
-        <CardText
-          className="text-muted mr-2 d-inline"
-          tag="p"
-        >
-          <FontAwesome
-            className="text-success"
-            name="eye"
-          />
-           
-          290
-        </CardText>
-      </CardBody>
+          <h5
+            className="mb-1 pt-3"
+          >
+            Chicken Pie
+          </h5>
+        </CardImgOverlay>
+      </Card>
     </Link>
   </Card>
 </div>

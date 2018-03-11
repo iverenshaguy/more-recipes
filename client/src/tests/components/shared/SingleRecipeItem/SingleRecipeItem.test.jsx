@@ -78,7 +78,6 @@ describe('SingleRecipeItem', () => {
   it('calls toggleReviewForm() when review icon is clicked', () => {
     const { props, mountedWrapper } = setup();
     const wrapper = mountedWrapper.find(SingleRecipeItem);
-    // console.log(wrapper.debug());
 
     wrapper.find('i.fa-star-o').simulate('click');
 

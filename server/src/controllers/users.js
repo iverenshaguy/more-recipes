@@ -1,7 +1,8 @@
 import { config } from 'dotenv';
-import { User, Recipe } from '../models';
-import { verifyPassword } from '../helpers/passwordHash';
-import { generateToken, getCleanUser, getUserObject } from '../helpers';
+import { sequelize, User, Recipe, Review } from '../models';
+import getItems from '../helpers/getItems';
+import { hashPassword, verifyPassword } from '../helpers/passwordHash';
+import { generateToken, getCleanUser, getUserObject, updateUser } from '../helpers';
 
 config();
 
@@ -44,17 +45,64 @@ export default {
       .catch(next);
   },
 
-  retrieve(req, res, next) {
+  retrieve(req, data, res, next) {
     return User.findOne({
-      where: { id: req.id },
-      include: [
-        {
-          model: Recipe,
-          as: 'recipes'
-        }
-      ]
+      where: { id: +data.userId }
     })
       .then(user => res.status(200).send(user))
+      .catch(next);
+  },
+
+  update(req, userData, res, next) {
+    if (+req.id !== +userData.userId) {
+      return res.status(401).send({ message: 'You are not authorized to access this page' });
+    }
+
+    return User
+      .findOne({ where: { id: +req.id } })
+      .then((user) => {
+        delete userData.email;
+        delete userData.username;
+
+        if (userData.password) {
+          hashPassword(userData.password).then((hash) => {
+            userData.passwordHash = hash;
+
+            return updateUser(user, userData)
+              .then(updatedUser => res.status(200).send(updatedUser));
+          });
+        }
+
+        return updateUser(user, userData)
+          .then(updatedUser => res.status(200).send(updatedUser));
+      })
+      .catch(next);
+  },
+
+  getUserRecipes(req, data, res, next) {
+    return Recipe
+      .findAll({
+        where: { userId: +data.userId },
+        attributes: {
+          include: [
+            [sequelize.fn('AVG', sequelize.col('reviews.rating')), 'rating'],
+          ],
+        },
+        include: [
+          {
+            model: Review,
+            as: 'reviews',
+            attributes: [],
+          },
+          {
+            model: User,
+            as: 'User',
+            attributes: ['id', 'username', 'profilePic']
+          }
+        ],
+        group: ['Recipe.id', 'User.id']
+      })
+      .then(recipes => getItems(req, res, recipes, 'recipes'))
       .catch(next);
   },
 

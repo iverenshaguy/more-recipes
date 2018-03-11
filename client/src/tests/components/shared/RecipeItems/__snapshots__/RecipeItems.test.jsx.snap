@@ -20,7 +20,7 @@ exports[`RecipeItems renders correctly 1`] = `
   </div>
   <hr />
   <div
-    className="row pt-2 px-5"
+    className="row pt-2 px-2 px-sm-3 px-md-4 px-lg-5 px-xl-5"
     id="search-result"
   >
     <RecipeCard
@@ -116,7 +116,7 @@ exports[`RecipeItems renders correctly when no recipes are passed 1`] = `
   </div>
   <hr />
   <div
-    className="row pt-2 px-5"
+    className="row pt-2 px-2 px-sm-3 px-md-4 px-lg-5 px-xl-5"
     id="search-result"
   >
     <div
@@ -152,7 +152,7 @@ exports[`RecipeItems renders correctly when title is SEARCH RESULTS 1`] = `
   </div>
   <hr />
   <div
-    className="row pt-2 px-5"
+    className="row pt-2 px-2 px-sm-3 px-md-4 px-lg-5 px-xl-5"
     id="search-result"
   >
     <RecipeCard

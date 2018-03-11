@@ -62,6 +62,7 @@ exports[`Auth login: renders correctly 1`] = `
           submitError={null}
           submitting={false}
           type="login"
+          username={null}
         />
       </Col>
     </Row>
@@ -69,12 +70,25 @@ exports[`Auth login: renders correctly 1`] = `
 </div>
 `;
 
-exports[`Auth redirects when authenticated 1`] = `
+exports[`Auth redirects when authenticated: login 1`] = `
 <Redirect
   push={false}
   to={
     Object {
       "pathname": "/",
+    }
+  }
+/>
+`;
+
+exports[`Auth redirects when authenticated: signup 1`] = `
+<Redirect
+  push={false}
+  to={
+    Object {
+      "from": Object {
+        "pathname": "/null",
+      },
     }
   }
 />
@@ -153,6 +167,7 @@ exports[`Auth signup: renders correctly 1`] = `
           submitError={null}
           submitting={false}
           type="signup"
+          username={null}
         />
       </Col>
     </Row>

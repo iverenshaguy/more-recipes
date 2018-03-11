@@ -42,6 +42,10 @@ export default {
       addReviewSuccess: false,
       error: null,
       reviewing: false
-    }
+    },
+    // uploadImage: {
+    //   uploading: false,
+    //   success: false
+    // }
   },
 };

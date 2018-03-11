@@ -92,10 +92,8 @@ exports[`Navbar logs user out on logout click 1`] = `
             <img
               alt="User"
               className="rounded-cirle"
-              src="images/user1.jpg"
+              src="images/user-image-placeholder.png"
             />
-             
-            Dave
           </DropdownToggle>
           <DropdownMenu
             flip={true}
@@ -105,14 +103,14 @@ exports[`Navbar logs user out on logout click 1`] = `
             <Link
               className="dropdown-item"
               replace={false}
-              to="/user/profile"
+              to="/undefined"
             >
               Profile
             </Link>
             <Link
               className="dropdown-item"
               replace={false}
-              to="/user/profile/edit"
+              to="/undefined/profile/edit"
             >
               Edit Profile
             </Link>
@@ -150,8 +148,8 @@ exports[`Navbar logs user out on logout click 1`] = `
         >
           <a
             className="dropdown-item add-recipe"
-            data-toggle="modal"
             href="#add-edit-modal"
+            onClick={[Function]}
             title="New Recipe"
           >
             Add a Recipe
@@ -159,17 +157,17 @@ exports[`Navbar logs user out on logout click 1`] = `
           <Link
             className="dropdown-item"
             replace={false}
-            to="/recipes"
-          >
-            All Recipes
-          </Link>
-          <Link
-            className="dropdown-item"
-            replace={false}
             to="/"
           >
             Top Recipes
           </Link>
+          <a
+            className="dropdown-item"
+            href="#favorite-recipes"
+            title="favorite-recipes"
+          >
+            Favorite Recipes
+          </a>
         </DropdownMenu>
       </UncontrolledDropdown>
     </Nav>
@@ -289,10 +287,8 @@ exports[`Navbar renders correctly when type = home 1`] = `
             <img
               alt="User"
               className="rounded-cirle"
-              src="images/user1.jpg"
+              src="images/user-image-placeholder.png"
             />
-             
-            Dave
           </DropdownToggle>
           <DropdownMenu
             flip={true}
@@ -302,14 +298,14 @@ exports[`Navbar renders correctly when type = home 1`] = `
             <Link
               className="dropdown-item"
               replace={false}
-              to="/user/profile"
+              to="/undefined"
             >
               Profile
             </Link>
             <Link
               className="dropdown-item"
               replace={false}
-              to="/user/profile/edit"
+              to="/undefined/profile/edit"
             >
               Edit Profile
             </Link>
@@ -347,8 +343,8 @@ exports[`Navbar renders correctly when type = home 1`] = `
         >
           <a
             className="dropdown-item add-recipe"
-            data-toggle="modal"
             href="#add-edit-modal"
+            onClick={[Function]}
             title="New Recipe"
           >
             Add a Recipe
@@ -356,17 +352,17 @@ exports[`Navbar renders correctly when type = home 1`] = `
           <Link
             className="dropdown-item"
             replace={false}
-            to="/recipes"
-          >
-            All Recipes
-          </Link>
-          <Link
-            className="dropdown-item"
-            replace={false}
             to="/"
           >
             Top Recipes
           </Link>
+          <a
+            className="dropdown-item"
+            href="#favorite-recipes"
+            title="favorite-recipes"
+          >
+            Favorite Recipes
+          </a>
         </DropdownMenu>
       </UncontrolledDropdown>
     </Nav>

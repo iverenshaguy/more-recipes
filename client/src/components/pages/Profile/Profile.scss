@@ -1,0 +1,201 @@
+@import '../../../assets/scss/modules';
+
+// body.user-profile {
+//   background-color: $background-grey !important;
+// }
+
+/* .user-profile-div {} */
+
+.user-profile {
+  background-color: $background-grey !important;
+
+  .navbar {
+    background-color: $white;
+
+    a, i, .fa-heart {
+      color: $navbar-grey !important;
+    }
+  }
+
+  .navbar-brand {
+    color: $navbar-grey !important;
+  }
+
+  #search {
+    border: 1px solid $navbar-grey !important;
+    border-right: none !important;
+  }
+
+  #search-form .input-group-btn button {
+    border-color: $navbar-grey !important;
+    border-left: none !important;
+  }
+
+  #more-recipes-navbar.affix .fa-heart {
+    color: $navbar-grey !important;
+  }
+}
+
+.black {
+  color: $darkgrey;
+}
+
+.user-profile-details {
+  /*box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.1);*/
+  // border-top: 1px solid $recipe-card-grey;
+  border-bottom: 1px solid $recipe-card-grey;
+  height: 4rem;
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    padding: 0.7rem;
+    text-transform: uppercase;
+
+    &.active {
+      border-bottom: 1.5px solid $green;
+    }
+
+    i {
+      color: $darkgrey;
+    }
+  }
+}
+
+.user-profile {
+  .card-img-top {
+    height: 8rem !important;
+    width: 100%;
+  }
+
+  .card-block {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+  }
+
+  .card-top {
+    height: 10rem !important;
+    color: $navbar-grey;
+  }
+
+  #add-recipe-card i {
+    padding-top: 23%;
+  }
+}
+
+.user-info {
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .profile-picture {
+    border-right: 1px solid $recipe-card-grey;
+  }
+
+  .profile-picture {
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .name-div {
+    border-right: 0px solid $recipe-card-grey;
+  }
+
+  .username, .about-me {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) and (min-width: 576px) {
+  .user-info {
+    .profile-picture img {
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .user-info {
+    .profile-picture {
+        img {
+        height: 90px;
+        width: 90px;
+      }
+    }
+  }
+}
+
+.user-profile-cards {
+  margin-bottom: 15vh;
+}
+
+.user-profile-recipe-cards-wrapper {
+  margin-top: -3rem;
+}
+
+.add-text {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: $darkgrey;
+}
+
+.category-card p {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.user-info .recipe-count p {
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.user-dashboard-pills {
+  padding: 2em 5em 0.5em;
+}
+
+.nav-pills .nav-link.active {
+  background-color: $user-navpills-grey;
+  border-radius: 20px;
+  color: $darkgrey;
+}
+
+.settings-collapse .heading a {
+  border-radius: 5px;
+  color: $darkgrey;
+
+  /* font-size: 1em; */
+  /* font-weight: bold; */
+  padding: .4em 1em .5em;
+  text-transform: uppercase;
+}
+
+.nav-pills .nav-link {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: .4em 1em .5em;
+  text-transform: uppercase;
+}
+
+.nav-profile-picture-div {
+  height: 2rem;
+  width: 2rem;
+  text-transform: capitalize;
+  border-radius: 50%;
+
+  /*margin-top: -0.06rem;*/
+
+  img {
+    height: 2rem;
+    width: 2rem;
+    text-transform: capitalize;
+    border-radius: 50%;
+    margin-top: -0.3rem;
+  }
+}

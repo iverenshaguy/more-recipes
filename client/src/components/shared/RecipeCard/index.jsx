@@ -1,48 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardImg, CardBody, CardText } from 'reactstrap';
+import { Card, CardImg, CardText, CardHeader, CardImgOverlay } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
 import { singleRecipePropTypes } from '../../../helpers/proptypes';
 import './RecipeCard.scss';
 
 const RecipeCard = ({ recipe }) => (
-  <div className="col-lg-3 col-md-6 col-sm-12 col-xs-12 mt-4 recipe-card">
+  <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 mt-4 recipe-card">
     <Card>
       <Link to={`/recipes/${recipe.id}`}>
-        <CardImg
-          top
-          width="100%"
-          className="img-fluid"
-          src="images/jollof-rice-img.jpg"
-          alt="recipe"
-        />
-        <CardBody className="card-block text-center pb-3">
-          <h5 className="mb-1">{recipe.recipeName}</h5>
-          <p className="card-text mb-2"><span className="text-muted">Posted by </span>{recipe.User.username}</p>
-        </CardBody>
-        <CardBody className="card-block text-center recipe-details">
-          <CardText className="text-muted mr-2 d-inline">
-            <FontAwesome name="clock-o" /> {recipe.totalTime}
+        <CardHeader className="py-2">
+          <CardText className="d-inline"><small>@{recipe.User.username}</small></CardText>
+          <CardText className="d-inline float-right">
+            <small className="text-muted"><FontAwesome name="heart" /> {recipe.upvotes}</small>
           </CardText>
-          <CardText className="text-muted mr-0 d-inline"> | </CardText>
-          <CardText className="text-muted d-inline">
-            <i className="aria-hidden flaticon flaticon-oven-kitchen-tool-for-cooking-foods" />
-            {recipe.difficulty}
-          </CardText>
-        </CardBody>
-        <CardBody className="text-center text-muted px-2 recipe-rating">
-          <CardText className="text-muted mr-2 d-inline">
-            <FontAwesome name="star" /> {(+recipe.rating).toPrecision(2)}
-          </CardText>
-          <CardText className="text-muted mr-2 d-inline"> | </CardText>
-          <CardText className="text-muted mr-2 d-inline">
-            <FontAwesome name="heart" /> {recipe.upvotes}
-          </CardText>
-          <CardText className="text-muted mr-2 d-inline"> | </CardText>
-          <CardText className="text-muted mr-2 d-inline">
-            <FontAwesome name="eye" className="text-success" /> {recipe.views}
-          </CardText>
-        </CardBody>
+        </CardHeader>
+        <Card className="m-0 p-0 card-image">
+          <CardImg
+            bottom
+            width="100%"
+            className="img-fluid"
+            src="images/jollof-rice-img.jpg"
+            alt="recipe"
+          />
+          <CardImgOverlay className="text-center card-image-overlay text-white px-2 recipe-rating">
+            <h5 className="mb-1 pt-3">{recipe.recipeName}</h5>
+          </CardImgOverlay>
+        </Card>
       </Link>
     </Card>
   </div>

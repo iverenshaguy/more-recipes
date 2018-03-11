@@ -16,6 +16,7 @@ exports[`Header logs user out on logout click 1`] = `
     <NavbarWrapper
       isAuthenticated={true}
       logout={[Function]}
+      showAddRecipeModal={[Function]}
       user={
         Object {
           "firstname": "Dave",
@@ -205,10 +206,8 @@ exports[`Header logs user out on logout click 1`] = `
                                 <img
                                   alt="User"
                                   className="rounded-cirle"
-                                  src="images/user1.jpg"
+                                  src="images/user-image-placeholder.png"
                                 />
-                                 
-                                Dave
                               </a>
                             </Target>
                           </DropdownToggle>
@@ -226,11 +225,11 @@ exports[`Header logs user out on logout click 1`] = `
                               <Link
                                 className="dropdown-item"
                                 replace={false}
-                                to="/user/profile"
+                                to="/undefined"
                               >
                                 <a
                                   className="dropdown-item"
-                                  href="/user/profile"
+                                  href="/undefined"
                                   onClick={[Function]}
                                 >
                                   Profile
@@ -239,11 +238,11 @@ exports[`Header logs user out on logout click 1`] = `
                               <Link
                                 className="dropdown-item"
                                 replace={false}
-                                to="/user/profile/edit"
+                                to="/undefined/profile/edit"
                               >
                                 <a
                                   className="dropdown-item"
-                                  href="/user/profile/edit"
+                                  href="/undefined/profile/edit"
                                   onClick={[Function]}
                                 >
                                   Edit Profile
@@ -330,25 +329,12 @@ exports[`Header logs user out on logout click 1`] = `
                           >
                             <a
                               className="dropdown-item add-recipe"
-                              data-toggle="modal"
                               href="#add-edit-modal"
+                              onClick={[Function]}
                               title="New Recipe"
                             >
                               Add a Recipe
                             </a>
-                            <Link
-                              className="dropdown-item"
-                              replace={false}
-                              to="/recipes"
-                            >
-                              <a
-                                className="dropdown-item"
-                                href="/recipes"
-                                onClick={[Function]}
-                              >
-                                All Recipes
-                              </a>
-                            </Link>
                             <Link
                               className="dropdown-item"
                               replace={false}
@@ -362,6 +348,13 @@ exports[`Header logs user out on logout click 1`] = `
                                 Top Recipes
                               </a>
                             </Link>
+                            <a
+                              className="dropdown-item"
+                              href="#favorite-recipes"
+                              title="favorite-recipes"
+                            >
+                              Favorite Recipes
+                            </a>
                           </div>
                         </DropdownMenu>
                       </li>
@@ -383,6 +376,7 @@ exports[`Header renders correctly 1`] = `
   <NavbarWrapper
     isAuthenticated={false}
     logout={[Function]}
+    showAddRecipeModal={[Function]}
     user={
       Object {
         "firstname": "Dave",

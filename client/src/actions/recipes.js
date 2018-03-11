@@ -4,6 +4,8 @@ import { errorHandler } from '../utils';
 import {
   RECEIVE_TOP_RECIPES_SUCCESS,
   RECEIVE_TOP_RECIPES_FAILURE,
+  RECEIVE_USER_RECIPES_SUCCESS,
+  RECEIVE_USER_RECIPES_FAILURE,
   RECEIVE_SEARCH_RESULTS_SUCCESS,
   RECEIVE_SEARCH_RESULTS_FAILURE
 } from './actionTypes';
@@ -28,6 +30,22 @@ const fetchTopRecipes = (page, limit) => async (dispatch) => {
     const errorResponse = errorHandler(error);
 
     dispatch(fetchRecipesFailure(RECEIVE_TOP_RECIPES_FAILURE, errorResponse.response));
+    dispatch(unsetFetching());
+  }
+};
+
+const fetchUserRecipes = (id, page, limit) => async (dispatch) => {
+  try {
+    dispatch(setFetching());
+
+    const response = await instance.get(`users/${id}/recipes/user?page=${page}&limit=${limit}`);
+
+    dispatch(fetchRecipesSuccess(RECEIVE_USER_RECIPES_SUCCESS, response.data));
+    dispatch(unsetFetching());
+  } catch (error) {
+    const errorResponse = errorHandler(error);
+
+    dispatch(fetchRecipesFailure(RECEIVE_USER_RECIPES_FAILURE, errorResponse.response));
     dispatch(unsetFetching());
   }
 };
@@ -57,6 +75,7 @@ const searchRecipes = (value, page, limit) => async (dispatch) => {
 
 export default {
   fetchTopRecipes,
+  fetchUserRecipes,
   fetchRecipesSuccess,
   fetchRecipesFailure,
   searchRecipes

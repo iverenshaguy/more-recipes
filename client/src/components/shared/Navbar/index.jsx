@@ -25,7 +25,8 @@ class NavbarWrapper extends Component {
    */
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.logout = this.logout.bind(this);
+    this.showAddRecipeModal = this.showAddRecipeModal.bind(this);
   }
 
   /**
@@ -33,9 +34,19 @@ class NavbarWrapper extends Component {
    * @param {object} e
    * @returns {component} NavbarWrapper
    */
-  handleClick(e) {
+  logout(e) {
     e.preventDefault();
     this.props.logout();
+  }
+
+  /**
+   * @memberof NavbarWrapper
+   * @param {object} e
+   * @returns {component} NavbarWrapper
+   */
+  showAddRecipeModal(e) {
+    e.preventDefault();
+    this.props.showAddRecipeModal();
   }
 
   /**
@@ -43,7 +54,10 @@ class NavbarWrapper extends Component {
    * @returns {component} NavbarWrapper
    */
   render() {
-    if (!this.props.isAuthenticated) {
+    const { user, isAuthenticated } = this.props;
+    const altImage = 'images/user-image-placeholder.png';
+
+    if (!isAuthenticated) {
       return (
         <div>
           <Navbar color="faded" light expand="md" id="more-recipes-navbar">
@@ -83,13 +97,13 @@ class NavbarWrapper extends Component {
             <UncontrolledDropdown nav>
               <div className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline">
                 <DropdownToggle nav>
-                  <img src="images/user1.jpg" className="rounded-cirle" alt="User" /> {this.props.user && this.props.user.firstname}
+                  <img src={user && user.profilePic ? user.profilePic : altImage} className="rounded-cirle" alt="User" />
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <Link to="/user/profile" className="dropdown-item">
+                  <Link to={`/${user && user.username}`} className="dropdown-item">
                     Profile
                   </Link>
-                  <Link to="/user/profile/edit" className="dropdown-item">Edit Profile</Link>
+                  <Link to={`/${user && user.username}/profile/edit`} className="dropdown-item">Edit Profile</Link>
                   {/* <div className="dropdown-divider" /> */}
                   {/* <a className="dropdown-item" id="my-recipes" href="user-profile.html">
                     My Recipes
@@ -97,7 +111,7 @@ class NavbarWrapper extends Component {
                   {/* <div className="dropdown-divider" /> */}
                   {/* <a className="dropdown-item">Settings</a> */}
                   <div className="dropdown-divider" />
-                  <a className="dropdown-item" href="/login" onClick={this.handleClick}>
+                  <a className="dropdown-item" href="/login" onClick={this.logout}>
                     Log out
                   </a>
                 </DropdownMenu>
@@ -111,20 +125,24 @@ class NavbarWrapper extends Component {
                 <a
                   className="dropdown-item add-recipe"
                   href="#add-edit-modal"
-                  data-toggle="modal"
+                  onClick={this.showAddRecipeModal}
                   title="New Recipe"
                 >
                   Add a Recipe
                 </a>
-                <Link to="/recipes" className="dropdown-item">
-                  All Recipes
-                </Link>
                 {/* <a className="dropdown-item get-favorites" href="user-profile.html">
                   Favorite Recipes
                 </a> */}
                 <Link to="/" className="dropdown-item">
                   Top Recipes
                 </Link>
+                <a
+                  className="dropdown-item"
+                  href="#favorite-recipes"
+                  title="favorite-recipes"
+                >
+                  Favorite Recipes
+                </a>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -137,6 +155,7 @@ class NavbarWrapper extends Component {
 NavbarWrapper.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
+  showAddRecipeModal: PropTypes.func.isRequired,
   ...userPropTypes
 };
 

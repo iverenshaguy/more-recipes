@@ -9,7 +9,7 @@ import {
 } from '../../utils/setupTests';
 
 describe('Retrieve', () => {
-  const retrieveURL = `${rootURL}/users/profile`;
+  const retrieveURL = `${rootURL}/users/1`;
   const { iverenToken } = tokens;
 
   it('should authenticate user and return user data', (done) => {

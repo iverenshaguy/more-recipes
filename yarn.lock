@@ -59,6 +59,10 @@
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.1.1.tgz#1b794e101c779310763b1bfce8c24e7728fb9a91"
 
+"@firebase/app-types@^0.1.0":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.1.2.tgz#a20cb346e3be374c0bdee6b102de0ea5e8e6fa27"
+
 "@firebase/app@0.1.7":
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/@firebase/app/-/app-0.1.7.tgz#2fb780b583db48a0594ccb77e5e33018a59bb18e"
@@ -5397,6 +5401,10 @@ jest-message-util@^21.2.1:
     chalk "^2.0.1"
     micromatch "^2.3.11"
     slash "^1.0.0"
+
+jest-mock-promise@^1.0.22:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/jest-mock-promise/-/jest-mock-promise-1.0.22.tgz#a1b152d0a1982c0807825322710513b6dcc6686a"
 
 jest-mock@^21.2.0:
   version "21.2.0"

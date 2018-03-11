@@ -11,6 +11,9 @@ import {
   loginFailure,
   signupSuccess,
   signupFailure,
+  updateUserImage,
+  updateUserImageSuccess,
+  updateUserImageFailure,
   clearAuthError,
   resetUser,
   auth as authAction,
@@ -86,6 +89,19 @@ describe('Auth Actions', () => {
     const auth = signupFailure('error');
 
     expect(auth).toEqual({ type: 'SIGNUP_ERROR', payload: 'error' });
+  });
+
+  test('updateUserImageSuccess', () => {
+    const data = { name: 'Emily' };
+    const upload = updateUserImageSuccess(data);
+
+    expect(upload).toEqual({ type: 'UPDATE_USER_IMAGE_SUCCESS', payload: { name: 'Emily' } });
+  });
+
+  test('updateUserImageFailure', () => {
+    const upload = updateUserImageFailure('error');
+
+    expect(upload).toEqual({ type: 'UPDATE_USER_IMAGE_FAILURE', payload: 'error' });
   });
 
   test('clearAuthError', () => {
@@ -258,6 +274,49 @@ describe('Auth Actions', () => {
         });
       });
     });
+
+    describe('updateUserImage', () => {
+      beforeEach(() => {
+        moxios.install(instance);
+      });
+
+      afterEach(() => {
+        moxios.uninstall(instance);
+      });
+
+      it('dispatches UPLOADING, UPDATE_USER_IMAGE_SUCCESS and UPLOAD_SUCCESS on successful upload', () => {
+        const expectedActions = ['UPLOADING', 'UPDATE_USER_IMAGE_SUCCESS', 'UPLOAD_SUCCESS'];
+
+        moxios.stubRequest(`${url}/users/1`, {
+          status: 200,
+          response: { ...user, profilePic: 'picurl' }
+        }, 5);
+
+        return store.dispatch(updateUserImage(1, 'picurl')).then(() => {
+          const dispatchedActions = store.getActions();
+          const actionTypes = dispatchedActions.map(action => action.type);
+
+          expect(actionTypes).toEqual(expectedActions);
+        });
+      });
+
+      it('dispatches UPLOADING, UPDATE_USER_IMAGE_FAILURE and UPLOAD_FAILURE on unsuccessful login', () => {
+        const expectedActions = ['UPLOADING', 'UPDATE_USER_IMAGE_FAILURE', 'UPLOAD_FAILURE'];
+
+        moxios.stubRequest(`${url}/users/1`, {
+          status: 500,
+          response: {
+            error: 'Internal Server Error'
+          },
+        }, 5);
+
+        return store.dispatch(updateUserImage(1, 'picurl')).catch(() => {
+          const dispatchedActions = store.getActions();
+          const actionTypes = dispatchedActions.map(action => action.type);
+
+          expect(actionTypes).toEqual(expectedActions);
+        });
+      });
+    });
   });
 });
-

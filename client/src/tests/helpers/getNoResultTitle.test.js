@@ -13,6 +13,12 @@ describe('getNoResultText', () => {
     expect(getNoResultText(title)).toBe('Your search returned no results');
   });
 
+  it('returns right text when title is MY RECIPES', () => {
+    const title = 'MY RECIPES';
+
+    expect(getNoResultText(title)).toBe('You have no recipe yet, add a recipe to see your recipes');
+  });
+
   it('returns default text when title is not TOP RECIPES or SEARCH RESULTS', () => {
     const title = 'random';
 

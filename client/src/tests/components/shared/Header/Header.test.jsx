@@ -37,4 +37,22 @@ describe('Header', () => {
     expect(dispatchMock).toHaveBeenCalled();
     component.unmount();
   });
+
+  it('calls Modal on Add Recipe click', () => {
+    const component = mount( //eslint-disable-line
+      <MemoryRouter>
+        <HeaderComponent
+          user={{ firstname: 'Dave', lastname: 'Smith' }}
+          isAuthenticated
+          currentLocation="auth"
+          dispatch={dispatchMock}
+        />
+      </MemoryRouter>);
+    const wrapper = component.find(HeaderComponent);
+
+    wrapper.find('a[href="#add-edit-modal"]').simulate('click', { preventDefault() { } });
+
+    expect(wrapper.find('.modal')).toBeTruthy();
+    component.unmount();
+  });
 });

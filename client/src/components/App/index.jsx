@@ -9,6 +9,7 @@ import StickyBar from '../shared/StickyBar';
 import Modal from '../shared/Modals';
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
+import Profile from '../pages/Profile';
 import Error from '../shared/Error';
 import SingleRecipe from '../pages/SingleRecipe';
 import { requireAuthentication } from '../hoc';
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/login" render={props => <Auth {...props} type="login" />} />
           <Route path="/signup" render={props => <Auth {...props} type="signup" />} />
           <Route path="/page-not-found" render={() => <Error type={404} />} />
+          <Route exact path="/:username" component={requireAuthentication(Profile)} />
           <Route path="/*" render={() => <Error type={404} />} />
         </Switch>
       </div>

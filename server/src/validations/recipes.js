@@ -12,24 +12,21 @@ export default {
       .withMessage('Recipe name must not be more than 255 characters')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Recipe name can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('prepTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Prep time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Prep time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('cookTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Cook time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Cook time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('totalTime')
       .exists()
       .withMessage('Total time must be specified')
@@ -37,26 +34,22 @@ export default {
       .withMessage('Total time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Total time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('difficulty')
       .optional({ checkFalsy: true })
       .isIn(['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
       .withMessage('Please select a valid field')
-      .trim()
-      .escape(),
+      .trim(),
     check('extraInfo')
       .optional({ checkFalsy: true })
       .matches(/^[a-z 0-9 ,.'-\s]+$/i)
       .withMessage('Extra info can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('vegetarian')
       .optional({ checkFalsy: true })
       .isIn([false, true])
       .withMessage('This field can only accept true or false')
-      .trim()
-      .escape(),
+      .trim(),
     check('ingredients')
       .exists()
       .withMessage('Ingredient must be specified')
@@ -64,16 +57,14 @@ export default {
       .withMessage('Ingredient cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Ingredient can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('preparations')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
       .withMessage('Preparation cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Preparation can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('directions')
       .exists()
       .withMessage('Direction must be specified')
@@ -81,8 +72,7 @@ export default {
       .withMessage('Direction cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Direction can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
   ],
   getSingleRecipe: [
     check('recipeId')
@@ -117,77 +107,66 @@ export default {
       .withMessage('Recipe name must not be more than 255 characters')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Recipe name can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('prepTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Prep time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Prep time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('cookTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Cook time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Cook time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('totalTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
       .withMessage('Total time must be between 2 and 15 characters')
       .matches(/^[a-zA-Z0-9\s]*$/)
       .withMessage('Total time can only contain alphanumeric characters')
-      .trim()
-      .escape(),
+      .trim(),
     check('difficulty')
       .optional({ checkFalsy: true })
       .isIn(['Easy', 'Normal', 'A Bit Difficult', 'Difficult', 'Very Difficult'])
       .withMessage('Please select a valid field')
-      .trim()
-      .escape(),
+      .trim(),
     check('extraInfo')
       .optional({ checkFalsy: true })
       .matches(/^[a-z 0-9 ,.'-\s]+$/i)
       .withMessage('Extra info can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('vegetarian')
       .optional({ checkFalsy: true })
       .isIn([false, true])
       .withMessage('This field can only accept true or false')
-      .trim()
-      .escape(),
+      .trim(),
     check('recipeImage')
-      .trim()
-      .escape(),
+      .trim(),
     check('ingredients')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
       .withMessage('Ingredient cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Ingredient can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('preparations')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
       .withMessage('Preparation cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Preparation can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
     check('directions')
       .optional({ checkFalsy: true })
       .isLength({ min: 1 })
       .withMessage('Direction cannot be empty')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Direction can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
+      .trim(),
   ],
   reviewRecipe: [
     check('recipeId')
@@ -206,8 +185,7 @@ export default {
       .withMessage('Recipe must be rated')
       .isIn([1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5])
       .withMessage('Recipe must be rated from 1 - 5')
-      .trim()
-      .escape(),
+      .trim(),
     check('comment')
       .exists()
       .withMessage('Review must be specified')
@@ -217,14 +195,6 @@ export default {
       .withMessage('Review must not be more than 400 characters')
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Review can only contain letters and the characters (,.\'-)')
-      .trim()
-      .escape(),
-  ],
-  favoriteRecipes: [
-    check('userId')
-      .exists()
-      .withMessage('User must be specified')
-      .isInt()
-      .withMessage('User Not Found'),
+      .trim(),
   ],
 };

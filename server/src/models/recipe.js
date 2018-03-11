@@ -21,13 +21,10 @@ export default (sequelize, DataTypes) => {
         }
       },
       recipeImage: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
         validate: {
-          is: {
-            args: /^[a-zA-Z0-9._\s]*$/,
-            msg: 'Input is not valid'
-          },
+          isUrl: true,
           notEmpty: {
             args: true,
             msg: 'Input cannot be empty'
@@ -195,12 +192,6 @@ export default (sequelize, DataTypes) => {
           recipe.preparations = checkArrayData(recipe.preparations);
           recipe.directions = checkArrayData(recipe.directions);
         },
-
-        beforeUpdate: (recipe) => {
-          recipe.ingredients = checkArrayData(recipe.ingredients);
-          recipe.preparations = checkArrayData(recipe.preparations);
-          recipe.directions = checkArrayData(recipe.directions);
-        }
       }
     }
   );

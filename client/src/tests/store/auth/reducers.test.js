@@ -64,6 +64,20 @@ describe('Auth Reducers', () => {
     });
   });
 
+  it('should handle UPDATE_USER_IMAGE_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_USER_IMAGE_SUCCESS',
+      payload: { name: 'Emily', profilePic: 'pic' },
+    });
+
+    expect(newState).toEqual({
+      isAuthenticated: true,
+      user: { name: 'Emily', profilePic: 'pic' },
+      error: null,
+      loading: false
+    });
+  });
+
   it('should handle AUTHENTICATION_ERROR action', () => {
     const newState = reducer(state, {
       type: 'AUTHENTICATION_ERROR',
@@ -95,6 +109,20 @@ describe('Auth Reducers', () => {
   it('should handle SIGNUP_ERROR action', () => {
     const newState = reducer(state, {
       type: 'SIGNUP_ERROR',
+      payload: 'Error',
+    });
+
+    expect(newState).toEqual({
+      isAuthenticated: false,
+      user: {},
+      error: 'Error',
+      loading: false
+    });
+  });
+
+  it('should handle UPDATE_USER_IMAGE_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_USER_IMAGE_FAILURE',
       payload: 'Error',
     });
 

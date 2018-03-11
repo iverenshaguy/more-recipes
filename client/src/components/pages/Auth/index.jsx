@@ -17,8 +17,13 @@ import './Auth.scss';
 class Auth extends Component {
   static propTypes = {
     ...authPropTypes,
+    username: PropTypes.string,
     type: PropTypes.string.isRequired,
   };
+
+  static defaultProps = {
+    username: null
+  }
 
   /**
    * @memberof Auth
@@ -26,6 +31,9 @@ class Auth extends Component {
    */
   render() {
     const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
+    if (this.props.isAuthenticated && this.props.type === 'signup') {
+      return <Redirect to={{ from: { pathname: `/${this.props.username}` } }} />;
+    }
 
     if (this.props.isAuthenticated) {
       return <Redirect to={from} />;
@@ -62,6 +70,7 @@ class Auth extends Component {
 const mapStateToProps = state => ({
   submitting: state.auth.loading,
   isAuthenticated: state.auth.isAuthenticated,
+  username: state.auth.user.username,
   submitError: state.auth.error
 });
 
