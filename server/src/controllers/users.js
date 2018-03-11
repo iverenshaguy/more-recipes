@@ -68,6 +68,7 @@ export default {
           hashPassword(userData.password).then((hash) => {
             userData.passwordHash = hash;
 
+            // can't send headers after they are sent error #73
             return updateUser(user, userData)
               .then(updatedUser => res.status(200).send(updatedUser));
           });

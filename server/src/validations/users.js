@@ -158,6 +158,5 @@ export default {
       .isLength({ max: 144 })
       .withMessage('Text must not be more than 144 characters')
       .trim()
-
   ],
 };
