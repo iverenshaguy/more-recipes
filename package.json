@@ -7,7 +7,7 @@
   "main": "server/build/bin/www.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iverenshaguy/more-recipes-personal"
+    "url": "https://github.com/iverenshaguy/more-recipes"
   },
   "scripts": {
     "start": "node ./server/build/bin/www.js",
