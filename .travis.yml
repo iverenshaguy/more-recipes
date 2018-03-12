@@ -11,11 +11,11 @@ env:
 
 script:
   - npm run test:server
-  - ./cc-test-reporter format-coverage -t lcov ./server/coverage/lcov.info --output ./coverage/codeclimate.server.json
+  # - ./cc-test-reporter format-coverage -t lcov ./server/coverage/lcov.info --output ./coverage/codeclimate.server.json
   - npm run test:client
-  - ./cc-test-reporter format-coverage -t lcov ./client/coverage/lcov.info  --output ./coverage/codeclimate.client.json
-  - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
-  - ./cc-test-reporter upload-coverage
+  # - ./cc-test-reporter format-coverage -t lcov ./client/coverage/lcov.info  --output ./coverage/codeclimate.client.json
+  # - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
+  # - ./cc-test-reporter upload-coverage
 
 cache:
   directories:
@@ -23,9 +23,9 @@ cache:
 
 before_script:
   - psql -c 'create database more_recipes_personal_test;' -U postgres
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+  # - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  # - chmod +x ./cc-test-reporter
+  # - ./cc-test-reporter before-build
   - npm run build
   
 after_success:
