@@ -7,7 +7,9 @@ import {
   RECEIVE_USER_RECIPES_SUCCESS,
   RECEIVE_USER_RECIPES_FAILURE,
   RECEIVE_SEARCH_RESULTS_SUCCESS,
-  RECEIVE_SEARCH_RESULTS_FAILURE
+  RECEIVE_SEARCH_RESULTS_FAILURE,
+  RECEIVE_FAVORITE_RECIPES_SUCCESS,
+  RECEIVE_FAVORITE_RECIPES_FAILURE,
 } from './actionTypes';
 
 const fetchRecipesSuccess = (type, payload) => ({
@@ -73,10 +75,27 @@ const searchRecipes = (value, page, limit) => async (dispatch) => {
   }
 };
 
+const fetchFavoriteRecipes = (userId, page, limit) => async (dispatch) => {
+  try {
+    dispatch(setFetching());
+
+    const response = await instance.get(`/users/${userId}/recipes?page=${page}&limit=${limit}`);
+
+    dispatch(fetchRecipesSuccess(RECEIVE_FAVORITE_RECIPES_SUCCESS, response.data));
+    dispatch(unsetFetching());
+  } catch (error) {
+    const errorResponse = errorHandler(error);
+
+    dispatch(fetchRecipesFailure(RECEIVE_FAVORITE_RECIPES_FAILURE, errorResponse.response));
+    dispatch(unsetFetching());
+  }
+};
+
 export default {
+  searchRecipes,
   fetchTopRecipes,
   fetchUserRecipes,
   fetchRecipesSuccess,
   fetchRecipesFailure,
-  searchRecipes
+  fetchFavoriteRecipes,
 };
