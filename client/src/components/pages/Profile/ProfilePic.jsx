@@ -119,7 +119,6 @@ class ProfilePic extends Component {
    */
   render() {
     const { user } = this.props;
-
     const { uploading, uploadError } = this.state;
 
     return (
