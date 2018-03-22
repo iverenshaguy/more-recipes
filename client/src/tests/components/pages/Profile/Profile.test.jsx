@@ -1,14 +1,23 @@
 /* eslint-disable */
 import React from 'react';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { MemoryRouter } from 'react-router-dom';
+import configureStore from 'redux-mock-store';
 import { toggleModal } from '../../../../actions/ui';
 import RecipeItems from '../../../../components/shared/RecipeItems';
 import MiniPreLoader from '../../../../components/shared/PreLoader/MiniPreLoader';
 import { ProfileComponent } from '../../../../components/pages/Profile';
+import initialValues from '../../../setup/initialValues';
 
 const mockFn = jest.fn();
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+const authStore = mockStore(initialValues);
 const setup = () => {
   const props = {
     dispatch: mockFn,
+    updateUserImage: mockFn,
     isFetching: false,
     match: {
       url: '/',
@@ -36,20 +45,18 @@ const setup = () => {
   };
 
   const shallowWrapper = shallow(<ProfileComponent {...props} />, rrcMock.get());
-  const mountedWrapper = mount(<ProfileComponent {...props} />, rrcMock.get());
+  const mountedWrapper = mount(
+    <Provider store={authStore}>
+      <ProfileComponent {...props} />
+    </Provider>, rrcMock.get()
+  );
 
   return { props, shallowWrapper, mountedWrapper };
 };
 
 const state = {
   limit: 1,
-  uploadTask: {
-    delete: jest.fn(),
-    cancel: jest.fn()
-  },
   currentPage: 1,
-  uploading: false,
-  uploadError: null
 };
 
 describe('Profile', () => {
@@ -65,7 +72,7 @@ describe('Profile', () => {
     mountedWrapper.unmount();
   });
 
-  it('renders Redirects to user\'s profile params is not equal to username', () => {
+  it('renders Redirects to user\'s profile when params is not equal to username', () => {
     const { props } = setup();
     // rrcMock = global variable that mocks react-router context
     const shallowWrapper = shallow(<ProfileComponent
@@ -76,7 +83,7 @@ describe('Profile', () => {
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
-  it('renders user\'s RecipeItmes when isFetching is false', () => {
+  it('renders user\'s RecipeItems when isFetching is false', () => {
     const { shallowWrapper } = setup();
 
     expect(shallowWrapper.find(RecipeItems).length).toBeTruthy();
@@ -89,63 +96,22 @@ describe('Profile', () => {
     expect(shallowWrapper.find(MiniPreLoader).length).toBeTruthy();
   });
 
-  it('renders error when uploading is false and there is an error', () => {
-    const { shallowWrapper } = setup();
-
-    shallowWrapper.setState({ uploading: false, uploadError: 'An error occurred' });
-
-    expect(shallowWrapper.find('.upload-error').length).toBeTruthy();
-    expect(shallowWrapper.find('.upload-error').text()).toEqual('An error occurred');
-  });
-
-  it('renders change picture link and changes image opacity when not uploading', () => {
-    const { shallowWrapper } = setup();
-
-    shallowWrapper.setState({ uploading: false });
-    const wrapperStyle = shallowWrapper.find('img').get(0).props.style;
-
-    expect(shallowWrapper.find('a[href="#profile-photo"]').text()).toEqual('Change Picture');
-    expect(wrapperStyle).toHaveProperty('opacity', 1);
-  });
-
-  it('renders cancel upload link and changes image opacity when uploading', () => {
-    const { shallowWrapper } = setup();
-
-    shallowWrapper.setState({ uploading: true });
-    const wrapperStyle = shallowWrapper.find('img').get(0).props.style;
-
-    expect(shallowWrapper.find('a[href="#profile-photo"]').text()).toEqual('Cancel Upload');
-    expect(wrapperStyle).toHaveProperty('opacity', 0.3);
-  });
-
-  it('renders user\'s profilepic when provided', () => {
-    const { props } = setup();
-    const shallowWrapper = shallow(<ProfileComponent
-      {...props}
-      user={{ id: 1, username: 'username', profilePic: 'pic.png' }}
-    />, rrcMock.get());
-
-    shallowWrapper.setState({ uploading: true });
-
-    expect(shallowWrapper.find('img[src="pic.png"]')).toBeTruthy();
-  });
-
   it('handles page change', () => {
     const { mountedWrapper } = setup();
 
-    const handlePageChangeSpy = jest.spyOn(mountedWrapper.instance(), 'handlePageChange');
+    const handlePageChangeSpy = jest.spyOn(mountedWrapper.find(ProfileComponent).instance(), 'handlePageChange');
 
     mountedWrapper.setState(state);
     mountedWrapper.find('a.page-link').at(3).simulate('click');
 
     expect(handlePageChangeSpy).toHaveBeenCalled();
-    expect(mountedWrapper.instance().state.currentPage).toEqual(2);
+    expect(mountedWrapper.find(ProfileComponent).instance().state.currentPage).toEqual(2);
     mountedWrapper.unmount();
   });
 
   it('calls showAddRecipeModal() when button is clicked', () => {
     const { mountedWrapper } = setup();
-    const showAddRecipeModalSpy = jest.spyOn(mountedWrapper.instance(), 'showAddRecipeModal');
+    const showAddRecipeModalSpy = jest.spyOn(mountedWrapper.find(ProfileComponent).instance(), 'showAddRecipeModal');
 
     mountedWrapper.setState(state);
     mountedWrapper.find('button#home-add-recipe-btn').simulate('click');
@@ -154,81 +120,4 @@ describe('Profile', () => {
     expect(mockFn).toHaveBeenCalledWith(toggleModal('addRecipe'));
     mountedWrapper.unmount();
   });
-
-  it('handles change image click', () => {
-    const { mountedWrapper } = setup();
-    const handleCancelImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleCancelImageUpload');
-    const mockClick = jest.fn();
-
-    mountedWrapper.instance().imageUploader.click = mockClick;
-    mountedWrapper.setState({ ...state, uploadError: 'Error' });
-    mountedWrapper.find('a[href="#profile-photo"]').simulate('click');
-
-    expect(mountedWrapper.instance().state.uploadError).toBeNull();
-    expect(handleCancelImageUploadSpy).not.toHaveBeenCalled();
-    expect(mockClick).toHaveBeenCalled();
-    mountedWrapper.unmount();
-  });
-
-  it('handles cancel upload click', () => {
-    const { mountedWrapper } = setup();
-    const handleCancelImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleCancelImageUpload');
-    const mockClick = jest.fn();
-
-    mountedWrapper.instance().imageUploader.click = mockClick;
-    mountedWrapper.setState({ ...state, uploadError: 'Error', uploading: true });
-    mountedWrapper.find('a[href="#profile-photo"]').simulate('click');
-    mountedWrapper.find('img').src = 'picn';
-
-    expect(mountedWrapper.instance().state.uploadError).toBeNull();
-    expect(mountedWrapper.find('img[src="images/user-image-placeholder.png"]')).toBeTruthy();
-    expect(handleCancelImageUploadSpy).toHaveBeenCalled();
-    expect(mockClick).not.toHaveBeenCalled();
-    mountedWrapper.unmount();
-  });
-
-  it('handles change image', () => {
-    const { mountedWrapper } = setup();
-    const handleChangeImageSpy = jest.spyOn(mountedWrapper.instance(), 'handleChangeImage');
-    const image = new Blob(['../../assets/images/user-image-placeholder.png'], { type: 'application/png' });
-    const event = { target: { files: [image] } };
-
-    mountedWrapper.setState(state);
-    mountedWrapper.find('input[type="file"]').simulate('change', event);
-
-    expect(handleChangeImageSpy).toHaveBeenCalled();
-    mountedWrapper.unmount();
-  });
-
-  // it('handles image upload: successful upload', () => {
-  //   const { props, mountedWrapper } = setup();
-  //   const handleImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleImageUpload');
-  //   const image = new Blob(['../../assets/images/user-image-placeholder.png'], { type: 'application/png', size: 2 * 1024 });
-  //   const event = { target: { files: [image] } };
-
-  //   mountedWrapper.setState(state);
-  //   mountedWrapper.find('input[type="file"]').simulate('change', event);
-  //   mountedWrapper.setProps({ ...props, uploadImage: { uploading: false, uploadSuccess: true } });
-
-  //   expect(handleImageUploadSpy).toHaveBeenCalled();
-  //   expect(mountedWrapper.instance().state.uploading).toBeFalsy();
-  //   mountedWrapper.unmount();
-  // });
-
-  // it('handles image upload: unsuccessful upload', () => {
-  //   const { props, mountedWrapper } = setup();
-  //   const handleImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleImageUpload');
-  //   const image = new Blob(['../../assets/images/user-image-placeholder.png'], { type: 'application/png', size: 2 * 1024 });
-  //   const event = { target: { files: [image] } };
-
-  //   mountedWrapper.setState(state);
-  //   mountedWrapper.find('input[type="file"]').simulate('change', event);
-  //   mountedWrapper.setProps({ ...props, uploadImage: { uploading: false, uploadSuccess: false } });
-
-  //   expect(handleImageUploadSpy).toHaveBeenCalled();
-  //   expect(mountedWrapper.instance().state.uploading).toBeFalsy();
-  //   expect(mountedWrapper.instance().state.uploadError).toEqual('Something happened, please try again');
-  //   expect(props.uploadTask.delete).toHaveBeenCalled();
-  //   mountedWrapper.unmount();
-  // });
 });

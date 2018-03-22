@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Profile renders Redirects to user's profile params is not equal to username 1`] = `
+exports[`Profile renders Redirects to user's profile when params is not equal to username 1`] = `
 <div
   className="user-profile pb-4"
 >
@@ -10,41 +10,21 @@ exports[`Profile renders Redirects to user's profile params is not equal to user
     <div
       className="row justify-content-start user-info py-4 px-3 px-md-5"
     >
-      <div
-        className="col-5 col-md-4 profile-picture align-self-center"
-      >
-        <img
-          alt="Profile"
-          className="d-block d-md-inline rounded-circle img-fluid img-thumbnail user-img align-middle"
-          src="images/user-image-placeholder.png"
-          style={
-            Object {
-              "opacity": 1,
-            }
+      <ProfilePic
+        updateUserImage={[Function]}
+        uploadImage={
+          Object {
+            "success": false,
+            "uploading": false,
           }
-        />
-           
-        <div
-          className="d-block d-md-inline-block align-middle"
-        >
-          <a
-            href="#profile-photo"
-            onClick={[Function]}
-          >
-            Change Picture
-          </a>
-        </div>
-        <input
-          accept="image/gif, image/jpeg, image/png"
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
+        }
+        user={
+          Object {
+            "id": 1,
+            "username": "username2",
           }
-          type="file"
-        />
-      </div>
+        }
+      />
       <div
         className="col-7 col-md-8 name-div align-self-center"
       >
@@ -77,6 +57,40 @@ exports[`Profile renders Redirects to user's profile params is not equal to user
     >
       Add a New Recipe
     </Button>
+    <div
+      className="profile-toggle-wrapper text-center mt-3"
+    >
+      <a
+        className="d-inline recipes-tab text-center active"
+        href="#recipes"
+      >
+        <i
+          className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view"
+        />
+        <span
+          className="d-none d-sm-inline"
+        >
+            RECIPES
+        </span>
+      </a>
+      <Link
+        className="d-inline recipes-tab text-center"
+        href="#favorite-recipes"
+        replace={false}
+        to="/username2/favorites"
+      >
+        <FontAwesome
+          name="heart"
+          size="lg"
+          tag="i"
+        />
+        <span
+          className="d-none d-sm-inline"
+        >
+            FAVORITES
+        </span>
+      </Link>
+    </div>
     <div
       className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
     >
@@ -127,41 +141,21 @@ exports[`Profile renders correctly 1`] = `
     <div
       className="row justify-content-start user-info py-4 px-3 px-md-5"
     >
-      <div
-        className="col-5 col-md-4 profile-picture align-self-center"
-      >
-        <img
-          alt="Profile"
-          className="d-block d-md-inline rounded-circle img-fluid img-thumbnail user-img align-middle"
-          src="images/user-image-placeholder.png"
-          style={
-            Object {
-              "opacity": 1,
-            }
+      <ProfilePic
+        updateUserImage={[Function]}
+        uploadImage={
+          Object {
+            "success": false,
+            "uploading": false,
           }
-        />
-           
-        <div
-          className="d-block d-md-inline-block align-middle"
-        >
-          <a
-            href="#profile-photo"
-            onClick={[Function]}
-          >
-            Change Picture
-          </a>
-        </div>
-        <input
-          accept="image/gif, image/jpeg, image/png"
-          onChange={[Function]}
-          style={
-            Object {
-              "display": "none",
-            }
+        }
+        user={
+          Object {
+            "id": 2,
+            "username": "username",
           }
-          type="file"
-        />
-      </div>
+        }
+      />
       <div
         className="col-7 col-md-8 name-div align-self-center"
       >
@@ -194,6 +188,40 @@ exports[`Profile renders correctly 1`] = `
     >
       Add a New Recipe
     </Button>
+    <div
+      className="profile-toggle-wrapper text-center mt-3"
+    >
+      <a
+        className="d-inline recipes-tab text-center active"
+        href="#recipes"
+      >
+        <i
+          className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view"
+        />
+        <span
+          className="d-none d-sm-inline"
+        >
+            RECIPES
+        </span>
+      </a>
+      <Link
+        className="d-inline recipes-tab text-center"
+        href="#favorite-recipes"
+        replace={false}
+        to="/username/favorites"
+      >
+        <FontAwesome
+          name="heart"
+          size="lg"
+          tag="i"
+        />
+        <span
+          className="d-none d-sm-inline"
+        >
+            FAVORITES
+        </span>
+      </Link>
+    </div>
     <div
       className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
     >

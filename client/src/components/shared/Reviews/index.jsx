@@ -43,6 +43,7 @@ class Reviews extends Component {
       limit: 10
     };
 
+    this.altImage = '/images/user-image-placeholder.png';
     this.getReviews = this.getReviews.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
@@ -97,7 +98,7 @@ class Reviews extends Component {
           <div className="px-5 pb-3 review-heading" key={review.id}>
             <div className="row">
               <div className="col-4 rounded-circle text-left">
-                <img src={review.User.profilePic} alt="user" className="review-picture" />
+                <img src={review.User.profilePic ? review.User.profilePic : this.altImage} alt="user" className="review-picture" />
               </div>
               <div className="col-8 mr-0 text-right">
                 <p className="mb-0">{review.User.username}</p>

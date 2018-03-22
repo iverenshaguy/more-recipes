@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updateUserImage } from '../../../actions/auth';
 import { userPropTypes } from '../../../helpers/proptypes';
 import { uploadValidation } from '../../../helpers/validations';
 import { fileEventAdapter as adaptFileEventToValue, imageUpload } from '../../../utils';
@@ -20,7 +18,7 @@ class ProfilePic extends Component {
       error: PropTypes.string,
       success: PropTypes.bool
     }).isRequired,
-    dispatch: PropTypes.func.isRequired
+    updateUserImage: PropTypes.func.isRequired
   }
 
   /**
@@ -37,7 +35,7 @@ class ProfilePic extends Component {
       uploadError: null,
     };
 
-    this.altImage = 'images/user-image-placeholder.png';
+    this.altImage = '/images/user-image-placeholder.png';
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleChangeImageClick = this.handleChangeImageClick.bind(this);
@@ -89,7 +87,7 @@ class ProfilePic extends Component {
       `users/${Date.now()}`,
       (downloadURL) => {
         // upload imageurl to db
-        this.props.dispatch(updateUserImage(this.props.user.id, downloadURL))
+        this.props.updateUserImage(this.props.user.id, downloadURL)
           .then(() => {
             if (!this.props.uploadImage.uploading && this.props.uploadImage.success) {
               this.setState({ uploading: false });
@@ -152,5 +150,4 @@ class ProfilePic extends Component {
   }
 }
 
-export { ProfilePic as ProfilePicComponent };
-export default connect()(ProfilePic);
+export default ProfilePic;

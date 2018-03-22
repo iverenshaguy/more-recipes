@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import FontAwesome from 'react-fontawesome';
 import FavComponents from './FavComponents';
-import { toggleModal } from '../../../actions/ui';
+// import { toggleModal } from '../../../actions/ui';
 import { MiniPreLoader } from '../../shared/PreLoader';
 import { fetchFavoriteRecipes } from '../../../actions/recipes';
 import { userPropTypes, multiRecipePropTypes, urlMatchPropTypes } from '../../../helpers/proptypes';
@@ -44,7 +44,7 @@ class FavoriteRecipes extends Component {
 
     this.toggleTab = this.toggleTab.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
-    this.showModal = this.showModal.bind(this);
+    // this.showModal = this.showModal.bind(this);
   }
 
   /**
@@ -77,14 +77,14 @@ class FavoriteRecipes extends Component {
     }, () => this.props.dispatch(fetchFavoriteRecipes(this.props.user.id, page, this.state.limit)));
   }
 
-  /**
-   * @memberof FavoriteRecipes
-   * @param {string} modal - modal to show
-   * @returns {nothing} Returns nothing
-   */
-  showModal(modal) {
-    this.props.dispatch(toggleModal(modal));
-  }
+  // /**
+  //  * @memberof FavoriteRecipes
+  //  * @param {string} modal - modal to show
+  //  * @returns {nothing} Returns nothing
+  //  */
+  // showModal(modal) {
+  //   this.props.dispatch(toggleModal(modal));
+  // }
 
   /**
    * @memberof FavoriteRecipes
@@ -135,7 +135,7 @@ class FavoriteRecipes extends Component {
             <i className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view" />
             <span className="d-none d-sm-inline">&nbsp;&nbsp;RECIPES</span>
           </a>
-          <a className={categoriesTab} href="#recipes" onClick={e => this.toggleTab(e, 'categories')}>
+          <a className={categoriesTab} href="#categories" onClick={e => this.toggleTab(e, 'categories')}>
             <FontAwesome name="folder" size="lg" tag="i" />
             <span className="d-none d-sm-inline">&nbsp;&nbsp;CATEGORIES</span>
           </a>
@@ -162,8 +162,8 @@ class FavoriteRecipes extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   isFetching: state.isFetching,
-  recipes: state.favoriteRecipes.items,
-  metadata: state.favoriteRecipes.metadata,
+  recipes: state.recipes.items,
+  metadata: state.recipes.metadata,
 });
 
 export { FavoriteRecipes as FavoriteRecipesComponent };

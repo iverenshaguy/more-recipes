@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoriteRecipes renders correctly 1`] = `
+<div
+  className="favorite-recipes pb-4"
+>
+  <h3
+    className="text-center pt-5"
+  >
+    FAVORITE RECIPES
+  </h3>
+  <div
+    className="profile-toggle-wrapper text-center mt-3"
+  >
+    <Link
+      className="back-link"
+      replace={false}
+      to="/username"
+    >
+      <FontAwesome
+        name="arrow-left"
+        tag="i"
+      />
+       BACK TO PROFILE
+    </Link>
+    <a
+      className="d-inline recipes-tab text-center active"
+      href="#recipes"
+      onClick={[Function]}
+    >
+      <i
+        className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view"
+      />
+      <span
+        className="d-none d-sm-inline"
+      >
+          RECIPES
+      </span>
+    </a>
+    <a
+      className="d-inline recipes-tab text-center"
+      href="#categories"
+      onClick={[Function]}
+    >
+      <FontAwesome
+        name="folder"
+        size="lg"
+        tag="i"
+      />
+      <span
+        className="d-none d-sm-inline"
+      >
+          CATEGORIES
+      </span>
+    </a>
+  </div>
+  <div
+    className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1"
+  >
+    <div
+      className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
+    >
+      <FavComponents
+        dispatch={[Function]}
+        handlePageChange={[Function]}
+        isFetching={false}
+        match={
+          Object {
+            "isExact": true,
+            "params": Object {
+              "username": "username",
+            },
+            "url": "/favorites",
+          }
+        }
+        recipes={
+          Array [
+            Object {
+              "User": "Me",
+              "id": 1,
+              "recipeName": "Rice",
+            },
+            Object {
+              "User": "She",
+              "id": 5,
+              "recipeName": "Beans",
+            },
+          ]
+        }
+        user={
+          Object {
+            "id": 2,
+            "username": "username",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;

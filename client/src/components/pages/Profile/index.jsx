@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
-import classNames from 'classnames';
 import ProfilePic from './ProfilePic';
 import RecipeItems from '../../shared/RecipeItems';
 import { MiniPreLoader } from '../../shared/PreLoader';
 import { toggleModal } from '../../../actions/ui';
 import { fetchUserRecipes } from '../../../actions/recipes';
+import { updateUserImage } from '../../../actions/auth';
 import { userPropTypes, multiRecipePropTypes, urlMatchPropTypes } from '../../../helpers/proptypes';
 import './Profile.scss';
 
@@ -26,7 +28,7 @@ class Profile extends Component {
     ...urlMatchPropTypes,
     ...multiRecipePropTypes,
     isFetching: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    updateUserImage: PropTypes.func.isRequired
   }
 
   /**
@@ -39,11 +41,9 @@ class Profile extends Component {
 
     this.state = {
       limit: 5,
-      currentPage: 1,
-      activeTab: 'recipes'
+      currentPage: 1
     };
 
-    this.toggleTab = this.toggleTab.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
     this.showAddRecipeModal = this.showAddRecipeModal.bind(this);
   }
@@ -82,49 +82,22 @@ class Profile extends Component {
 
   /**
    * @memberof Profile
-   * @param {object} e - event
-   * @param {string} activeTab - tab
-   * @returns {nothing} Returns nothing
-   */
-  toggleTab(e, activeTab) {
-    e.preventDefault();
-    const { user } = this.props;
-    const location = activeTab === 'recipes' ? `/${user.username}` : `/${user.username}/favorites`;
-
-    this.setState({ activeTab });
-    this.props.dispatch(push(location));
-  }
-
-  /**
-   * @memberof Profile
    * @returns {JSX} User Profile
    */
   render() {
-    const { activeTab } = this.state;
-
     const {
       user, isFetching, recipes, metadata, uploadImage
     } = this.props;
-
-    const recipesTab = classNames({
-      'd-inline': true,
-      'recipes-tab': true,
-      'text-center': true,
-      active: activeTab === 'recipes'
-    });
-
-    const favoritesTab = classNames({
-      'd-inline': true,
-      'favorites-tab': true,
-      'text-center': true,
-      active: activeTab === 'favorites'
-    });
 
     return (
       <div className="user-profile pb-4">
         <div className="container-fluid user-profile-div">
           <div className="row justify-content-start user-info py-4 px-3 px-md-5">
-            <ProfilePic user={user} uploadImage={uploadImage} />
+            <ProfilePic
+              user={user}
+              uploadImage={uploadImage}
+              updateUserImage={this.props.updateUserImage}
+            />
             <div className="col-7 col-md-8 name-div align-self-center">
               <p className="name pt-2">{`${user.firstname} ${user.lastname}`}</p>
               <small className="text-muted username pt-1">{`@${user.username}`}</small>
@@ -142,14 +115,14 @@ class Profile extends Component {
             Add a New Recipe
           </Button>
           <div className="profile-toggle-wrapper text-center mt-3">
-            <a className={recipesTab} href="#recipes" onClick={e => this.toggleTab(e, 'recipes')}>
+            <a className="d-inline recipes-tab text-center active" href="#recipes">
               <i className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view" />
               <span className="d-none d-sm-inline">&nbsp;&nbsp;RECIPES</span>
             </a>
-            <a className={favoritesTab} href="#recipes" onClick={e => this.toggleTab(e, 'favorites')}>
+            <Link to={`/${user.username}/favorites`} className="d-inline recipes-tab text-center" href="#favorite-recipes">
               <FontAwesome name="heart" size="lg" tag="i" />
               <span className="d-none d-sm-inline">&nbsp;&nbsp;FAVORITES</span>
-            </a>
+            </Link>
           </div>
           {isFetching &&
             <div className="justify-content-center py-5">
@@ -172,10 +145,14 @@ class Profile extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   isFetching: state.isFetching,
-  recipes: state.userRecipes.items,
-  metadata: state.userRecipes.metadata,
+  recipes: state.recipes.items,
+  metadata: state.recipes.metadata,
   uploadImage: state.uploadImage
 });
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+  updateUserImage
+}, dispatch);
+
 export { Profile as ProfileComponent };
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

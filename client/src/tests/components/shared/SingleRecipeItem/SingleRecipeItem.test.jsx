@@ -69,6 +69,29 @@ describe('SingleRecipeItem', () => {
     expect(shallowWrapper.find('div#call-to-action').length).toBeFalsy();
   });
 
+  it('renders recipe image when provided', () => {
+    const { props } = setup();
+    const recipe = {
+      recipeItem: {
+        id: 2,
+        recipeName: 'Recipe',
+        recipeImage: 'pic.jpg',
+        userId: 1,
+        isReviewed: false,
+        ingredients: ['rice', 'beans'],
+        preparations: ['wash', 'cook'],
+        directions: ['wash', 'cook'],
+        User: {
+          id: 1,
+          username: 'name'
+        }
+      }
+    };
+    const shallowWrapper = shallow(<SingleRecipeItem {...props} recipe={recipe} />);
+
+    expect(shallowWrapper.find('img[src="pic.png"]')).toBeTruthy();
+  });
+
   it('shows review form when recipe is not reviewed and show review form is true', () => {
     const { props } = setup();
     const shallowWrapper = shallow(<SingleRecipeItem {...props} showReviewForm />);
