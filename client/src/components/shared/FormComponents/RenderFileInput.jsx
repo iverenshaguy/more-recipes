@@ -1,44 +1,83 @@
 /* eslint-disable */
 import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { Input } from 'reactstrap';
-import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
+import { FormGroup, Label } from 'reactstrap';
 
-const preview = document.querySelector('.photo-preview');
+/**
+ * @exports
+ * @function RenderFileInput
+ * @param {object} props
+ * @returns {JSX} RenderFileInput
+ */
+const RenderFileInput = (props) => {
+  let recipeImage;
 
-const RenderFileInput = ({
-  input: {
-    value: omitValue, onChange, onBlur, ...inputProps
-  },
-  meta: { touched, error },
-  ...props
-}) => (
+  const {
+    name,
+    value,
+    label,
+    labelClass,
+    required,
+    meta: {
+      error,
+      touched
+    },
+    handleChangeImage,
+  } = props;
+
+  const validFeedBack = classNames({
+    'invalid-feedback': touched && error,
+    'd-none': touched && !error
+  });
+
+  const showImage = classNames({
+    'd-none': !touched || error,
+    'd-block': touched && value && !error
+  });
+
+  return (
     <Fragment>
-      {touched &&
-        !error && (
-          <div className="preview-img-div">
-            <img className="photo-preview" src="" alt="preview" />
-          </div>
-        )}
-      <Input
-        onChange={adaptFileEventToValue(onChange, preview)}
-        onBlur={adaptFileEventToValue(onBlur, preview)}
-        type="file"
-        {...inputProps}
-        {...props}
-      />
-      {touched && error && <small className="file-feedback">{error}</small>}
+      <Label className={`col-form-label ${labelClass}`}>
+        {label}
+        {required && <span className="text-danger">*</span>}
+      </Label>
+      <div className={`image-preview-div ${showImage}`}>
+        <img
+          src={null}
+          ref={(ref) => { recipeImage = ref; }}
+          className={`img-fluid ${showImage}`}
+          id="recipe-image-preview"
+          alt="recipe-preview"
+        />
+        <br /><br />
+      </div>
+      <FormGroup>
+        <input
+          name={name}
+          required={required}
+          onChange={e => handleChangeImage(e, recipeImage)}
+          type="file"
+          accept="image/gif, image/jpeg, image/png"
+        />
+        {touched && error && <div className={validFeedBack}>{error}</div>}
+      </FormGroup>
     </Fragment>
   );
+};
 
 RenderFileInput.propTypes = {
-  input: PropTypes.shape({}).isRequired,
-  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+  labelClass: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  required: PropTypes.bool.isRequired,
   meta: PropTypes.shape({
-    // active: PropTypes.bool,
     touched: PropTypes.bool,
     error: PropTypes.any
-  }).isRequired
+  }).isRequired,
+  handleChangeImage: PropTypes.func.isRequired,
 };
 
 export default RenderFileInput;

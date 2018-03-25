@@ -1,0 +1,38 @@
+@import '../../../assets/scss/modules';
+@import '~bootstrap/scss/bootstrap';
+
+#recipe-wrapper {
+  .image-container {
+    position: relative;
+
+    .overlay {
+      position: absolute;
+      font-weight: 400;
+      font-size: 2em;
+      top: -5%;
+      right: 2%;
+      cursor: pointer;
+
+      a:not(.dropdown-item) {
+        color: white;
+        text-decoration: none;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      .overlay {
+        font-size: 3em;
+        top: -6%;
+        right: 3%;
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      .overlay {
+        font-size: 3.7em;
+        top: -8%;
+        right: 3%;
+      }
+    }
+  }
+}

@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import AddRecipeModal from './AddRecipeModal';
 import SocialModal from './SocialModal';
 import { toggleModal } from '../../../actions/ui';
+import './Modals.scss';
 
 const Modal = ({
   type, isOpen, dispatch
 }) => {
   switch (type) {
     case 'addRecipe':
-      return <AddRecipeModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
+    case 'editRecipe':
+      return <AddRecipeModal type={type} isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
     case 'social':
       return <SocialModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
     default:

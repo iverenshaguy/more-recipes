@@ -1,0 +1,11 @@
+@import '../../../assets/scss/modules.scss';
+
+#add-edit-modal {
+  .modal-header {
+    border-bottom: 0 solid #e9ecef;
+  }
+}
+
+#dynamic-modal-title {
+  text-transform: capitalize;
+}

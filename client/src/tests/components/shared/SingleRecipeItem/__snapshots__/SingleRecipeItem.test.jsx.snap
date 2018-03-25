@@ -16,6 +16,35 @@ exports[`SingleRecipeItem renders correctly 1`] = `
         className="img-fluid"
         src="/images/jollof-rice-img.jpg"
       />
+      <UncontrolledDropdown
+        className="overlay"
+      >
+        <DropdownToggle
+          aria-haspopup={true}
+          color="secondary"
+          tag="a"
+        >
+          ...
+        </DropdownToggle>
+        <DropdownMenu
+          flip={true}
+          right={true}
+          tag="div"
+        >
+          <a
+            className="dropdown-item"
+            href="#edit"
+          >
+            Edit Recipe
+          </a>
+          <a
+            className="dropdown-item"
+            href="#delete"
+          >
+            Delete Recipe
+          </a>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     </div>
   </div>
   <div

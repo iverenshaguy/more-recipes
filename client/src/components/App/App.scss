@@ -1,4 +1,5 @@
 @import '../../assets/scss/modules';
+@import '~bootstrap/scss/bootstrap';
 // sass-lint:disable-block indentation
 body {
   &:not(.user-profile) {
@@ -16,12 +17,27 @@ a,
 a {
   &:hover,
   &:focus,
-  &:active {
+  &:active,
+  &.active {
     border: 0;
     box-shadow: none;
     color: $green;
     cursor: pointer;
     outline: none;
+  }
+
+  &.dropdown-item {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      border: 0;
+      background-color: $gray-100;
+      box-shadow: none;
+      color: $green;
+      cursor: pointer;
+      outline: none;
+    }
   }
 }
 
@@ -435,5 +451,15 @@ form {
         margin-left: 0;
       }
     }
+  }
+}
+
+.close {
+  outline: none !important;
+
+  &:hover,
+  &:focus,
+  &.active {
+    outline: none !important;
   }
 }

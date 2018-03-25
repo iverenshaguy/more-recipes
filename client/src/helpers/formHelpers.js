@@ -1,10 +1,12 @@
 import { auth, clearAuthError } from '../actions/auth';
 import { reviewRecipe, clearReviewError } from '../actions/recipeReviews';
+import { addRecipe, clearRecipeError } from '../actions/singleRecipe';
 
 const clearFormError = {
   login: clearAuthError(),
   signup: clearAuthError(),
-  review: clearReviewError()
+  review: clearReviewError(),
+  recipe: clearRecipeError()
 };
 
 const formFields = {
@@ -19,7 +21,20 @@ const formFields = {
     'occupation',
     'aboutMe'
   ],
-  review: ['rating', 'comment']
+  review: ['rating', 'comment'],
+  recipe: [
+    'recipeName',
+    'recipeImage',
+    'prepTime',
+    'cookTime',
+    'totalTime',
+    'difficulty',
+    'extraInfo',
+    'vegetarian',
+    'ingredients',
+    'preparations',
+    'directions'
+  ]
 };
 
 const requiredFormFields = {
@@ -31,13 +46,20 @@ const requiredFormFields = {
     'password',
     'passwordConfirm'
   ],
-  review: ['rating', 'comment']
+  review: ['rating', 'comment'],
+  recipe: [
+    'recipeName',
+    'totalTime',
+    'ingredients',
+    'directions'
+  ],
 };
 
 const formSubmitMapper = {
   login: auth('login'),
   signup: auth('signup'),
-  review: reviewRecipe
+  review: reviewRecipe,
+  addRecipe
 };
 
 export default {

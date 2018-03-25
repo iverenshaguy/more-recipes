@@ -56,13 +56,20 @@ const formPropTypes = type => ({
     error: PropTypes.shape(arrayToObject(formFields[type], PropTypes.string)),
     pristine: PropTypes.bool,
     formValid: PropTypes.bool,
-    asyncValidating: PropTypes.bool
+    asyncValidating: PropTypes.bool,
+    fieldCount: PropTypes.shape({
+      ingredients: PropTypes.number,
+      preparations: PropTypes.number,
+      directions: PropTypes.number,
+    }),
   }).isRequired,
   handlers: PropTypes.shape({
     handleBlur: PropTypes.func,
     handleChange: PropTypes.func,
     handleFocus: PropTypes.func,
     handleSubmit: PropTypes.func,
+    handleAddField: PropTypes.func.isRequired,
+    handleRemoveField: PropTypes.func.isRequired
   }).isRequired
 });
 
@@ -143,10 +150,12 @@ const multiReviewPropTypes = {
 
 const renderFormFieldPropTypes = {
   id: PropTypes.string.isRequired,
+  rows: PropTypes.number,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  labelClass: PropTypes.string,
   placeholder: PropTypes.string,
   meta: PropTypes.shape({
     touched: PropTypes.bool,
@@ -156,6 +165,8 @@ const renderFormFieldPropTypes = {
   handleChange: PropTypes.func.isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleFocus: PropTypes.func.isRequired,
+  handleAddField: PropTypes.func,
+  handleRemoveField: PropTypes.func,
   value: PropTypes.string.isRequired
 };
 
