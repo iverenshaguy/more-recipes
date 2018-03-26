@@ -43,6 +43,8 @@ const validation = {
     ingredients: [isRequired, minLength1, isAlphaNumeric],
     preparations: [minLength1, isAlphaNumeric],
     directions: [isRequired, minLength1, isAlphaNumeric],
+    difficulty: null,
+    vegetarian: null,
     extraInfo: [isAlphaNumeric],
   }
 };

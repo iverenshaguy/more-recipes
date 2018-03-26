@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -71,8 +70,7 @@ RenderFileInput.propTypes = {
   label: PropTypes.string.isRequired,
   required: PropTypes.bool.isRequired,
   labelClass: PropTypes.string.isRequired,
-  value: PropTypes.any.isRequired,
-  required: PropTypes.bool.isRequired,
+  value: PropTypes.any.isRequired, // eslint-disable-line
   meta: PropTypes.shape({
     touched: PropTypes.bool,
     error: PropTypes.any

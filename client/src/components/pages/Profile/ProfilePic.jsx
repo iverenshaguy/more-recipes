@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { userPropTypes } from '../../../helpers/proptypes';
+import { userPropTypes, uploadPropTypes } from '../../../helpers/proptypes';
 import { uploadValidation } from '../../../helpers/validations';
-import { fileEventAdapter as adaptFileEventToValue, imageUpload } from '../../../utils';
+import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
 
 /**
  * @exports
@@ -14,10 +14,7 @@ import { fileEventAdapter as adaptFileEventToValue, imageUpload } from '../../..
 class ProfilePic extends Component {
   static propTypes = {
     ...userPropTypes,
-    uploadImage: PropTypes.shape({
-      error: PropTypes.string,
-      success: PropTypes.bool
-    }).isRequired,
+    ...uploadPropTypes,
     updateUserImage: PropTypes.func.isRequired
   }
 
@@ -28,12 +25,6 @@ class ProfilePic extends Component {
    */
   constructor() {
     super();
-
-    this.state = {
-      uploadTask: {},
-      uploading: false,
-      uploadError: null,
-    };
 
     this.altImage = '/images/user-image-placeholder.png';
     this.handleImageUpload = this.handleImageUpload.bind(this);
@@ -49,11 +40,10 @@ class ProfilePic extends Component {
    */
   handleChangeImageClick(e) {
     e.preventDefault();
-    this.setState({
-      uploadError: null
-    });
+    const { clearUploadError, uploadImageObj: { uploading } } = this.props;
+    clearUploadError();
 
-    if (!this.state.uploading) {
+    if (!uploading) {
       return this.imageUploader.click();
     }
     return this.handleCancelImageUpload();
@@ -80,26 +70,9 @@ class ProfilePic extends Component {
    * @return {state} returns new state
    */
   handleImageUpload(image) {
-    imageUpload.call(
-      this,
-      image,
-      this.props.user.profilePic,
-      `users/${Date.now()}`,
-      (downloadURL) => {
-        // upload imageurl to db
-        this.props.updateUserImage(this.props.user.id, downloadURL)
-          .then(() => {
-            if (!this.props.uploadImage.uploading && this.props.uploadImage.success) {
-              this.setState({ uploading: false });
-            }
-
-            if (!this.props.uploadImage.uploading && !this.props.uploadImage.success) {
-              this.setState({ uploadError: 'Something happened, please try again', uploading: false });
-              this.state.uploadTask.delete();
-            }
-          });
-      }
-    );
+    const { uploadImageObj: { uploadTask } } = this.props;
+    return this.props.uploadImage(image, this.props.user.profilePic, `users/${Date.now()}`, downloadURL =>
+      this.props.updateUserImage(this.props.user.id, downloadURL, uploadTask));
   }
 
   /**
@@ -107,8 +80,8 @@ class ProfilePic extends Component {
    * @return {state} returns new state
    */
   handleCancelImageUpload() {
-    const { user } = this.props;
-    this.state.uploadTask.cancel();
+    const { user, uploadImageObj: { uploadTask } } = this.props;
+    uploadTask.cancel();
     // change image source back to former image
     this.userImage.src = user.profilePic ? user.profilePic : this.altImage;
   }
@@ -118,8 +91,7 @@ class ProfilePic extends Component {
    * @returns {JSX} User ProfilePic
    */
   render() {
-    const { user } = this.props;
-    const { uploading, uploadError } = this.state;
+    const { user, uploadImageObj: { uploading, error } } = this.props;
 
     return (
       <div className="col-5 col-md-4 profile-picture align-self-center">
@@ -135,7 +107,7 @@ class ProfilePic extends Component {
         !uploadError &&
         <Progress color="light" value={uploadProgress} className="w-50" />} */}
         <div className="d-block d-md-inline-block align-middle">
-          {!uploading && uploadError && <p className="text-danger upload-error">{uploadError}</p>}
+          {!uploading && error && <p className="text-danger upload-error">{error}</p>}
           <a href="#profile-photo" onClick={this.handleChangeImageClick}>{!uploading ? 'Change Picture' : 'Cancel Upload'}</a>
         </div>
         <input

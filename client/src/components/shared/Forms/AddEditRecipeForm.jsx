@@ -164,7 +164,7 @@ class AddEditRecipeForm extends Component {
         </div>
         <div>
           <Label for="directions" className="col-form-label col-form-label-lg ">
-            Directions
+            Directions<span className="text-danger">*</span>
           </Label>
         </div>
         {this.mapFields('directions', 'Put the spiced chicken in a hot oven for 15 minutes')}
@@ -239,20 +239,28 @@ class AddEditRecipeForm extends Component {
           <Input
             type="select"
             name="difficulty"
-            className="custom-select form-control "
+            className="custom-select form-control"
             id="difficulty"
-            defaultValue="Easy"
+            value={state.values.difficulty}
+            onChange={handlers.handleChange}
           >
-            <option value="Easy ">Easy</option>
-            <option value="Normal ">Normal</option>
-            <option value="A Bit Difficult ">A Bit Difficult</option>
-            <option value="Difficult ">Difficult</option>
-            <option value="Very Difficult ">Very Difficult</option>
+            <option value="Easy">Easy</option>
+            <option value="Normal">Normal</option>
+            <option value="A Bit Difficult">A Bit Difficult</option>
+            <option value="Difficult">Difficult</option>
+            <option value="Very Difficult">Very Difficult</option>
           </Input>
         </FormGroup>
         <FormGroup check>
           <Label for="vegetarian" className="custom-control custom-checkbox">
-            <input type="checkbox" className="custom-control-input" id="vegetarian" defaultValue />
+            <input
+              type="checkbox"
+              name="vegetarian"
+              className="custom-control-input"
+              id="vegetarian"
+              checked={state.values.vegetarian}
+              onChange={handlers.handleChange}
+            />
             <span className="custom-control-indicator" />
             <span className="custom-control-description">Suitable For Vegetarians</span>
           </Label>

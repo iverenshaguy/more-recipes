@@ -170,10 +170,26 @@ const renderFormFieldPropTypes = {
   value: PropTypes.string.isRequired
 };
 
+const uploadPropTypes = {
+  uploadImageObj: PropTypes.shape({
+    url: PropTypes.string,
+    error: PropTypes.string,
+    uploading: PropTypes.bool,
+    uploadTask: PropTypes.any
+  }).isRequired,
+  uploadImage: PropTypes.func.isRequired,
+  setUploading: PropTypes.func.isRequired,
+  uploadSuccess: PropTypes.func.isRequired,
+  uploadFailure: PropTypes.func.isRequired,
+  unsetUploading: PropTypes.func.isRequired,
+  clearUploadError: PropTypes.func.isRequired
+};
+
 export default {
   authPropTypes,
   formPropTypes,
   userPropTypes,
+  uploadPropTypes,
   urlMatchPropTypes,
   metadataPropTypes,
   multiRecipePropTypes,

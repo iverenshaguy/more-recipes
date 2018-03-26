@@ -18,6 +18,10 @@ const syncValidate = type => (field, values, i) => {
   const types = validation[type][field];
   let validate;
 
+  if (!types) {
+    return null;
+  }
+
   if (field === 'passwordConfirm') {
     validate = [isRequired(value), isValidPasswordConfirm(value, values)];
   } else {

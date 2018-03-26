@@ -9,3 +9,13 @@
 #dynamic-modal-title {
   text-transform: capitalize;
 }
+
+.show-preloader {
+  padding: 10vh auto;
+
+  .hide-close-btn {
+    .close {
+      display: none;
+    }
+  }
+}

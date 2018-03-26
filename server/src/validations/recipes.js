@@ -13,6 +13,8 @@ export default {
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Recipe name can only contain letters and the characters (,.\'-)')
       .trim(),
+    check('recipeImage')
+      .trim(),
     check('prepTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
@@ -108,6 +110,8 @@ export default {
       .matches(/^[a-z 0-9 ,.'-()\s]+$/i)
       .withMessage('Recipe name can only contain letters and the characters (,.\'-)')
       .trim(),
+    check('recipeImage')
+      .trim(),
     check('prepTime')
       .optional({ checkFalsy: true })
       .isLength({ min: 2, max: 15 })
@@ -143,8 +147,6 @@ export default {
       .optional({ checkFalsy: true })
       .isIn([false, true])
       .withMessage('This field can only accept true or false')
-      .trim(),
-    check('recipeImage')
       .trim(),
     check('ingredients')
       .optional({ checkFalsy: true })

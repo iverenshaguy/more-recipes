@@ -50,7 +50,7 @@ const SingleRecipeItem = (props) => {
               {!disableRecipeActions && <p className="user-info"><span className="text-muted">Posted By </span>{recipe.recipeItem.User.username}</p>}
             </div>
             <div className="col-xs-12 col-md-6 col-lg-8 pt-3 pb-1" id="recipe-rating-info">
-              <p className="text-muted inline-p"><i className="aria-hidden fa fa-star" /> {(+recipe.recipeItem.rating).toPrecision(2)} &nbsp; &nbsp;</p>
+              <p className="text-muted inline-p"><i className="aria-hidden fa fa-star" /> {recipe.recipeItem.rating ? (+recipe.recipeItem.rating).toPrecision(2) : 0} &nbsp; &nbsp;</p>
               <p className="text-muted inline-p"><i className="aria-hidden fa fa-heart" /> {recipe.recipeItem.upvotes} &nbsp;&nbsp;</p>
               <p className="text-muted inline-p"><i className="text-success aria-hidden fa fa-eye" /> {recipe.recipeItem.views} &nbsp;&nbsp;</p>
               <p className="text-muted inline-p"><i className="aria-hidden fa fa-thumbs-down" /> {recipe.recipeItem.downvotes} &nbsp; &nbsp;</p>

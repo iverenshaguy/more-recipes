@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Form as BootstrapForm, Button } from 'reactstrap';
 import AuthForm from './AuthForm';
 import ReviewForm from './ReviewForm';
+import MiniPreLoader from '../PreLoader/MiniPreLoader';
 import { NormalAlert } from '../Alert';
 import { formHelpers } from '../../../helpers';
 import AddEditRecipeForm from './AddEditRecipeForm';
+import { uploadImage, clearUploadError } from '../../../actions/uploadImage';
 import { recipeObjectPropTypes } from '../../../helpers/proptypes';
-import { arrayToObject, fileEventAdapter as adaptFileEventToValue, imageUpload } from '../../../utils';
+import { arrayToObject, fileEventAdapter as adaptFileEventToValue, mapRecipeObject } from '../../../utils';
 import {
   asyncValidate, syncValidate, validateRequiredFields, uploadValidation
 } from '../../../helpers/validations';
@@ -32,7 +34,13 @@ class Form extends Component {
       extra: PropTypes.element
     }).isRequired,
     id: PropTypes.number,
-    ...recipeObjectPropTypes
+    ...recipeObjectPropTypes,
+    uploadImageObj: PropTypes.shape({
+      url: PropTypes.string,
+      error: PropTypes.string,
+      uploading: PropTypes.bool,
+      uploadTask: PropTypes.any
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -57,8 +65,6 @@ class Form extends Component {
     this.state = {
       type,
       image: null,
-      uploading: false,
-      uploadError: null,
       values: arrayToObject(fields, ''),
       touched: arrayToObject(fields, false),
       error: arrayToObject(fields, null),
@@ -78,6 +84,7 @@ class Form extends Component {
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.submitter = this.submitter.bind(this);
     this.setImageValue = this.setImageValue.bind(this);
     this.validateField = this.validateField.bind(this);
     this.validateForm = this.validateForm.bind(this);
@@ -110,6 +117,7 @@ class Form extends Component {
     const { clearFormError } = formHelpers;
 
     this.props.dispatch(clearFormError[clearType]);
+    this.props.dispatch(clearUploadError());
   }
 
 
@@ -121,12 +129,13 @@ class Form extends Component {
    */
   handleChange(event, i) {
     const { target } = event;
-    const { value, name } = target;
+    const { value, name, type } = target;
+    const newValue = type === 'checkbox' ? target.checked : value;
 
     if (i || i === 0) {
       const values = { ...this.state.values };
       const touched = { ...this.state.touched };
-      values[name][i] = value;
+      values[name][i] = newValue;
       touched[name][i] = true;
 
       this.setState({
@@ -136,7 +145,7 @@ class Form extends Component {
       }, () => { this.validateField(name, i); });
     } else {
       this.setState({
-        values: { ...this.state.values, [name]: value },
+        values: { ...this.state.values, [name]: newValue },
         touched: { ...this.state.touched, [name]: true },
         pristine: false,
       }, () => { this.validateField(name); });
@@ -161,6 +170,8 @@ class Form extends Component {
       uploadError: null,
       pristine: false,
     });
+
+    this.props.dispatch(clearUploadError());
 
     if (uploadValidation.call(this, file, maxSize, allowedTypes)) {
       adaptFileEventToValue(this.setImageValue, preview)(event);
@@ -318,13 +329,34 @@ class Form extends Component {
    */
   validateForm() {
     const formErrorArrayLength =
-      Object.values(this.state.error).filter(value => value !== null).length;
+      Object.values(this.state.error).filter((value) => {
+        let isError;
+        if (Array.isArray(value)) {
+          const filterError = (Object.values(value).filter(val => val !== null)).length;
+          isError = filterError ? 'Error' : null;
+        } else {
+          isError = value;
+        }
+        return isError !== null;
+      }).length;
     const touchedFields =
-      Object.keys(this.state.touched).filter(key => this.state.touched[key] === true);
+      Object.keys(this.state.touched).filter((key) => {
+        let touched;
+        if (Array.isArray(this.state.touched[key])) {
+          const filterTouched =
+            (Object.values(this.state.touched[key]).filter(val => val === true)).length;
+          touched = !!filterTouched;
+        } else {
+          touched = this.state.touched[key];
+        }
+        return touched === true;
+      });
     const { requiredFormFields } = formHelpers;
-    const requiredFields = requiredFormFields[this.props.type];
+    const { type } = this.props;
+    const formType = (type === 'addRecipe' || type === 'editRecipe') ? 'recipe' : type;
+    const requiredFields = requiredFormFields[formType];
 
-    if (formErrorArrayLength && this.state.uploadError) {
+    if (formErrorArrayLength || this.state.uploadError) {
       this.setState({
         formValid: false
       });
@@ -338,31 +370,48 @@ class Form extends Component {
   }
 
   /**
+   * @memberof Form
+   * @param {object} uploadTask
+   * @returns {nothing} Returns nothing
+   */
+  submitter(uploadTask) {
+    const { type } = this.state;
+    const { formSubmitMapper } = formHelpers;
+    const { values } = this.state;
+    const newValues = type === 'addRecipe' || type === 'editRecipe' ?
+      mapRecipeObject(values) : values;
+
+    switch (type) {
+      case 'login':
+      case 'signup':
+        return formSubmitMapper[type](newValues);
+      case 'addRecipe':
+        return formSubmitMapper[type](newValues, uploadTask);
+      case 'updateRecipe':
+        return formSubmitMapper[type](this.props.id, newValues, uploadTask);
+      default:
+        return formSubmitMapper[type](this.props.id, newValues);
+    }
+  }
+
+  /**
    * @memberof ProfilePic
    * @param {object} image - image
    * @return {state} returns new state
    */
   handleImageUpload(image) {
-    imageUpload.call(
-      this,
-      image,
-      (this.props.recipe ? this.props.recipe.recipeItem.recipeImage : null),
-      `users/${Date.now()}`,
-      (downloadURL) => {
-        this.setState({
-          values: {
-            ...this.state.values,
-            recipeImage: downloadURL
-          },
-          error: {
-            ...this.state.error,
-            recipeImage: null
-          },
-          uploadError: null,
-          uploading: false
-        });
-      }
-    );
+    const { uploadImageObj: { uploadTask } } = this.props;
+    return this.props.dispatch(uploadImage(image, (this.props.recipe ? this.props.recipe.recipeItem.recipeImage : null), `recipes/${Date.now()}`, downloadURL =>
+      this.setState({
+        values: {
+          ...this.state.values,
+          recipeImage: downloadURL
+        },
+        error: {
+          ...this.state.error,
+          recipeImage: null
+        }
+      }, () => this.props.dispatch(this.submitter(uploadTask)))));
   }
 
   /**
@@ -372,17 +421,12 @@ class Form extends Component {
    */
   handleSubmit(event) {
     event.preventDefault();
-    const { type } = this.state;
-    const { formSubmitMapper } = formHelpers;
-    const submitter = (type === 'login' || type === 'signup' || type === 'addRecipe') ?
-      formSubmitMapper[type](this.state.values) :
-      formSubmitMapper[type](this.props.id, this.state.values);
 
     if (this.state.image) {
-      return this.handleImageUpload(this.state.image).then(() => this.props.dispatch(submitter));
+      return this.handleImageUpload(this.state.image);
     }
 
-    return this.props.dispatch(submitter);
+    return this.props.dispatch(this.submitter());
   }
 
   /**
@@ -391,12 +435,11 @@ class Form extends Component {
    */
   render() {
     const {
-      values, touched, error, pristine, formValid,
-      fieldCount, uploadError, uploading, asyncValidating
+      values, touched, error, pristine, formValid, fieldCount, asyncValidating
     } = this.state;
 
     const {
-      submitting, submitError, type, meta
+      submitting, submitError, type, meta, uploadImageObj
     } = this.props;
 
     const { title, btnText, extra } = meta;
@@ -422,38 +465,51 @@ class Form extends Component {
       handleSubmit: this.handleSubmit
     };
 
-    if ((type === 'addRecipe' || type === 'editRecipe') && uploadError) {
-      error.recipeImage = uploadError;
-    }
-
     return (
       <div>
-        <h4 className="text-center">{title}</h4>
-        <hr />
-        {(type !== 'login' && type !== 'review') &&
+        {(submitting || uploadImageObj.uploading) &&
+          <div className="modal-preloader text-center"><MiniPreLoader /></div>}
+        {!submitting && !uploadImageObj.uploading &&
+        <Fragment><h4 className="text-center">{title}</h4>
+          <hr />
+          {(type !== 'login' && type !== 'review') &&
           <p className="text-muted mx-auto text-center">
             Fields marked
             <span className="text-danger">*</span> are important
           </p>}
-        <BootstrapForm className="mt-4 mb-3 px-5" onSubmit={handlers.handleSubmit}>
-          {submitError && (
+          <BootstrapForm className="mt-4 mb-3 px-5" onSubmit={handlers.handleSubmit}>
+            {(submitError || uploadImageObj.error) && (
             <NormalAlert color="danger">
-              <p className="text-center mb-0">{submitError}</p>
+              <p className="text-center mb-0">{submitError || 'Something happened, please try again'}</p>
             </NormalAlert>
           )}
-          {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
-          {type === 'review' && <ReviewForm type={type} state={formState} handlers={handlers} />}
-          {(type === 'addRecipe' || type === 'editRecipe') && <AddEditRecipeForm type={type} state={formState} handlers={handlers} />}
-          <Button className="btn-block mt-0" disabled={!formValid || pristine || submitting || uploading}>
-            {btnText}
-          </Button>
-        </BootstrapForm>
-        {extra && extra}
+            {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
+            {type === 'review' && <ReviewForm type={type} state={formState} handlers={handlers} />}
+            {(type === 'addRecipe' || type === 'editRecipe') &&
+            <AddEditRecipeForm
+              type={type}
+              state={formState}
+              handlers={handlers}
+              uploadImageObj={uploadImageObj}
+            />}
+            <Button
+              className="btn-block mt-0"
+              disabled={!formValid || pristine || submitting || uploadImageObj.uploading}
+            >
+              {btnText}
+            </Button>
+          </BootstrapForm>
+          {extra && extra}
+        </Fragment>}
       </div>);
   }
 }
 
+const mapStateToProps = state => ({
+  uploadImageObj: state.uploadImage
+});
+
 
 export { Form as FormComponent };
 
-export default connect()(Form);
+export default connect(mapStateToProps)(Form);

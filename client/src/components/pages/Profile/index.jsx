@@ -12,6 +12,9 @@ import { MiniPreLoader } from '../../shared/PreLoader';
 import { toggleModal } from '../../../actions/ui';
 import { fetchUserRecipes } from '../../../actions/recipes';
 import { updateUserImage } from '../../../actions/auth';
+import {
+  setUploading, unsetUploading, uploadSuccess, uploadFailure, clearUploadError, uploadImage
+} from '../../../actions/uploadImage';
 import { userPropTypes, multiRecipePropTypes, urlMatchPropTypes } from '../../../helpers/proptypes';
 import './Profile.scss';
 
@@ -86,7 +89,7 @@ class Profile extends Component {
    */
   render() {
     const {
-      user, isFetching, recipes, metadata, uploadImage
+      user, isFetching, recipes, metadata, uploadImageObj
     } = this.props;
 
     return (
@@ -95,8 +98,14 @@ class Profile extends Component {
           <div className="row justify-content-start user-info py-4 px-3 px-md-5">
             <ProfilePic
               user={user}
-              uploadImage={uploadImage}
+              uploadImageObj={uploadImageObj}
+              uploadImage={this.props.uploadImage}
+              setUploading={this.props.setUploading}
+              uploadFailure={this.props.uploadFailure}
+              uploadSuccess={this.props.uploadSuccess}
+              unsetUploading={this.props.unsetUploading}
               updateUserImage={this.props.updateUserImage}
+              clearUploadError={this.props.clearUploadError}
             />
             <div className="col-7 col-md-8 name-div align-self-center">
               <p className="name pt-2">{`${user.firstname} ${user.lastname}`}</p>
@@ -147,11 +156,17 @@ const mapStateToProps = state => ({
   isFetching: state.isFetching,
   recipes: state.recipes.items,
   metadata: state.recipes.metadata,
-  uploadImage: state.uploadImage
+  uploadImageObj: state.uploadImage
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateUserImage
+  clearUploadError,
+  updateUserImage,
+  unsetUploading,
+  uploadSuccess,
+  uploadFailure,
+  setUploading,
+  uploadImage
 }, dispatch);
 
 export { Profile as ProfileComponent };

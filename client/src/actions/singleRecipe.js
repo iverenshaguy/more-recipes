@@ -1,7 +1,8 @@
 import { push } from 'react-router-redux';
 import instance from '../axios';
 import { setFetching, unsetFetching } from './isFetching';
-import { errorHandler } from '../utils';
+import { toggleModal } from './ui';
+import { errorHandler, createRecipeResponseObj } from '../utils';
 import {
   SET_ADDING,
   UNSET_ADDING,
@@ -24,12 +25,12 @@ const clearRecipeError = () => ({
   type: CLEAR_RECIPE_ERROR
 });
 
-const addRecipeSuccess = (type, payload) => ({
+const addRecipeSuccess = payload => ({
   type: ADD_RECIPE_SUCCESS,
   payload
 });
 
-const addRecipeFailure = (type, payload) => ({
+const addRecipeFailure = payload => ({
   type: ADD_RECIPE_FAILURE,
   payload
 });
@@ -44,20 +45,25 @@ const fetchRecipeFailure = payload => ({
   payload
 });
 
-const addRecipe = recipe => async (dispatch) => {
+const addRecipe = (recipe, uploadTask) => async (dispatch) => {
   try {
     dispatch(setAdding());
 
     const response = await instance.post('/recipes', recipe);
 
-    dispatch(addRecipeSuccess(response.data));
+    dispatch(addRecipeSuccess(createRecipeResponseObj(response.data)));
     dispatch(unsetAdding());
     dispatch(push(`/recipes/${response.data.id}`));
+    dispatch(toggleModal());
   } catch (error) {
     const errorResponse = errorHandler(error);
 
+    // delete image from firebase if there's an upload task
+    if (uploadTask) uploadTask.delete();
+
     dispatch(addRecipeFailure(errorResponse.response));
     dispatch(unsetAdding());
+    dispatch(toggleModal());
   }
 };
 
@@ -66,6 +72,7 @@ const fetchSingleRecipe = id => async (dispatch) => {
     dispatch(setFetching());
 
     const response = await instance.get(`/recipes/${id}`);
+
     dispatch(fetchRecipeSuccess(response.data));
     dispatch(unsetFetching());
   } catch (error) {

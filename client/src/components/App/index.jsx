@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import { history } from '../../reducers';
@@ -29,14 +29,14 @@ const App = () => (
       <div className="content">
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
+          <Route path="/:username/favorites" component={requireAuthentication(FavoriteRecipes)} />
+          <Route path="/:username" component={requireAuthentication(Profile)} />
           <Route exact path="/recipes/:id" component={requireAuthentication(SingleRecipe)} />
           {/* <Route exact path="/recipes" component={requireAuthentication(AllRecipes)} /> */}
           <Route path="/login" render={props => <Auth {...props} type="login" />} />
           <Route path="/signup" render={props => <Auth {...props} type="signup" />} />
           <Route path="/page-not-found" render={() => <Error type={404} />} />
-          <Route path="/:username/favorites" component={requireAuthentication(FavoriteRecipes)} />
-          <Route path="/:username" component={requireAuthentication(Profile)} />
-          <Route path="/*" render={() => <Error type={404} />} />
+          <Redirect to="/not-found" />
         </Switch>
       </div>
       <Footer />

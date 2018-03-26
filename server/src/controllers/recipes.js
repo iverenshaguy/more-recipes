@@ -8,6 +8,7 @@ export default {
     return Recipe
       .create({
         recipeName: recipeData.recipeName,
+        recipeImage: recipeData.recipeImage,
         prepTime: recipeData.prepTime,
         cookTime: recipeData.cookTime,
         totalTime: recipeData.totalTime,
