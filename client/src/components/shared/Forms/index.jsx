@@ -167,15 +167,17 @@ class Form extends Component {
       values: { ...this.state.values, recipeImage: file },
       touched: { ...this.state.touched, recipeImage: true },
       error: { ...this.state.error, recipeImage: null },
-      uploadError: null,
       pristine: false,
     });
 
     this.props.dispatch(clearUploadError());
 
-    if (uploadValidation.call(this, file, maxSize, allowedTypes)) {
+    if (!uploadValidation(file, maxSize, allowedTypes)) {
       adaptFileEventToValue(this.setImageValue, preview)(event);
     } else {
+      this.setState({
+        error: { ...this.state.error, recipeImage: uploadValidation(file, maxSize, allowedTypes) },
+      });
       // reset input box
       event.target.value = '';
     }
@@ -470,37 +472,37 @@ class Form extends Component {
         {(submitting || uploadImageObj.uploading) &&
           <div className="modal-preloader text-center"><MiniPreLoader /></div>}
         {!submitting && !uploadImageObj.uploading &&
-        <Fragment><h4 className="text-center">{title}</h4>
-          <hr />
-          {(type !== 'login' && type !== 'review') &&
-          <p className="text-muted mx-auto text-center">
-            Fields marked
-            <span className="text-danger">*</span> are important
-          </p>}
-          <BootstrapForm className="mt-4 mb-3 px-5" onSubmit={handlers.handleSubmit}>
-            {(submitError || uploadImageObj.error) && (
-            <NormalAlert color="danger">
-              <p className="text-center mb-0">{submitError || 'Something happened, please try again'}</p>
-            </NormalAlert>
-          )}
-            {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
-            {type === 'review' && <ReviewForm type={type} state={formState} handlers={handlers} />}
-            {(type === 'addRecipe' || type === 'editRecipe') &&
-            <AddEditRecipeForm
-              type={type}
-              state={formState}
-              handlers={handlers}
-              uploadImageObj={uploadImageObj}
-            />}
-            <Button
-              className="btn-block mt-0"
-              disabled={!formValid || pristine || submitting || uploadImageObj.uploading}
-            >
-              {btnText}
-            </Button>
-          </BootstrapForm>
-          {extra && extra}
-        </Fragment>}
+          <Fragment><h4 className="text-center">{title}</h4>
+            <hr />
+            {(type !== 'login' && type !== 'review') &&
+              <p className="text-muted mx-auto text-center">
+                Fields marked
+                <span className="text-danger">*</span> are important
+              </p>}
+            <BootstrapForm className="mt-4 mb-3 px-5" onSubmit={handlers.handleSubmit}>
+              {(submitError || uploadImageObj.error) && (
+                <NormalAlert color="danger">
+                  <p className="text-center mb-0">{submitError || 'Something happened, please try again'}</p>
+                </NormalAlert>
+              )}
+              {(type === 'signup' || type === 'login') && <AuthForm type={type} state={formState} handlers={handlers} />}
+              {type === 'review' && <ReviewForm type={type} state={formState} handlers={handlers} />}
+              {(type === 'addRecipe' || type === 'editRecipe') &&
+                <AddEditRecipeForm
+                  type={type}
+                  state={formState}
+                  handlers={handlers}
+                  uploadImageObj={uploadImageObj}
+                />}
+              <Button
+                className="btn-block mt-0"
+                disabled={!formValid || pristine || submitting || uploadImageObj.uploading}
+              >
+                {btnText}
+              </Button>
+            </BootstrapForm>
+            {extra && extra}
+          </Fragment>}
       </div>);
   }
 }

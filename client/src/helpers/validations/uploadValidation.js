@@ -8,20 +8,14 @@
  */
 function uploadValidation(file, maxSize, allowedTypes) {
   if (!allowedTypes.includes(file.type)) {
-    this.setState({
-      uploadError: 'Invalid File Type'
-    });
-    return false;
+    return 'Invalid File Type';
   }
 
   if (file.size > maxSize) {
-    this.setState({
-      uploadError: 'File too large'
-    });
-    return false;
+    return 'File Too Large';
   }
 
-  return true;
+  return null;
 }
 
 export default uploadValidation;

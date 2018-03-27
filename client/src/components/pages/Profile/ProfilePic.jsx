@@ -26,6 +26,10 @@ class ProfilePic extends Component {
   constructor() {
     super();
 
+    this.state = {
+      uploadError: null
+    };
+
     this.altImage = '/images/user-image-placeholder.png';
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
@@ -59,7 +63,11 @@ class ProfilePic extends Component {
     const maxSize = 2 * 1024 * 1024; // 2MB max size
     const allowedTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
-    if (uploadValidation.call(this, file, maxSize, allowedTypes)) {
+    this.setState({
+      uploadError: uploadValidation(file, maxSize, allowedTypes)
+    });
+
+    if (!uploadValidation(file, maxSize, allowedTypes)) {
       adaptFileEventToValue(this.handleImageUpload, this.userImage)(event);
     }
   }
@@ -92,6 +100,7 @@ class ProfilePic extends Component {
    */
   render() {
     const { user, uploadImageObj: { uploading, error } } = this.props;
+    const mainError = error || this.state.uploadError;
 
     return (
       <div className="col-5 col-md-4 profile-picture align-self-center">
@@ -107,7 +116,7 @@ class ProfilePic extends Component {
         !uploadError &&
         <Progress color="light" value={uploadProgress} className="w-50" />} */}
         <div className="d-block d-md-inline-block align-middle">
-          {!uploading && error && <p className="text-danger upload-error">{error}</p>}
+          {!uploading && mainError && <p className="text-danger upload-error">{mainError}</p>}
           <a href="#profile-photo" onClick={this.handleChangeImageClick}>{!uploading ? 'Change Picture' : 'Cancel Upload'}</a>
         </div>
         <input
