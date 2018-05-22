@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import instance from '../axios';
 import { setFetching, unsetFetching } from './isFetching';
-import { toggleModal } from './ui';
+import { setUploading, unsetUploading } from './uploadImage';
 import { errorHandler, createRecipeResponseObj } from '../utils';
 import {
   SET_ADDING,
@@ -10,7 +10,9 @@ import {
   ADD_RECIPE_SUCCESS,
   ADD_RECIPE_FAILURE,
   FETCH_RECIPE_SUCCESS,
-  FETCH_RECIPE_FAILURE
+  FETCH_RECIPE_FAILURE,
+  UPDATE_RECIPE_IMAGE_SUCCESS,
+  UPDATE_RECIPE_IMAGE_FAILURE,
 } from './actionTypes';
 
 const setAdding = () => ({
@@ -35,6 +37,16 @@ const addRecipeFailure = payload => ({
   payload
 });
 
+const updateRecipeImageSuccess = recipe => ({
+  type: UPDATE_RECIPE_IMAGE_SUCCESS,
+  payload: recipe
+});
+
+const updateRecipeImageFailure = error => ({
+  type: UPDATE_RECIPE_IMAGE_FAILURE,
+  payload: error
+});
+
 const fetchRecipeSuccess = payload => ({
   type: FETCH_RECIPE_SUCCESS,
   payload
@@ -45,7 +57,7 @@ const fetchRecipeFailure = payload => ({
   payload
 });
 
-const addRecipe = (recipe, uploadTask) => async (dispatch) => {
+const addRecipe = recipe => async (dispatch) => {
   try {
     dispatch(setAdding());
 
@@ -54,16 +66,29 @@ const addRecipe = (recipe, uploadTask) => async (dispatch) => {
     dispatch(addRecipeSuccess(createRecipeResponseObj(response.data)));
     dispatch(unsetAdding());
     dispatch(push(`/recipes/${response.data.id}`));
-    dispatch(toggleModal());
+  } catch (error) {
+    const errorResponse = errorHandler(error);
+
+    dispatch(addRecipeFailure(errorResponse.response));
+    dispatch(unsetAdding());
+  }
+};
+
+const updateRecipeImage = (recipeImage, recipeId, uploadTask) => async (dispatch) => {
+  try {
+    dispatch(setUploading());
+
+    const response = await instance.put(`/recipes/${recipeId}`, { recipeImage });
+
+    dispatch(updateRecipeImageSuccess(response.data));
+    dispatch(unsetUploading());
   } catch (error) {
     const errorResponse = errorHandler(error);
 
     // delete image from firebase if there's an upload task
     if (uploadTask) uploadTask.delete();
-
-    dispatch(addRecipeFailure(errorResponse.response));
-    dispatch(unsetAdding());
-    dispatch(toggleModal());
+    dispatch(updateRecipeImageFailure(errorResponse.response));
+    dispatch(unsetUploading());
   }
 };
 
@@ -94,7 +119,10 @@ export default {
   clearRecipeError,
   addRecipeSuccess,
   addRecipeFailure,
+  updateRecipeImage,
   fetchSingleRecipe,
   fetchRecipeSuccess,
-  fetchRecipeFailure
+  fetchRecipeFailure,
+  updateRecipeImageSuccess,
+  updateRecipeImageFailure,
 };

@@ -1,18 +1,7 @@
-/* eslint-disable */
 import React from 'react';
-// import { Provider } from 'react-redux';
-// import thunk from 'redux-thunk';
-// import configureStore from 'redux-mock-store';
-import { toggleModal } from '../../../../actions/ui';
-import RecipeItems from '../../../../components/shared/RecipeItems';
-import MiniPreLoader from '../../../../components/shared/PreLoader/MiniPreLoader';
 import ProfilePic from '../../../../components/pages/Profile/ProfilePic';
-import initialValues from '../../../setup/initialValues';
 
 const mockFn = jest.fn();
-// const middlewares = [thunk];
-// const mockStore = configureStore(middlewares);
-// const authStore = mockStore(initialValues);
 const setup = () => {
   const props = {
     updateUserImage: mockFn,
@@ -134,36 +123,4 @@ describe('ProfilePic', () => {
     expect(handleChangeImageSpy).toHaveBeenCalled();
     mountedWrapper.unmount();
   });
-
-  // it('handles image upload: successful upload', () => {
-  //   const { props, mountedWrapper } = setup();
-  //   const handleImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleImageUpload');
-  //   const image = new Blob(['../../assets/images/user-image-placeholder.png'], { type: 'application/png', size: 2 * 1024 });
-  //   const event = { target: { files: [image] } };
-
-  //   mountedWrapper.setState(state);
-  //   mountedWrapper.find('input[type="file"]').simulate('change', event);
-  //   mountedWrapper.setProps({ ...props, uploadImage: { uploading: false, uploadSuccess: true } });
-
-  //   expect(handleImageUploadSpy).toHaveBeenCalled();
-  //   expect(mountedWrapper.instance().state.uploading).toBeFalsy();
-  //   mountedWrapper.unmount();
-  // });
-
-  // it('handles image upload: unsuccessful upload', () => {
-  //   const { props, mountedWrapper } = setup();
-  //   const handleImageUploadSpy = jest.spyOn(mountedWrapper.instance(), 'handleImageUpload');
-  //   const image = new Blob(['../../assets/images/user-image-placeholder.png'], { type: 'application/png', size: 2 * 1024 });
-  //   const event = { target: { files: [image] } };
-
-  //   mountedWrapper.setState(state);
-  //   mountedWrapper.find('input[type="file"]').simulate('change', event);
-  //   mountedWrapper.setProps({ ...props, uploadImage: { uploading: false, uploadSuccess: false } });
-
-  //   expect(handleImageUploadSpy).toHaveBeenCalled();
-  //   expect(mountedWrapper.instance().state.uploading).toBeFalsy();
-  //   expect(mountedWrapper.instance().state.uploadError).toEqual('Something happened, please try again');
-  //   expect(props.uploadTask.delete).toHaveBeenCalled();
-  //   mountedWrapper.unmount();
-  // });
 });

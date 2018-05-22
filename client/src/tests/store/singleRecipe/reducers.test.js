@@ -15,7 +15,7 @@ const singleRecipePayload = {
 };
 
 const payload = {
-  message: 'Your Recipe has been Added to Favorites',
+  message: 'Action Performed',
   recipe: {
     id: 2,
     recipeName: 'Jollof Rice'
@@ -137,6 +137,21 @@ describe('Single Recipe Reducers', () => {
     });
   });
 
+  it('should handle UPDATE_RECIPE_IMAGE_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_RECIPE_IMAGE_SUCCESS',
+      payload: singleRecipePayload
+    });
+
+    expect(newState).toEqual({
+      ...state,
+      recipe: {
+        ...state.recipe,
+        item: singleRecipePayload
+      }
+    });
+  });
+
   it('should handle ADD_RECIPE_FAILURE action', () => {
     const newState = reducer(state, {
       type: 'ADD_RECIPE_FAILURE',
@@ -144,6 +159,12 @@ describe('Single Recipe Reducers', () => {
     });
 
     expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: 'Error' } });
+  });
+
+  it('should handle CLEAR_RECIPE_ERROR action', () => {
+    const newState = reducer({ ...state, recipe: { ...state.recipe, error: 'Error' } }, { type: 'CLEAR_RECIPE_ERROR' });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: null } });
   });
 
   it('should handle FETCH_RECIPE_FAILURE action', () => {
@@ -167,6 +188,15 @@ describe('Single Recipe Reducers', () => {
   it('should handle ADD_RECIPE_TO_FAVORITES_FAILURE action', () => {
     const newState = reducer(state, {
       type: 'ADD_RECIPE_TO_FAVORITES_FAILURE',
+      payload: 'Error'
+    });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: 'Error' } });
+  });
+
+  it('should handle UPDATE_RECIPE_IMAGE_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_RECIPE_IMAGE_FAILURE',
       payload: 'Error'
     });
 

@@ -13,6 +13,12 @@ describe('getNoResultText', () => {
     expect(getNoResultText(title)).toBe('Your search returned no results');
   });
 
+  it('returns right text when title is REVIEWS RESULT', () => {
+    const title = 'REVIEWS RESULT';
+
+    expect(getNoResultText(title)).toBe('There are no reviews for this recipe');
+  });
+
   it('returns right text when title is MY RECIPES', () => {
     const title = 'MY RECIPES';
 

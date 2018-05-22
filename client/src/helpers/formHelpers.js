@@ -12,12 +12,15 @@ const clearFormError = {
 const formFields = {
   login: ['email', 'password'],
   signup: [
-    'firstname',
-    'lastname',
     'username',
     'email',
     'password',
     'passwordConfirm',
+  ],
+  updateProfile: [
+    'firstname',
+    'lastname',
+    'username',
     'occupation',
     'aboutMe'
   ],
@@ -40,11 +43,13 @@ const formFields = {
 const requiredFormFields = {
   login: ['email', 'password'],
   signup: [
-    'firstname',
     'username',
     'email',
     'password',
     'passwordConfirm'
+  ],
+  updateProfile: [
+    'username',
   ],
   review: ['rating', 'comment'],
   recipe: [
@@ -62,9 +67,12 @@ const formSubmitMapper = {
   addRecipe
 };
 
+const asyncValidateFields = ['name', 'email'];
+
 export default {
   formFields,
   clearFormError,
   formSubmitMapper,
-  requiredFormFields
+  requiredFormFields,
+  asyncValidateFields
 };

@@ -4,7 +4,7 @@ export default (sequelize, DataTypes) => {
     {
       firstname: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       lastname: {
         type: DataTypes.STRING,

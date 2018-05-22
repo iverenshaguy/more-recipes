@@ -38,18 +38,10 @@ const setup = () => {
       pages: [1, 2, 3],
       totalCount: 13,
     },
-    uploadImage: {
-      uploading: false,
-      success: false
-    }
   };
 
   const shallowWrapper = shallow(<ProfileComponent {...props} />, rrcMock.get());
-  const mountedWrapper = mount(
-    <Provider store={authStore}>
-      <ProfileComponent {...props} />
-    </Provider>, rrcMock.get()
-  );
+  const mountedWrapper = mount(<ProfileComponent {...props} store={authStore} />, rrcMock.get());
 
   return { props, shallowWrapper, mountedWrapper };
 };

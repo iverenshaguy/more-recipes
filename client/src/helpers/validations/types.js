@@ -34,17 +34,17 @@ export const isAlphaNumeric = value =>
   (value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters allowed!' : undefined);
 
 export const isName = value =>
-  (value && /[^a-z ,.'-\s]+$/i.test(value)
+  (value && /[^a-z,.'-()\s]/i.test(value)
     ? "Only letters and the characters (,.'-) allowed!"
     : undefined);
 
 export const isRecipeName = value =>
-  (value && /[^a-z 0-9 ,.'-()\s]+$/i.test(value)
+  (value && /[^a-z0-9,.'-()\s]/i.test(value)
     ? "Only letters and the characters (,.'-) allowed!"
     : undefined);
 
 export const isUsername = value =>
-  (value && /[^a-zA-Z0-9]/i.test(value)
+  (value && /[\W]/i.test(value)
     ? 'Username can only contain letters and numbers without space'
     : undefined);
 

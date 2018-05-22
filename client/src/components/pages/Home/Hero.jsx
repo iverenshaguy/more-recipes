@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { AddRecipeBtn } from '../../shared/Buttons';
 import SearchForm from '../../shared/Forms/SearchForm';
-import { toggleModal } from '../../../actions/ui';
 
 /**
  * @exports
@@ -12,7 +11,7 @@ import { toggleModal } from '../../../actions/ui';
  */
 const Hero = (props) => {
   const {
-    dispatch, handleSearch, handleSearchInput, searchValue
+    handleSearch, handleAddRecipe, handleSearchInput, searchValue
   } = props;
 
   return (
@@ -32,22 +31,15 @@ const Hero = (props) => {
               />
             </div>
           </div>
-          <Button
-            onClick={() => dispatch(toggleModal('addRecipe'))}
-            className="btn-default btn-lg"
-            id="home-add-recipe-btn"
-            title="New Recipe"
-          >
-            Add a New Recipe
-          </Button>
+          <AddRecipeBtn handleClick={handleAddRecipe} />
         </div>
       </div>
     </div>);
 };
 
 Hero.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
+  handleAddRecipe: PropTypes.func.isRequired,
   handleSearchInput: PropTypes.func.isRequired,
   searchValue: PropTypes.string.isRequired
 };

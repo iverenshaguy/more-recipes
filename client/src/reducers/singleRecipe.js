@@ -14,6 +14,8 @@ import {
   VOTE_RECIPE_FAILURE,
   FETCH_RECIPE_SUCCESS,
   FETCH_RECIPE_FAILURE,
+  UPDATE_RECIPE_IMAGE_SUCCESS,
+  UPDATE_RECIPE_IMAGE_FAILURE,
   ADD_RECIPE_TO_FAVORITES_SUCCESS,
   ADD_RECIPE_TO_FAVORITES_FAILURE,
 } from '../actions/actionTypes';
@@ -42,6 +44,7 @@ const recipe = (state = initialState, action) => {
       return Object.assign({}, state, { voting: false });
     case ADD_RECIPE_SUCCESS:
     case FETCH_RECIPE_SUCCESS:
+    case UPDATE_RECIPE_IMAGE_SUCCESS:
       return Object.assign({}, state, { item: action.payload });
     case VOTE_RECIPE_SUCCESS:
     case ADD_RECIPE_TO_FAVORITES_SUCCESS:
@@ -49,6 +52,7 @@ const recipe = (state = initialState, action) => {
     case VOTE_RECIPE_FAILURE:
     case ADD_RECIPE_FAILURE:
     case FETCH_RECIPE_FAILURE:
+    case UPDATE_RECIPE_IMAGE_FAILURE:
     case ADD_RECIPE_TO_FAVORITES_FAILURE:
       return Object.assign({}, state, { error: action.payload });
     case CLEAR_RECIPE_ERROR:

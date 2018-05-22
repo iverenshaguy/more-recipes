@@ -1,7 +1,13 @@
 import RenderInput from './RenderInput';
-import RenderFileInput from './RenderFileInput';
+import RenderSelect from './RenderSelect';
+import RenderCheckBox from './RenderCheckBox';
+import AddRecipeCompA from './AddRecipeCompA';
+import AddRecipeCompB from './AddRecipeCompB';
 
 export default {
   RenderInput,
-  RenderFileInput
+  RenderSelect,
+  RenderCheckBox,
+  AddRecipeCompA,
+  AddRecipeCompB
 };

@@ -51,6 +51,7 @@
       color: $green !important;
       cursor: pointer;
       text-decoration: none;
+      transition: color 0.5s;
     }
   }
 }
@@ -126,6 +127,7 @@
       background-color: $green;
       border: 1px solid $green;
       color: $white;
+      transition: background-color 0.5s;
     }
   }
 

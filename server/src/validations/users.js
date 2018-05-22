@@ -11,10 +11,7 @@ export default {
   ],
   register: [
     check('firstname')
-      .exists()
-      .withMessage('First name must be specified')
-      .isLength({ min: 1 })
-      .withMessage('First name cannot be empty')
+      .optional({ checkFalsy: true })
       .isLength({ max: 144 })
       .withMessage('First name must not be more than 144 characters')
       .matches(/^[a-z ,.'-\s]+$/i)

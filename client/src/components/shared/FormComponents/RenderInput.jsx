@@ -4,6 +4,12 @@ import FontAwesome from 'react-fontawesome';
 import { Input, FormGroup, Label, InputGroup } from 'reactstrap';
 import { renderFormFieldPropTypes } from '../../../helpers/proptypes';
 
+/**
+ * @exports
+ * @function RenderInput
+ * @param {object} props
+ * @returns {JSX} RenderInput
+ */
 const RenderInput = ({
   id,
   rows,

@@ -2,32 +2,21 @@
 
 exports[`Auth login: renders correctly 1`] = `
 <div
-  className="login-signup-body"
+  className="card-form-body"
 >
   <div
     className="container"
-    id="login-signup-container"
   >
-    <Row
+    <div
       className="my-5"
-      id="login-signup-wrapper"
-      tag="div"
+      id="card-form-wrapper"
     >
-      <Col
-        className="p-xs-2 p-lg-4"
+      <div
+        className="pt-4 pb-3"
         id="login-signup-div"
-        tag="div"
-        widths={
-          Array [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ]
-        }
       >
-        <Connect(Form)
+        <Login
+          changeForm={[Function]}
           dispatch={[Function]}
           isAuthenticated={false}
           location={
@@ -40,32 +29,13 @@ exports[`Auth login: renders correctly 1`] = `
               },
             }
           }
-          meta={
-            Object {
-              "btnText": "SIGN IN",
-              "extra": <p
-                className="text-center"
-              >
-                Dont have an account, 
-                <Link
-                  onClick={[Function]}
-                  replace={false}
-                  to="/signup"
-                >
-                  Sign up here
-                </Link>
-                .
-              </p>,
-              "title": "Sign In to Your Account",
-            }
-          }
           submitError={null}
           submitting={false}
           type="login"
           username={null}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -87,7 +57,7 @@ exports[`Auth redirects when authenticated: signup 1`] = `
   to={
     Object {
       "from": Object {
-        "pathname": "/null",
+        "pathname": "/username",
       },
     }
   }
@@ -107,32 +77,21 @@ exports[`Auth redirects when authenticated: stateless location 1`] = `
 
 exports[`Auth signup: renders correctly 1`] = `
 <div
-  className="login-signup-body"
+  className="card-form-body signup-body"
 >
   <div
     className="container"
-    id="login-signup-container"
   >
-    <Row
+    <div
       className="my-5"
-      id="login-signup-wrapper"
-      tag="div"
+      id="card-form-wrapper"
     >
-      <Col
-        className="p-xs-2 p-lg-4"
+      <div
+        className="pt-4 pb-3"
         id="login-signup-div"
-        tag="div"
-        widths={
-          Array [
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ]
-        }
       >
-        <Connect(Form)
+        <Signup
+          changeForm={[Function]}
           dispatch={[Function]}
           isAuthenticated={false}
           location={
@@ -145,32 +104,13 @@ exports[`Auth signup: renders correctly 1`] = `
               },
             }
           }
-          meta={
-            Object {
-              "btnText": "SIGN UP",
-              "extra": <p
-                className="text-center"
-              >
-                Already have an account, 
-                <Link
-                  onClick={[Function]}
-                  replace={false}
-                  to="/login"
-                >
-                  Log in here
-                </Link>
-                .
-              </p>,
-              "title": "Register for a New Account",
-            }
-          }
           submitError={null}
           submitting={false}
           type="signup"
           username={null}
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </div>
 </div>
 `;

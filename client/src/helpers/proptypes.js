@@ -185,6 +185,15 @@ const uploadPropTypes = {
   clearUploadError: PropTypes.func.isRequired
 };
 
+const uploadImageObjPropTypes = {
+  uploadImageObj: PropTypes.shape({
+    url: PropTypes.string,
+    error: PropTypes.string,
+    uploading: PropTypes.bool,
+    uploadTask: PropTypes.any
+  }).isRequired,
+};
+
 export default {
   authPropTypes,
   formPropTypes,
@@ -197,5 +206,6 @@ export default {
   singleRecipePropTypes,
   recipeObjectPropTypes,
   singleReviewPropTypes,
+  uploadImageObjPropTypes,
   renderFormFieldPropTypes
 };

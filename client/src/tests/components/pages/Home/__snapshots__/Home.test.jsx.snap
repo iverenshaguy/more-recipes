@@ -1,39 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home renders correctly 1`] = `
-<Home
-  dispatch={[Function]}
-  isFetching={false}
-  metadata={
-    Object {
-      "firstPage": 1,
-      "itemsPerPage": 5,
-      "lastPage": 3,
-      "page": 2,
-      "pages": Array [
-        1,
-        2,
-        3,
-      ],
-      "totalCount": 13,
-    }
-  }
-  recipes={
-    Array [
-      Object {
-        "User": "Me",
-        "id": 1,
-        "recipeName": "Rice",
-      },
-      Object {
-        "User": "She",
-        "id": 5,
-        "recipeName": "Beans",
-      },
-    ]
-  }
-/>
-`;
+exports[`Home renders correctly 1`] = `null`;
 
 exports[`Home renders correctly when fully mounted 1`] = `
 <Home
@@ -73,6 +40,7 @@ exports[`Home renders correctly when fully mounted 1`] = `
   >
     <Hero
       dispatch={[Function]}
+      handleAddRecipe={[Function]}
       handleSearch={[Function]}
       handleSearchInput={[Function]}
       searchValue=""
@@ -198,24 +166,28 @@ exports[`Home renders correctly when fully mounted 1`] = `
                 </SearchForm>
               </div>
             </div>
-            <Button
-              className="btn-default btn-lg"
-              color="secondary"
-              id="home-add-recipe-btn"
-              onClick={[Function]}
-              tag="button"
-              title="New Recipe"
+            <AddRecipeBtn
+              handleClick={[Function]}
             >
-              <button
-                className="btn-default btn-lg btn btn-secondary"
+              <Button
+                className="btn-default btn-lg d-none d-md-inline-block"
+                color="secondary"
                 id="home-add-recipe-btn"
                 onClick={[Function]}
+                tag="button"
                 title="New Recipe"
-                type="button"
               >
-                Add a New Recipe
-              </button>
-            </Button>
+                <button
+                  className="btn-default btn-lg d-none d-md-inline-block btn btn-secondary"
+                  id="home-add-recipe-btn"
+                  onClick={[Function]}
+                  title="New Recipe"
+                  type="button"
+                >
+                  Add a New Recipe
+                </button>
+              </Button>
+            </AddRecipeBtn>
           </div>
         </div>
       </div>
@@ -355,14 +327,16 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             alt="recipe"
                             bottom={true}
                             className="img-fluid"
-                            src="/images/jollof-rice-img.jpg"
+                            onError={[Function]}
+                            src="/images/placeholder-image.jpg"
                             tag="img"
                             width="100%"
                           >
                             <img
                               alt="recipe"
                               className="img-fluid card-img-bottom"
-                              src="/images/jollof-rice-img.jpg"
+                              onError={[Function]}
+                              src="/images/placeholder-image.jpg"
                               width="100%"
                             />
                           </CardImg>
@@ -469,14 +443,16 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             alt="recipe"
                             bottom={true}
                             className="img-fluid"
-                            src="/images/jollof-rice-img.jpg"
+                            onError={[Function]}
+                            src="/images/placeholder-image.jpg"
                             tag="img"
                             width="100%"
                           >
                             <img
                               alt="recipe"
                               className="img-fluid card-img-bottom"
-                              src="/images/jollof-rice-img.jpg"
+                              onError={[Function]}
+                              src="/images/placeholder-image.jpg"
                               width="100%"
                             />
                           </CardImg>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
+import MiniPreLoader from '../../shared/PreLoader/MiniPreLoader';
 import { userPropTypes, uploadPropTypes } from '../../../helpers/proptypes';
 import { uploadValidation } from '../../../helpers/validations';
 import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
@@ -34,7 +36,19 @@ class ProfilePic extends Component {
     this.handleImageUpload = this.handleImageUpload.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleChangeImageClick = this.handleChangeImageClick.bind(this);
-    this.handleCancelImageUpload = this.handleCancelImageUpload.bind(this);
+  }
+
+  /**
+   * @memberof ProfilePic
+   * @param {object} nextProps
+   * @returns {nothing} Returns nothing
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps !== this.props) {
+      if (this.props.uploadImageObj.error || this.state.uploadError) {
+        this.userImage.src = this.props.user.profilePic;
+      }
+    }
   }
 
   /**
@@ -44,13 +58,13 @@ class ProfilePic extends Component {
    */
   handleChangeImageClick(e) {
     e.preventDefault();
-    const { clearUploadError, uploadImageObj: { uploading } } = this.props;
+    const { clearUploadError } = this.props;
     clearUploadError();
+    this.setState({
+      uploadError: null
+    });
 
-    if (!uploading) {
-      return this.imageUploader.click();
-    }
-    return this.handleCancelImageUpload();
+    return this.imageUploader.click();
   }
 
   /**
@@ -63,12 +77,15 @@ class ProfilePic extends Component {
     const maxSize = 2 * 1024 * 1024; // 2MB max size
     const allowedTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
-    this.setState({
-      uploadError: uploadValidation(file, maxSize, allowedTypes)
-    });
-
     if (!uploadValidation(file, maxSize, allowedTypes)) {
       adaptFileEventToValue(this.handleImageUpload, this.userImage)(event);
+    } else {
+      this.setState({
+        uploadError: uploadValidation(file, maxSize, allowedTypes)
+      });
+
+      // reset input box
+      event.target.value = '';
     }
   }
 
@@ -85,40 +102,33 @@ class ProfilePic extends Component {
 
   /**
    * @memberof ProfilePic
-   * @return {state} returns new state
-   */
-  handleCancelImageUpload() {
-    const { user, uploadImageObj: { uploadTask } } = this.props;
-    uploadTask.cancel();
-    // change image source back to former image
-    this.userImage.src = user.profilePic ? user.profilePic : this.altImage;
-  }
-
-  /**
-   * @memberof ProfilePic
    * @returns {JSX} User ProfilePic
    */
   render() {
     const { user, uploadImageObj: { uploading, error } } = this.props;
     const mainError = error || this.state.uploadError;
+    const show = uploading ? 'show' : null;
 
     return (
-      <div className="col-5 col-md-4 profile-picture align-self-center">
-        <img
-          src={user.profilePic ? user.profilePic : this.altImage}
-          ref={(ref) => { this.userImage = ref; }}
-          style={{ opacity: uploading ? 0.3 : 1 }}
-          className="d-block d-md-inline rounded-circle img-fluid img-thumbnail user-img align-middle"
-          alt="profile"
-        />
-        &nbsp; &nbsp;
-        {/* {uploading &&
-        !uploadError &&
-        <Progress color="light" value={uploadProgress} className="w-50" />} */}
-        <div className="d-block d-md-inline-block align-middle">
-          {!uploading && mainError && <p className="text-danger upload-error">{mainError}</p>}
-          <a href="#profile-photo" onClick={this.handleChangeImageClick}>{!uploading ? 'Change Picture' : 'Cancel Upload'}</a>
+      <div className="col-5 col-md-4 profile-picture align-self-center text-center">
+        <div className="profile-img-div">
+          <img
+            src={user.profilePic ? user.profilePic : this.altImage}
+            onError={(e) => { e.target.src = this.altImage; }}
+            ref={(ref) => { this.userImage = ref; }}
+            className="rounded-circle img-fluid img-thumbnail user-img align-middle"
+            alt="profile"
+          />
+          <a
+            className={`image-overlay rounded-circle ${show}`}
+            href="#profile-photo"
+            onClick={this.handleChangeImageClick}
+          >
+            {!uploading && <FontAwesome name="plus-square-o" tag="i" />}
+            {uploading && <MiniPreLoader />}
+          </a>
         </div>
+        {!uploading && mainError && <p className="d-block text-center text-danger upload-error">{mainError}</p>}
         <input
           type="file"
           accept="image/gif, image/jpeg, image/png"

@@ -17,6 +17,9 @@ export default {
     },
     reviewForm: {
       isOpen: false,
+    },
+    recipeForm: {
+      active: 'one'
     }
   },
   isFetching: false,
@@ -43,9 +46,11 @@ export default {
       error: null,
       reviewing: false
     },
-    // uploadImage: {
-    //   uploading: false,
-    //   success: false
-    // }
   },
+  uploadImage: {
+    uploadTask: null,
+    uploading: false,
+    error: null,
+    url: null
+  }
 };

@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import ProfilePic from './ProfilePic';
 import RecipeItems from '../../shared/RecipeItems';
+import { AddRecipeBtn } from '../../shared/Buttons';
 import { MiniPreLoader } from '../../shared/PreLoader';
-import { toggleModal } from '../../../actions/ui';
 import { fetchUserRecipes } from '../../../actions/recipes';
 import { updateUserImage } from '../../../actions/auth';
 import {
@@ -30,6 +29,7 @@ class Profile extends Component {
     ...userPropTypes,
     ...urlMatchPropTypes,
     ...multiRecipePropTypes,
+    dispatch: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     updateUserImage: PropTypes.func.isRequired
   }
@@ -46,9 +46,6 @@ class Profile extends Component {
       limit: 5,
       currentPage: 1
     };
-
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.showAddRecipeModal = this.showAddRecipeModal.bind(this);
   }
 
   /**
@@ -69,18 +66,10 @@ class Profile extends Component {
    * @param {number} page
    * @returns {state} home
    */
-  handlePageChange(page) {
+  handlePageChange = (page) => {
     this.setState({
       currentPage: page
     }, () => this.props.dispatch(fetchUserRecipes(this.props.user.id, page, this.state.limit)));
-  }
-
-  /**
-   * @memberof Profile
-   * @returns {nothing} Returns nothing
-   */
-  showAddRecipeModal() {
-    this.props.dispatch(toggleModal('addRecipe'));
   }
 
   /**
@@ -89,7 +78,7 @@ class Profile extends Component {
    */
   render() {
     const {
-      user, isFetching, recipes, metadata, uploadImageObj
+      user, dispatch, isFetching, recipes, metadata, uploadImageObj
     } = this.props;
 
     return (
@@ -115,14 +104,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1">
-          <Button
-            onClick={this.showAddRecipeModal}
-            className="btn-default btn-lg d-none d-md-inline-block"
-            id="home-add-recipe-btn"
-            title="New Recipe"
-          >
-            Add a New Recipe
-          </Button>
+          <AddRecipeBtn handleClick={() => dispatch(push('/recipes/new'))} />
           <div className="profile-toggle-wrapper text-center mt-3">
             <a className="d-inline recipes-tab text-center active" href="#recipes">
               <i className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view" />

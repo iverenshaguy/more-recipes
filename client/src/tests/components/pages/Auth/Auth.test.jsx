@@ -37,31 +37,19 @@ const signupLocation = {
   state: { from: { pathname: '/' } }
 };
 
-const signupMeta = {
-  title: 'Register for a New Account',
-  btnText: 'SIGN UP',
-  extra: <p>something</p>
-};
-
-const loginMeta = {
-  title: 'Sign In to Your Account',
-  btnText: 'SIGN IN',
-  extra: <p>something</p>
-};
-
 const statelessLocation = {
   pathname: '/signup'
 };
 
 describe('Auth', () => {
   it('login: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" meta={loginMeta} />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={loginLocation} type="login" />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('signup: renders correctly', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" meta={signupMeta} />);
+    const shallowWrapper = shallow(<AuthComponent {...props} location={signupLocation} type="signup" />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
@@ -78,6 +66,34 @@ describe('Auth', () => {
 
     expect(wrapper.find(Auth)).toHaveLength(1);
     expect(wrapper.find(Home)).toHaveLength(0);
+
+    wrapper.unmount();
+  });
+
+  it('changes to signup when clicked', () => {
+    const wrapper = mount( //eslint-disable-line
+      <AuthComponent {...props} store={unAuthStore} location={loginLocation} type="login" />,
+      rrcMock.get()
+    );
+
+    wrapper.find('a[href="/signup"]').simulate('click');
+
+    expect(wrapper.find('Login').length).toBeFalsy();
+    expect(wrapper.find('Signup').length).toBeTruthy();
+
+    wrapper.unmount();
+  });
+
+  it('changes to login when clicked', () => {
+    const wrapper = mount( //eslint-disable-line
+      <AuthComponent {...props} store={unAuthStore} location={loginLocation} type="signup" />,
+      rrcMock.get()
+    );
+
+    wrapper.find('a[href="/login"]').simulate('click');
+
+    expect(wrapper.find('Signup').length).toBeFalsy();
+    expect(wrapper.find('Login').length).toBeTruthy();
 
     wrapper.unmount();
   });
@@ -99,19 +115,19 @@ describe('Auth', () => {
   });
 
   it('redirects when authenticated: login', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" meta={loginMeta} />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={loginLocation} type="login" />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('redirects when authenticated: signup', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={signupLocation} type="signup" meta={signupMeta} />);
+    const shallowWrapper = shallow(<AuthComponent {...props} username="username" isAuthenticated location={signupLocation} type="signup" />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });
 
   it('redirects when authenticated: stateless location', () => {
-    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" meta={loginMeta} />);
+    const shallowWrapper = shallow(<AuthComponent {...props} isAuthenticated location={statelessLocation} type="login" />);
 
     expect(toJson(shallowWrapper)).toMatchSnapshot();
   });

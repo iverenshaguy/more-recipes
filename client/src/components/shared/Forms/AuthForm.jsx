@@ -15,46 +15,16 @@ const AuthForm = ({ type, state, handlers }) => {
     ...formPropTypes(type)
   };
 
+  // 'required' props is a ui prop that tells RenderInput to display red asterik
+
   return (
     <Fragment>
-      {type === 'signup' && <RenderInput
-        type="text"
-        name="firstname"
-        label="First Name"
-        required
-        id="firstname"
-        value={state.values.firstname}
-        placeholder="Jane"
-        handleChange={handlers.handleChange}
-        handleBlur={handlers.handleBlur}
-        handleFocus={handlers.handleFocus}
-        meta={{
-          touched: state.touched.firstname,
-          error: state.error.firstname
-        }}
-      />}
-      {type === 'signup' && <RenderInput
-        type="text"
-        name="lastname"
-        id="lastname"
-        label="Last Name"
-        required={false}
-        value={state.values.lastname}
-        placeholder="Smith"
-        handleChange={handlers.handleChange}
-        handleBlur={handlers.handleBlur}
-        handleFocus={handlers.handleFocus}
-        meta={{
-          touched: state.touched.lastname,
-          error: state.error.lastname,
-        }}
-      />}
       <RenderInput
         type="email"
         name="email"
         label="Email Address"
         id="email"
-        required={type !== 'login'}
+        required={false}
         value={state.values.email}
         placeholder="janesmith@me.com"
         handleChange={handlers.handleChange}
@@ -71,7 +41,7 @@ const AuthForm = ({ type, state, handlers }) => {
         name="username"
         id="username"
         label="Username"
-        required
+        required={false}
         value={state.values.username}
         placeholder="janesmith"
         handleChange={handlers.handleChange}
@@ -89,7 +59,7 @@ const AuthForm = ({ type, state, handlers }) => {
         className="mb-4"
         label="Password"
         id="password"
-        required={type !== 'login'}
+        required={false}
         value={state.values.password}
         placeholder={placeholder}
         handleChange={handlers.handleChange}
@@ -105,7 +75,7 @@ const AuthForm = ({ type, state, handlers }) => {
         name="passwordConfirm"
         id="passwordconfirm"
         label="Password Confirmation"
-        required
+        required={false}
         value={state.values.passwordConfirm}
         handleChange={handlers.handleChange}
         handleBlur={handlers.handleBlur}
@@ -113,38 +83,6 @@ const AuthForm = ({ type, state, handlers }) => {
         meta={{
           touched: state.touched.passwordConfirm,
           error: state.error.passwordConfirm
-        }}
-      />}
-      {type === 'signup' && <RenderInput
-        type="textarea"
-        name="aboutMe"
-        id="user-info"
-        label="Tell Us Something About Yourself"
-        required={false}
-        value={state.values.aboutMe}
-        placeholder="I love to cook"
-        handleChange={handlers.handleChange}
-        handleBlur={handlers.handleBlur}
-        handleFocus={handlers.handleFocus}
-        meta={{
-          touched: state.touched.aboutMe,
-          error: state.error.aboutMe
-        }}
-      />}
-      {type === 'signup' && <RenderInput
-        type="text"
-        name="occupation"
-        id="occupation"
-        label="Occupation"
-        required={false}
-        value={state.values.occupation}
-        placeholder="Chef"
-        handleChange={handlers.handleChange}
-        handleBlur={handlers.handleBlur}
-        handleFocus={handlers.handleFocus}
-        meta={{
-          touched: state.touched.occupation,
-          error: state.error.occupation
         }}
       />}
     </Fragment>

@@ -1,7 +1,7 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import PropTypes from 'prop-types';
-import capitalizeString from '../../../helpers/capitalizeString';
+import capitalizeString from '../../../utils/capitalizeString';
 import { recipeObjectPropTypes } from '../../../helpers/proptypes';
 
 /**

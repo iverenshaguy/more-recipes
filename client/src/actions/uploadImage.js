@@ -13,7 +13,7 @@ const unsetUploading = () => ({ type: UNSET_UPLOADING });
 
 const clearUploadError = () => ({ type: CLEAR_UPLOAD_ERROR });
 
-const uploadSuccess = () => ({ type: UPLOAD_SUCCESS });
+const uploadSuccess = payload => ({ type: UPLOAD_SUCCESS, payload });
 
 const uploadFailure = payload => ({ type: UPLOAD_FAILURE, payload });
 
@@ -68,6 +68,7 @@ const uploadImage = (image, formerImagePath, imagePath, successCallBack) => (dis
 
 export default {
   setUploading,
+  setUploadTask,
   unsetUploading,
   clearUploadError,
   uploadSuccess,

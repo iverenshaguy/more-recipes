@@ -8,11 +8,15 @@ import {
   addRecipeFailure,
   fetchSingleRecipe,
   fetchRecipeSuccess,
-  fetchRecipeFailure
+  fetchRecipeFailure,
+  updateRecipeImage
 } from '../../../actions/singleRecipe';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+const mockUploadTask = {
+  delete: jest.fn().mockReturnThis()
+};
 
 const singleRecipeResponse = {
   recipe: {
@@ -53,7 +57,7 @@ describe('Single Recipe Actions', () => {
   });
 
   test('addRecipeSuccess', () => {
-    const recipe = addRecipeSuccess('ADD_RECIPE_SUCCESS', singleRecipeResponse);
+    const recipe = addRecipeSuccess(singleRecipeResponse);
 
     expect(recipe).toEqual({
       type: 'ADD_RECIPE_SUCCESS',
@@ -62,7 +66,7 @@ describe('Single Recipe Actions', () => {
   });
 
   test('addRecipeFailure', () => {
-    const recipe = addRecipeFailure('ADD_RECIPE_FAILURE', 'There was a problem');
+    const recipe = addRecipeFailure('There was a problem');
 
     expect(recipe).toEqual({
       type: 'ADD_RECIPE_FAILURE',
@@ -179,6 +183,62 @@ describe('Single Recipe Actions', () => {
         const actionTypes = dispatchedActions.map(action => action.type);
 
         expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_UPLOADING, UPDATE_RECIPE_IMAGE_SUCCESS and UNSET_UPLOADING successfully', () => {
+      const expectedActions = ['SET_UPLOADING', 'UPDATE_RECIPE_IMAGE_SUCCESS', 'UNSET_UPLOADING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: singleRecipeResponse,
+        });
+      });
+
+      return store.dispatch(updateRecipeImage('image.com/pic', 3, { delete: () => 'delete' })).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_UPLOADING, UPDATE_RECIPE_IMAGE_FAILURE and UNSET_UPLOADING successfully and cancels upload task', () => {
+      const expectedActions = ['SET_UPLOADING', 'UPDATE_RECIPE_IMAGE_FAILURE', 'UNSET_UPLOADING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({ status: 500 });
+      });
+
+      return store.dispatch(updateRecipeImage('image.com/pic', 3, mockUploadTask)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+        expect(actionTypes).toEqual(expectedActions);
+        expect(mockUploadTask.delete).toHaveBeenCalled();
+      });
+    });
+
+    it('dispatches SET_UPLOADING, UPDATE_RECIPE_IMAGE_FAILURE and UNSET_UPLOADING successfully only', () => {
+      const expectedActions = ['SET_UPLOADING', 'UPDATE_RECIPE_IMAGE_FAILURE', 'UNSET_UPLOADING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({ status: 500 });
+      });
+
+      return store.dispatch(updateRecipeImage('image.com/pic', 3, undefined)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+        expect(actionTypes).toEqual(expectedActions);
+        expect(mockUploadTask.delete).not.toHaveBeenCalled();
       });
     });
   });

@@ -30,7 +30,7 @@ app.use('/api', apiRoutes);
 
 // Default catch-all route that sends back a not found warning for wrong api routes.
 app.get('/api/*', (req, res) =>
-  res.status(409).send({
+  res.status(404).send({
     message: 'Where Are You Going? Page Not Found'
   }));
 

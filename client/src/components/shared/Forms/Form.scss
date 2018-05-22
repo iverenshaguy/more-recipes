@@ -44,6 +44,7 @@
       &.active {
         background-color: $white;
         color: $green;
+        transition: background-color 0.5s;
       }
     }
   }
@@ -56,4 +57,9 @@
 
 .modal-preloader {
   margin: 30vh auto;
+}
+
+.next-previous-btn {
+  width: 15vw;
+  color: white;
 }

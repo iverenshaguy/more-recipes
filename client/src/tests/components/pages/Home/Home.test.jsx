@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { HomeComponent } from '../../../../components/pages/Home';
 
 const setup = () => {
@@ -26,8 +26,8 @@ const setup = () => {
     searchValue: ''
   };
 
-  const mountedWrapper = mount(<MemoryRouter><HomeComponent {...props} /></MemoryRouter>);
-  const shallowWrapper = shallow(<MemoryRouter><HomeComponent {...props} /></MemoryRouter>);
+  const mountedWrapper = mount(<HomeComponent {...props} />, rrcMock);
+  const shallowWrapper = shallow(<HomeComponent {...props} />, rrcMock);
 
   return {
     state, props, mountedWrapper, shallowWrapper
@@ -62,6 +62,14 @@ describe('Home', () => {
     const { mountedWrapper, props } = setup();
     expect(props.dispatch).toHaveBeenCalled();
     mountedWrapper.unmount();
+  });
+
+  it('handles add recipe when clicked', () => {
+    const { mountedWrapper, props } = setup();
+
+    mountedWrapper.find('Button#home-add-recipe-btn').simulate('click');
+
+    expect(props.dispatch).toHaveBeenCalledWith(push('/recipes/new'));
   });
 
   it('handles page change for TOP RECIPES', () => {

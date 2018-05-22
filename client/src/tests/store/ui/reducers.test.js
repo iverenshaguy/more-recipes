@@ -7,6 +7,9 @@ const state = {
   },
   reviewForm: {
     isOpen: false
+  },
+  recipeForm: {
+    active: 'one'
   }
 };
 
@@ -55,6 +58,20 @@ describe('Auth Reducers', () => {
       ...state,
       reviewForm: {
         isOpen: false
+      }
+    });
+  });
+
+  it('should handle CHANGE_RECIPE_FORM_STATE action', () => {
+    const newState = reducer(state, {
+      type: 'CHANGE_RECIPE_FORM_STATE',
+      payload: 'two'
+    });
+
+    expect(newState).toEqual({
+      ...state,
+      recipeForm: {
+        active: 'two'
       }
     });
   });
