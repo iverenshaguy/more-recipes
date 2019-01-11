@@ -1,13 +1,14 @@
 {
   "name": "more-recipes-personal",
   "version": "1.0.0",
+  "engines" : { "node" : "9.11.1" },
   "description": "A Recipe Management Application written in Javscript (ES6)",
   "author": "Iveren Shaguy",
   "license": "ISC",
   "main": "server/build/bin/www.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iverenshaguy/more-recipes"
+    "url": "https://github.com/iverenshaguy/more-recipes-personal"
   },
   "scripts": {
     "start": "node ./server/build/bin/www.js",
@@ -40,7 +41,8 @@
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
     "migrate:test": "sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test",
     "seed": "sequelize db:seed:all",
-    "seed:test": "sequelize db:seed:all --env=test"
+    "seed:test": "sequelize db:seed:all --env=test",
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "@firebase/app-types": "^0.1.0",
