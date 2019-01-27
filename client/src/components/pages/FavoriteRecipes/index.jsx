@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import FontAwesome from 'react-fontawesome';
-import FavComponents from './FavComponents';
-// import { toggleModal } from '../../../actions/ui';
+import RecipeItems from '../../shared/RecipeItems';
 import { MiniPreLoader } from '../../shared/PreLoader';
 import { fetchFavoriteRecipes } from '../../../actions/recipes';
 import { userPropTypes, multiRecipePropTypes, urlMatchPropTypes } from '../../../helpers/proptypes';
@@ -53,14 +52,16 @@ class FavoriteRecipes extends Component {
    */
   componentWillMount() {
     const { match, user, dispatch } = this.props;
-    if (match.params.username !== user.username) {
-      dispatch(push(`/${user.username}/favorites`));
-    }
 
-    if (match.params.username === user.username && !match.isExact) {
+    if ((match.path).includes('categories')) {
+      dispatch(push(`/${user.username}/favorites/categories`));
+
       this.setState({
         activeTab: 'categories'
       });
+    } else if (match.params.username !== user.username) {
+      // redirect user to real username if a new uer logins after an old user
+      dispatch(push(`/${user.username}/favorites`));
     }
 
     dispatch(fetchFavoriteRecipes(this.props.user.id, this.state.currentPage, this.state.limit));
@@ -147,12 +148,22 @@ class FavoriteRecipes extends Component {
             </div>}
           {!isFetching &&
             <div className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0">
-              <FavComponents
-                {...this.props}
-                recipes={recipes}
-                handlePageChange={this.handlePageChange}
-                metadata={metadata}
-              />
+              {activeTab === 'recipes' && (
+                <RecipeItems
+                  title="RECIPES"
+                  recipes={recipes}
+                  handlePageChange={this.handlePageChange}
+                  metadata={metadata}
+                />
+              )}
+              {activeTab === 'categories' && (
+                <RecipeItems
+                  title="RECIPE CATEGORIES"
+                  recipes={recipes}
+                  handlePageChange={this.handlePageChange}
+                  metadata={metadata}
+                />
+              )}
             </div>}
         </div>
       </div>);

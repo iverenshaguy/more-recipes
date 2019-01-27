@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import { history } from '../../reducers';
@@ -10,7 +10,9 @@ import Modal from '../shared/Modals';
 import Home from '../pages/Home';
 import Auth from '../pages/Auth';
 import Profile from '../pages/Profile';
+import AddEditRecipe from '../pages/AddEditRecipe';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+// import FavoriteRecipesCategories from '../pages/FavoriteRecipesCategories';
 import Error from '../shared/Error';
 import SingleRecipe from '../pages/SingleRecipe';
 import { requireAuthentication } from '../hoc';
@@ -29,14 +31,16 @@ const App = () => (
       <div className="content">
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
+          <Route exact path="/recipes/new" component={requireAuthentication(AddEditRecipe)} />
           <Route exact path="/recipes/:id" component={requireAuthentication(SingleRecipe)} />
           {/* <Route exact path="/recipes" component={requireAuthentication(AllRecipes)} /> */}
-          <Route path="/login" render={props => <Auth {...props} type="login" />} />
-          <Route path="/signup" render={props => <Auth {...props} type="signup" />} />
-          <Route path="/page-not-found" render={() => <Error type={404} />} />
+          <Route exact path="/login" render={props => <Auth {...props} type="login" />} />
+          <Route exact path="/signup" render={props => <Auth {...props} type="signup" />} />
+          <Route path="/:username/favorites/categories" component={requireAuthentication(FavoriteRecipes)} />
           <Route path="/:username/favorites" component={requireAuthentication(FavoriteRecipes)} />
           <Route path="/:username" component={requireAuthentication(Profile)} />
-          <Route path="/*" render={() => <Error type={404} />} />
+          <Route excat path="/page-not-found" render={() => <Error type={404} />} />
+          <Redirect to="/not-found" />
         </Switch>
       </div>
       <Footer />

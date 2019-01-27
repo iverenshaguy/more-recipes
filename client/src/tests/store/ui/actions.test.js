@@ -1,12 +1,10 @@
-import {
-  toggleModal, toggleReviewForm
-} from '../../../actions/ui';
+import { toggleModal, toggleReviewForm, changeRecipeFormState } from '../../../actions/ui';
 
 describe('Component Actions', () => {
   test('toggleModal with modal type', () => {
-    const modal = toggleModal('addRecipe');
+    const modal = toggleModal('modal');
 
-    expect(modal).toEqual({ type: 'TOGGLE_MODAL', payload: 'addRecipe' });
+    expect(modal).toEqual({ type: 'TOGGLE_MODAL', payload: 'modal' });
   });
 
   test('toggleModal with null modal', () => {
@@ -19,6 +17,12 @@ describe('Component Actions', () => {
     const form = toggleReviewForm();
 
     expect(form).toEqual({ type: 'TOGGLE_REVIEW_FORM' });
+  });
+
+  test('toggleReviewForm', () => {
+    const form = changeRecipeFormState('two');
+
+    expect(form).toEqual({ type: 'CHANGE_RECIPE_FORM_STATE', payload: 'two' });
   });
 });
 

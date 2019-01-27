@@ -1,4 +1,4 @@
-import { TOGGLE_MODAL, TOGGLE_REVIEW_FORM } from '../actions/actionTypes';
+import { TOGGLE_MODAL, TOGGLE_REVIEW_FORM, CHANGE_RECIPE_FORM_STATE } from '../actions/actionTypes';
 
 const initialState = {
   modals: {
@@ -7,6 +7,9 @@ const initialState = {
   },
   reviewForm: {
     isOpen: false
+  },
+  recipeForm: {
+    active: 'one'
   }
 };
 
@@ -23,6 +26,12 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         reviewForm: {
           isOpen: !state.reviewForm.isOpen,
+        }
+      });
+    case CHANGE_RECIPE_FORM_STATE:
+      return Object.assign({}, state, {
+        recipeForm: {
+          active: action.payload
         }
       });
     default:

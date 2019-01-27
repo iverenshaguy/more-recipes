@@ -60,17 +60,20 @@ exports[`FavoriteRecipes renders correctly 1`] = `
     <div
       className="row justify-content-center user-profile-recipe-cards px-5 px-sm-5 px-md-0 mt-0"
     >
-      <FavComponents
-        dispatch={[Function]}
+      <RecipeItems
         handlePageChange={[Function]}
-        isFetching={false}
-        match={
+        metadata={
           Object {
-            "isExact": true,
-            "params": Object {
-              "username": "username",
-            },
-            "url": "/favorites",
+            "firstPage": 1,
+            "itemsPerPage": 5,
+            "lastPage": 3,
+            "page": 2,
+            "pages": Array [
+              1,
+              2,
+              3,
+            ],
+            "totalCount": 13,
           }
         }
         recipes={
@@ -87,12 +90,7 @@ exports[`FavoriteRecipes renders correctly 1`] = `
             },
           ]
         }
-        user={
-          Object {
-            "id": 2,
-            "username": "username",
-          }
-        }
+        title="RECIPES"
       />
     </div>
   </div>

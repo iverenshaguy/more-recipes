@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
-import Form from '../../shared/Forms';
+import classNames from 'classnames';
+import { Redirect } from 'react-router-dom';
+import Login from './Login';
+import Signup from './Signup';
 import { authPropTypes } from '../../../helpers/proptypes';
-import './Auth.scss';
 
 /**
  * @exports
  * @class Auth
  * @extends Component
- * @param {object} this.props
  * @returns {JSX} Auth
  */
 class Auth extends Component {
@@ -26,41 +26,71 @@ class Auth extends Component {
   }
 
   /**
+   * @constructor
+   * @memberof Auth
+   * @returns {nothing} returns nothing
+   */
+  constructor() {
+    super();
+
+    this.state = {
+      type: null
+    };
+
+    this.changeForm = this.changeForm.bind(this);
+  }
+
+  /**
+   * @memberof Auth
+   * @returns {nothing} returns nothing
+   */
+  componentWillMount() {
+    this.setState({ type: this.props.type });
+  }
+
+
+  /**
+   * @memberof Auth
+   * @param {object} e - event
+   * @param {string} type - form type
+   * @returns {JSX} Form
+   */
+  changeForm(e, type) {
+    e.preventDefault();
+
+    this.setState({ type });
+    this.props.dispatch(push(`/${type}`));
+  }
+
+  /**
    * @memberof Auth
    * @returns {JSX} Auth
    */
   render() {
     const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
     if (this.props.isAuthenticated && this.props.type === 'signup') {
-      return <Redirect to={{ from: { pathname: `/${this.props.username}` } }} />;
+      return <Redirect to={{ pathname: `/${this.props.username}` }} />;
     }
 
     if (this.props.isAuthenticated) {
       return <Redirect to={from} />;
     }
 
-    const signupMeta = {
-      title: 'Register for a New Account',
-      btnText: 'SIGN UP',
-      extra: <p className="text-center">Already have an account, <Link onClick={this.forceUpdate} to="/login">Log in here</Link>.</p>
-    };
-
-    const loginMeta = {
-      title: 'Sign In to Your Account',
-      btnText: 'SIGN IN',
-      extra: <p className="text-center">Dont have an account, <Link onClick={this.forceUpdate} to="/signup">Sign up here</Link>.</p>
-    };
+    const loginSignupBody = classNames({
+      'card-form-body': true,
+      'signup-body': this.state.type === 'signup'
+    });
 
     return (
-      <div className="login-signup-body">
-        <div className="container" id="login-signup-container">
-          <Row className="my-5" id="login-signup-wrapper">
-            <Col className="p-xs-2 p-lg-4" id="login-signup-div">
-              {this.props.type === 'signup' ?
-                <Form {...this.props} type="signup" meta={signupMeta} /> :
-                <Form {...this.props} type="login" meta={loginMeta} />}
-            </Col>
-          </Row>
+      <div className={loginSignupBody}>
+        <div className="container">
+          <div className="my-5" id="card-form-wrapper">
+            <div className="pt-4 pb-3" id="login-signup-div">
+              {this.state.type === 'signup' ?
+                <Signup {...this.props} changeForm={this.changeForm} /> :
+                <Login {...this.props} changeForm={this.changeForm} />}
+            </div>
+          </div>
         </div>
       </div>
     );

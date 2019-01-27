@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import ProfilePic from './ProfilePic';
 import RecipeItems from '../../shared/RecipeItems';
+import { AddRecipeBtn } from '../../shared/Buttons';
 import { MiniPreLoader } from '../../shared/PreLoader';
-import { toggleModal } from '../../../actions/ui';
 import { fetchUserRecipes } from '../../../actions/recipes';
 import { updateUserImage } from '../../../actions/auth';
+import {
+  setUploading, unsetUploading, uploadSuccess, uploadFailure, clearUploadError, uploadImage
+} from '../../../actions/uploadImage';
 import { userPropTypes, multiRecipePropTypes, urlMatchPropTypes } from '../../../helpers/proptypes';
 import './Profile.scss';
 
@@ -27,6 +29,7 @@ class Profile extends Component {
     ...userPropTypes,
     ...urlMatchPropTypes,
     ...multiRecipePropTypes,
+    dispatch: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
     updateUserImage: PropTypes.func.isRequired
   }
@@ -43,9 +46,6 @@ class Profile extends Component {
       limit: 5,
       currentPage: 1
     };
-
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.showAddRecipeModal = this.showAddRecipeModal.bind(this);
   }
 
   /**
@@ -64,20 +64,20 @@ class Profile extends Component {
   /**
    * @memberof Home
    * @param {number} page
-   * @returns {state} home
+   * @returns {void}
    */
-  handlePageChange(page) {
+  handlePageChange = (page) => {
     this.setState({
       currentPage: page
     }, () => this.props.dispatch(fetchUserRecipes(this.props.user.id, page, this.state.limit)));
   }
 
   /**
-   * @memberof Profile
-   * @returns {nothing} Returns nothing
+   * @memberof Home
+   * @returns {void}
    */
-  showAddRecipeModal() {
-    this.props.dispatch(toggleModal('addRecipe'));
+  handleAddRecipe = () => {
+    this.props.dispatch(push('/recipes/new'));
   }
 
   /**
@@ -86,7 +86,7 @@ class Profile extends Component {
    */
   render() {
     const {
-      user, isFetching, recipes, metadata, uploadImage
+      user, isFetching, recipes, metadata, uploadImageObj
     } = this.props;
 
     return (
@@ -95,8 +95,14 @@ class Profile extends Component {
           <div className="row justify-content-start user-info py-4 px-3 px-md-5">
             <ProfilePic
               user={user}
-              uploadImage={uploadImage}
+              uploadImageObj={uploadImageObj}
+              uploadImage={this.props.uploadImage}
+              setUploading={this.props.setUploading}
+              uploadFailure={this.props.uploadFailure}
+              uploadSuccess={this.props.uploadSuccess}
+              unsetUploading={this.props.unsetUploading}
               updateUserImage={this.props.updateUserImage}
+              clearUploadError={this.props.clearUploadError}
             />
             <div className="col-7 col-md-8 name-div align-self-center">
               <p className="name pt-2">{`${user.firstname} ${user.lastname}`}</p>
@@ -106,14 +112,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1">
-          <Button
-            onClick={this.showAddRecipeModal}
-            className="btn-default btn-lg d-none d-md-inline-block"
-            id="home-add-recipe-btn"
-            title="New Recipe"
-          >
-            Add a New Recipe
-          </Button>
+          <AddRecipeBtn handleClick={this.handleAddRecipe} />
           <div className="profile-toggle-wrapper text-center mt-3">
             <a className="d-inline recipes-tab text-center active" href="#recipes">
               <i className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view" />
@@ -147,11 +146,17 @@ const mapStateToProps = state => ({
   isFetching: state.isFetching,
   recipes: state.recipes.items,
   metadata: state.recipes.metadata,
-  uploadImage: state.uploadImage
+  uploadImageObj: state.uploadImage
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  updateUserImage
+  clearUploadError,
+  updateUserImage,
+  unsetUploading,
+  uploadSuccess,
+  uploadFailure,
+  setUploading,
+  uploadImage
 }, dispatch);
 
 export { Profile as ProfileComponent };

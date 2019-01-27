@@ -63,7 +63,12 @@ const NavbarWrapper = (props) => {
           <UncontrolledDropdown nav>
             <div className="nav-profile-picture-div rounded-cirle menu-dropdown d-inline">
               <DropdownToggle nav>
-                <img src={user && user.profilePic ? user.profilePic : altImage} className="rounded-cirle" alt="User" />
+                <img
+                  src={user && user.profilePic ? user.profilePic : altImage}
+                  onError={(e) => { e.target.src = altImage; }}
+                  className="rounded-cirle"
+                  alt="User"
+                />
               </DropdownToggle>
               <DropdownMenu right>
                 <Link to={`/${user && user.username}`} className="dropdown-item">
@@ -88,14 +93,14 @@ const NavbarWrapper = (props) => {
               <FontAwesome name="reorder" size="lg" />
             </DropdownToggle>
             <DropdownMenu right>
-              <a
+              <Link
+                to="/recipes/new"
                 className="dropdown-item add-recipe"
-                href="#add-edit-modal"
-                onClick={props.showAddRecipeModal}
+                href="/recipes/new"
                 title="New Recipe"
               >
                 Add a Recipe
-              </a>
+              </Link>
               {/* <a className="dropdown-item get-favorites" href="user-profile.html">
                   Favorite Recipes
                 </a> */}

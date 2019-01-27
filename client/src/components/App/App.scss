@@ -1,4 +1,5 @@
 @import '../../assets/scss/modules';
+@import '~bootstrap/scss/bootstrap';
 // sass-lint:disable-block indentation
 body {
   &:not(.user-profile) {
@@ -16,12 +17,29 @@ a,
 a {
   &:hover,
   &:focus,
-  &:active {
+  &:active,
+  &.active {
     border: 0;
     box-shadow: none;
     color: $green;
     cursor: pointer;
     outline: none;
+    transition: color 0.5s;
+  }
+
+  &.dropdown-item {
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      border: 0;
+      background-color: $gray-100;
+      box-shadow: none;
+      color: $green;
+      cursor: pointer;
+      outline: none;
+      transition: color 0.5s;
+    }
   }
 }
 
@@ -35,6 +53,7 @@ input {
   &:active {
     border: 1px solid $light-green;
     outline: none;
+    transition: border 0.5s;
   }
 }
 
@@ -44,6 +63,7 @@ select {
   &:active {
     border: 1px solid $light-green;
     outline: none;
+    transition: border 0.5s;
   }
 }
 
@@ -68,6 +88,7 @@ form {
     &:focus,
     &:active {
       color: $green;
+      transition: color 0.5s;
     }
   }
 }
@@ -126,6 +147,7 @@ form {
     background-color: $light-green;
     border: 1px solid $light-green;
     border-radius: 3px;
+
     &:hover,
     &:focus,
     &:active,
@@ -133,12 +155,26 @@ form {
       background-color: $green;
       border: 1px solid $green;
       color: $white;
+      transition: background-color 0.5s;
     }
   }
+
+  &.btn-outline {
+    background-color: $white;
+    border: 1px solid $green;
+    color: $green;
+  }
+
+  &.next-previous-btn {
+    font-size: 1.2em;
+    font-weight: 400;
+  }
+
   &:hover,
   &:focus {
     cursor: pointer;
   }
+
   li {
     &:hover,
     &:focus,
@@ -147,6 +183,7 @@ form {
       background-color: $green;
       border: 1px solid $green;
       color: $white;
+      transition: background-color 0.5s;
     }
   }
 }
@@ -176,6 +213,7 @@ form {
     border-left: 0;
     color: $green !important;
     cursor: pointer !important;
+    transition: color 0.5s;
   }
 }
 
@@ -193,195 +231,6 @@ form {
   color: $danger-red;
   font-size: 0.875rem;
   margin-top: 0.25rem;
-}
-
-@import '../../assets/scss/modules';
-.login-signup-body {
-  h4 {
-    font-weight: 400;
-    margin: 2rem 0 1rem;
-  }
-  hr {
-    background-color: $grey;
-    width: 60%;
-  }
-  .navbar {
-    li {
-      margin: 0 1rem 0 0;
-    }
-  }
-  .footer {
-    line-height: 1rem;
-  }
-  .nav-tabs {
-    border-bottom: 0 solid $d-white;
-    text-align: center;
-    width: 75%;
-    .nav-item {
-      width: 50%;
-      &.show {
-        .nav-link {
-          background-color: $white;
-          border-bottom: 2px solid $red !important;
-          border-left: 0;
-          border-right: 0;
-          border-top: 0;
-          color: $green;
-        }
-      }
-    }
-    .nav-link {
-      border: 0.1rem solid transparent;
-      border-bottom: 2px solid $d-white !important;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
-      color: $green;
-      font-size: 1.3rem;
-      &.active {
-        background-color: $white;
-        border-bottom: 2px solid $red !important;
-        border-left: 0;
-        border-right: 0;
-        border-top: 0;
-        color: $green;
-      }
-      &:focus,
-      &:hover {
-        border-bottom: 2px solid $red !important;
-        border-left: 0;
-        border-right: 0;
-        border-top: 0;
-      }
-    }
-  }
-  &.nav-link {
-    &:focus,
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  form {
-    .col-form-label {
-      font-size: 1.2rem;
-    }
-    button {
-      margin-top: 2.5rem;
-    }
-  }
-}
-
-#login-signup-wrapper {
-  background-color: $white;
-  border: 1px solid $white;
-  border-radius: 0.5rem;
-  height: auto;
-  margin-bottom: 6rem;
-  .tab-content {
-    padding-left: 3rem !important;
-    padding-right: 3rem !important;
-  }
-}
-
-#signin-modal {
-  .tab-content {
-    padding-left: 3rem !important;
-    padding-right: 3rem !important;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  #login-signup-wrapper,
-  #signin-modal {
-    margin-left: 15rem;
-    margin-right: 15rem;
-  }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  #login-signup-wrapper {
-    margin-left: 10rem;
-    margin-right: 10rem;
-  }
-  #signin-modal {
-    margin-left: 10rem;
-    margin-right: 10rem;
-  }
-}
-
-@media only screen and (min-width: 453px) and (max-width: 575px) {
-  #login-signup-wrapper {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    .tab-content {
-      padding-left: 0.5rem !important;
-      padding-right: 0.5rem !important;
-    }
-  }
-  #signin-modal {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    .tab-content {
-      padding-left: 0.5rem !important;
-      padding-right: 0.5rem !important;
-    }
-  }
-}
-
-@media only screen and (max-width: 452px) {
-  #login-signup-wrapper {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    .tab-content {
-      padding-left: 0.05rem !important;
-      padding-right: 0.05rem !important;
-    }
-    .nav-item {
-      #nav-tab-link-1 {
-        padding-left: 0.2rem;
-      }
-      #nav-tab-link {
-        padding-left: 0.2rem;
-      }
-    }
-  }
-  #signin-modal {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    .tab-content {
-      padding-left: 0.05rem !important;
-      padding-right: 0.05rem !important;
-    }
-    .nav-item {
-      #nav-tab-link-1 {
-        padding-left: 0.2rem;
-      }
-      #nav-tab-link {
-        padding-left: 0.2rem;
-      }
-    }
-  }
-  .login-signup-body {
-    .nav-tabs {
-      width: 100%;
-    }
-  }
-}
-
-@media only screen and (max-width: 330px) {
-  #login-signup-wrapper {
-    .nav-item {
-      #nav-tab-link-2 {
-        padding-bottom: 2.6rem;
-      }
-    }
-  }
-  #signin-modal {
-    .nav-item {
-      #nav-tab-link-2 {
-        padding-bottom: 2.6rem;
-      }
-    }
-  }
 }
 
 // TABS-TOGGLE
@@ -435,5 +284,86 @@ form {
         margin-left: 0;
       }
     }
+  }
+}
+
+.close {
+  outline: none !important;
+
+  &:hover,
+  &:focus,
+  &.active {
+    outline: none !important;
+  }
+}
+
+.input-group .form-control {
+  margin: 0px !important;
+}
+
+// Card Form
+
+.card-form-body {
+  &.signup-body {
+    margin-top: -30px;
+  }
+
+  #card-form-wrapper {
+    background-color: $white;
+    border: 1px solid $white;
+    border-radius: 0.5rem;
+    height: auto;
+    margin-bottom: 6rem;
+  }
+
+  a.next-previous-a {
+    // font-size: 1em;
+    color: $green;
+
+    &:hover,
+    &:focus,
+    &.active {
+      text-decoration: none;
+      font-size: 1.04em;
+      transition: font-size 0.2s;
+    }
+  }
+
+  // form {
+  //   button {
+  //     margin-top: 2.5rem;
+  //   }
+  // }
+}
+
+.show {
+  opacity: 1 !important;
+}
+
+@media only screen and (min-width: 1200px) {
+  #card-form-wrapper {
+    margin-left: 15rem;
+    margin-right: 15rem;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  #card-form-wrapper {
+    margin-left: 10rem;
+    margin-right: 10rem;
+  }
+}
+
+@media only screen and (min-width: 453px) and (max-width: 575px) {
+  #card-form-wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+@media only screen and (max-width: 452px) {
+  #card-form-wrapper {
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 }

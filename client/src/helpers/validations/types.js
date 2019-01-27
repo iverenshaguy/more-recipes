@@ -6,6 +6,8 @@ export const isRequired = value => (value ? undefined : 'Required!');
 export const maxLength = max => value =>
   (value && value.length > max ? `Must be ${max} characters or less!` : undefined);
 
+export const maxLength15 = maxLength(15);
+export const maxLength25 = maxLength(25);
 export const maxLength144 = maxLength(144);
 export const maxLength255 = maxLength(255);
 
@@ -13,6 +15,7 @@ export const minLength = min => value =>
   (value && value.length < min ? `Must be ${min} characters or more!` : undefined);
 
 export const minLength1 = minLength(1);
+export const minLength2 = minLength(2);
 export const minLength3 = minLength(3);
 export const minLength10 = minLength(10);
 
@@ -31,12 +34,17 @@ export const isAlphaNumeric = value =>
   (value && /[^a-zA-Z0-9 ]/i.test(value) ? 'Only alphanumeric characters allowed!' : undefined);
 
 export const isName = value =>
-  (value && /[^a-z ,.'-\s]+$/i.test(value)
+  (value && /[^a-z,.'-()\s]/i.test(value)
+    ? "Only letters and the characters (,.'-) allowed!"
+    : undefined);
+
+export const isRecipeName = value =>
+  (value && /[^a-z0-9,.'-()\s]/i.test(value)
     ? "Only letters and the characters (,.'-) allowed!"
     : undefined);
 
 export const isUsername = value =>
-  (value && /[^a-zA-Z0-9]/i.test(value)
+  (value && /[\W]/i.test(value)
     ? 'Username can only contain letters and numbers without space'
     : undefined);
 

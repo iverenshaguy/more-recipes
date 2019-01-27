@@ -38,7 +38,6 @@ describe('Signup', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(422);
           expect(res.body).to.have.property('errors');
-          expect(res.body.errors.firstname.msg, 'It shouldn\'t accept an empty string').to.equal('First name cannot be empty');
           expect(res.body.errors.lastname.msg, 'It shouldn\'t accept numbers').to.equal('Last name can only contain letters and the characters (,.\'-)');
           expect(res.body.errors.username.msg, 'It shouldn\'t accept an empty string').to.equal('Username must be between 2 to 144 charcters');
           expect(res.body.errors.email.msg, 'It shouldn\'t accept an empty string').to.equal('This email is invalid');

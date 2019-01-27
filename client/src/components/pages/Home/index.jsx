@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { fetchTopRecipes, searchRecipes } from '../../../actions/recipes';
 import Hero from './Hero';
@@ -128,6 +129,7 @@ class Home extends Component {
         <Hero
           dispatch={this.props.dispatch}
           handleSearch={this.handleSearch}
+          handleAddRecipe={() => this.props.dispatch(push('/recipes/new'))}
           handleSearchInput={this.handleSearchInput}
           searchValue={this.state.searchValue}
         />

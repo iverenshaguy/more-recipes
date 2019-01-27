@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup renders correctly 1`] = `
+<Connect(Form)
+  changeForm={[Function]}
+  meta={
+    Object {
+      "btnText": "SIGN UP",
+      "extra": <p
+        className="text-center"
+      >
+        Already have an account, 
+        <a
+          href="/login"
+          onClick={[Function]}
+        >
+          Log in here.
+        </a>
+      </p>,
+      "title": "Register for a New Account",
+    }
+  }
+  type="signup"
+/>
+`;

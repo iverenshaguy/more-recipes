@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 const SocialModal = ({ isOpen, toggle }) => (
-  <Modal isOpen={isOpen} toggle={toggle} id="social-modal">
+  <Modal isOpen={isOpen} toggle={toggle} centered="true" id="social-modal">
     <ModalHeader toggle={toggle} tag="div">
       <h3 className="modal-title text-center" id="social-modal">
         Share this Recipe

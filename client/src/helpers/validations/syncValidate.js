@@ -10,12 +10,17 @@ import validation from './validation';
  * @param {string} type - validation types
  * @param {string} field - field to test
  * @param {object} values - all field values
+ * @param {number} i - field index
  * @returns {string} field Error
  */
-const syncValidate = type => (field, values) => {
-  const value = values[field];
+const syncValidate = type => (field, values, i) => {
+  const value = (i || i === 0) ? values[field][i] : values[field];
   const types = validation[type][field];
   let validate;
+
+  if (!types) {
+    return null;
+  }
 
   if (field === 'passwordConfirm') {
     validate = [isRequired(value), isValidPasswordConfirm(value, values)];

@@ -1,10 +1,12 @@
 import { auth, clearAuthError } from '../actions/auth';
 import { reviewRecipe, clearReviewError } from '../actions/recipeReviews';
+import { addRecipe, clearRecipeError } from '../actions/singleRecipe';
 
 const clearFormError = {
   login: clearAuthError(),
   signup: clearAuthError(),
-  review: clearReviewError()
+  review: clearReviewError(),
+  recipe: clearRecipeError()
 };
 
 const formFields = {
@@ -19,30 +21,64 @@ const formFields = {
     'occupation',
     'aboutMe'
   ],
-  review: ['rating', 'comment']
+  updateProfile: [
+    'firstname',
+    'lastname',
+    'username',
+    'occupation',
+    'aboutMe'
+  ],
+  review: ['rating', 'comment'],
+  recipe: [
+    'recipeName',
+    'recipeImage',
+    'prepTime',
+    'cookTime',
+    'totalTime',
+    'difficulty',
+    'extraInfo',
+    'vegetarian',
+    'ingredients',
+    'preparations',
+    'directions'
+  ]
 };
 
 const requiredFormFields = {
   login: ['email', 'password'],
   signup: [
     'firstname',
+    'lastname',
     'username',
     'email',
     'password',
     'passwordConfirm'
   ],
-  review: ['rating', 'comment']
+  updateProfile: [
+    'username',
+  ],
+  review: ['rating', 'comment'],
+  recipe: [
+    'recipeName',
+    'totalTime',
+    'ingredients',
+    'directions'
+  ],
 };
 
 const formSubmitMapper = {
   login: auth('login'),
   signup: auth('signup'),
-  review: reviewRecipe
+  review: reviewRecipe,
+  addRecipe
 };
+
+const asyncValidateFields = ['name', 'email'];
 
 export default {
   formFields,
   clearFormError,
   formSubmitMapper,
-  requiredFormFields
+  requiredFormFields,
+  asyncValidateFields
 };

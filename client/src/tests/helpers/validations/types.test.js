@@ -8,6 +8,7 @@ import {
   isAlphaNumeric,
   isName,
   isUsername,
+  isRecipeName,
   isPhoneNumber,
   isValidImage,
   isValidSize,
@@ -70,6 +71,12 @@ describe('Validation Types', () => {
 
     test('isUsername', () => {
       const check = isUsername('myUsername');
+
+      expect(check).toEqual(undefined);
+    });
+
+    test('isRecipeName', () => {
+      const check = isRecipeName('Rice and Beans');
 
       expect(check).toEqual(undefined);
     });
@@ -152,6 +159,12 @@ describe('Validation Types', () => {
       const check = isUsername('My Username');
 
       expect(check).toEqual('Username can only contain letters and numbers without space');
+    });
+
+    test('isRecipeName', () => {
+      const check = isRecipeName('Rice & Beans');
+
+      expect(check).toEqual("Only letters and the characters (,.'-) allowed!");
     });
 
     test('isPhoneNumber', () => {

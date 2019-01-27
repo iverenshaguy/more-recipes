@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import AddRecipeModal from './AddRecipeModal';
 import SocialModal from './SocialModal';
 import { toggleModal } from '../../../actions/ui';
+import './Modals.scss';
 
 const Modal = ({
   type, isOpen, dispatch
 }) => {
   switch (type) {
-    case 'addRecipe':
-      return <AddRecipeModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
     case 'social':
       return <SocialModal isOpen={isOpen} toggle={() => dispatch(toggleModal())} />;
     default:
@@ -33,6 +31,6 @@ const mapStateToProps = state => ({
   isOpen: state.ui.modals.isOpen,
 });
 
-export { AddRecipeModal, SocialModal, Modal as ModalComponent };
+export { SocialModal, Modal as ModalComponent };
 
 export default connect(mapStateToProps)(Modal);

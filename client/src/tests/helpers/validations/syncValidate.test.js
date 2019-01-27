@@ -140,10 +140,16 @@ describe('Sync Validation: Auth', () => {
       expect(check).toEqual('Passwords do not match');
     });
 
-    test('aboutMe', () => {
-      const check = syncValidate('signup')('aboutMe', wrongSignupValues);
+    test('difficulty', () => {
+      const check = syncValidate('recipe')('difficulty', { difficulty: 'hard' });
 
-      expect(check).toEqual('Must be 255 characters or less!');
+      expect(check).toEqual(null);
+    });
+
+    test('ingredients', () => {
+      const check = syncValidate('recipe')('ingredients', { ingredients: ['Rice', 'Beans'] }, 1);
+
+      expect(check).toEqual(null);
     });
   });
 });

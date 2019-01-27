@@ -24,6 +24,9 @@ import {
 const url = '/api/v1';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+const mockUploadTask = {
+  delete: jest.fn().mockReturnThis()
+};
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTE1NDQ0NzkwLCJleHAiOjE1MTU1MzExOTB9.6d1VznIz8slZFioUzvC4KNGDlz_YsUNy95g2LPaEnJE';
 
 const user = {
@@ -284,15 +287,15 @@ describe('Auth Actions', () => {
         moxios.uninstall(instance);
       });
 
-      it('dispatches UPLOADING, UPDATE_USER_IMAGE_SUCCESS and UPLOAD_SUCCESS on successful upload', () => {
-        const expectedActions = ['UPLOADING', 'UPDATE_USER_IMAGE_SUCCESS', 'UPLOAD_SUCCESS'];
+      it('dispatches SET_UPLOADING, UPDATE_USER_IMAGE_SUCCESS and UNSET_UPLOADING on successful upload', () => {
+        const expectedActions = ['SET_UPLOADING', 'UPDATE_USER_IMAGE_SUCCESS', 'UNSET_UPLOADING'];
 
         moxios.stubRequest(`${url}/users/1`, {
           status: 200,
           response: { ...user, profilePic: 'picurl' }
         }, 5);
 
-        return store.dispatch(updateUserImage(1, 'picurl')).then(() => {
+        return store.dispatch(updateUserImage(1, 'picurl', { delete: () => 'delete' })).then(() => {
           const dispatchedActions = store.getActions();
           const actionTypes = dispatchedActions.map(action => action.type);
 
@@ -300,8 +303,8 @@ describe('Auth Actions', () => {
         });
       });
 
-      it('dispatches UPLOADING, UPDATE_USER_IMAGE_FAILURE and UPLOAD_FAILURE on unsuccessful login', () => {
-        const expectedActions = ['UPLOADING', 'UPDATE_USER_IMAGE_FAILURE', 'UPLOAD_FAILURE'];
+      it('dispatches SET_UPLOADING, UPDATE_USER_IMAGE_FAILURE and UNSET_UPLOADING on unsuccessful login', () => {
+        const expectedActions = ['SET_UPLOADING', 'UPDATE_USER_IMAGE_FAILURE', 'UNSET_UPLOADING'];
 
         moxios.stubRequest(`${url}/users/1`, {
           status: 500,
@@ -310,11 +313,12 @@ describe('Auth Actions', () => {
           },
         }, 5);
 
-        return store.dispatch(updateUserImage(1, 'picurl')).catch(() => {
+        return store.dispatch(updateUserImage(1, 'picurl', mockUploadTask)).catch(() => {
           const dispatchedActions = store.getActions();
           const actionTypes = dispatchedActions.map(action => action.type);
 
           expect(actionTypes).toEqual(expectedActions);
+          expect(mockUploadTask.delete).toHaveBeenCalled();
         });
       });
     });

@@ -2,7 +2,7 @@ import reducer from '../../../reducers/singleRecipe';
 
 const state = {
   recipe: {
-    error: null, favoriting: false, item: {}, voting: false
+    error: null, favoriting: false, item: {}, voting: false, adding: false,
   },
   recipeReviews: {
     addReviewSuccess: false, error: null, metadata: {}, reviewing: false, reviews: []
@@ -15,7 +15,7 @@ const singleRecipePayload = {
 };
 
 const payload = {
-  message: 'Your Recipe has been Added to Favorites',
+  message: 'Action Performed',
   recipe: {
     id: 2,
     recipeName: 'Jollof Rice'
@@ -27,6 +27,22 @@ describe('Single Recipe Reducers', () => {
     const newState = reducer(undefined, {});
 
     expect(newState).toEqual(state);
+  });
+
+  it('should handle SET_ADDING action', () => {
+    const newState = reducer(state, {
+      type: 'SET_ADDING',
+    });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, adding: true } });
+  });
+
+  it('should handle UNSET_ADDING action', () => {
+    const newState = reducer({ ...state, recipe: { ...state.recipe, adding: true } }, {
+      type: 'UNSET_ADDING',
+    });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, adding: false } });
   });
 
   it('should handle SET_VOTING action', () => {
@@ -61,6 +77,21 @@ describe('Single Recipe Reducers', () => {
     expect(newState).toEqual({ ...state, recipe: { ...state.recipe, favoriting: false } });
   });
 
+  it('should handle ADD_RECIPE_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'ADD_RECIPE_SUCCESS',
+      payload: singleRecipePayload
+    });
+
+    expect(newState).toEqual({
+      ...state,
+      recipe: {
+        ...state.recipe,
+        item: singleRecipePayload
+      }
+    });
+  });
+
   it('should handle FETCH_RECIPE_SUCCESS action', () => {
     const newState = reducer(state, {
       type: 'FETCH_RECIPE_SUCCESS',
@@ -71,10 +102,7 @@ describe('Single Recipe Reducers', () => {
       ...state,
       recipe: {
         ...state.recipe,
-        item: singleRecipePayload,
-        error: null,
-        favoriting: false,
-        voting: false
+        item: singleRecipePayload
       }
     });
   });
@@ -89,10 +117,7 @@ describe('Single Recipe Reducers', () => {
       ...state,
       recipe: {
         ...state.recipe,
-        item: payload.recipe,
-        error: null,
-        favoriting: false,
-        voting: false
+        item: payload.recipe
       }
     });
   });
@@ -107,12 +132,39 @@ describe('Single Recipe Reducers', () => {
       ...state,
       recipe: {
         ...state.recipe,
-        item: payload.recipe,
-        error: null,
-        favoriting: false,
-        voting: false
+        item: payload.recipe
       }
     });
+  });
+
+  it('should handle UPDATE_RECIPE_IMAGE_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_RECIPE_IMAGE_SUCCESS',
+      payload: singleRecipePayload
+    });
+
+    expect(newState).toEqual({
+      ...state,
+      recipe: {
+        ...state.recipe,
+        item: singleRecipePayload
+      }
+    });
+  });
+
+  it('should handle ADD_RECIPE_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'ADD_RECIPE_FAILURE',
+      payload: 'Error'
+    });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: 'Error' } });
+  });
+
+  it('should handle CLEAR_RECIPE_ERROR action', () => {
+    const newState = reducer({ ...state, recipe: { ...state.recipe, error: 'Error' } }, { type: 'CLEAR_RECIPE_ERROR' });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: null } });
   });
 
   it('should handle FETCH_RECIPE_FAILURE action', () => {
@@ -136,6 +188,15 @@ describe('Single Recipe Reducers', () => {
   it('should handle ADD_RECIPE_TO_FAVORITES_FAILURE action', () => {
     const newState = reducer(state, {
       type: 'ADD_RECIPE_TO_FAVORITES_FAILURE',
+      payload: 'Error'
+    });
+
+    expect(newState).toEqual({ ...state, recipe: { ...state.recipe, error: 'Error' } });
+  });
+
+  it('should handle UPDATE_RECIPE_IMAGE_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'UPDATE_RECIPE_IMAGE_FAILURE',
       payload: 'Error'
     });
 

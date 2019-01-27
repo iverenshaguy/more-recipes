@@ -7,10 +7,9 @@ import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
 const preview = document.querySelector('.photo-preview');
 
 const RenderFileInput = ({
-  input: {
-    value: omitValue, onChange, onBlur, ...inputProps
-  },
+  value,
   meta: { touched, error },
+  handleChangeImage,
   ...props
 }) => (
     <Fragment>
@@ -21,19 +20,16 @@ const RenderFileInput = ({
           </div>
         )}
       <Input
-        onChange={adaptFileEventToValue(onChange, preview)}
-        onBlur={adaptFileEventToValue(onBlur, preview)}
+        onChange={adaptFileEventToValue(handleChangeImage, preview)}
+        onBlur={adaptFileEventToValue(handleChangeImage, preview)}
         type="file"
-        {...inputProps}
-        {...props}
       />
       {touched && error && <small className="file-feedback">{error}</small>}
     </Fragment>
   );
 
 RenderFileInput.propTypes = {
-  input: PropTypes.shape({}).isRequired,
-  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   meta: PropTypes.shape({
     // active: PropTypes.bool,
     touched: PropTypes.bool,

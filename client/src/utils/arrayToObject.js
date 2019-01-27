@@ -7,6 +7,9 @@
  */
 const arrayToObject = (array, value) => array.reduce((obj, item) => {
   obj[item] = value;
+  if (item === 'ingredients' || item === 'directions' || item === 'preparations') {
+    obj[item] = [value];
+  }
 
   return obj;
 }, {});

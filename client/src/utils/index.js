@@ -1,13 +1,17 @@
-import errorHandler from './errorHandler';
 import decodeToken from './decodeToken';
+import errorHandler from './errorHandler';
 import arrayToObject from './arrayToObject';
-import imageUpload from './imageUpload';
+import mapRecipeObject from './mapRecipeObject';
+import capitalizeString from './capitalizeString';
 import fileEventAdapter from './fileEventAdapter';
+import createRecipeResponseObj from './createRecipeResponseObj';
 
 export default {
-  errorHandler,
   decodeToken,
-  imageUpload,
+  errorHandler,
   arrayToObject,
+  mapRecipeObject,
+  capitalizeString,
   fileEventAdapter,
+  createRecipeResponseObj
 };

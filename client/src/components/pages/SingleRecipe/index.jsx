@@ -7,8 +7,11 @@ import { toggleReviewForm } from '../../../actions/ui';
 import { voteRecipe } from '../../../actions/voteRecipe';
 import SingleRecipeItem from '../../shared/SingleRecipeItem';
 import { isReviewed } from '../../../selectors/recipeReviews';
-import { fetchSingleRecipe } from '../../../actions/singleRecipe';
+import { uploadValidation } from '../../../helpers/validations';
 import { addRecipeToFavorites } from '../../../actions/favoriteRecipes';
+import { fileEventAdapter as adaptFileEventToValue } from '../../../utils';
+import { fetchSingleRecipe, updateRecipeImage } from '../../../actions/singleRecipe';
+import { uploadImage, clearUploadError, uploadFailure } from '../../../actions/uploadImage';
 import { recipeObjectPropTypes, urlMatchPropTypes, userPropTypes } from '../../../helpers/proptypes';
 import './SingleRecipe.scss';
 
@@ -34,22 +37,11 @@ class SingleRecipe extends Component {
     dispatch: PropTypes.func.isRequired,
     reviewed: PropTypes.bool.isRequired,
     isFetching: PropTypes.bool.isRequired,
+    usersRecipe: PropTypes.bool.isRequired,
   }
 
   static defaultProps = {
     error: null
-  }
-
-  /**
-   * @constructor
-   * @memberof SingleRecipe
-   * @returns {nothing} Returns nothing
-   */
-  constructor() {
-    super();
-    this.toggleReviewForm = this.toggleReviewForm.bind(this);
-    this.addRecipeToFavorites = this.addRecipeToFavorites.bind(this);
-    this.voteRecipe = this.voteRecipe.bind(this);
   }
 
   /**
@@ -64,9 +56,64 @@ class SingleRecipe extends Component {
 
   /**
    * @memberof SingleRecipe
+   * @param {object} e - event oject
+   * @param {element} input - file input
    * @returns {nothing} Returns nothing
    */
-  toggleReviewForm() {
+  handleChangeImageClick = (e, input) => {
+    e.preventDefault();
+    this.props.dispatch(clearUploadError());
+    input.click();
+  }
+
+  /**
+   * @memberof SingleRecipe
+   * @param {object} event
+   * @param {element} preview
+   * @returns {nothing} Returns nothing
+   */
+  handleChangeImage = (event, preview) => {
+    const file = event.target.files[0];
+    const maxSize = 5 * 1024 * 1024; // 2MB max size
+    const allowedTypes = ['image/gif', 'image/jpeg', 'image/png'];
+
+    this.props.dispatch(clearUploadError());
+
+    // check for file to ensure it isn't undefined
+    if (file) {
+      if (!uploadValidation(file, maxSize, allowedTypes)) {
+        adaptFileEventToValue(this.handleImageUpload, preview)(event);
+        this.handleImageUpload(file);
+      } else {
+        this.props.dispatch(uploadFailure(uploadValidation(file, maxSize, allowedTypes)));
+        // reset input box
+        event.target.value = '';
+      }
+    }
+  }
+
+  /**
+   * @memberof SingleRecipe
+   * @param {object} image - image
+   * @return {state} returns new state
+   */
+  handleImageUpload = (image) => {
+    const { uploadImageObj: { uploadTask }, recipe } = this.props;
+    return this.props.dispatch(uploadImage(
+      image, recipe.recipeItem.recipeImage,
+      `recipes/${Date.now()}`,
+      (downloadURL) => {
+        this.props.dispatch(clearUploadError());
+        this.props.dispatch(updateRecipeImage(downloadURL, recipe.recipeItem.id, uploadTask));
+      }
+    ));
+  }
+
+  /**
+   * @memberof SingleRecipe
+   * @returns {nothing} Returns nothing
+   */
+  toggleReviewForm = () => {
     this.props.dispatch(toggleReviewForm());
   }
 
@@ -75,7 +122,7 @@ class SingleRecipe extends Component {
    * @param {object} e
    * @returns {nothing} Returns nothing
    */
-  addRecipeToFavorites(e) {
+  addRecipeToFavorites = (e) => {
     e.preventDefault();
     const { recipe: { recipeItem: { id } } } = this.props;
     this.props.dispatch(addRecipeToFavorites(id));
@@ -87,7 +134,7 @@ class SingleRecipe extends Component {
    * @param {string} type
    * @returns {nothing} Returns nothing
    */
-  voteRecipe(e, type) {
+  voteRecipe = (e, type) => {
     e.preventDefault();
     const { recipe: { recipeItem: { id } } } = this.props;
     this.props.dispatch(voteRecipe(id, type));
@@ -100,7 +147,7 @@ class SingleRecipe extends Component {
    */
   render() {
     const {
-      isFetching, error, recipe, user, reviewed
+      isFetching, error, recipe, user, reviewed, usersRecipe
     } = this.props;
 
     return (
@@ -113,9 +160,14 @@ class SingleRecipe extends Component {
               user={user}
               recipe={recipe}
               reviewed={reviewed}
+              usersRecipe={usersRecipe}
               voteRecipe={this.voteRecipe}
+              uploadImageObj={this.props.uploadImageObj}
               toggleReviewForm={this.toggleReviewForm}
+              handleChangeImage={this.handleChangeImage}
+              handleImageUpload={this.handleImageUpload}
               addRecipeToFavorites={this.addRecipeToFavorites}
+              handleChangeImageClick={this.handleChangeImageClick}
             />
           </div>}
       </Fragment>
@@ -128,7 +180,10 @@ const mapStateToProps = state => ({
   isFetching: state.isFetching,
   recipe: state.singleRecipe.recipe.item,
   error: state.singleRecipe.recipe.error,
-  reviewed: isReviewed(state.singleRecipe.recipeReviews.reviews, state.auth.user.id)
+  uploadImageObj: state.uploadImage,
+  reviewed: isReviewed(state.singleRecipe.recipeReviews.reviews, state.auth.user.id),
+  usersRecipe: !!state.singleRecipe.recipe.item.recipeItem &&
+    (state.auth.user.id === state.singleRecipe.recipe.item.recipeItem.userId),
 });
 
 export { SingleRecipe as SingleRecipeComponent };

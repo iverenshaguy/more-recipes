@@ -1,0 +1,65 @@
+@import '../../../assets/scss/modules.scss';
+
+.custom-control-input {
+  &:focus ~ .custom-control-indicator, {
+    box-shadow: 0 0 0 1px, 0 0 0 3px $light-green !important;
+  }
+
+  &:active ~ .custom-control-indicator,
+  &:checked ~ .custom-control-indicator {
+    background-color: $green !important;
+    color: $white !important;
+  }
+}
+
+.form-group {
+  .invalid-feedback, {
+    display: block;
+  }
+
+  .input {
+    outline: none;
+  }
+
+  .input-group-btn {
+    .btn {
+      background-color: $white;
+      border: 1px solid $input-border;
+      border-bottom-left-radius: 0;
+      border-left: 0 solid $input-border;
+      border-top-left-radius: 0;
+      color: $input-color;
+      outline: none;
+
+      &.is-valid {
+        border-color: $green;
+      }
+
+      &.is-invalid {
+        border-color: $red;
+      }
+
+      &:hover,
+      &:focus,
+      &.active {
+        background-color: $white;
+        color: $green;
+        transition: background-color 0.5s;
+      }
+    }
+  }
+}
+
+.recipe-image-preview {
+  max-height: 20rem;
+  width: 100% !important;
+}
+
+.modal-preloader {
+  margin: 30vh auto;
+}
+
+.next-previous-btn {
+  width: 15vw;
+  color: white;
+}

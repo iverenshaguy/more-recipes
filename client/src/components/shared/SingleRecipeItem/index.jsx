@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu } from 'reactstrap';
+import FontAwesome from 'react-fontawesome';
+import MoreHoriz from 'material-ui-icons/MoreHoriz';
 import Reviews, { AddReview } from '../Reviews';
+import MiniPreLoader from '../PreLoader/MiniPreLoader';
 import { RenderIcon, RenderVoteIcon } from '../Icons';
 import RecipeDetailsSection from '../RecipeDetailsSection';
-import { recipeObjectPropTypes, userPropTypes } from '../../../helpers/proptypes';
+import { recipeObjectPropTypes, userPropTypes, uploadImageObjPropTypes } from '../../../helpers/proptypes';
+import './SingleRecipeItem.scss';
 
-const altImage = '/images/jollof-rice-img.jpg';
+const altImage = '/images/placeholder-image.jpg';
+let recipeImage = '';
+let imageUploader = '';
 
 /**
  * @exports
@@ -15,20 +22,58 @@ const altImage = '/images/jollof-rice-img.jpg';
  */
 const SingleRecipeItem = (props) => {
   const {
-    recipe, user, reviewed, voteRecipe, toggleReviewForm, addRecipeToFavorites
+    recipe, reviewed, voteRecipe, toggleReviewForm, uploadImageObj: { uploading, error },
+    addRecipeToFavorites, handleChangeImage, handleChangeImageClick, usersRecipe
   } = props;
-  let disableRecipeActions = false;
 
-  if (recipe.recipeItem.userId === user.id) {
-    disableRecipeActions = true;
+  const show = (uploading || error) ? 'show' : null;
+  const hide = usersRecipe ? null : 'd-none';
+  const forUser = usersRecipe ? 'for-user' : null;
+
+  if (error) {
+    recipeImage.src = recipe.recipeItem.recipeImage;
   }
 
   return (
     <div className="container page-margin" id="recipe-wrapper">
+      {usersRecipe &&
+        <div className="edit-delete-more text-right">
+          <UncontrolledDropdown>
+            <DropdownToggle tag="a">
+              <MoreHoriz />
+            </DropdownToggle>
+            <DropdownMenu right>
+              <a className="dropdown-item" href="#edit">Edit Recipe</a>
+              <a className="dropdown-item" href="#delete">Delete Recipe</a>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+        </div>}
       <div className="recipe-picture-wrapper">
         <div className="image-container">
-          <img src={recipe.recipeItem.recipeImage ? recipe.recipeItem.recipeImage : altImage} alt="recipe" className="img-fluid" />
+          <img
+            src={recipe.recipeItem.recipeImage ? recipe.recipeItem.recipeImage : altImage}
+            onError={(e) => { e.target.src = altImage; }}
+            alt="recipe"
+            className={`img-fluid ${recipe.recipeItem ? forUser : null}`}
+            ref={(ref) => { recipeImage = ref; }}
+          />
+          <input
+            type="file"
+            accept="image/gif, image/jpeg, image/png"
+            ref={(ref) => { imageUploader = ref; }}
+            onChange={e => handleChangeImage(e, recipeImage)}
+            style={{ display: 'none' }}
+          />
         </div>
+        <a
+          className={`image-overlay ${show} ${forUser} ${hide}`}
+          href="#change-image"
+          onClick={e => handleChangeImageClick(e, imageUploader)}
+        >
+          {!uploading && !error && <FontAwesome name="plus-square-o" size="2x" tag="i" />}
+          {!uploading && error && <h3 className="text-danger">{error}</h3>}
+          {uploading && <MiniPreLoader />}
+        </a>
       </div>
       <div className="row px-xs-1 px-sm-2 px-md-2 px-lg-4 px-xl-5" id="recipe-details">
         <div className="col-12 px-xl-5 px-lg-5 px-md-5 px-sm-4 px-xs-3">
@@ -37,24 +82,24 @@ const SingleRecipeItem = (props) => {
           </div>
           <div className="row" id="recipe-rating">
             <div className="col-xs-12 col-md-6 col-lg-4 pt-3 pb-1">
-              {!disableRecipeActions && <p className="user-info"><span className="text-muted">Posted By </span>{recipe.recipeItem.User.username}</p>}
+              {!usersRecipe && <p className="user-info"><span className="text-muted">Posted By </span>{recipe.recipeItem.User.username}</p>}
             </div>
             <div className="col-xs-12 col-md-6 col-lg-8 pt-3 pb-1" id="recipe-rating-info">
-              <p className="text-muted inline-p"><i className="aria-hidden fa fa-star" /> {(+recipe.recipeItem.rating).toPrecision(2)} &nbsp; &nbsp;</p>
+              <p className="text-muted inline-p"><i className="aria-hidden fa fa-star" /> {recipe.recipeItem.rating ? (+recipe.recipeItem.rating).toPrecision(2) : 0} &nbsp; &nbsp;</p>
               <p className="text-muted inline-p"><i className="aria-hidden fa fa-heart" /> {recipe.recipeItem.upvotes} &nbsp;&nbsp;</p>
               <p className="text-muted inline-p"><i className="text-success aria-hidden fa fa-eye" /> {recipe.recipeItem.views} &nbsp;&nbsp;</p>
               <p className="text-muted inline-p"><i className="aria-hidden fa fa-thumbs-down" /> {recipe.recipeItem.downvotes} &nbsp; &nbsp;</p>
             </div>
           </div>
           <RecipeDetailsSection recipe={recipe.recipeItem} />
-          {!disableRecipeActions &&
+          {!usersRecipe &&
             <div className="d-flex pt-5 pb-1 align-items-center" id="call-to-action">
               <RenderIcon recipe={recipe} reviewed={reviewed} type="review" icon="star" handleClick={toggleReviewForm} />
               <RenderIcon recipe={recipe} type="favorite" icon="heart" handleClick={addRecipeToFavorites} />
               <RenderVoteIcon recipe={recipe} type="up" boolCheck handleClick={voteRecipe} />
               <RenderVoteIcon recipe={recipe} type="down" boolCheck={false} handleClick={voteRecipe} />
             </div>}
-          {!disableRecipeActions &&
+          {!usersRecipe &&
             !recipe.recipeItem.isReviewed &&
             !reviewed &&
             <AddReview id={recipe.recipeItem.id} />}
@@ -75,8 +120,12 @@ SingleRecipeItem.propTypes = {
   voteRecipe: PropTypes.func.isRequired,
   toggleReviewForm: PropTypes.func.isRequired,
   addRecipeToFavorites: PropTypes.func.isRequired,
+  handleChangeImage: PropTypes.func.isRequired,
+  handleChangeImageClick: PropTypes.func.isRequired,
+  usersRecipe: PropTypes.bool.isRequired,
   ...userPropTypes,
-  ...recipeObjectPropTypes
+  ...recipeObjectPropTypes,
+  ...uploadImageObjPropTypes
 };
 
 SingleRecipeItem.defaultProps = {

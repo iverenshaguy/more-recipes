@@ -1,6 +1,6 @@
 import instance from '../axios';
 import { errorHandler } from '../utils';
-import { uploading, uploadSuccess, uploadFailure } from './uploadImage';
+import { setUploading, unsetUploading } from './uploadImage';
 import { auth as authAPI } from '../services/api/users';
 import {
   AUTHENTICATED,
@@ -68,16 +68,18 @@ const resetUser = () => ({
   type: UNAUTHENTICATED
 });
 
-const updateUserImage = (id, url) => async (dispatch) => {
+const updateUserImage = (id, url, uploadTask) => async (dispatch) => {
   try {
-    dispatch(uploading());
+    dispatch(setUploading());
     const response = await instance.put(`/users/${id}`, { profilePic: url });
     dispatch(updateUserImageSuccess(response.data));
-    dispatch(uploadSuccess());
+    dispatch(unsetUploading());
   } catch (error) {
     const errorResponse = errorHandler(error);
+    // delete already uploaded image from firebase
+    uploadTask.delete();
     dispatch(updateUserImageFailure(errorResponse.response));
-    dispatch(uploadFailure());
+    dispatch(unsetUploading());
   }
 };
 
