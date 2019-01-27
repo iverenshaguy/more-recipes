@@ -47,7 +47,7 @@ exports[`RecipeCard renders correctly 1`] = `
           alt="recipe"
           bottom={true}
           className="img-fluid"
-          src="images/jollof-rice-img.jpg"
+          src="sjkks"
           tag="img"
           width="100%"
         />

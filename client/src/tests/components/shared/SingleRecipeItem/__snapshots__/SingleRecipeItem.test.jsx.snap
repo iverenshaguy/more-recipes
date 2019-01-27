@@ -14,6 +14,7 @@ exports[`SingleRecipeItem renders correctly 1`] = `
       <img
         alt="recipe"
         className="img-fluid"
+        src="/images/jollof-rice-img.jpg"
       />
     </div>
   </div>

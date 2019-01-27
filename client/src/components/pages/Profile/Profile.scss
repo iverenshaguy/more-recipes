@@ -1,11 +1,5 @@
 @import '../../../assets/scss/modules';
 
-// body.user-profile {
-//   background-color: $background-grey !important;
-// }
-
-/* .user-profile-div {} */
-
 .user-profile {
   background-color: $background-grey !important;
 
@@ -38,28 +32,6 @@
 
 .black {
   color: $darkgrey;
-}
-
-.user-profile-details {
-  /*box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.1);*/
-  // border-top: 1px solid $recipe-card-grey;
-  border-bottom: 1px solid $recipe-card-grey;
-  height: 4rem;
-
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    padding: 0.7rem;
-    text-transform: uppercase;
-
-    &.active {
-      border-bottom: 1.5px solid $green;
-    }
-
-    i {
-      color: $darkgrey;
-    }
-  }
 }
 
 .user-profile {

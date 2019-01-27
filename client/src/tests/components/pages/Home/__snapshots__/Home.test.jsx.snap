@@ -355,14 +355,14 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             alt="recipe"
                             bottom={true}
                             className="img-fluid"
-                            src="images/jollof-rice-img.jpg"
+                            src="/images/jollof-rice-img.jpg"
                             tag="img"
                             width="100%"
                           >
                             <img
                               alt="recipe"
                               className="img-fluid card-img-bottom"
-                              src="images/jollof-rice-img.jpg"
+                              src="/images/jollof-rice-img.jpg"
                               width="100%"
                             />
                           </CardImg>
@@ -469,14 +469,14 @@ exports[`Home renders correctly when fully mounted 1`] = `
                             alt="recipe"
                             bottom={true}
                             className="img-fluid"
-                            src="images/jollof-rice-img.jpg"
+                            src="/images/jollof-rice-img.jpg"
                             tag="img"
                             width="100%"
                           >
                             <img
                               alt="recipe"
                               className="img-fluid card-img-bottom"
-                              src="images/jollof-rice-img.jpg"
+                              src="/images/jollof-rice-img.jpg"
                               width="100%"
                             />
                           </CardImg>

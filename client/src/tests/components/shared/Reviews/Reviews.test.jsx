@@ -27,7 +27,7 @@ const setup = () => {
         User: {
           id: 4,
           username: 'user',
-          profilePic: null
+          profilePic: 'pic.png'
         }
       },
       {
@@ -116,5 +116,11 @@ describe('Reviews', () => {
     expect(handlePageChangeSpy).toHaveBeenCalled();
     expect(mountedWrapper.instance().state.currentPage).toEqual(2);
     mountedWrapper.unmount();
+  });
+
+  it('renders review image when provided', () => {
+    const { shallowWrapper } = setup();
+
+    expect(shallowWrapper.find('img[src="pic.png"]')).toBeTruthy();
   });
 });

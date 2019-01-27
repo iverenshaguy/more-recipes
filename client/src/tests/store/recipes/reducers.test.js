@@ -46,6 +46,32 @@ describe('Recipe Reducers', () => {
     });
   });
 
+  it('should handle RECEIVE_USER_RECIPES_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_USER_RECIPES_SUCCESS',
+      payload: recipesPayload
+    });
+
+    expect(newState).toEqual({
+      items: recipesPayload.recipes,
+      metadata: recipesPayload.metadata,
+      error: null
+    });
+  });
+
+  it('should handle RECEIVE_FAVORITE_RECIPES_SUCCESS action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_FAVORITE_RECIPES_SUCCESS',
+      payload: recipesPayload
+    });
+
+    expect(newState).toEqual({
+      items: recipesPayload.recipes,
+      metadata: recipesPayload.metadata,
+      error: null
+    });
+  });
+
   it('should handle RECEIVE_TOP_RECIPES_FAILURE action', () => {
     const newState = reducer(state, {
       type: 'RECEIVE_TOP_RECIPES_FAILURE',
@@ -58,6 +84,24 @@ describe('Recipe Reducers', () => {
   it('should handle RECEIVE_SEARCH_RESULTS_FAILURE action', () => {
     const newState = reducer(state, {
       type: 'RECEIVE_SEARCH_RESULTS_FAILURE',
+      payload: 'Error'
+    });
+
+    expect(newState).toEqual({ ...state, error: 'Error' });
+  });
+
+  it('should handle RECEIVE_FAVORITE_RECIPES_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_FAVORITE_RECIPES_FAILURE',
+      payload: 'Error'
+    });
+
+    expect(newState).toEqual({ ...state, error: 'Error' });
+  });
+
+  it('should handle RECEIVE_USER_RECIPES_FAILURE action', () => {
+    const newState = reducer(state, {
+      type: 'RECEIVE_USER_RECIPES_FAILURE',
       payload: 'Error'
     });
 

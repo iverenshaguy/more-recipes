@@ -5,6 +5,7 @@ import { RenderIcon, RenderVoteIcon } from '../Icons';
 import RecipeDetailsSection from '../RecipeDetailsSection';
 import { recipeObjectPropTypes, userPropTypes } from '../../../helpers/proptypes';
 
+const altImage = '/images/jollof-rice-img.jpg';
 
 /**
  * @exports
@@ -26,7 +27,7 @@ const SingleRecipeItem = (props) => {
     <div className="container page-margin" id="recipe-wrapper">
       <div className="recipe-picture-wrapper">
         <div className="image-container">
-          <img src={recipe.recipeItem.recipeImage} alt="recipe" className="img-fluid" />
+          <img src={recipe.recipeItem.recipeImage ? recipe.recipeItem.recipeImage : altImage} alt="recipe" className="img-fluid" />
         </div>
       </div>
       <div className="row px-xs-1 px-sm-2 px-md-2 px-lg-4 px-xl-5" id="recipe-details">

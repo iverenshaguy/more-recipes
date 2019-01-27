@@ -7,6 +7,7 @@ import {
   fetchUserRecipes,
   fetchRecipesSuccess,
   fetchRecipesFailure,
+  fetchFavoriteRecipes,
   searchRecipes
 } from '../../../actions/recipes';
 
@@ -215,6 +216,70 @@ describe('Recipes Actions', () => {
       });
 
       return store.dispatch(fetchUserRecipes(1, 1, 5)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_FAVORITE_RECIPES_SUCCESS and UNSET_FETCHING succesfully', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_FAVORITE_RECIPES_SUCCESS', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: recipesResponse,
+        });
+      });
+
+      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+        expect(actionTypes).toEqual(expectedActions);
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_FAVORITE_RECIPES_SUCCESS and UNSET_FETCHING succesfully when there are no results', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_FAVORITE_RECIPES_SUCCESS', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {
+            message: 'You have no favorite recipes'
+          },
+        });
+      });
+
+      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
+        const dispatchedActions = store.getActions();
+
+        const actionTypes = dispatchedActions.map(action => action.type);
+
+
+        expect(actionTypes).toEqual(expectedActions);
+        expect(dispatchedActions[1].payload).toEqual({
+          message: 'You have no favorite recipes'
+        });
+      });
+    });
+
+    it('dispatches SET_FETCHING, RECEIVE_FAVORITE_RECIPES_FAILURE and UNSET_FETCHING succesfully', () => {
+      const expectedActions = ['SET_FETCHING', 'RECEIVE_FAVORITE_RECIPES_FAILURE', 'UNSET_FETCHING'];
+
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({ status: 500 });
+      });
+
+      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
         const dispatchedActions = store.getActions();
 
         const actionTypes = dispatchedActions.map(action => action.type);

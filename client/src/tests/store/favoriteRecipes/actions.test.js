@@ -5,10 +5,7 @@ import instance from '../../../axios';
 import {
   setFavoriting,
   unsetFavoriting,
-  fetchFavoriteRecipes,
   addRecipeToFavorites,
-  fetchFavoriteRecipesSuccess,
-  fetchFavoriteRecipesFailure,
   addRecipeToFavoritesSuccess,
   addRecipeToFavoritesFailure
 } from '../../../actions/favoriteRecipes';
@@ -42,18 +39,6 @@ describe('Component Actions', () => {
     const action = addRecipeToFavoritesFailure('payload');
 
     expect(action).toEqual({ type: 'ADD_RECIPE_TO_FAVORITES_FAILURE', payload: 'payload' });
-  });
-
-  test('fetchFavoriteRecipesSuccess', () => {
-    const action = fetchFavoriteRecipesSuccess('payload');
-
-    expect(action).toEqual({ type: 'FETCH_FAVORITE_RECIPES_SUCCESS', payload: 'payload' });
-  });
-
-  test('fetchFavoriteRecipesFailure', () => {
-    const action = fetchFavoriteRecipesFailure('payload');
-
-    expect(action).toEqual({ type: 'FETCH_FAVORITE_RECIPES_FAILURE', payload: 'payload' });
   });
 
   test('setFavoriting', () => {
@@ -109,70 +94,6 @@ describe('Component Actions', () => {
       });
 
       return store.dispatch(addRecipeToFavorites(1)).then(() => {
-        const dispatchedActions = store.getActions();
-
-        const actionTypes = dispatchedActions.map(action => action.type);
-
-
-        expect(actionTypes).toEqual(expectedActions);
-      });
-    });
-
-    it('dispatches SET_FETCHING, FETCH_FAVORITE_RECIPES_SUCCESS and UNSET_FETCHING succesfully', () => {
-      const expectedActions = ['SET_FETCHING', 'FETCH_FAVORITE_RECIPES_SUCCESS', 'UNSET_FETCHING'];
-
-      moxios.wait(() => {
-        const request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: favoriteResponse,
-        });
-      });
-
-      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
-        const dispatchedActions = store.getActions();
-
-        const actionTypes = dispatchedActions.map(action => action.type);
-
-        expect(actionTypes).toEqual(expectedActions);
-      });
-    });
-
-    it('dispatches SET_FETCHING, FETCH_FAVORITE_RECIPES_SUCCESS and UNSET_FETCHING succesfully when there are no results', () => {
-      const expectedActions = ['SET_FETCHING', 'FETCH_FAVORITE_RECIPES_SUCCESS', 'UNSET_FETCHING'];
-
-      moxios.wait(() => {
-        const request = moxios.requests.mostRecent();
-        request.respondWith({
-          status: 200,
-          response: {
-            message: 'You have no favorite recipes'
-          },
-        });
-      });
-
-      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
-        const dispatchedActions = store.getActions();
-
-        const actionTypes = dispatchedActions.map(action => action.type);
-
-
-        expect(actionTypes).toEqual(expectedActions);
-        expect(dispatchedActions[1].payload).toEqual({
-          message: 'You have no favorite recipes'
-        });
-      });
-    });
-
-    it('dispatches SET_FETCHING, FETCH_FAVORITE_RECIPES_FAILURE and UNSET_FETCHING succesfully', () => {
-      const expectedActions = ['SET_FETCHING', 'FETCH_FAVORITE_RECIPES_FAILURE', 'UNSET_FETCHING'];
-
-      moxios.wait(() => {
-        const request = moxios.requests.mostRecent();
-        request.respondWith({ status: 500 });
-      });
-
-      return store.dispatch(fetchFavoriteRecipes(2)).then(() => {
         const dispatchedActions = store.getActions();
 
         const actionTypes = dispatchedActions.map(action => action.type);
