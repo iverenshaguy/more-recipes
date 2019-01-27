@@ -38,6 +38,18 @@ const setup = () => {
       pages: [1, 2, 3],
       totalCount: 13,
     },
+    uploadImageObj: {
+      uploading: false,
+      success: false,
+      error: null
+    },
+    uploadImage: jest.fn(),
+    setUploading: jest.fn(),
+    uploadFailure: jest.fn(),
+    uploadSuccess: jest.fn(),
+    unsetUploading: jest.fn(),
+    updateUserImage: jest.fn(),
+    clearUploadError: jest.fn(),
   };
 
   const shallowWrapper = shallow(<ProfileComponent {...props} />, rrcMock.get());
@@ -101,15 +113,16 @@ describe('Profile', () => {
     mountedWrapper.unmount();
   });
 
-  it('calls showAddRecipeModal() when button is clicked', () => {
+  it('calls the handleAddRecipe method when button is clicked', () => {
     const { mountedWrapper } = setup();
-    const showAddRecipeModalSpy = jest.spyOn(mountedWrapper.find(ProfileComponent).instance(), 'showAddRecipeModal');
+    const handleAddRecipeSpy = jest.spyOn(mountedWrapper.find(ProfileComponent).instance(), 'handleAddRecipe');
 
     mountedWrapper.setState(state);
     mountedWrapper.find('button#home-add-recipe-btn').simulate('click');
 
-    expect(showAddRecipeModalSpy).toHaveBeenCalled();
-    expect(mockFn).toHaveBeenCalledWith(toggleModal('addRecipe'));
+    expect(handleAddRecipeSpy).toHaveBeenCalled();
+    expect(mountedWrapper.props().dispatch).toHaveBeenCalled();
+
     mountedWrapper.unmount();
   });
 });

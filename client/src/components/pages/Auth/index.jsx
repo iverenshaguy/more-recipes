@@ -69,7 +69,7 @@ class Auth extends Component {
   render() {
     const { from } = this.props.location.state ? this.props.location.state : { from: { pathname: '/' } };
     if (this.props.isAuthenticated && this.props.type === 'signup') {
-      return <Redirect to={{ from: { pathname: `/${this.props.username}` } }} />;
+      return <Redirect to={{ pathname: `/${this.props.username}` }} />;
     }
 
     if (this.props.isAuthenticated) {

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePic renders correctly 1`] = `
+<div
+  className="col-5 col-md-4 profile-picture align-self-center text-center"
+>
+  <div
+    className="profile-img-div"
+  >
+    <img
+      alt="profile"
+      className="rounded-circle img-fluid img-thumbnail user-img align-middle"
+      onError={[Function]}
+      src="/images/user-image-placeholder.png"
+    />
+    <a
+      className="image-overlay rounded-circle null"
+      href="#profile-photo"
+      onClick={[Function]}
+    >
+      <FontAwesome
+        name="plus-square-o"
+        tag="i"
+      />
+    </a>
+  </div>
+  <input
+    accept="image/gif, image/jpeg, image/png"
+    onChange={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    type="file"
+  />
+</div>
+`;

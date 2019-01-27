@@ -11,13 +11,20 @@ exports[`Profile renders Redirects to user's profile when params is not equal to
       className="row justify-content-start user-info py-4 px-3 px-md-5"
     >
       <ProfilePic
+        clearUploadError={[Function]}
+        setUploading={[Function]}
+        unsetUploading={[Function]}
         updateUserImage={[Function]}
-        uploadImage={
+        uploadFailure={[Function]}
+        uploadImage={[Function]}
+        uploadImageObj={
           Object {
+            "error": null,
             "success": false,
             "uploading": false,
           }
         }
+        uploadSuccess={[Function]}
         user={
           Object {
             "id": 1,
@@ -47,16 +54,9 @@ exports[`Profile renders Redirects to user's profile when params is not equal to
   <div
     className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1"
   >
-    <Button
-      className="btn-default btn-lg d-none d-md-inline-block"
-      color="secondary"
-      id="home-add-recipe-btn"
-      onClick={[Function]}
-      tag="button"
-      title="New Recipe"
-    >
-      Add a New Recipe
-    </Button>
+    <AddRecipeBtn
+      handleClick={[Function]}
+    />
     <div
       className="profile-toggle-wrapper text-center mt-3"
     >
@@ -142,13 +142,20 @@ exports[`Profile renders correctly 1`] = `
       className="row justify-content-start user-info py-4 px-3 px-md-5"
     >
       <ProfilePic
+        clearUploadError={[Function]}
+        setUploading={[Function]}
+        unsetUploading={[Function]}
         updateUserImage={[Function]}
-        uploadImage={
+        uploadFailure={[Function]}
+        uploadImage={[Function]}
+        uploadImageObj={
           Object {
+            "error": null,
             "success": false,
             "uploading": false,
           }
         }
+        uploadSuccess={[Function]}
         user={
           Object {
             "id": 2,
@@ -178,16 +185,9 @@ exports[`Profile renders correctly 1`] = `
   <div
     className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1"
   >
-    <Button
-      className="btn-default btn-lg d-none d-md-inline-block"
-      color="secondary"
-      id="home-add-recipe-btn"
-      onClick={[Function]}
-      tag="button"
-      title="New Recipe"
-    >
-      Add a New Recipe
-    </Button>
+    <AddRecipeBtn
+      handleClick={[Function]}
+    />
     <div
       className="profile-toggle-wrapper text-center mt-3"
     >

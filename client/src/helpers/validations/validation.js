@@ -23,7 +23,7 @@ const validation = {
   },
   signup: {
     firstname: [isRequired, minLength1, maxLength144, isName],
-    lastname: [maxLength144, isName],
+    lastname: [isRequired, maxLength144, isName],
     username: [isRequired, minLength3, maxLength144, isUsername],
     email: [isRequired, isEmail],
     password: [isRequired, minLength10],

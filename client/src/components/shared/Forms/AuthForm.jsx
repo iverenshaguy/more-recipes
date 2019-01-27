@@ -19,6 +19,38 @@ const AuthForm = ({ type, state, handlers }) => {
 
   return (
     <Fragment>
+      {type === 'signup' && <RenderInput
+        type="text"
+        name="firstname"
+        id="firstname"
+        label="First Name"
+        required
+        value={state.values.firstname}
+        placeholder="Jane"
+        handleChange={handlers.handleChange}
+        handleBlur={handlers.handleBlur}
+        handleFocus={handlers.handleFocus}
+        meta={{
+          touched: state.touched.firstname,
+          error: state.error.firstname
+        }}
+      />}
+      {type === 'signup' && <RenderInput
+        type="text"
+        name="lastname"
+        id="lastname"
+        label="Last Name"
+        required
+        value={state.values.lastname}
+        placeholder="Smith"
+        handleChange={handlers.handleChange}
+        handleBlur={handlers.handleBlur}
+        handleFocus={handlers.handleFocus}
+        meta={{
+          touched: state.touched.lastname,
+          error: state.error.lastname
+        }}
+      />}
       <RenderInput
         type="email"
         name="email"
@@ -83,6 +115,38 @@ const AuthForm = ({ type, state, handlers }) => {
         meta={{
           touched: state.touched.passwordConfirm,
           error: state.error.passwordConfirm
+        }}
+      />}
+      {type === 'signup' && <RenderInput
+        type="text"
+        name="occupation"
+        id="occupation"
+        label="Occupation"
+        required={false}
+        value={state.values.occupation}
+        placeholder="Chef"
+        handleChange={handlers.handleChange}
+        handleBlur={handlers.handleBlur}
+        handleFocus={handlers.handleFocus}
+        meta={{
+          touched: state.touched.occupation,
+          error: state.error.occupation
+        }}
+      />}
+      {type === 'signup' && <RenderInput
+        type="textarea"
+        name="aboutMe"
+        id="aboutMe"
+        label="Tell us a little about you"
+        required={false}
+        value={state.values.aboutMe}
+        placeholder="I am cool"
+        handleChange={handlers.handleChange}
+        handleBlur={handlers.handleBlur}
+        handleFocus={handlers.handleFocus}
+        meta={{
+          touched: state.touched.aboutMe,
+          error: state.error.aboutMe
         }}
       />}
     </Fragment>

@@ -56,9 +56,7 @@ exports[`Auth redirects when authenticated: signup 1`] = `
   push={false}
   to={
     Object {
-      "from": Object {
-        "pathname": "/username",
-      },
+      "pathname": "/username",
     }
   }
 />

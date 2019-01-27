@@ -12,10 +12,14 @@ const clearFormError = {
 const formFields = {
   login: ['email', 'password'],
   signup: [
+    'firstname',
+    'lastname',
     'username',
     'email',
     'password',
     'passwordConfirm',
+    'occupation',
+    'aboutMe'
   ],
   updateProfile: [
     'firstname',
@@ -43,6 +47,8 @@ const formFields = {
 const requiredFormFields = {
   login: ['email', 'password'],
   signup: [
+    'firstname',
+    'lastname',
     'username',
     'email',
     'password',

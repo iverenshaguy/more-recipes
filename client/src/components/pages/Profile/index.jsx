@@ -64,7 +64,7 @@ class Profile extends Component {
   /**
    * @memberof Home
    * @param {number} page
-   * @returns {state} home
+   * @returns {void}
    */
   handlePageChange = (page) => {
     this.setState({
@@ -73,12 +73,20 @@ class Profile extends Component {
   }
 
   /**
+   * @memberof Home
+   * @returns {void}
+   */
+  handleAddRecipe = () => {
+    this.props.dispatch(push('/recipes/new'));
+  }
+
+  /**
    * @memberof Profile
    * @returns {JSX} User Profile
    */
   render() {
     const {
-      user, dispatch, isFetching, recipes, metadata, uploadImageObj
+      user, isFetching, recipes, metadata, uploadImageObj
     } = this.props;
 
     return (
@@ -104,7 +112,7 @@ class Profile extends Component {
           </div>
         </div>
         <div className="container-fluid text-center user-profile-recipe-cards-wrapper mb-5 mt-1">
-          <AddRecipeBtn handleClick={() => dispatch(push('/recipes/new'))} />
+          <AddRecipeBtn handleClick={this.handleAddRecipe} />
           <div className="profile-toggle-wrapper text-center mt-3">
             <a className="d-inline recipes-tab text-center active" href="#recipes">
               <i className="aria-hidden flaticon flaticon-flat-plate-with-hot-food-from-side-view" />

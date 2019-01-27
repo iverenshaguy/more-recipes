@@ -58,7 +58,7 @@ describe('App Home', () => {
       request(app)
         .get('/api/fallback')
         .end((err, res) => {
-          expect(res.statusCode).to.equal(409);
+          expect(res.statusCode).to.equal(404);
           expect(res.body.message).to.equal('Where Are You Going? Page Not Found');
 
           if (err) return done(err);

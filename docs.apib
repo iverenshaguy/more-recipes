@@ -65,7 +65,7 @@ More-Recipes API uses the following error codes
 
     + 404 - Not Found
 
-    + 409 - Page Not Found
+    + 404 - Page Not Found
 
     + 422 - Validation Error
 
@@ -110,7 +110,7 @@ You may create a new account using this action. It takes a JSON object containin
     + Headers
 
             Location: /users/1
-    
+
     + Body
 
             {
@@ -149,7 +149,7 @@ You may signin to your account using this action. It takes a JSON object contain
     + Headers
 
             Location: /users/1
-    
+
     + Body
 
             {
@@ -236,7 +236,7 @@ This allows you to refresh user token
 
 + Response 200 (application/json)
 
-        {   
+        {
             "recipes": [
                 {
                     "id": 2,
@@ -285,7 +285,7 @@ This allows you to refresh user token
                 "lastPage": 2,
                 "firstPage": 1
             }
-        }    
+        }
 
 # Group Recipes
 
@@ -329,7 +329,7 @@ A Recipe Object has the following attributes:
 
 + Response 200 (application/json)
 
-        {   
+        {
             "recipes": [
                 {
                     "id": 2,
@@ -441,8 +441,8 @@ You may add you own recipe using this action. It takes a JSON object containing 
     + Headers
 
             Location: /recipes/16
-    
-    + Body 
+
+    + Body
 
             {
                 "id": 16,
@@ -476,9 +476,9 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
 + Parameters
     + sort: upvotes (string, required) - String to be sorted by.
-    + order: ascending (string, required) - Order to be arranged by. 
+    + order: ascending (string, required) - Order to be arranged by.
     + page: 3 (number, optional) - Page number to show.
-    + limit: 10 (number, optional) - Number of items per page. 
+    + limit: 10 (number, optional) - Number of items per page.
 
 + Request (application/json)
 
@@ -488,7 +488,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
 + Response 200 (application/json)
 
-        {   
+        {
             "recipes": [
                 {
                     "id": 2,
@@ -538,14 +538,14 @@ You may add you own recipe using this action. It takes a JSON object containing 
                 "lastPage": 2,
                 "firstPage": 1
             }
-        } 
+        }
 
 ### Search Recipes by Name or Ingredients [GET /recipes{?search,page,limit}]
 
 + Parameters
     + search: rice (string, required) - String to search for.
     + page: 3 (number, optional) - Page number to show.
-    + limit: 10 (number, optional) - Number of items per page. 
+    + limit: 10 (number, optional) - Number of items per page.
 
 + Request (application/json)
 
@@ -555,7 +555,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
 + Response 200 (application/json)
 
-        {   
+        {
             "recipes": [
                 {
                     "id": 2,
@@ -622,9 +622,9 @@ You may add you own recipe using this action. It takes a JSON object containing 
 
 + Response 200 (application/json)
 
-    + Body 
+    + Body
 
-            {   
+            {
                 "isReviewed": true,
                 "isFavorited": false,
                 "vote": null,
@@ -659,7 +659,7 @@ You may add you own recipe using this action. It takes a JSON object containing 
                         "username": "abosedeshaguy",
                         "profilePic": "www.profilepic.com/user.jpeg"
                     }
-                }  
+                }
             }
 
 ### Modify a Recipe [PUT]
@@ -704,8 +704,8 @@ This action allows you to modify an existing recipe added by you.
     + Headers
 
             Location: /recipes/16
-    
-    + Body 
+
+    + Body
 
             {
                 "id": 16,
@@ -768,7 +768,7 @@ You may upvote recipes using this action. It takes no input. Sending it again wi
     + Headers
 
             Location: /recipes/4/upvotes/62
-    
+
     + Body
 
             {
@@ -834,7 +834,7 @@ You may downvote recipes using this action. It takes no input. Sending it again 
     + Headers
 
             Location: /recipes/4/downvotes/63
-    
+
     + Body
 
             {
@@ -880,7 +880,7 @@ You may downvote recipes using this action. It takes no input. Sending it again 
                         },
                     }
                 }
-            }           
+            }
 
 ## Add a Recipe to Favorites [POST /recipes/{recipeId}/favorites]
 
@@ -900,9 +900,9 @@ You may add a recipe to your favorite recipes using this action. It takes no inp
     + Headers
 
             Location: /recipes/4/favorites/6
-        
+
     + Body
-    
+
             {
                 "message": "Recipe has been added to favorites",
                 "recipe":  {
@@ -955,7 +955,7 @@ You may review a recipe using this action. It takes a JSON object containing a r
 + Parameters
     + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer.
 
-+ Attributes 
++ Attributes
 
     + rating (number, required)  - A number from 1 - 5 with 1 being the lowest and 5 being the highest rating.
     + comment (string, optional) - A comment to add to the review.
@@ -977,7 +977,7 @@ You may review a recipe using this action. It takes a JSON object containing a r
     + Headers
 
             Location: /recipes/8/reviews/22
-    
+
     + Body
 
             {
@@ -993,7 +993,7 @@ You may review a recipe using this action. It takes a JSON object containing a r
 ## Get Reviews for a Recipe [GET /recipes/{recipeId}/reviews]
 
 + Parameters
-    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer. 
+    + recipeId: `8` (number, required) - ID of the Recipe to review in form of an integer.
 
 + Request (application/json)
 
