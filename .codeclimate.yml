@@ -1,4 +1,6 @@
-engines: 
+version: "2"
+
+engines:
   eslint:
     enabled: true
     checks:
@@ -8,7 +10,7 @@ engines:
         enabled: false
   fixme:
     enabled: true
-    
+
 ratings:
    paths:
    - "server/src/**.js"

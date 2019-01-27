@@ -1,10 +1,9 @@
 # More Recipes
 
-[![Build Status](https://travis-ci.org/iverenshaguy/more-recipes-personal.svg?branch=develop)](https://travis-ci.org/iverenshaguy/more-recipes-personal)
-[![Coverage Status](https://coveralls.io/repos/github/iverenshaguy/more-recipes-personal/badge.svg?branch=develop)](https://coveralls.io/github/iverenshaguy/more-recipes-personal?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/maintainability)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/test_coverage)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/test_coverage)
-[![Issue Count](https://codeclimate.com/github/iverenshaguy/more-recipes-personal/badges/issue_count.svg)](https://codeclimate.com/github/iverenshaguy/more-recipes-personal)
+[![Build Status](https://travis-ci.org/iverenshaguy/more-recipes.svg?branch=develop)](https://travis-ci.org/iverenshaguy/more-recipes)
+[![Coverage Status](https://coveralls.io/repos/github/iverenshaguy/more-recipes/badge.svg?branch=develop)](https://coveralls.io/github/iverenshaguy/more-recipes?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/maintainability)](https://codeclimate.com/github/iverenshaguy/more-recipes/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/430187c352d8ead5737f/test_coverage)](https://codeclimate.com/github/iverenshaguy/more-recipes/test_coverage)
 
 A Recipe Management Application written in JavaScript (ES6).
 

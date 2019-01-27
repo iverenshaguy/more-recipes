@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer renders correctly 1`] = `
+<footer
+  className="footer"
+>
+  <div
+    className="container"
+  >
+    <p>
+      © 
+      2019
+       More Recipes
+    </p>
+  </div>
+</footer>
+`;
+
+exports[`Footer renders correctly when fully mounted 1`] = `
+<Footer>
+  <footer
+    className="footer"
+  >
+    <div
+      className="container"
+    >
+      <p>
+        © 
+        2019
+         More Recipes
+      </p>
+    </div>
+  </footer>
+</Footer>
+`;
