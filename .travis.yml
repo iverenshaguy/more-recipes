@@ -11,7 +11,14 @@ env:
 
 script:
   - npm run test:server
+  - mkdir ./coverage
+  - mv ./server/coverage/lcov.info ./coverage/lcov.server.info
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.server.info --output ./coverage/codeclimate.server.json
   - npm run test:client
+  - mv ./client/coverage/lcov.info ./coverage/lcov.client.info
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.client.info  --output ./coverage/codeclimate.client.json
+  - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
+  - ./cc-test-reporter upload-coverage
 
 cache:
   directories:
@@ -23,11 +30,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - npm run build
-  
+
 after_success:
   - npm run coverage
-  - ./cc-test-reporter format-coverage -t lcov ./server/coverage/lcov.info --output ./coverage/codeclimate.server.json
-  - ./cc-test-reporter format-coverage -t lcov ./client/coverage/lcov.info  --output ./coverage/codeclimate.client.json
-  - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
-  - ./cc-test-reporter upload-coverage
-  
+

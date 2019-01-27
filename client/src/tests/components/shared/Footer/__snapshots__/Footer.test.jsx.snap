@@ -9,7 +9,7 @@ exports[`Footer renders correctly 1`] = `
   >
     <p>
       © 
-      2018
+      2019
        More Recipes
     </p>
   </div>
@@ -26,7 +26,7 @@ exports[`Footer renders correctly when fully mounted 1`] = `
     >
       <p>
         © 
-        2018
+        2019
          More Recipes
       </p>
     </div>
